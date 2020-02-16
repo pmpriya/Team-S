@@ -135,44 +135,6 @@ if(is_post_request()) {
     </div>
 </form>
 
-<!-- referring organisation form -->
 
-
-<!--<h1>SIGN UP TO KCL CHESS SOCIETY</h1>
-    <form action="<?php //echo url_for("/register_member.php"); ?>" method="post">
-        <div class="field-column">
-            <label>First Name</label>
-            <input type="text" name="firstname">
-        </div>
-        <div class="field-column">
-            <label>Last Name</label>
-            <input type="text" name="lastname">
-        </div>
-        <div class="field-column">
-            <label>E-mail</label>
-            <input type="text" name="email">
-        </div>
-        <div class="field-column">
-            <label>Date of Birth</label>
-            <input type="date" name="dob">
-        </div>
-        <div class="field-column">
-            <label>Phone Number</label>
-            <input type="text" name="phone">
-        </div>
-        <div class="field-column">
-            <label>Address</label>
-            <input type="text" name="address">
-        </div>
-        <div class="field-column">
-            <label>Gender</label>
-                <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
-                <input id="gender" type="radio" name="gender" value="f"> <label id="genderOption">Female</label>
-                <input id="gender" type="radio" name="gender" value="o"> <label id="genderOption">Other</label>
-        </div>
-        <div class="field-column"><input type="submit"></div>
-    </form>
-</div>
--->
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
