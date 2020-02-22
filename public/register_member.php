@@ -11,8 +11,8 @@ if(is_post_request()) {
     
     $dob = strtotime($_POST["dob"]);
     $dob = date('Y-m-d', $dob);
-    $home_phone = $_POST["homenumber"];
-    $mobile_phone = $_POST["mobilenumber"];
+    $homephone = $_POST["homenumber"];
+    $mobilephone = $_POST["mobilenumber"];
     $address = $_POST["address"];
     $gender = $_POST["gender"];
     $nhs_number = $_POST["nhsnumber"];
@@ -25,14 +25,12 @@ if(is_post_request()) {
 
    // } else {
     
-        if(count(array_filter($_POST))!=count($_POST)){
-            
-            echo '<label class="text-danger">Please fill in all required fields</label>';
-        }
-           
+        if ($firstname=="" || $lastname=="" || $nhs_number=="" || $dob=="" || $mobilephone==""|| $homephone=="" || $address=="" || $gender=="" || $gp_address==""|| $gp_number=="")
+
+             echo '<label class="text-danger">Please fill in all required fields</label>';
         
         else {
-           // $resulte = find_member_by_email($email);
+            $result = find_member_by_nhsno($nhs_number);
            // list($usr, $domain) = explode('@', $email);
 
            // if (!($domain == 'kcl.ac.uk')) {
@@ -40,15 +38,15 @@ if(is_post_request()) {
               //  echo '<label class="text-danger">This is not a valid Kings College London email (@kcl.ac.uk domain)</label>';
            // } else {
                 
-                //if(mysqli_num_rows($resulte) > 0) {
-                 //   $mes = '<label class="text-danger">Email Already Exits</label>';
-                 //   echo $mes;
-              //  } else { 
-                    //$result = insert_member($firstname, $lastname, $dob, $phone, $address, $gender, $email);
+                if(mysqli_num_rows($result) > 0) {
+                  $mes = '<label class="text-danger">Patient is already registered with us</label>';
+                       echo $mes;
+              } else { 
+                    $result1 = insert_member($firstname, $lastname, $dob, $mobilephone,$homephone, $address, $gender, $nhs_number,$gp_address);
                     //$new_id = mysqli_insert_id($db);
                     redirect_to(url_for('referring_organisation.php?id=' . $new_id));
                 }
-            
+              }
 }
 ?>
 <html>
