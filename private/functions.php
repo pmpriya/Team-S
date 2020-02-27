@@ -43,7 +43,7 @@ function send_email($email,$username,$password){
   ------------------------
    
   Please log in to your account:
-  http://kingschesslondon.herokuapp.com/login.php
+  http://kingshospitallondon.herokuapp.com/login.php
    
   '; 
                        

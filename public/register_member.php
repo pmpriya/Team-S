@@ -6,15 +6,16 @@
 <?php
 if(is_post_request()) {
     
-    $firstname = $_POST["firstname"]; 
-    $lastname = $_POST["lastname"];
+    $first_name = $_POST["firstname"]; 
+    $last_name = $_POST["lastname"];
     
     $dob = strtotime($_POST["dob"]);
     $dob = date('Y-m-d', $dob);
-    $homephone = $_POST["homenumber"];
-    $mobilephone = $_POST["mobilenumber"];
-    $address = $_POST["address"];
-    $gender = $_POST["gender"];
+    $home_phone = $_POST["homenumber"];
+    $mobile_phone = $_POST["mobilenumber"];
+    $postcode = $_POST["postcode"];
+    $home_address = $_POST["address"];
+    $sex = $_POST["gender"];
     $nhs_number = $_POST["nhsnumber"];
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
@@ -25,7 +26,7 @@ if(is_post_request()) {
 
    // } else {
     
-        if ($firstname=="" || $lastname=="" || $nhs_number=="" || $dob=="" || $mobilephone==""|| $homephone=="" || $address=="" || $gender=="" || $gp_address==""|| $gp_number=="")
+        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $gp_address==""|| $gp_number=="")
 
              echo '<label class="text-danger">Please fill in all required fields</label>';
         
@@ -41,8 +42,8 @@ if(is_post_request()) {
                 if(mysqli_num_rows($result) > 0) {
                   $mes = '<label class="text-danger">Patient is already registered with us</label>';
                        echo $mes;
-              } else { 
-                    $result1 = insert_member($firstname, $lastname, $dob, $mobilephone,$homephone, $address, $gender, $nhs_number,$gp_address);
+              } else {//.= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone)
+                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
                     //$new_id = mysqli_insert_id($db);
                     redirect_to(url_for('referring_organisation.php?id=' . $new_id));
                 }
@@ -86,10 +87,11 @@ if(is_post_request()) {
      
      <!-- sex -->
      <div class="field-column">
-      <label>Gender</label>
-     Male : <input type = "radio" name="gender" value="Male">
-     Female : <input type = "radio" name="gender" value="Female">
-     </div>
+            <label>Gender</label>
+                <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
+                <input id="gender" type="radio" name="gender" value="f"> <label id="genderOption">Female</label>
+               
+        </div>
  
      <!-- home address -->
      <div class="field-column">
@@ -99,7 +101,7 @@ if(is_post_request()) {
      <!-- post code -->
      <div class="field-column">
       <label>Postcode</label>
-      <textarea name = "address"> </textarea>
+      <textarea name = "postcode"> </textarea>
     </div>
      <!-- Home telephone number -->
      <div class="field-column">
@@ -110,7 +112,7 @@ if(is_post_request()) {
      <!-- Mobile telephone number -->
    
      <div class="field-column">
-      <label>Postcode</label>
+      <label>Mobile Phone Number</label>
       <input type="number" name="mobilenumber" required>
     </div>
      <!-- Patient's GP address -->
