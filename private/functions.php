@@ -43,7 +43,7 @@ function send_email($email,$username,$password){
   ------------------------
    
   Please log in to your account:
-  http://kingschesslondon.herokuapp.com/login.php
+  http://kingshospitallondon.herokuapp.com/login.php
    
   '; 
                        
@@ -52,15 +52,5 @@ function send_email($email,$username,$password){
 
 }
 
-function calculate_elo($elo_player_one, $elo_player_two, $score) {
-
-  $rating1 = (floatval($elo_player_one) - floatval($elo_player_two)) / 400;
-  $p1 = (1.0 / (1.0 + pow(10, $rating1)));
-  $rating2 = (floatval($elo_player_two) - floatval($elo_player_one)) / 400;
-  $p2 = (1 / (1 + pow(10, $rating2)));
-  $result = $elo_player_one + 2000 * (floatval($score) - floatval($p1));
-
-  return $result;
-}
 
 ?>
