@@ -17,7 +17,11 @@
       <li><a href="<?php echo url_for('/index.php'); ?>">MAIN</a></li>
       
       <li><a href="<?php echo url_for('/register_member.php'); ?>">REGISTER PATIENT</a></li>
-      
+        <li><a href="<?php echo url_for('/register_member.php'); ?>">Admin: STAFF MANAGEMENT</a></li>
+        <li><a href="<?php echo url_for('/register_member.php'); ?>">Staff: PATIENTS</a></li>
+        <li><a href="<?php echo url_for('/register_member.php'); ?>">Staff: REFERRALS </a></li>
+        <li><a href="<?php echo url_for('/register_member.php'); ?>">Patient: MY REFERRALS </a></li>
+        <li><a href="<?php echo url_for('/register_member.php'); ?>">Patient: MY RESULTS </a></li>
 
     </ul>
   </navigation>
