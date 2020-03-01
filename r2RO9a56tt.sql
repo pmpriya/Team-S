@@ -101,6 +101,17 @@ CREATE TABLE `User` (
   `userLevel` int(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `User` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) DEFAULT '',
+  `name` varchar(10) NOT NULL,
+  `surname` varchar(10) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `userLevel` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 
 --
 -- Indexes for table `Investigations`
