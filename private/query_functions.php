@@ -38,7 +38,7 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     }
   }
 
-// Retrieves all User information
+
 function find_all_users() {
     global $db;
     $sql = "SELECT * FROM User ";
@@ -47,6 +47,31 @@ function find_all_users() {
     confirm_result_set($result);
     return $result;
 }
-  
+
+ function find_user_by_id($userID) {
+     global $db;
+    $sql = "SELECT * FROM User ";
+    $sql .= "WHERE id='" . $userID . "'";
+     $result = mysqli_query($db, $sql);
+        return $result;
+}
+
+function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_userLevel) {
+    global $db;
+    $sql = "UPDATE User SET username='$new_username', name='$new_name',surname='$new_surname',email='$new_email',userLevel='$new_userLevel' WHERE id=$id";
+    $result = mysqli_query($db, $sql);
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+        echo '<script>window.location.replace("users.php"); </script>';
+        header('users.php');
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+
+}
 
   ?>
