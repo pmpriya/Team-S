@@ -1,8 +1,8 @@
 <?php
 
-define("DB_SERVER", "remotemysql.com");
-define("DB_USER", "r2RO9a56tt");
-define("DB_PASS", "AOjlSa74n4");
-define("DB_NAME", "r2RO9a56tt");
+define("DB_SERVER", "juliusz.uk");
+define("DB_USER", "project");
+define("DB_PASS", "segproject");
+define("DB_NAME", "project_main");
 
 ?>

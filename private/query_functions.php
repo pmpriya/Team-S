@@ -37,6 +37,16 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
       exit;
     }
   }
+
+// Retrieves all User information
+function find_all_users() {
+    global $db;
+    $sql = "SELECT * FROM User ";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
   
 
   ?>
