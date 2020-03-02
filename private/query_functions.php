@@ -60,7 +60,6 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     global $db;
     $sql = "UPDATE User SET username='$new_username', name='$new_name',surname='$new_surname',email='$new_email',userLevel='$new_userLevel' WHERE id=$id";
     $result = mysqli_query($db, $sql);
-    $result = mysqli_query($db, $sql);
     if($result) {
         return true;
         echo '<script>window.location.replace("users.php"); </script>';
@@ -74,20 +73,39 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
 
 }
 
-function delete_user($userID) {
+
+
+function edit_password($id, $new_password)
+{
     global $db;
-    $sql = "DELETE FROM User ";
-    $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
-    $sql .= "LIMIT 1";
+    $sql = "UPDATE User SET password='$new_password' WHERE id=$id";
     $result = mysqli_query($db, $sql);
-    if($result) {
+    if ($result) {
         return true;
+        echo '<script>window.location.replace("users.php"); </script>';
+        header('users.php');
     } else {
-        // DELETE failed
         echo mysqli_error($db);
         db_disconnect($db);
         exit;
+    }}
+
+    function delete_user($userID)
+    {
+        global $db;
+        $sql = "DELETE FROM User ";
+        $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        if ($result) {
+            return true;
+        } else {
+            // DELETE failed
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
     }
-}
+
 
   ?>

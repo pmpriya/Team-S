@@ -55,5 +55,8 @@ if(mysqli_num_rows($query)>=1){
 
                                 <button type="submit" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
                             </form>
+               <br><br>
+               <td><a href=passwordReset.php?id=<?php echo $id; ?>>Update password</a></td>
+
                       </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
