@@ -45,10 +45,11 @@ if (isset($_GET["delete"])) {
                     <td>" . $users["surname"] . "</td>
                     <td>" . $users["userLevel"] . "</td>
                 <td><a href=editUser.php?id=" . $users["id"] . ">Edit</a></td>
-                <td><a href=?delete=" . $users["id"] . " onclick=\"return confirm('Are you sure?');\">Delete</a></td></tr>";
+                <td><a href=?delete=" . $users["id"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td></tr>";
                     } ?>
 
                 </table>
+            <br><td><a href=addUser.php>Add user</a></td>
 
         </center>
 

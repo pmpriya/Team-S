@@ -108,4 +108,22 @@ function edit_password($id, $new_password)
     }
 
 
+function add_user($username,$name,$surname,$email,$password, $userLevel) {
+    global $db;
+    $sql = "INSERT INTO User VALUES (null, '$username','$password','$name','$surname','$email', '$userLevel')";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+        echo '<script>window.location.replace("users.php"); </script>';
+        header('users.php');
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+
+}
+
+
   ?>
