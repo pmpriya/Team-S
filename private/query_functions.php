@@ -74,4 +74,20 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
 
 }
 
+function delete_user($userID) {
+    global $db;
+    $sql = "DELETE FROM User ";
+    $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+    } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
   ?>

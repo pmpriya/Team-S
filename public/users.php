@@ -5,6 +5,12 @@
 $page_title = 'KCL Paedriatic Liver Service';
 $user_set = find_all_users();
 
+settype($var, 'integer');
+$var = $_GET["delete"] ?? '';
+if (isset($_GET["delete"])) {
+    delete_user($var);
+    header('Location: users.php');
+}
 ?>
         <style>
 
@@ -30,7 +36,7 @@ $user_set = find_all_users();
                         <th><b>Name</b></th>
                         <th><b>Surname</b></th>
                         <th><b>Level</b></th>
-                        <th colspan="3"><b>Manage</b></th>
+                        <th colspan="2"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
@@ -38,9 +44,8 @@ $user_set = find_all_users();
                     <td>" . $users["name"] . "</td>
                     <td>" . $users["surname"] . "</td>
                     <td>" . $users["userLevel"] . "</td>
-                <td><a href=userDetails.php?id=" . $users["id"] . ">View</a></td>
                 <td><a href=editUser.php?id=" . $users["id"] . ">Edit</a></td>
-                <td><a href=?delete=" . $users["id"] . ">Delete</td></tr>";
+                <td><a href=?delete=" . $users["id"] . " onclick=\"return confirm('Are you sure?');\">Delete</a></td></tr>";
                     } ?>
 
                 </table>
