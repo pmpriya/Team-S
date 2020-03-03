@@ -73,7 +73,20 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
 
 }
 
+function find_user_by_username($username) {
+    global $db;
 
+    $sql = "SELECT * FROM User ";
+    $sql .= "WHERE username='" . $username . "'";
+    $result = mysqli_query($db, $sql);
+  
+    confirm_result_set($result);
+    $user = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $user;
+    
+
+  }
 
 function edit_password($id, $new_password)
 {
