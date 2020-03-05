@@ -84,7 +84,8 @@ CREATE TABLE `Referral` (
   `family_history` mediumtext NOT NULL,
   `current_feeds` text,
   `medications` text,
-  `other_investigations` text
+  `other_investigations` text,
+  'urgent' boolean
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

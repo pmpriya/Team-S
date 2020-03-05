@@ -138,5 +138,10 @@ function add_user($username,$name,$surname,$email,$password, $userLevel) {
 
 }
 
+    function is_urgent($referralId){
+        global $db;
+        $sql = "SELECT urgent FROM Referral";
+        return $sql;
+    }
 
   ?>

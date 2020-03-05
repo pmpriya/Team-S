@@ -24,7 +24,7 @@ if(is_post_request()){
 
 
   if(count(array_filters($_POST))!=count($_POST)){
-    echo <'label class = "text-danger">Please fill in all required fields</label';
+    echo 'label class = "text-danger">Please fill in all required fields</label';
   }
   else {
     //redirect_to
@@ -92,6 +92,28 @@ if(is_post_request()){
       <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
       <input type="text" name="kchDocName">
     </div>
+
+    <!-- Asking for indication of urgent symptoms -->
+    <div class="field-column">
+      <label>Does the patient have any of the following symptoms?</label>
+
+      <!-- The checkboxes for urgent symptoms-->
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasAbnormalClotting" required> <label> Abnormal clotting</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasConjugatedJaundice" required> <label> Conjugated jaundice</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasPaleStools" required> <label> Pale stools</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasAcuteHepatitisPlus" required> <label> Acute hepatitis with elevated transaminase levels and jaundice</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasParacetamolOD" required> <label> Paracetamol overdose</label>
+        </div>
+      </div>
 
      <!-- Current Issue -->
 

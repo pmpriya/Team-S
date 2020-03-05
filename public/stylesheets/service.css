@@ -158,6 +158,12 @@
      margin-bottom: 10px;
  }
 
+ input[type="checkbox"] {
+  display: inline-block;
+  width: 15px;
+  vertical-align: top;
+}
+
 
 
 
@@ -174,7 +180,6 @@
     width: 300px;
  }
  
-
  
  #center-title {
    text-align: center;
@@ -223,3 +228,5 @@
    padding-left: 40px;
  }
  
+ .checkbox-container input[type="checkbox"]{display:inline-block; width: 15px; vertical-align: top;}
+ .checkbox-container label{display: inline-block; width: 200px; word-break: keep-all; }
