@@ -1,4 +1,4 @@
-<?php require_once ('../../../private/initialize.php'); ?>
+<?php require_once ('../../private/initialise.php'); ?>
 <?php
     $investigations_set = find_all_investigations();
     $patient_set = get_all_userIds()
