@@ -1,5 +1,5 @@
 
-<?php require_once ('../../../private/initialize.php'); 
+<?php require_once ('../../private/initialise.php'); 
 if(!isset($GET['patient_ID'])){
     redirect_to(url_for('/investigations/show.php?patient_ID= ' . $patient_ID));
 }
