@@ -36,7 +36,7 @@ if (isset($_GET["delete"])) {
                         <th><b>Surname</b></th>
                         <th><b>DOB</b></th>
                         <th><b>Postcode</b></th>
-                        <th colspan="2"><b>Manage</b></th>
+                        <th colspan="3"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
@@ -44,6 +44,7 @@ if (isset($_GET["delete"])) {
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["postcode"] . "</td>
+                    <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
                 <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
                 <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td></tr>";
                     } ?>
