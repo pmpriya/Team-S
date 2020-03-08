@@ -138,5 +138,31 @@ function add_user($username,$name,$surname,$email,$password, $userLevel) {
 
 }
 
+function find_all_patients() {
+    global $db;
+    $sql = "SELECT * FROM Patient ";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
 
+function delete_patient($userID)
+{
+    global $db;
+    $sql = "DELETE FROM Patient ";
+    $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if ($result) {
+        return true;
+    } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
   ?>
+
+
