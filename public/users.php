@@ -29,7 +29,7 @@ if (isset($_GET["delete"])) {
 
         <center>
 
-                <h1>Users</h1>
+                <h1>Staff</h1>
                 <table>
                     <tr>
                         <th><b>Username</b></th>
