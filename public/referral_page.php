@@ -24,12 +24,9 @@ if(is_post_request()){
 
 
   if(count(array_filters($_POST))!=count($_POST)){
-    echo <'label class = "text-danger">Please fill in all required fields</label';
+    echo '<label class = "text-danger">Please fill in all required fields</label';
   }
-  else {
-    //redirect_to
-  }
-}
+ 
 ?>
 <html>
     <head>
