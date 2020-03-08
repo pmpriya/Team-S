@@ -19,7 +19,7 @@ if(is_post_request()) {
       if($password===$user['password']) {
       
         log_in_users($user);
-        redirect_to(url_for('patients_table.php?id=' . $new_id));
+        redirect_to(url_for('viewPatient.php?id=' . $new_id));
       }
       else {
         echo "Incorrect password.";
