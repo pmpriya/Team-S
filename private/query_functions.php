@@ -91,7 +91,8 @@ function find_user_by_username($username) {
 function edit_password($id, $new_password)
 {
     global $db;
-    $sql = "UPDATE User SET password='$new_password' WHERE id=$id";
+    $MD5Pass = md5($new_password);
+    $sql = "UPDATE User SET password='$MD5Pass' WHERE id=$id";
     $result = mysqli_query($db, $sql);
     if ($result) {
         return true;
@@ -123,7 +124,8 @@ function edit_password($id, $new_password)
 
 function add_user($username,$name,$surname,$email,$password, $userLevel) {
     global $db;
-    $sql = "INSERT INTO User VALUES (null, '$username','$password','$name','$surname','$email', '$userLevel')";
+    $MD5Pass = md5($password);
+    $sql = "INSERT INTO User VALUES (null, '$username','$MD5Pass','$name','$surname','$email', '$userLevel')";
     $result = mysqli_query($db, $sql);
     if($result) {
         return true;
