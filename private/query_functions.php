@@ -123,7 +123,8 @@ function edit_password($id, $new_password)
 
 function add_user($username,$name,$surname,$email,$password, $userLevel) {
     global $db;
-    $sql = "INSERT INTO User VALUES (null, '$username','$password','$name','$surname','$email', '$userLevel')";
+    $MD5Pass = md5($password);
+    $sql = "INSERT INTO User VALUES (null, '$username','$MD5Pass','$name','$surname','$email', '$userLevel')";
     $result = mysqli_query($db, $sql);
     if($result) {
         return true;
@@ -182,6 +183,28 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
 
 
 }
+
+function access_investigation($dob, $postcode) {
+    global $db;
+    $sql = "SELECT * FROM Patient WHERE date_of_birth='" . $dob . "' AND postcode='" . $postcode . "'";
+    $sql1 = "SELECT * FROM Patient WHERE date_of_birth='2020-03-27' AND postcode='SE14XA'";
+    $result = mysqli_query($db, $sql);
+
+    confirm_result_set($result);
+    $user = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $user;
+
+
+}
+
+function access_investigation2($dob, $postcode) {
+    global $db;
+    $sql = "SELECT * FROM Patient WHERE date_of_birth='2020-03-27' AND postcode='SE14XA'";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
   ?>
 
 

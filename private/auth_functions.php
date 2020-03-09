@@ -27,4 +27,14 @@
     }
   }
 
+
+function grant_external_access($dob, $postcode) {
+  session_start();
+  session_regenerate_id();
+  $_SESSION['dob'] = $dob;
+  $_SESSION['postcode'] = $postcode;
+  return true;
+}
+
+
 ?>
