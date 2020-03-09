@@ -7,7 +7,7 @@ Use project_main;
 --
 
 CREATE TABLE `Investigations` (
-  `id` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `patient_ID` int(11) NOT NULL,
   `date` date NOT NULL,
   `Bili T/D` tinytext NOT NULL,

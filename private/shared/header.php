@@ -20,7 +20,7 @@
       <li><a href="<?php echo url_for('/user_login.php'); ?>">LOG IN</a></li>
         <li><a href="<?php echo url_for('/users.php'); ?>">Admin: STAFF MANAGEMENT</a></li>
        
-        <li><a href="<?php echo url_for('/register_member.php'); ?>">Staff: PATIENTS</a></li>
+        <li><a href="<?php echo url_for('/patients.php'); ?>">Staff: PATIENTS</a></li>
         <li><a href="<?php echo url_for('/register_member.php'); ?>">Staff: REFERRALS </a></li>
         <li><a href="<?php echo url_for('/register_member.php'); ?>">Patient: MY RESULTS </a></li>
 
