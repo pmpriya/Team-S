@@ -5,7 +5,7 @@ function get_all_userIds(){
     $sql = "SELECT id FROM Patient ";
     
     $result = mysqli_query($db, $sql);
-    return result;
+    return $result;
   }
   
   
@@ -17,7 +17,7 @@ function get_all_userIds(){
     
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
-    return result;
+    return $result;
   }
   
   
@@ -292,7 +292,9 @@ function add_user($username,$name,$surname,$email,$password, $userLevel) {
 
     function is_urgent($referralId){
         global $db;
-        $sql = "SELECT urgent FROM Referral";
+        //Select 1
+        // $sql = "SELECT urgent FROM Referral";
+        // $sql = "SELECT urgent FROM Patient";
         return $sql;
     }
 
