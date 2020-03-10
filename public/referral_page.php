@@ -5,6 +5,7 @@
 
 <?php
 if(is_post_request()){
+  $patient_ID = 1;
   $consultant_name = $_POST["consultantName"];
   $consultant_specialty = $_POST["consultantSpecialty"];
   $organisation_hospital_name = $_POST["orgName"];
@@ -26,7 +27,22 @@ if(is_post_request()){
   if(count(array_filters($_POST))!=count($_POST)){
     echo '<label class = "text-danger">Please fill in all required fields</label';
   }
- 
+  //$result = find_member_by_nhsno($nhs_number);
+  // list($usr, $domain) = explode('@', $email);
+
+  // if (!($domain == 'kcl.ac.uk')) {
+       // use gmail
+     //  echo '<label class="text-danger">This is not a valid Kings College London email (@kcl.ac.uk domain)</label>';
+  // } 
+  else {
+       
+           $result1 = insert_referral( $patient_ID ,$consultant_name, $consultant_speciality, $organisation_hospital_name, $organisation_hospital_number, 
+           $bleep_number, $is_patient_aware, $is_interpreter_needed, $kch_doc_name, $current_issue, 
+           $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $date_time);
+           //$new_id = mysqli_insert_id($db);
+           redirect_to(url_for('referral_page.php?id=' . $new_id));
+       }
+     }
 ?>
 <html>
     <head>
@@ -71,13 +87,13 @@ if(is_post_request()){
      <!-- Patient Aware -->
      <div class="field-column">
       <label>Is the patient aware of the referral?</label>
-        <input type = "checkbox" name = "isAware" required>
+        <input type = "checkbox" name = "isAware" optional>
      </div>
 
      <!-- Interpreter Needed -->
      <div class="field-column">
       <label>Will there be a language interpreter needed?</label>
-       <input type = "checkbox" name = "isInterpreterNeeded" required>
+       <input type = "checkbox" name = "isInterpreterNeeded" optional>
     </div>
      <!-- Interpreter Language -->
      <div class="field-column">
