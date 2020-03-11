@@ -6,49 +6,38 @@
 <?php
 if(is_post_request()) {
     
-    $firstname = $_POST["firstname"]; 
-    $lastname = $_POST["lastname"];
+    $first_name = $_POST["firstname"]; 
+    $last_name = $_POST["lastname"];
     
     $dob = strtotime($_POST["dob"]);
     $dob = date('Y-m-d', $dob);
     $home_phone = $_POST["homenumber"];
     $mobile_phone = $_POST["mobilenumber"];
-    $address = $_POST["address"];
-    $gender = $_POST["gender"];
+    $postcode = $_POST["postcode"];
+    $home_address = $_POST["address"];
+    $sex = $_POST["gender"];
     $nhs_number = $_POST["nhsnumber"];
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
 
-   // if(email_blacklisted($email)) {
-
-      //  echo '<label class="text-danger">You are not allowed to sign-up!</label>';
-
-   // } else {
     
-        if(count(array_filter($_POST))!=count($_POST)){
-            
-            echo '<label class="text-danger">Please fill in all required fields</label>';
-        }
-           
+        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $gp_address==""|| $gp_number=="")
+
+             echo '<label class="text-danger">Please fill in all required fields</label>';
         
         else {
-           // $resulte = find_member_by_email($email);
-           // list($usr, $domain) = explode('@', $email);
-
-           // if (!($domain == 'kcl.ac.uk')) {
-                // use gmail
-              //  echo '<label class="text-danger">This is not a valid Kings College London email (@kcl.ac.uk domain)</label>';
-           // } else {
-                
-                //if(mysqli_num_rows($resulte) > 0) {
-                 //   $mes = '<label class="text-danger">Email Already Exits</label>';
-                 //   echo $mes;
-              //  } else { 
-                    //$result = insert_member($firstname, $lastname, $dob, $phone, $address, $gender, $email);
+            $result = find_member_by_nhsno($nhs_number);
+           
+                if(mysqli_num_rows($result) > 0) {
+                  $mes = '<label class="text-danger">Patient is already registered with us</label>';
+                       echo $mes;
+                } 
+              else {
+                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
                     //$new_id = mysqli_insert_id($db);
-                    redirect_to(url_for('referring_organisation.php?id=' . $new_id));
-                }
-            
+                    redirect_to(url_for('referring_organisation.php'));
+              }
+        }
 }
 ?>
 <html>
@@ -61,74 +50,93 @@ if(is_post_request()) {
     <h1><b>PATIENT REGISTRATION</b></h1>
 
 <h3> <div>Patient Details(Please complete all fields) </div></h3>
-<h3><b><div> Referral is NOT accepted without filling ALL Fields in this page </div></b></h3>
+<h3><b><div> Registration is NOT accepted without filling ALL Fields in this page </div></b></h3>
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
+
     <!-- patient details form -->
-    <form action="<?php echo url_for("/register_member.php"); ?>" method="post">    <!-- Patient's Surname -->
+
+    <form action="<?php echo url_for("/register_patient.php"); ?>" method="post">    <!-- Patient's Surname -->
       <div class="field-column">
       <label>Surname</label>
          <input type="text" name="lastname" placeholder="Required" required>
         </div>
+
     <!-- Patient's forename -->
+
     <div class="field-column">
       <label>Forename</label>
-       <input type="text" name="firstname" >
+       <input type="text" name="firstname" placeholder="Required" required>
     </div>
+
      <!-- NHS number -->
+
      <div class="field-column">
       <label>NHS number</label>
-       <input type="number" name="nhsnumber" required>
+       <input type="number" name="nhsnumber" placeholder="Required" required>
     </div>
      <!-- date of birth -->
+
      <div class="field-column">
       <label>Date of birth</label>
-       <input type = "date" name = "dob" required>
+       <input type = "date" name = "dob" placeholder="Required" required>
     </div>
      
      <!-- sex -->
+
      <div class="field-column">
-      <label>Gender</label>
-     Male : <input type = "radio" name="gender" value="Male">
-     Female : <input type = "radio" name="gender" value="Female">
-     </div>
+            <label>Gender</label>
+                <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
+                <input id="gender" type="radio" name="gender" value="f"> <label id="genderOption">Female</label>
+               
+        </div>
  
      <!-- home address -->
+
      <div class="field-column">
       <label>Home address</label>
-     <textarea name = "address"> </textarea>
+      <input type = "textarea" name = "address" placeholder="Required" required>
     </div>
+
      <!-- post code -->
+
      <div class="field-column">
       <label>Postcode</label>
-      <textarea name = "address"> </textarea>
+      <input type="text" name="postcode" placeholder="Required" required>
     </div>
+
      <!-- Home telephone number -->
+
      <div class="field-column">
       <label>Home Phone Number</label>
-      <input type="number" name="homenumber">
+      <input type="number" name="homenumber" placeholder="Required" required>
     </div>
     
      <!-- Mobile telephone number -->
    
      <div class="field-column">
-      <label>Postcode</label>
-      <input type="number" name="mobilenumber" required>
+      <label>Mobile Phone Number</label>
+      <input type="number" name="mobilenumber" placeholder="Required" required>
     </div>
+
      <!-- Patient's GP address -->
+
      <div class="field-column">
       <label>GP address</label>
-       <textarea name = "gpaddress"> </textarea>
+      <input type="text" name="gpaddress" placeholder="Required" required>
     </div>
+
      <!-- GP telephone number -->
+
      <div class="field-column">
-      <label>GP phone number</label> <input type="number" name="gpnumber">
+      <label>GP phone number</label> <input type="number" name="gpnumber" placeholder="Required" required>
     </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
      <button type = "submit" name="submit">Submit</button>
-</div>
+
+    </div>
      <!-- reset button -->
      <div class="field-column">
      <button type = "reset" name="reset">Reset</button>
