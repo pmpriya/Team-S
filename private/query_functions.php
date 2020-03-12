@@ -1,16 +1,16 @@
 <?php
-function find_member_by_nhsno($nhs_number) {
-    global $db;
-    
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE nhs_number='" . $nhs_number . "' ";
-    $result = mysqli_query($db, $sql);
-    
-    return $result;
+ function find_member_by_nhsno($nhs_number) {
+  global $db;
+
+  $sql = "SELECT * FROM Patient ";
+  $sql .= "WHERE nhs_number='" . $nhs_number . "' ";
+  $result = mysqli_query($db, $sql);
+ 
+  return $result;
 }
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number) {
     global $db;
-    
+  
     $sql = "INSERT INTO Patient ";
     $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone) ";
     $sql .= "VALUES (";
@@ -19,7 +19,6 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     $sql .= "'" . $last_name . "', ";
     $sql .= "'" . $dob . "', ";
     $sql .= "'" . $sex . "', ";
-    
     $sql .= "'" . $home_address . "', ";
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
@@ -30,14 +29,13 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
-        return true;
+      return true;
     } else {
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
     }
-}
-
+  }
 
 function find_all_users() {
     global $db;
@@ -48,12 +46,12 @@ function find_all_users() {
     return $result;
 }
 
-function find_user_by_id($userID) {
-    global $db;
+ function find_user_by_id($userID) {
+     global $db;
     $sql = "SELECT * FROM User ";
     $sql .= "WHERE id='" . $userID . "'";
-    $result = mysqli_query($db, $sql);
-    return $result;
+     $result = mysqli_query($db, $sql);
+        return $result;
 }
 
 function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_userLevel) {
@@ -114,7 +112,6 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
 
 function find_user_by_username($username) {
     global $db;
-    
     $sql = "SELECT * FROM User ";
     $sql .= "WHERE username='" . $username . "'";
     $result = mysqli_query($db, $sql);
@@ -123,9 +120,7 @@ function find_user_by_username($username) {
     $user = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
     return $user;
-    
-    
-}
+  }
 
 function edit_password($id, $new_password)
 {
@@ -142,7 +137,6 @@ function edit_password($id, $new_password)
         db_disconnect($db);
         exit;
     }}
-    
     function delete_user($userID)
     {
         global $db;
@@ -159,8 +153,6 @@ function edit_password($id, $new_password)
             exit;
         }
     }
-    
-    
     function add_user($username,$name,$surname,$email,$password, $userLevel) {
         global $db;
         $MD5Pass = md5($password);
@@ -277,6 +269,5 @@ function edit_password($id, $new_password)
         
     }
     ?>
-    
     
     

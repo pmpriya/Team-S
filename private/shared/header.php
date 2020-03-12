@@ -21,7 +21,7 @@
         <li><a href="<?php echo url_for('/users.php'); ?>">Admin: STAFF MANAGEMENT</a></li>
        
         <li><a href="<?php echo url_for('/patients.php'); ?>">Staff: PATIENTS</a></li>
-        <li><a href="<?php echo url_for('/referrals.php'); ?>">Staff: REFERRALS </a></li>
+        <li><a href="<?php echo url_for('/register_patient.php'); ?>">Staff: REFERRALS </a></li>
         <li><a href="<?php echo url_for('/register_patient.php'); ?>">Patient: MY RESULTS </a></li>
 
     </ul>
