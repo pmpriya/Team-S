@@ -37,6 +37,153 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
       exit;
     }
   }
-  
 
+
+function find_all_users() {
+    global $db;
+    $sql = "SELECT * FROM User ";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+ function find_user_by_id($userID) {
+     global $db;
+    $sql = "SELECT * FROM User ";
+    $sql .= "WHERE id='" . $userID . "'";
+     $result = mysqli_query($db, $sql);
+        return $result;
+}
+
+function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_userLevel) {
+    global $db;
+    $sql = "UPDATE User SET username='$new_username', name='$new_name',surname='$new_surname',email='$new_email',userLevel='$new_userLevel' WHERE id=$id";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+        echo '<script>window.location.replace("users.php"); </script>';
+        header('users.php');
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+
+}
+
+function find_user_by_username($username) {
+    global $db;
+
+    $sql = "SELECT * FROM User ";
+    $sql .= "WHERE username='" . $username . "'";
+    $result = mysqli_query($db, $sql);
+  
+    confirm_result_set($result);
+    $user = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $user;
+    
+
+  }
+
+function edit_password($id, $new_password)
+{
+    global $db;
+    $MD5Pass = md5($new_password);
+    $sql = "UPDATE User SET password='$MD5Pass' WHERE id=$id";
+    $result = mysqli_query($db, $sql);
+    if ($result) {
+        return true;
+        echo '<script>window.location.replace("users.php"); </script>';
+        header('users.php');
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }}
+
+    function delete_user($userID)
+    {
+        global $db;
+        $sql = "DELETE FROM User ";
+        $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        if ($result) {
+            return true;
+        } else {
+            // DELETE failed
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
+
+function add_user($username,$name,$surname,$email,$password, $userLevel) {
+    global $db;
+    $MD5Pass = md5($password);
+    $sql = "INSERT INTO User VALUES (null, '$username','$MD5Pass','$name','$surname','$email', '$userLevel')";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+        echo '<script>window.location.replace("users.php"); </script>';
+        header('users.php');
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+
+}
+
+function find_all_patients() {
+    global $db;
+    $sql = "SELECT * FROM Patient ";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function delete_patient($userID)
+{
+    global $db;
+    $sql = "DELETE FROM Patient ";
+    $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if ($result) {
+        return true;
+    } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+
+function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone) {
+    global $db;
+    $sql = "UPDATE `Patient` SET `nhs_number`='$new_nhs_number',`first_name`='$new_first_name',`last_name`='$new_last_name',`date_of_birth`='$new_date_of_birth',`sex`='$new_sex',`home_address`='$new_home_address',`postcode`='$new_postcode',`home_phone`='$new_home_phone',`mobile_phone`='$new_mobile_phone',`gp_address`='$new_gp_address',`gp_phone`='$new_gp_phone' WHERE ID=$id";
+    echo($sql);
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+        echo '<script>window.location.replace("patients.php"); </script>';
+        header('users.php');
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+
+}
   ?>
+
+
