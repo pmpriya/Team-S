@@ -184,46 +184,46 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
      
      
 
-    function insert_referral($patient_ID,$consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_number, 
-                                    $bleep_number,  $interpreter_language, $kch_doc_name, $current_issue, 
-                                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
-                global $db;
-            
-                $sql = "INSERT INTO Referral ";
-                $sql .= "(patient_ID, consultant_name, consultant_specialty, organisation_hospital_name, organisation_hospital_no, 
-                bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-                        history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
-                $sql .= "VALUES (";
-                //$sql .= "'" . $ID . "', ";
-                $sql .= "'" . $patient_ID . "', ";
-                $sql .= "'" . $consultant_name . "', ";
-                $sql .= "'" . $consultant_specialty . "', ";
-                $sql .= "'" . $organisation_hospital_name . "', ";
+    // function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_number, 
+    //                                 $bleep_number, $is_patient_aware, $is_interpreter_needed,  $interpreter_language, $kch_doc_name, $current_issue, 
+    //                                 $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
+    //             global $db;
+                
+    //             $sql = "INSERT INTO Referral ";
+    //             $sql .= "(patient_ID, consultant_name, consultant_specialty, organisation_hospital_name, organisation_hospital_no, 
+    //             bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
+    //                     history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
+    //             $sql .= "VALUES (";
+    //             //$sql .= "'" . $ID . "', ";
+    //             $sql .= "'" . $patient_ID . "', ";
+    //             $sql .= "'" . $consultant_name . "', ";
+    //             $sql .= "'" . $consultant_specialty . "', ";
+    //             $sql .= "'" . $organisation_hospital_name . "', ";
              
-                $sql .= "'" . $organisation_hospital_number . "', ";
-                $sql .= "'" . $bleep_number . "', ";
-               // $sql .= "'" . $is_patient_aware . "', ";
-               // $sql .= "'" . $is_interpreter_needed . "', ";
-                $sql .= "'" . $interpreter_language . "', ";
-                //$sql .= "'" . $nhs_number . "', ";
-                $sql .= "'" . $kch_doc_name . "', ";
-                $sql .= "'" . $current_issue . "', ";
-                $sql .= "'" . $history_of_present_complaint . "', ";
-                $sql .= "'" . $family_history . "', ";
-                $sql .= "'" . $current_feeds . "', ";
-                $sql .= "'" . $medications . "', ";
-                $sql .= "'" . $other_investigations . "'";
-               // $sql .= "'" . $datetime . "'";
-                $sql .= ")";
-                $result = mysqli_query($db, $sql);
-                if($result) {
-                  return true;
-                } else {
-                  echo mysqli_error($db);
-                  db_disconnect($db);
-                  exit;
-                }
-          }
+    //             $sql .= "'" . $organisation_hospital_number . "', ";
+    //             $sql .= "'" . $bleep_number . "', ";
+    //             $sql .= "'" . $is_patient_aware . "', ";
+    //             $sql .= "'" . $is_interpreter_needed . "', ";
+    //             $sql .= "'" . $interpreter_language . "', ";
+    //             //$sql .= "'" . $nhs_number . "', ";
+    //             $sql .= "'" . $kch_doc_name . "', ";
+    //             $sql .= "'" . $current_issue . "', ";
+    //             $sql .= "'" . $history_of_present_complaint . "', ";
+    //             $sql .= "'" . $family_history . "', ";
+    //             $sql .= "'" . $current_feeds . "', ";
+    //             $sql .= "'" . $medications . "', ";
+    //             $sql .= "'" . $other_investigations . "'";
+    //            // $sql .= "'" . $datetime . "'";
+    //             $sql .= ")";
+    //             $result = mysqli_query($db, $sql);
+    //             if($result) {
+    //               return true;
+    //             } else {
+    //               echo mysqli_error($db);
+    //               db_disconnect($db);
+    //               exit;
+    //             }
+    //       }
         
         function find_all_referrals(){
             global $db;

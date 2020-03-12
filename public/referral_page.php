@@ -16,31 +16,87 @@ if(is_post_request()){
   $organisation_hospital_number = $_POST["orgNumber"];
   $bleep_number = $_POST["bleepNumber"];
   $is_patient_aware = $_POST["isAware"];
-  //$is_interpreter_needed = $_POST["isInterpreterNeeded"];
-  //$interpreter_language = $_POST["interpreterLanguage"];
+  $is_interpreter_needed = $_POST["isInterpreterNeeded"];
+  $interpreter_language = $_POST["interpreterLanguage"];
   $kch_doc_name = $_POST["kchDocName"];
   $current_issue = $_POST["currentIssue"];
   $history_of_present_complaint = $_POST["complaintHistory"];
   $family_history = $_POST["familyHistory"];
   $current_feeds = $_POST["currentFeeds"];
   $medications = $_POST["medications"];
-  $other_investigations = $POST["otherInvestigations"];
-  //$datetime = $_POST["datetime"];
+  $datetime = $_POST["datetime"];
+  $other_investigations = $_POST["otherInvestigations"];
 
 
   
   if ($consultant_name=="" || $consultant_specialty=="" || $organisation_hospital_name==""|| 
    $organisation_hospital_number=="" || $bleep_number==""  || $kch_doc_name=="" || $current_issue==""|| $history_of_present_complaint==""
-    || $family_history=="" || $current_feeds=="" || $medications=="" || $other_investigations==""  ){
+    || $family_history=="" || $current_feeds=="" || $medications=="" ){
    echo '<label class = "text-danger">Please fill in all required fields</label>';
-   
   }
 
-
+  else
      {
+function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_number, 
+      $bleep_number, $is_patient_aware, $is_interpreter_needed,  $interpreter_language, $kch_doc_name, $current_issue, 
+      $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
+global $db;
+
+$sql = "INSERT INTO Referral ";
+$sql .= "(patient_ID, consultant_name, consultant_specialty, organisation_hospital_name, organisation_hospital_no, 
+bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
+history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
+$sql .= "VALUES (";
+//$sql .= "'" . $ID . "', ";
+$sql .= "'" . $patient_ID . "', ";
+$sql .= "'" . $consultant_name . "', ";
+$sql .= "'" . $consultant_specialty . "', ";
+$sql .= "'" . $organisation_hospital_name . "', ";
+
+$sql .= "'" . $organisation_hospital_number . "', ";
+$sql .= "'" . $bleep_number . "', ";
+$sql .= "'" . $is_patient_aware . "', ";
+$sql .= "'" . $is_interpreter_needed . "', ";
+$sql .= "'" . $interpreter_language . "', ";
+//$sql .= "'" . $nhs_number . "', ";
+$sql .= "'" . $kch_doc_name . "', ";
+$sql .= "'" . $current_issue . "', ";
+$sql .= "'" . $history_of_present_complaint . "', ";
+$sql .= "'" . $family_history . "', ";
+$sql .= "'" . $current_feeds . "', ";
+$sql .= "'" . $medications . "', ";
+$sql .= "'" . $other_investigations . "'";
+// $sql .= "'" . $datetime . "'";
+$sql .= ")";
+$result = mysqli_query($db, $sql);
+if($result) {
+return true;
+} else {
+echo mysqli_error($db);
+db_disconnect($db);
+exit;
+}
+}
+      echo $consultant_name;
+      echo $consultant_specialty;
+      echo $organisation_hospital_name;
+      echo $organisation_hospital_number;
+      echo $bleep_number;
+      echo $is_patient_aware;
+      echo $is_interpreter_needed;    
+      echo $interpreter_language;
+      echo $kch_doc_name;
+      echo $current_issue;
+      echo $history_of_present_complaint;
+      echo $family_history;
+      echo $current_feeds;
+      echo $medications;
+      echo $other_investigations;
+      echo $datetime;
            $result1 = insert_referral( $patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_number, 
-           $bleep_number,$interpreter_language, $kch_doc_name, $current_issue, 
-           $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations );
+           $bleep_number, $is_patient_aware, $is_interpreter_needed ,$interpreter_language, $kch_doc_name, $current_issue, 
+           $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations);
+          
            //$new_id = mysqli_insert_id($db);
            redirect_to(url_for('patients.php'));
        }
@@ -136,23 +192,23 @@ if(is_post_request()){
   </div>
   <!-- Other Investigations -->
   <div class="field-column">
-   <label>Other Investigations</label>
-     <textarea name = "otherInvestigations"> </textarea>
- </div>
- <!-- Family History -->
- <div class="field-column">
-  <label>Date and Time</label>
+    <label>Other Investigations</label>
+    <textarea name = "otherInvestigations"> </textarea>
+  </div>
+  <!-- Datetime -->
+  <div class="field-column">
+    <label>Date and Time</label>
     <input type = "datetime-local" name="datetime" required>
-</div>
+  </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
      <button type = "submit" name="submit">Submit</button>
-</div>
+  </div>
      <!-- reset button -->
      <div class="field-column">
      <button type = "reset" name="reset">Reset</button>
-    </div>
+  </div>
 </form>
 
 
