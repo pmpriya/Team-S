@@ -2,7 +2,7 @@ Show
 <?php // show the investigations that are already if not empty (if empty have only the links) and have links for edit and add ?>
 <?php require_once ('../../private/initialise.php'); ?>
 <?php 
-    $patient_ID = GET['patient_ID']?? '1';
+    $patient_ID = $GET['patient_ID']?? '1';
     $investigations_of_id = find_investigations_by_id($patient_ID);
 ?>
 
