@@ -23,7 +23,7 @@
         <li><a href="<?php echo url_for('/patients.php'); ?>">Staff: PATIENTS</a></li>
 
         <li><a href="<?php echo url_for('/register_member.php'); ?>">Staff: REFERRALS </a></li>
-        <li><a href="<?php echo url_for('/external_access.php'); ?>">External: Check status </a></li>
+        <li><a href="<?php echo url_for('/external_access.php'); ?>">External: STATUS </a></li>
 
 
     </ul>

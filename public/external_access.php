@@ -29,15 +29,15 @@
         ?>
 
         <h1>LOG IN</h1>
-        <form name="frmRegistration" method="post" action="<?php url_for("/login.php?")?>">
+        <form name="frmRegistration" method="post" action="<?php url_for("/external_access.php")?>">
 
             <div class="field-column">
-                <label>DOB: </label>
+                <label>NHS Number: </label>
                 <input type="text" class="demo-input-box" name="nhsno" value="">
             </div>
 
             <div class="field-column">
-                <label>NHS Number</label>
+                <label>Access Code</label>
                 <input type="password" class="demo-input-box" name="accessCode" value="">
             </div><br>
             <div class="field-column">
