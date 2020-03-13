@@ -37,23 +37,76 @@ if(is_post_request()) {
 ?>
 
 <h1>LOG IN</h1>
-    <form name="frmRegistration" method="post" action="<?php url_for("/login.php?")?>">
+    <form name="frmRegistration" id="form" method="post" action="<?php url_for("/login.php?")?>" >
+              <div class="form-group" align="center">
+              <span id="alert_message" style="color:red"></span>
+
                 
         <div class="field-column">
             <label>Username</label>
-            <input type="text" class="demo-input-box" name="username" value="">
+            <input type="text" class="demo-input-box"  required="" onfocusout="isEmpty(this,'Username')" id="username" name="username" value="">
         </div>
         
         <div class="field-column">
             <label>Password</label>
-            <input type="password" class="demo-input-box" name="password" value="">
+            <input type="password" class="demo-input-box" onfocusout="isEmpty(this,'Password')" required="" id="password" name="password" value="">
         </div><br>
         <div class="field-column">
-            <input type="submit" name="register-user" value="Sign in" class="btnRegister">
+            <input type="button" onclick="validateForm()" name="register-user" value="Sign in" class="btnRegister">
         </div>
+      </div>
 
        </div>
     </form>
 </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
+
+
+
+
+<script type="text/javascript">
+  var append = false;
+</script>
+<script type="text/javascript">
+    function isEmpty(r,e){
+        if(r.value.trim()==""){
+            if(append)
+                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
+            else
+                document.getElementById("alert_message").innerHTML =e+" can't be empty";
+            return true;
+        }
+        if(append) 
+            document.getElementById("alert_message").innerHTML += "";
+        else
+            document.getElementById("alert_message").innerHTML = "";
+        return false;
+    }
+</script>
+   
+
+<script type="text/javascript">
+    function validateForm(){
+        document.getElementById("alert_message").innerHTML = ""
+        append = true;
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        
+        var isOkay = true;
+        if(isEmpty(username,"Username")){
+            isOkay =false;
+        }
+        if(isEmpty(password,"Password")){
+            isOkay = false;
+        }
+
+        if(isOkay){
+            document.getElementById("form").submit();
+
+            return true;
+        }
+        return false;
+    }
+</script>
+
