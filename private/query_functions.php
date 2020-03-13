@@ -199,6 +199,27 @@ function find_patient_by_id($ID) {
 
 }
 
+
+function find_patient_by_nhsno($nhs_number) {
+    global $db;
+
+    $sql = "SELECT * FROM Patient ";
+    $sql .= "WHERE nhs_number='" . $nhs_number . "' ";
+    $result = mysqli_query($db, $sql);
+   
+     return $result;
+  }
+
+
+  function find_patient_by_email($email) {
+    global $db;
+
+    $sql = "SELECT * FROM Patient ";
+    $sql .= "WHERE email'" . $email . "' ";
+    $result = mysqli_query($db, $sql);
+   
+     return $result;
+  }
 function find_patient_by_nhsno_and_accesscode($nhsno, $accessCode) {
     global $db;
 
