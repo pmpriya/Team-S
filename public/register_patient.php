@@ -43,7 +43,7 @@ if(is_post_request()) {
                        // echo $mes;
                   //  } 
                   //  else { 
-                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
+                  //  $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
                     
                     redirect_to(url_for('referring_organisation.php'));
               }
@@ -68,20 +68,20 @@ if(is_post_request()) {
 
       <div class="field-column">
       <label>Surname </label>
-         <input type="text" name="lastname2" placeholder="Required" required>
+         <input type="text" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
         </div>
 
     <!--  forename -->
 
     <div class="field-column">
       <label>Forename</label>
-       <input type="text" name="firstname2" placeholder="Required" required>
+       <input type="text" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
     </div>
 
 
     <div class="field-column">
       <label>Email</label>
-       <input type="text" name="mail2" placeholder="Required" required>
+       <input type="text" name="mail2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
     </div>
 
 
@@ -96,14 +96,14 @@ if(is_post_request()) {
        <!-- Patient's Surname -->
       <div class="field-column">
       <label>Surname</label>
-         <input type="text" name="lastname" placeholder="Required" required>
+         <input type="text" name="lastname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
         </div>
 
     <!-- Patient's forename -->
 
     <div class="field-column">
       <label>Forename</label>
-       <input type="text" name="firstname" placeholder="Required" required>
+       <input type="text" name="firstname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
     </div>
 
      <!-- NHS number -->
@@ -121,7 +121,7 @@ if(is_post_request()) {
 
     <div class="field-column">
       <label>Full Name of Referring Doctor</label>
-       <input type="text" name="refname" placeholder="Required" required>
+       <input type="text" name="refname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
     </div>
      
     <div class="field-column">
@@ -141,7 +141,8 @@ if(is_post_request()) {
 
      <div class="field-column">
             <label>Email</label>
-            <input type="text" name="email" placeholder="Required" required>
+            <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
+            
      </div>
 
      <!-- home address -->
