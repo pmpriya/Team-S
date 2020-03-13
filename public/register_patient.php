@@ -44,7 +44,7 @@ if(is_post_request()) {
                   //  } 
                   //  else { 
                     $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
-                    //$new_id = mysqli_insert_id($db);
+                    
                     redirect_to(url_for('referring_organisation.php'));
               }
              }
@@ -54,20 +54,46 @@ if(is_post_request()) {
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Referral Form</title>
+        <title>Patient registration</title>
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
 <body>
     <h1><b>PATIENT REGISTRATION</b></h1>
+   
+    <h2> <div>Details of the person registering the patient(Please complete all fields) </div></h3>
+<br>
 
-<h3> <div>Patient Details(Please complete all fields) </div></h3>
-<h3><b><div> Registration is NOT accepted without filling ALL Fields in this page </div></b></h3>
+<form action="<?php echo url_for("/register_patient.php"); ?>" method="post">
+    <!-- porforma -->
+
+      <div class="field-column">
+      <label>Surname </label>
+         <input type="text" name="lastname2" placeholder="Required" required>
+        </div>
+
+    <!--  forename -->
+
+    <div class="field-column">
+      <label>Forename</label>
+       <input type="text" name="firstname2" placeholder="Required" required>
+    </div>
+
+
+    <div class="field-column">
+      <label>Email</label>
+       <input type="text" name="mail2" placeholder="Required" required>
+    </div>
+
+
+
+<h2> <div>Patient Details(Please complete all fields) </div></h3>
+
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
 
     <!-- patient details form -->
 
-    <form action="<?php echo url_for("/register_patient.php"); ?>" method="post">    <!-- Patient's Surname -->
+       <!-- Patient's Surname -->
       <div class="field-column">
       <label>Surname</label>
          <input type="text" name="lastname" placeholder="Required" required>
@@ -92,7 +118,16 @@ if(is_post_request()) {
       <label>Date of birth</label>
        <input type = "date" name = "dob" placeholder="Required" required>
     </div>
+
+    <div class="field-column">
+      <label>Full Name of Referring Doctor</label>
+       <input type="text" name="refname" placeholder="Required" required>
+    </div>
      
+    <div class="field-column">
+      <label>Referring Hospital</label>
+       <input type="text" name="refhospital" placeholder="Required" required>
+    </div>
      <!-- sex -->
 
      <div class="field-column">

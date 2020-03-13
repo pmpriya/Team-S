@@ -9,7 +9,7 @@
  
   return $result;
 }
-function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
+function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
     global $db;
   
     $sql = "INSERT INTO Patient ";

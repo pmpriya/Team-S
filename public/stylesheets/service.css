@@ -131,7 +131,10 @@
    letter-spacing: 2px;
  }
  
-
+ h2 {
+  margin-left: 20px;
+  
+}
  
  #profile a {
    color:#D0D0D0;
