@@ -35,7 +35,7 @@ if (isset($_GET["delete"])) {
                         <th><b>Name</b></th>
                         <th><b>Surname</b></th>
                         <th><b>DOB</b></th>
-                        <th><b>Postcode</b></th>
+                        <th><b>NHS Number</b></th>
                         <th colspan="3"><b>Manage</b></th>
                     </tr>
                     <?php
@@ -43,7 +43,7 @@ if (isset($_GET["delete"])) {
                         echo "<tr><td >" . $users["first_name"] . "</td>
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
-                    <td>" . $users["postcode"] . "</td>
+                    <td>" . $users["nhs_number"] . "</td>
                     <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
                 <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
                 <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>

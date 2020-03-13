@@ -19,6 +19,8 @@ if(is_post_request()) {
     $nhs_number = $_POST["nhsnumber"];
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
+    $accessCode = rand(0,9999);
+
 
     
         if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $gp_address==""|| $gp_number=="")
@@ -31,9 +33,10 @@ if(is_post_request()) {
                 if(mysqli_num_rows($result) > 0) {
                   $mes = '<label class="text-danger">Patient is already registered with us</label>';
                        echo $mes;
-                } 
-              else {
-                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
+
+              } else {//.= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone)
+                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode);
+
                     //$new_id = mysqli_insert_id($db);
                     redirect_to(url_for('referring_organisation.php'));
               }

@@ -27,4 +27,14 @@
     }
   }
 
+
+function grant_external_access($nhsno, $accessCode) {
+  session_start();
+  session_regenerate_id();
+  $_SESSION['nhsno'] = $nhsno;
+  $_SESSION['accessCode'] = $accessCode;
+  return true;
+}
+
+
 ?>
