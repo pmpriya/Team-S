@@ -48,7 +48,7 @@ if(is_post_request()) {
                     redirect_to(url_for('referring_organisation.php'));
               }
              }
-      }
+      
 }
 ?>
 <html>
