@@ -50,9 +50,9 @@
   // * spaces count towards length
   // * use trim() if spaces should not count
   function has_length($value, $options) {
-    if(isset($options['min']) && !has_length_greater_than($value, $options['min'])) {
+    if(isset($options['min']) && !has_length_greater_than($value, $options['min'] - 1)) {
       return false;
-    } elseif(isset($options['max']) && !has_length_less_than($value, $options['max'])) {
+    } elseif(isset($options['max']) && !has_length_less_than($value, $options['max'] + 1)) {
       return false;
     } elseif(isset($options['exact']) && !has_length_exactly($value, $options['exact'])) {
       return false;
@@ -91,6 +91,17 @@
   function has_valid_email_format($value) {
     $email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';
     return preg_match($email_regex, $value) === 1;
+  }
+
+  function is_letters_only($value) {
+    return ctype_alpha($value);
+  }
+
+  function is_nhs_email($value) {
+    if (!preg_match('/^([a-z0-9\+\_\-\.]+)@([a-z0-9\+\_\-\.]{2,})(\.[a-z]{2,4})$/i', $value)) return false;
+    $domains = array('.nhs.uk','nhs.net','nhs.uk');
+    list(, $email_domain) = explode('@', $value, 2);
+    return !in_array($email_domain, $domains);
   }
 
 ?>
