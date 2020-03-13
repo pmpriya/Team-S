@@ -54,6 +54,7 @@ else {
     
   //       if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $gp_address==""|| $gp_number=="")
 
+
   //            echo '<label class="text-danger">Please fill in all required fields</label>';
         
   //       else {
@@ -75,6 +76,7 @@ else {
   //               }
   //             }
 
+
 ?>
 <html>
     <head>
@@ -86,34 +88,45 @@ else {
     <h1><b>PATIENT REGISTRATION</b></h1>
 
 <h3> <div>Patient Details(Please complete all fields) </div></h3>
-<h3><b><div> Referral is NOT accepted without filling ALL Fields in this page </div></b></h3>
+<h3><b><div> Registration is NOT accepted without filling ALL Fields in this page </div></b></h3>
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
+
     <!-- patient details form -->
     <form action="<?php echo url_for("/register_member.php"); ?>" method="post" id="form">    <!-- Patient's Surname -->
+
       <div class="field-column">
         <span id="alert_message" style="color:red"></span>
 
       <label>Surname</label>
          <input type="text"  onfocusout="isOnlyCharacter(this,'Surname')" id="lastname" name="lastname" placeholder="Required" required>
         </div>
+
     <!-- Patient's forename -->
+
     <div class="field-column">
       <label>Forename</label>
        <input type="text"  onfocusout="isOnlyCharacter(this,'Forename')" id="firstname" name="firstname" required>
+
     </div>
+
      <!-- NHS number -->
+
      <div class="field-column">
       <label>NHS number</label>
        <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"  required="" id="nhsnumber" name="nhsnumber" required>
+
     </div>
      <!-- date of birth -->
+
      <div class="field-column">
       <label>Date of birth</label>
        <input type = "date" onfocusout="isEmpty(this,'Date of birth')"  id="dob" name = "dob" required>
+
     </div>
      
      <!-- sex -->
+
      <div class="field-column">
             <label>Gender</label>
                 <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
@@ -122,19 +135,27 @@ else {
         </div>
  
      <!-- home address -->
+
      <div class="field-column">
       <label>Home address</label>
      <textarea name = "address" onfocusout="isEmpty(this,'Home address')" id="address"> </textarea>
+
     </div>
+
      <!-- post code -->
+
      <div class="field-column">
       <label>Postcode</label>
       <textarea name = "postcode" onfocusout="isOnlyNumber(this,'Postcode')"  id="postcode"> </textarea>
+
     </div>
+
      <!-- Home telephone number -->
+
      <div class="field-column">
       <label>Home Phone Number</label>
       <textarea type="number" onfocusout="isOnlyNumber(this,'Home Phone Number')" name="homenumber" id="homenumber"> </textarea>
+
     </div>
     
      <!-- Mobile telephone number -->
@@ -142,21 +163,30 @@ else {
      <div class="field-column">
       <label>Mobile Phone Number</label>
       <textarea type="number" onfocusout="isOnlyNumber(this,'Mobile Phone Number')" name="mobilenumber" id="mobilenumber" required> </textarea>
+
     </div>
+
      <!-- Patient's GP address -->
+
      <div class="field-column">
       <label>GP address</label>
        <textarea name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"> </textarea>
+
     </div>
+
      <!-- GP telephone number -->
+
      <div class="field-column">
       <label>GP phone number</label> <textarea type="number" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" name="gpnumber"></textarea>
+
     </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
+
      <button type = "button" onclick="validateForm()" name="submit">Submit</button>
 </div>
+
      <!-- reset button -->
      <div class="field-column">
      <button type = "reset" name="reset">Reset</button>

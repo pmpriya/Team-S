@@ -64,6 +64,7 @@
          <h1>Edit patient</h1>
 
 
+
          <form method="post" id="form">
             <div class="form-group" align="center">
                 <span id="alert_message" style="color:red"></span>
@@ -73,6 +74,7 @@
                       <tr><td>First Name:</td><td> <textarea required="" id="first_name" onfocusout="isOnlyCharacter(this,'First Name')" name="first_name" rows="1" cols="10"><?php echo $first_name; ?></textarea></td></tr>
 
                     <tr><td>Last Name:</td><td> <textarea required="" id="last_name" onfocusout="isOnlyCharacter(this,'Last Name')" name="last_name" rows="1" cols="10"><?php echo $last_name; ?></textarea></td></tr>
+
 
                     <tr><td>DOB:</td><td> <input type="date" name="" required="" id="date_of_birth" onfocusout="isEmpty(this,'DOB')" name="date_of_birth" rows="1" cols="10"><?php echo $date_of_birth; ?></input></td></tr>
 
@@ -262,3 +264,4 @@
         return false;
     }
 </script>
+
