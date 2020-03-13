@@ -20,11 +20,11 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     $sql .= "'" . $last_name . "', ";
     $sql .= "'" . $dob . "', ";
     $sql .= "'" . $sex . "', ";
+    $sql .= "'" . $email . "', ";
     $sql .= "'" . $home_address . "', ";
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
-    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
     $sql .= "'" . $gp_number . "',";
     $sql .= "'" . $accessCode . "'";
