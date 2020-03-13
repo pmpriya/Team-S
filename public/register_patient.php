@@ -34,15 +34,15 @@ if(is_post_request()) {
                        echo $mes;
                 } 
               else {
-                $result2 = find_patient_by_email($email);
-                list($usr, $domain) = explode('@', $email);
+              //  $result2 = find_patient_by_email($email);
+                //list($usr, $domain) = explode('@', $email);
     
                     
-                    if(mysqli_num_rows($result2) > 0) {
-                        $mes = '<label class="text-danger">Email Already Exits</label>';
-                        echo $mes;
-                    } 
-                    else { 
+                   // if(mysqli_num_rows($result2) > 0) {
+                     //   $mes = '<label class="text-danger">Email Already Exits</label>';
+                       // echo $mes;
+                  //  } 
+                  //  else { 
                     $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
                     //$new_id = mysqli_insert_id($db);
                     redirect_to(url_for('referring_organisation.php'));
