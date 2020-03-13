@@ -19,6 +19,8 @@ if(is_post_request()) {
     $nhs_number = $_POST["nhsnumber"];
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
+    $accessCode = rand(0,9999);
+
 
    // if(email_blacklisted($email)) {
 
@@ -43,7 +45,7 @@ if(is_post_request()) {
                   $mes = '<label class="text-danger">Patient is already registered with us</label>';
                        echo $mes;
               } else {//.= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone)
-                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
+                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode);
                     //$new_id = mysqli_insert_id($db);
                     redirect_to(url_for('referring_organisation.php?id=' . $new_id));
                 }
@@ -64,7 +66,7 @@ if(is_post_request()) {
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
     <!-- patient details form -->
-    <form action="<?php echo url_for("/register_member.php"); ?>" method="post">    <!-- Patient's Surname -->
+    <form action="<?php echo url_for("/register_patient.php"); ?>" method="post">    <!-- Patient's Surname -->
       <div class="field-column">
       <label>Surname</label>
          <input type="text" name="lastname" placeholder="Required" required>

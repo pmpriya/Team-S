@@ -6,19 +6,19 @@
         <?php
         if(is_post_request()) {
 
-            $dob = $_POST["dob"];
-            $postcode = $_POST["postcode"];
+            $nhsno = $_POST["nhsno"];
+            $accessCode = $_POST["accessCode"];
 
-            if (isset($dob) && isset($postcode)) {
+            if (isset($nhsno) && isset($accessCode)) {
 
-                $patient = access_investigation($dob, $postcode);
+                $patient = access_investigation($nhsno, $accessCode);
 
                 // User exists
                 if ($patient) {
 
 
-                    grant_external_access($dob, $postcode);
-                    redirect_to(url_for('external_investigation.php?id='));
+                    grant_external_access($nhsno, $accessCode);
+                    redirect_to(url_for('externalOverview.php'));
 
                 } else {
                     echo "Please check your details";
@@ -29,17 +29,16 @@
         ?>
 
         <h1>LOG IN</h1>
-       <?php $patient = access_investigation2("2020-03-27", "SE14XA");?>
         <form name="frmRegistration" method="post" action="<?php url_for("/login.php?")?>">
 
             <div class="field-column">
                 <label>DOB: </label>
-                <input type="text" class="demo-input-box" name="dob" value="">
+                <input type="text" class="demo-input-box" name="nhsno" value="">
             </div>
 
             <div class="field-column">
-                <label>Postcode</label>
-                <input type="password" class="demo-input-box" name="postcode" value="">
+                <label>NHS Number</label>
+                <input type="password" class="demo-input-box" name="accessCode" value="">
             </div><br>
             <div class="field-column">
                 <input type="submit" name="register-user" value="Access" class="btnRegister">

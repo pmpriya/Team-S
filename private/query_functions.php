@@ -8,11 +8,11 @@
  
   return $result;
 }
-function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number) {
+function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
     global $db;
 
     $sql = "INSERT INTO Patient ";
-    $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone) ";
+    $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
@@ -26,8 +26,10 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     $sql .= "'" . $mobile_phone . "', ";
     //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
-    $sql .= "'" . $gp_number . "'";
+    $sql .= "'" . $gp_number . "',";
+    $sql .= "'" . $accessCode . "'";
     $sql .= ")";
+    echo $sql;
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
@@ -148,6 +150,41 @@ function find_all_patients() {
     return $result;
 }
 
+function find_patient_by_id($ID) {
+    global $db;
+
+    $sql = "SELECT * FROM Patient ";
+    $sql .= "WHERE ID='" . $ID . "'";
+    $query = mysqli_query($db, "SELECT * FROM Patient WHERE id = '$ID'") or die(mysqli_error());
+
+
+    return $query;
+
+
+}
+
+function find_patient_by_nhsno_and_accesscode($nhsno, $accessCode) {
+    global $db;
+
+    $sql = "SELECT * FROM Patient";
+    $sql .= " WHERE nhs_number='" . $nhsno . "'";
+    $sql .= " AND accessCode='" . $accessCode . "'";
+    $result = mysqli_query($db, $sql);
+
+    return $result;
+
+
+}
+
+function find_all_referrals() {
+    global $db;
+    $sql = "SELECT * FROM Referral ";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
 function delete_patient($userID)
 {
     global $db;
@@ -184,23 +221,19 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
 
 }
 
-function access_investigation($dob, $postcode) {
+
+
+
+function access_investigation($ID) {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE date_of_birth='" . $dob . "' AND postcode='" . $postcode . "'";
-    $sql1 = "SELECT * FROM Patient WHERE date_of_birth='2020-03-27' AND postcode='SE14XA'";
+    $sql = "SELECT * FROM Investigations WHERE patient_ID='$ID'";
     $result = mysqli_query($db, $sql);
-
-    confirm_result_set($result);
-    $user = mysqli_fetch_assoc($result);
-    mysqli_free_result($result);
-    return $user;
-
-
+    return $result;
 }
 
-function access_investigation2($dob, $postcode) {
+function access_referral($ID) {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE date_of_birth='2020-03-27' AND postcode='SE14XA'";
+    $sql = "SELECT * FROM Referral WHERE patient_ID='$ID'";
     $result = mysqli_query($db, $sql);
     return $result;
 }
