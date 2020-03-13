@@ -16,10 +16,10 @@ if(is_post_request()) {
     // User exists
     if($user) {
     
-      if($password===$user['password']) {
+      if(password_verify($password,$user['password'])) {
       
-        log_in_users($user);
-        redirect_to(url_for('patients_table.php?id=' . $new_id));
+        log_in_user($user);
+        redirect_to(url_for('patients.php'));
       }
       else {
         echo "Incorrect password.";
