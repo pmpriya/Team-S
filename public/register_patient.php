@@ -16,13 +16,14 @@ if(is_post_request()) {
     $postcode = $_POST["postcode"];
     $home_address = $_POST["address"];
     $sex = $_POST["gender"];
-    $email = $_POST["email"];
     $nhs_number = $_POST["nhsnumber"];
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
+    $accessCode = rand(0,9999);
+
 
     
-        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number=="")
+        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $gp_address==""|| $gp_number=="")
 
              echo '<label class="text-danger">Please fill in all required fields</label>';
         
@@ -32,78 +33,43 @@ if(is_post_request()) {
                 if(mysqli_num_rows($result) > 0) {
                   $mes = '<label class="text-danger">Patient is already registered with us</label>';
                        echo $mes;
-                } 
-              else {
-              //  $result2 = find_patient_by_email($email);
-                //list($usr, $domain) = explode('@', $email);
-    
-                    
-                   // if(mysqli_num_rows($result2) > 0) {
-                     //   $mes = '<label class="text-danger">Email Already Exits</label>';
-                       // echo $mes;
-                  //  } 
-                  //  else { 
-                  //  $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
-                    
+
+              } else {//.= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone)
+                    $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode);
+
+                    //$new_id = mysqli_insert_id($db);
                     redirect_to(url_for('referring_organisation.php'));
               }
-             }
-      
+        }
 }
 ?>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Patient registration</title>
+        <title>Referral Form</title>
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
 <body>
     <h1><b>PATIENT REGISTRATION</b></h1>
-   
-    <h2> <div>Details of the person registering the patient(Please complete all fields) </div></h3>
-<br>
 
-<form action="<?php echo url_for("/register_patient.php"); ?>" method="post">
-    <!-- porforma -->
-
-      <div class="field-column">
-      <label>Surname </label>
-         <input type="text" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
-        </div>
-
-    <!--  forename -->
-
-    <div class="field-column">
-      <label>Forename</label>
-       <input type="text" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
-    </div>
-
-
-    <div class="field-column">
-      <label>Email</label>
-       <input type="text" name="mail2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
-    </div>
-
-
-
-<h2> <div>Patient Details(Please complete all fields) </div></h3>
-
+<h3> <div>Patient Details(Please complete all fields) </div></h3>
+<h3><b><div> Registration is NOT accepted without filling ALL Fields in this page </div></b></h3>
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
 
     <!-- patient details form -->
 
-       <!-- Patient's Surname -->
+    <form action="<?php echo url_for("/register_patient.php"); ?>" method="post">    <!-- Patient's Surname -->
       <div class="field-column">
       <label>Surname</label>
-         <input type="text" name="lastname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
+         <input type="text" name="lastname" placeholder="Required" required>
         </div>
 
     <!-- Patient's forename -->
 
     <div class="field-column">
       <label>Forename</label>
-       <input type="text" name="firstname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
+       <input type="text" name="firstname" placeholder="Required" required>
     </div>
 
      <!-- NHS number -->
@@ -118,16 +84,7 @@ if(is_post_request()) {
       <label>Date of birth</label>
        <input type = "date" name = "dob" placeholder="Required" required>
     </div>
-
-    <div class="field-column">
-      <label>Full Name of Referring Doctor</label>
-       <input type="text" name="refname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
-    </div>
      
-    <div class="field-column">
-      <label>Referring Hospital</label>
-       <input type="text" name="refhospital" placeholder="Required" required>
-    </div>
      <!-- sex -->
 
      <div class="field-column">
@@ -135,16 +92,8 @@ if(is_post_request()) {
                 <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
                 <input id="gender" type="radio" name="gender" value="f"> <label id="genderOption">Female</label>
                
-      </div>
+        </div>
  
-    <!-- email -->
-
-     <div class="field-column">
-            <label>Email</label>
-            <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
-            
-     </div>
-
      <!-- home address -->
 
      <div class="field-column">
@@ -199,3 +148,4 @@ if(is_post_request()) {
 
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
+

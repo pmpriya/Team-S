@@ -9,7 +9,7 @@
  
   return $result;
 }
-function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
+function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
     global $db;
   
     $sql = "INSERT INTO Patient ";
@@ -20,11 +20,11 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, 
     $sql .= "'" . $last_name . "', ";
     $sql .= "'" . $dob . "', ";
     $sql .= "'" . $sex . "', ";
-    $sql .= "'" . $email . "', ";
     $sql .= "'" . $home_address . "', ";
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
+    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
     $sql .= "'" . $gp_number . "',";
     $sql .= "'" . $accessCode . "'";
@@ -199,27 +199,6 @@ function find_patient_by_id($ID) {
 
 }
 
-
-function find_patient_by_nhsno($nhs_number) {
-    global $db;
-
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE nhs_number='" . $nhs_number . "' ";
-    $result = mysqli_query($db, $sql);
-   
-     return $result;
-  }
-
-
-  function find_patient_by_email($email) {
-    global $db;
-
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE email'" . $email . "' ";
-    $result = mysqli_query($db, $sql);
-   
-     return $result;
-  }
 function find_patient_by_nhsno_and_accesscode($nhsno, $accessCode) {
     global $db;
 
