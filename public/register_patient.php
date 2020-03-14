@@ -121,7 +121,7 @@ if(is_post_request()) {
 
             <div class="field-column">
                 <label>Full Name of Referring Doctor</label>
-                <input type="text" name="refname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
+                <input type="text" name="refname" pattern="^(\w\w+)\s(\w+)$" placeholder="Required" required>
             </div>
 
             <div class="field-column">
