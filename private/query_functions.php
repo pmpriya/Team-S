@@ -11,7 +11,7 @@
 }
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
     global $db;
-  
+
     $sql = "INSERT INTO Patient ";
     $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
     $sql .= "VALUES (";
@@ -32,13 +32,13 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, 
     echo $sql;
     $result = mysqli_query($db, $sql);
     if($result) {
-      return true;
+        return true;
     } else {
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
     }
-  }
+}
 
 function find_all_users() {
     global $db;
@@ -198,28 +198,26 @@ function find_patient_by_id($ID) {
 
 
 }
-
-
 function find_patient_by_nhsno($nhs_number) {
     global $db;
 
     $sql = "SELECT * FROM Patient ";
     $sql .= "WHERE nhs_number='" . $nhs_number . "' ";
     $result = mysqli_query($db, $sql);
-   
-     return $result;
-  }
+
+    return $result;
+}
 
 
-  function find_patient_by_email($email) {
+function find_patient_by_email($email) {
     global $db;
 
     $sql = "SELECT * FROM Patient ";
     $sql .= "WHERE email'" . $email . "' ";
     $result = mysqli_query($db, $sql);
-   
-     return $result;
-  }
+
+    return $result;
+}
 function find_patient_by_nhsno_and_accesscode($nhsno, $accessCode) {
     global $db;
 
