@@ -21,33 +21,34 @@ if(is_post_request()) {
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
 
-
     if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number=="")
 
-        echo '<label class="text-danger">Please fill in all required fields</label>';
-
-    else {
-        $result = find_member_by_nhsno($nhs_number);
-
-        if(mysqli_num_rows($result) > 0) {
-            $mes = '<label class="text-danger">Patient is already registered with us</label>';
-            echo $mes;
-        }
-        else {
-            //  $result2 = find_patient_by_email($email);
-            //list($usr, $domain) = explode('@', $email);
-
-
-            // if(mysqli_num_rows($result2) > 0) {
-            //   $mes = '<label class="text-danger">Email Already Exits</label>';
-            // echo $mes;
-            //  }
-            //  else {
-            //  $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
-
-            redirect_to(url_for('referring_organisation.php'));
-        }
-    }
+             echo '<label class="text-danger">Please fill in all required fields</label>';
+        
+    else{
+            $result = find_member_by_nhsno($nhs_number);
+           
+                if(mysqli_num_rows($result) > 0) {
+                  $mes = '<label class="text-danger">Patient is already registered with us</label>';
+                       echo $mes;
+                 } 
+                else {
+                  $result2 = find_patient_by_email($email);
+                                
+                   if(mysqli_num_rows($result2) > 0) {
+                     
+                       $mes = '<label class="text-danger">Email Already Exits</label>';
+                       echo $mes;
+                    } 
+                    else { 
+                     
+                        $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
+                    
+                        redirect_to(url_for('referring_organisation.php'));
+                   }
+               }
+      
+       }
 
 }
 ?>
