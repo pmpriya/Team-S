@@ -7,45 +7,32 @@
 <?php
     //$patient_ID = GET['patient_ID']?? '1';
     //mysqli_insert_id($db);
-    if(is_post_request()){
-        $date = trim($_POST['date']) ?? '';
-        $BiliTD = trim($_POST['BiliTD']) ?? '';
-        $AST = trim($_POST['AST']) ?? '';
-        $ALT = trim($_POST['ALT']) ?? '';
-        $ALP = trim($_POST['ALP']) ?? '';
-        $GGT= trim($_POST['GGT']) ?? '';
-        $Prot = trim($_POST['Prot']) ?? '';
-        $Alb = trim($_POST['Alb']) ?? '';
-        $CK = trim($_POST['CK']) ?? '';
-        $HbHct = trim($_POST['HbHct'])?? '';
-        $HbHct = preg_replace('/[\x00-\x1F\x7F]/u', '', $HbHct);
-        $WCC = trim($_POST['WCC']) ?? '';
-        $WCC = preg_replace('/[\x00-\x1F\x7F]/u', '', $WCC);
-        $Neutro = trim($_POST['Neutro']) ?? '';
-        $Neutro = preg_replace('/[\x00-\x1F\x7F]/u', '', $Neutro);
-        $Platelets = trim($_POST['Platelets']) ?? '';
-        $CRP = trim($_POST['CRP']) ?? '';
-        $ESR = trim($_POST['ESR'])?? '';
-        $PTINR = trim($_POST['PTINR']) ?? '';
-        $APTR = trim($_POST['APTR']) ?? '';
-        $Fibrinogen = trim($_POST['Fibrinogen']) ?? '';
-        $Cortisol = trim($_POST['Cortisol']) ?? '';
-        $Urea = trim($_POST['Urea'] )?? '';
-        $Creatinine = trim($_POST['Creatinine']) ?? '';
+    if(is_post_request()) {
+        $date = $_POST['date'] ?? '';
+        $BiliTD = $_POST['BiliTD'] ?? '';
+        $AST = $_POST['AST'] ?? '';
+        $ALT = $_POST['ALT'] ?? '';
+        $ALP = $_POST['ALP'] ?? '';
+        $GGT = $_POST['GGT'] ?? '';
+        $Prot = $_POST['Prot'] ?? '';
+        $Alb = $_POST['Alb'] ?? '';
+        $CK = $_POST['CK'] ?? '';
+        $HbHct = $_POST['HbHct'] ?? '';
+        $WCC = $_POST['WCC'] ?? '';
+        $Neutro = $_POST['Neutro'] ?? '';
+        $Platelets = $_POST['Platelets'] ?? '';
+        $CRP = $_POST['CRP'] ?? '';
+        $ESR = $_POST['ESR'] ?? '';
+        $PTINR = $_POST['PTINR'] ?? '';
+        $APTR = $_POST['APTR'] ?? '';
+        $Fibrinogen = $_POST['Fibrinogen'] ?? '';
+        $Cortisol = $_POST['Cortisol'] ?? '';
+        $Urea = $_POST['Urea'] ?? '';
+        $Creatinine = $_POST['Creatinine'] ?? '';
 
-        //sanitise the data a=to trim //remove spaces
-       echo $patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine;
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine);
 
-
-      //echo $patient_ID; //it says it is 0 mistake it should be 14
-       $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine); //this is the problem
-       if ($result == true ){
-           // find what is the  id
-           //$patient_ID = mysqli_insert_id($db);
-          redirect_to(url_for('/InvestigationShow.php?patient_ID= ' . $patient_ID));
-       }
-    } 
-
+    }
     
 
 ?> 
@@ -53,7 +40,7 @@
 
 
 <div id= "content";>
-<a class = "back-Link" href="<?php echo url_for('/InvestigationsShow.php?patient_ID=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+<a class = "back-Link" href="<?php echo url_for('InvestigationsShow.php?patient_ID=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
 </div>
 <div class = "new investigation">
 <center>
