@@ -4,12 +4,18 @@
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <?php
+//$patient_ID = 2;
+if (isset($_GET['id'])){
+  $patient_ID = intval($_GET['id']);
+  $user_set = find_user_by_id($patient_ID);
+}
+else $patient_ID = 2;
 if(is_post_request()){
-  $patient_ID = 1;
+   
   $consultant_name = $_POST["consultantName"];
   $consultant_specialty = $_POST["consultantSpecialty"];
   $organisation_hospital_name = $_POST["orgName"];
-  $organisation_hospital_number = $_POST["orgNumber"];
+  $organisation_hospital_no = $_POST["orgNumber"];
   $bleep_number = $_POST["bleepNumber"];
   $is_patient_aware = $_POST["isAware"];
   $is_interpreter_needed = $_POST["isInterpreterNeeded"];
@@ -52,7 +58,7 @@ if(is_post_request()){
     </head>
 <body>
     <h1><b>REFERRAL FORM</b></h1>
-
+    
 <h3> <div>Patient Details(Please complete all fields) </div></h3>
 <h3><b><div> Referral is NOT accepted without filling ALL Fields in this page </div></b></h3>
 <br>
@@ -134,24 +140,22 @@ if(is_post_request()){
   </div>
   <!-- Other Investigations -->
   <div class="field-column">
-   <label>Other Investigations</label>
-     <textarea name = "otherInvestigations"> </textarea>
- </div>
- <!-- Family History -->
- <div class="field-column">
-  <label>Date and Time</label>
+    <label>Other Investigations</label>
+    <textarea name = "otherInvestigations"> </textarea>
+  </div>
+  <!-- Datetime -->
+  <div class="field-column">
+    <label>Date and Time</label>
     <input type = "datetime-local" name="datetime" required>
-</div>
+  </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
      <button type = "submit" name="submit">Submit</button>
-</div>
+  </div>
      <!-- reset button -->
      <div class="field-column">
      <button type = "reset" name="reset">Reset</button>
-    </div>
+  </div>
 </form>
-
-
 <?php include(SHARED_PATH . '/footer.php'); ?>

@@ -46,6 +46,7 @@ if (isset($_GET["delete"])) {
                     <td>" . $users["postcode"] . "</td>
                     <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
                 <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
+                <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>
                 <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td></tr>";
                     } ?>
 
