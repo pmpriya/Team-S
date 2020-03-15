@@ -347,6 +347,149 @@ function access_referral($ID) {
   ?>
 
 
+function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine){
+    global $db;
+  
+    // $errors = validate_investigation($investigation);
+    // if(!empty($errors)){
+    //   return $errors;
+    // }
+  
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine')";
+    echo($sql);
+    //remove spaces
+    $result = mysqli_query($db, $sql);
+    if($result) {
+      return true;
+    } else {
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
 
+
+//Investigations
+
+  function find_all_investigations(){
+    global $db;
+  
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "ORDER BY patient_ID ASC";
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return result;
+  }
+  
+  
+  function find_investigations_by_id($patient_ID){
+    global $db;
+  
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "WHERE patient_ID ='" . db_escape($db, $patient_ID) . "' ";
+    $sql .= "ORDER BY date ASC";
+    echo $sql;
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $investigation = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+
+    //returns empty
+    return $investigation;
+  }
+  
+  function find_investigation_dates_of_id($patient_ID){
+    global $db;
+  
+    $sql = "SELECT date FROM Investigations ";
+    $sql .= "WHERE patient_ID =' " . db_escape($db, $patient_ID) . "'"; 
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $investigation = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    
+    echo $sql;
+
+    return $investigation;
+  }
+  
+  function validate_investigation($investigation){
+    global $db;
+  
+    $errors = [];
+  
+    if (is_blank($investigation['date'])){
+      $errors[] = "Date cannot be empty!";
+    }
+    //validate type of rest AST...
+    return $errors;
+  }
+  
+  function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine){
+    global $db;
+  
+    // $errors = validate_investigation($investigation);
+    // if(!empty($errors)){
+    //   return $errors;
+    // }
+  
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine')";
+    echo($sql);
+    //remove spaces
+    $result = mysqli_query($db, $sql);
+    if($result) {
+      return true;
+    } else {
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
+  
+  function update_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine){
+    global $db;
+  
+    // $errors = validate_investigation($investigation);
+    // if(!empty($errors)){
+    //   return $errors;
+    // }
+  
+    $sql = "UPDATE Investigations SET ";
+    $sql .= "patient_ID= ' " . db_escape($db, $patient_ID) . "', ";
+    $sql .= "date= ' " . db_escape($db, $date) . "', ";
+    $sql .= "BiliTD= ' " . db_escape($db, $BiliTD) . "', ";
+    $sql .= "AST= ' " . db_escape($db, $AST) . "', ";
+    $sql .= "ALT= ' " . db_escape($db, $investigation['ALT']) . "', ";
+    $sql .= "ALP= ' " . db_escape($db, $investigation['ALP']) . "', ";
+    $sql .= "GGT= ' " . db_escape($db, $investigation['GGT']) . "', ";
+    $sql .= "Prot= ' " . db_escape($db, $investigation['Prot']) . "', ";
+    $sql .= "Alb= ' " . db_escape($db, $investigation['Alb']) . "', ";
+    $sql .= "CK= ' " . db_escape($db, $investigation['CK']) . "', ";
+    $sql .= "HbHct= ' " . db_escape($db, $investigation['HbHct']) . "', ";
+    $sql .= "WCC= ' " . db_escape($db, $investigation['WCC']) . "', ";
+    $sql .= "Neutro= ' " . db_escape($db, $investigation['Neutro']) . "', ";
+    $sql .= "Platelets= ' " . db_escape($db, $investigation['Platelets']) . "', ";
+    $sql .= "CRP= ' " . db_escape($db, $investigation['CRP']) . "', ";
+    $sql .= "ESR= ' " . db_escape($db, $investigation['ESR']) . "', ";
+    $sql .= "PTINR= ' " . db_escape($db, $investigation['PTINR']) . "', ";
+    $sql .= "APTR= ' " . db_escape($db, $investigation['APTR']) . "', ";
+    $sql .= "Fibrinogen= ' " . db_escape($db, $investigation['Fibrinogen']) . "', ";
+    $sql .= "Cortisol= ' " . db_escape($db, $investigation['Cortisol']) . "', ";
+    $sql .= "Urea= ' " . db_escape($db, $investigation['Urea']) . "', ";
+    $sql .= "Creatinine= ' " . db_escape($db, $investigation['Creatinine']) . "' ";
+    $sql .= "WHERE id= ' " . db_escape($db, $investigation['id']) . " AND " ."date= ' " . db_escape($db, $investigation['date']) . "' ";
+    
+    $result = mysqli_query($db, $sql);
+    if($result) {
+      return true;
+    } else {
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
+  
 
 
