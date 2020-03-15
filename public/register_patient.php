@@ -20,6 +20,7 @@ if(is_post_request()) {
     $nhs_number = $_POST["nhsnumber"];
     $gp_address = $_POST["gpaddress"];
     $gp_number = $_POST["gpnumber"];
+    $accessCode = rand(0,9999);
 
     if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number=="")
 
@@ -33,16 +34,17 @@ if(is_post_request()) {
                        echo $mes;
                  } 
                 else {
+                    /*
                   $result2 = find_patient_by_email($email);
                                 
                    if(mysqli_num_rows($result2) > 0) {
                      
                        $mes = '<label class="text-danger">Email Already Exits</label>';
                        echo $mes;
-                    } 
-                    else { 
+
+                    else { */
                      
-                        $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number);
+                        $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode);
                     
                         redirect_to(url_for('referring_organisation.php'));
                    }
@@ -50,7 +52,7 @@ if(is_post_request()) {
       
        }
 
-}
+
 ?>
     <html>
     <head>
@@ -61,10 +63,10 @@ if(is_post_request()) {
 <body>
     <h1><b>PATIENT REGISTRATION</b></h1>
 
-<h2> <div>Details of the person registering the patient(Please complete all fields) </div></h3>
+<h2> <div>Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 
-    <form action="<?php echo url_for("/register_patient.php"); ?>" method="post">
+    <form action="<?php echo url_for("/patients.php"); ?>" method="post">
         <!-- porforma -->
 
         <div class="field-column">
@@ -87,7 +89,7 @@ if(is_post_request()) {
 
 
 
-        <h2> <div>Patient Details(Please complete all fields) </div></h3>
+        <h2> <div>Patient Details(Please complete all fields) </div></h2>
 
             <br>
             <!--<form class = "form" action="contactform.php" method="post">  -->
