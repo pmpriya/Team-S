@@ -21,12 +21,14 @@ if(mysqli_num_rows($query)>=1){
         $last_name = $row['last_name'];
         $date_of_birth = $row['date_of_birth'];
         $sex = $row['sex'];
+        $email = $row['email'];
         $home_address = $row['home_address'];
         $postcode = $row['postcode'];
         $home_phone = $row['home_phone'];
         $mobile_phone = $row['mobile_phone'];
         $gp_address = $row['gp_address'];
         $gp_phone = $row['gp_phone'];
+        $accessCode = $row['accessCode'];
 
 
 
@@ -49,6 +51,8 @@ if(mysqli_num_rows($query)>=1){
 
         <h4>Sex: <b><?php echo $sex ?></b></h4>
 
+        <h4>E-mail: <b><?php echo $email ?></b></h4>
+
         <h4>Address: <b><?php echo $home_address?></b></h4>
 
         <h4>Postcode: <b><?php echo $postcode ?></b></h4>
@@ -60,6 +64,8 @@ if(mysqli_num_rows($query)>=1){
         <h4>GP Address: <b><?php echo $gp_address?></b></h4>
 
         <h4>GP Phone: <b><?php echo $gp_phone?></b></h4>
+
+        <h4>Access Code: <b><?php echo $accessCode?></b></h4>
 
         <br><a href="editPatient.php?id=<?php echo $id?>">Edit Patient</a><br>
         <br><a href="patients.php">Go Back</a>

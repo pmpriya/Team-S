@@ -13,14 +13,14 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, 
     global $db;
 
     $sql = "INSERT INTO Patient ";
-    $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
+    $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
     $sql .= "'" . $last_name . "', ";
     $sql .= "'" . $dob . "', ";
-    $sql .= "'" . $sex . "', ";
     $sql .= "'" . $email . "', ";
+    $sql .= "'" . $sex . "', ";
     $sql .= "'" . $home_address . "', ";
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
@@ -256,29 +256,15 @@ function delete_patient($userID)
         exit;
 
     }
-    
-    function delete_patient($userID)
-    {
-        global $db;
-        $sql = "DELETE FROM Patient ";
-        $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
-        $sql .= "LIMIT 1";
-        $result = mysqli_query($db, $sql);
-        if ($result) {
-            return true;
-        } else {
-            // DELETE failed
-            echo mysqli_error($db);
-            db_disconnect($db);
-            exit;
-        }
     }
     
+
     
-    function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone)
+    
+    function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_email,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone,$new_accessCode)
     {
         global $db;
-        $sql = "UPDATE `Patient` SET `nhs_number`='$new_nhs_number',`first_name`='$new_first_name',`last_name`='$new_last_name',`date_of_birth`='$new_date_of_birth',`sex`='$new_sex',`home_address`='$new_home_address',`postcode`='$new_postcode',`home_phone`='$new_home_phone',`mobile_phone`='$new_mobile_phone',`gp_address`='$new_gp_address',`gp_phone`='$new_gp_phone' WHERE ID=$id";
+        $sql = "UPDATE `Patient` SET `nhs_number`='$new_nhs_number',`first_name`='$new_first_name',`last_name`='$new_last_name',`date_of_birth`='$new_date_of_birth',`sex`='$new_sex',`email`='$new_email',`home_address`='$new_home_address',`postcode`='$new_postcode',`home_phone`='$new_home_phone',`mobile_phone`='$new_mobile_phone',`gp_address`='$new_gp_address',`gp_phone`='$new_gp_phone',`accessCode`='$new_accessCode' WHERE ID=$id";
         echo($sql);
         $result = mysqli_query($db, $sql);
         if ($result) {
@@ -295,14 +281,7 @@ function delete_patient($userID)
         
         
         
-        function find_all_referrals(){
-            global $db;
-            $sql = "SELECT * FROM Referral ";
-            $sql .= "ORDER BY id ASC";
-            $result = mysqli_query($db, $sql);
-            confirm_result_set($result);
-            return $result;     
-        }
+
         function edit_referral($ID, $new_consultant_name, $new_consultant_speciality, $new_organisation_name, $new_organisation_hospital_no, 
         $new_bleepnumber, $new_parent_aware, $new_interpreter_needed, $new_kch_doctor_name, $new_date_time, $new_current_issue, 
         $new_history_of_present_complaint, $new_family_history, $new_medications, $new_other_investigations) {
@@ -343,7 +322,8 @@ function delete_patient($userID)
                 db_disconnect($db);
                 exit;
             }
-        }
+
+
         
     }
 

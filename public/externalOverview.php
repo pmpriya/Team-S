@@ -55,7 +55,7 @@ if(mysqli_num_rows($user_set)>=1){
             echo '<b><a href=editInvestigation.php>Update Investigation</a></b>';
         }else{
             echo 'You currently have no cases in progress, use the link below to submit results for a review<br>';
-            echo '<b><a href=newInvestigation.php>Complete Referral</a></b>';
+            echo '<b><a href=newInvestigation.php>Start new investigation</a></b>';
         }
 
 
