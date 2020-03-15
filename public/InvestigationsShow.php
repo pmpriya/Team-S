@@ -3,7 +3,6 @@
 <?php include('../private/shared/header.php'); ?>
 <?php 
     $patient_ID = $_GET['patient_ID']?? '1';
-    echo $patient_ID;
     $investigations_of_id = find_investigations_by_id($patient_ID);
 ?> 
 
@@ -13,7 +12,7 @@
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1> The Investigations Form of the patient: <?php $patient_ID ?> </h1>
+    <h1> The Investigations Form of the patient: <?php echo $patient_ID ?> </h1>
 
     <div class= "actions">
     <a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a> 
@@ -32,6 +31,7 @@
         <th> GGT </th>
         <th> Prot </th>
         <th> Alb </th>
+        <th> CK </th>
         <th> Hb/Hct </th>
         <th> WCC </th>
         <th> Neutro </th>
@@ -71,8 +71,7 @@
             </tr> 
         <?php } ?>
     </table>
-    
-        <?php mysqli_free_result($investigations_of_id); ?> 
+
 
     </div>
 </div>

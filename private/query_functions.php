@@ -344,30 +344,6 @@ function access_referral($ID) {
     return $result;
 }
 
-  ?>
-
-
-function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine){
-    global $db;
-  
-    // $errors = validate_investigation($investigation);
-    // if(!empty($errors)){
-    //   return $errors;
-    // }
-  
-    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine')";
-    echo($sql);
-    //remove spaces
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
-    }
-  }
-
 
 //Investigations
 
@@ -381,9 +357,18 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
     confirm_result_set($result);
     return result;
   }
-  
-  
-  function find_investigations_by_id($patient_ID){
+
+
+function find_investigations_by_id($patient_ID) {
+    global $db;
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "WHERE patient_ID='" . $patient_ID . "'";
+    echo $sql;
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+  function find_investigations_by_id1($patient_ID){
     global $db;
   
     $sql = "SELECT * FROM Investigations ";
@@ -401,10 +386,10 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
   
   function find_investigation_dates_of_id($patient_ID){
     global $db;
-  
+
     $sql = "SELECT date FROM Investigations ";
-    $sql .= "WHERE patient_ID =' " . db_escape($db, $patient_ID) . "'"; 
-    
+    $sql .= "WHERE patient_ID =' " . db_escape($db, $patient_ID) . "'";
+
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     $investigation = mysqli_fetch_assoc($result);
@@ -490,6 +475,6 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
       exit;
     }
   }
-  
 
 
+?>
