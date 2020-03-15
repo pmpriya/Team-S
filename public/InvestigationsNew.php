@@ -31,7 +31,7 @@
         $Creatinine = $_POST['Creatinine'] ?? '';
 
         $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine);
-
+        header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     
 

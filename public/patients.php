@@ -37,7 +37,7 @@ if (isset($_GET["delete"])) {
                         <th><b>DOB</b></th>
                         <th><b>NHS Number</b></th>
                         <th><b>Access Code</b></th>
-                        <th colspan="4"><b>Manage</b></th>
+                        <th colspan="5"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
@@ -49,7 +49,8 @@ if (isset($_GET["delete"])) {
                     <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
                 <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
                 <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
-                <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td></tr>";
+                <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>
+                <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">View Investigations</a></td></tr>";
                     } ?>
 
                 </table>

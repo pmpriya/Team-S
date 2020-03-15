@@ -158,6 +158,23 @@ function edit_password($id, $new_password)
     }
 
 
+function delete_investigation($userID)
+{
+    global $db;
+    $sql = "DELETE FROM Investigations ";
+    $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if ($result) {
+        return true;
+    } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
 
 function add_user($username,$name,$surname,$email,$password, $userLevel) {
     global $db;
@@ -359,29 +376,28 @@ function access_referral($ID) {
   }
 
 
-function find_investigations_by_id($patient_ID) {
+function find_investigations_by_id($id) {
     global $db;
     $sql = "SELECT * FROM Investigations ";
-    $sql .= "WHERE patient_ID='" . $patient_ID . "'";
-    echo $sql;
+    $sql .= "WHERE id='" . $id . "'";
     $result = mysqli_query($db, $sql);
     return $result;
 }
 
-  function find_investigations_by_id1($patient_ID){
+function find_investigations_by_date($patient_ID, $date) {
     global $db;
-  
     $sql = "SELECT * FROM Investigations ";
-    $sql .= "WHERE patient_ID ='" . db_escape($db, $patient_ID) . "' ";
-    $sql .= "ORDER BY date ASC";
-    echo $sql;
+    $sql .= "WHERE patient_ID='" . $patient_ID . "' AND date='" . $date . "'";
     $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    $investigation = mysqli_fetch_assoc($result);
-    mysqli_free_result($result);
+    return $result;
+}
 
-    //returns empty
-    return $investigation;
+  function find_investigations_by_patientid($patient_ID){
+      global $db;
+      $sql = "SELECT * FROM Investigations ";
+      $sql .= "WHERE patient_id='" . $patient_ID . "'";
+      $result = mysqli_query($db, $sql);
+      return $result;
   }
   
   function find_investigation_dates_of_id($patient_ID){
@@ -421,7 +437,6 @@ function find_investigations_by_id($patient_ID) {
     // }
   
     $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine')";
-    echo($sql);
     //remove spaces
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -432,49 +447,20 @@ function find_investigations_by_id($patient_ID) {
       exit;
     }
   }
-  
-  function update_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine){
+function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine) {
     global $db;
-  
-    // $errors = validate_investigation($investigation);
-    // if(!empty($errors)){
-    //   return $errors;
-    // }
-  
-    $sql = "UPDATE Investigations SET ";
-    $sql .= "patient_ID= ' " . db_escape($db, $patient_ID) . "', ";
-    $sql .= "date= ' " . db_escape($db, $date) . "', ";
-    $sql .= "BiliTD= ' " . db_escape($db, $BiliTD) . "', ";
-    $sql .= "AST= ' " . db_escape($db, $AST) . "', ";
-    $sql .= "ALT= ' " . db_escape($db, $investigation['ALT']) . "', ";
-    $sql .= "ALP= ' " . db_escape($db, $investigation['ALP']) . "', ";
-    $sql .= "GGT= ' " . db_escape($db, $investigation['GGT']) . "', ";
-    $sql .= "Prot= ' " . db_escape($db, $investigation['Prot']) . "', ";
-    $sql .= "Alb= ' " . db_escape($db, $investigation['Alb']) . "', ";
-    $sql .= "CK= ' " . db_escape($db, $investigation['CK']) . "', ";
-    $sql .= "HbHct= ' " . db_escape($db, $investigation['HbHct']) . "', ";
-    $sql .= "WCC= ' " . db_escape($db, $investigation['WCC']) . "', ";
-    $sql .= "Neutro= ' " . db_escape($db, $investigation['Neutro']) . "', ";
-    $sql .= "Platelets= ' " . db_escape($db, $investigation['Platelets']) . "', ";
-    $sql .= "CRP= ' " . db_escape($db, $investigation['CRP']) . "', ";
-    $sql .= "ESR= ' " . db_escape($db, $investigation['ESR']) . "', ";
-    $sql .= "PTINR= ' " . db_escape($db, $investigation['PTINR']) . "', ";
-    $sql .= "APTR= ' " . db_escape($db, $investigation['APTR']) . "', ";
-    $sql .= "Fibrinogen= ' " . db_escape($db, $investigation['Fibrinogen']) . "', ";
-    $sql .= "Cortisol= ' " . db_escape($db, $investigation['Cortisol']) . "', ";
-    $sql .= "Urea= ' " . db_escape($db, $investigation['Urea']) . "', ";
-    $sql .= "Creatinine= ' " . db_escape($db, $investigation['Creatinine']) . "' ";
-    $sql .= "WHERE id= ' " . db_escape($db, $investigation['id']) . " AND " ."date= ' " . db_escape($db, $investigation['date']) . "' ";
-    
+    $sql = "UPDATE Investigations SET date='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine' WHERE id=$id";
     $result = mysqli_query($db, $sql);
     if($result) {
-      return true;
+        return true;
+        echo '<script>window.location.replace("index.php"); </script>';
+        header('users.php');
     } else {
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
     }
-  }
+}
 
 
 ?>

@@ -51,8 +51,7 @@ mysqli_free_result($investigation_set);
     <a class = "back-Link" href="<?php echo url_for('/InvestigationsShow.php?patient_ID= ' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
     <div class = "Investigation edit">
         <h1> Edit Investigation <h1> 
-        
-        <?php echo display_errors($errors);?>
+
         <form action="<?php echo url_for('/InvestigationsEditByDate.php?patient_ID= ' . h(u($patient_ID)).'?date= '. h(u($date))); ?>" method="post">
         
         <dl>

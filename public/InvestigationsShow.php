@@ -2,25 +2,23 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
 <?php 
-    $patient_ID = $_GET['patient_ID']?? '1';
-    $investigations_of_id = find_investigations_by_id($patient_ID);
+    $patient_ID = $_GET['id']?? '1';
+    $investigations_of_id = find_investigations_by_patientid($patient_ID);
+    $patient_set = find_patient_by_id($patient_ID);
+$patient = mysqli_fetch_assoc($patient_set);
 ?> 
 
 <?php $page_title= 'Show Investigations'; ?>
 
 <?php //Check if $investigations_of_id  is empty and it should have h1 header Investigations display of patient-> name ?>
 
+
+
 <div id="content">
 <div class= "Show Investigations">
-    <h1> The Investigations Form of the patient: <?php echo $patient_ID ?> </h1>
+    <h1> Investigations overview for <?php echo $patient["first_name"] ?> <?php echo $patient["last_name"] ?> </h1>
 
-    <div class= "actions">
-    <a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a> 
-    </div>
 
-    <div class= "actions">
-    <a class="action" href= "<?php echo url_for('InvestigationsEdit.php?patient_ID=' . $patient_ID); ?>"> Edit Investigation </a> 
-    </div>
 
     <table class= "InvestigationsTable">
         <th> Date </th>
@@ -47,7 +45,7 @@
  
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
             <tr>
-                <td> <?php echo h($allInvetigations['date']); ?> </td> 
+                <td><a href=InvestigationEdit.php?id=<?php echo h($allInvetigations['id']); ?>><?php echo h($allInvetigations['date']); ?></a></td>
                 <td> <?php echo h($allInvetigations['BiliTD']); ?> </td> 
                 <td> <?php echo h($allInvetigations['AST']); ?> </td> 
                 <td> <?php echo h($allInvetigations['ALT']); ?> </td> 
@@ -71,6 +69,8 @@
             </tr> 
         <?php } ?>
     </table>
+<center>       <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a></center>
+
 
 
     </div>
