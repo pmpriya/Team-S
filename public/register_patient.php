@@ -46,7 +46,7 @@ if(is_post_request()) {
                      
                         $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode);
                     
-                        redirect_to(url_for('referring_organisation.php'));
+                        redirect_to(url_for('patients.php'));
                    }
                }
       
@@ -66,7 +66,7 @@ if(is_post_request()) {
 <h2> <div>Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 
-    <form action="<?php echo url_for("/patients.php"); ?>" method="post">
+    <form method="post">
         <!-- porforma -->
 
         <div class="field-column">
