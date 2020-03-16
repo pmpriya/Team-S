@@ -32,7 +32,7 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, 
     echo $sql;
     $result = mysqli_query($db, $sql);
     if($result) {
-        return true;
+        return $result;
     } else {
         echo mysqli_error($db);
         db_disconnect($db);
