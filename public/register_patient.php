@@ -66,7 +66,7 @@ if(is_post_request()) {
 <h2> <div>Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 
-    <form method="post">
+    <form action="<?php echo url_for("/register_patient.php"); ?>" method="post">
         <!-- porforma -->
 
         <div class="field-column">
