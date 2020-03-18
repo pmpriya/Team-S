@@ -13,9 +13,9 @@ else $patient_ID = 2;
 if(is_post_request()){
    
   $consultant_name = $_POST["consultantName"];
-  $consultant_specialty = $_POST["consultantSpecialty"];
   $organisation_hospital_name = $_POST["orgName"];
   $organisation_hospital_no = $_POST["orgNumber"];
+  $referring_name = $_POST["referringName"];
   $bleep_number = $_POST["bleepNumber"];
   $is_patient_aware = $_POST["isAware"];
   $is_interpreter_needed = $_POST["isInterpreterNeeded"];
@@ -30,7 +30,25 @@ if(is_post_request()){
   $datetime = $_POST["datetime"];
 
 
-  if(count(array_filters($_POST))!=count($_POST)){
+  if($consultant_name==""|| $organisation_hospital_name==""|| $organisation_hospital_number==""|| $referring_name==""|| $bleep_number==""||
+  $kch_doc_name==""|| $current_issue==""|| $history_of_present_complaint==""|| 
+  $family_history==""|| $current_feeds==""|| $medications==""|| $other_investigations==""){
+    echo $consultant_name;
+    echo $organisation_hospital_name;
+    echo $organisation_hospital_number;
+    echo $referring_name;
+    echo $bleep_number;
+    echo $is_patient_aware;
+    echo $is_interpreter_needed;
+    echo $interpreter_language;
+    echo $kch_doc_name;
+    echo $current_issue;
+    echo $history_of_present_complaint;
+    echo $family_history;
+    echo $current_feeds;
+    echo $medications;
+    echo $other_investigations;
+    echo $date_time;
     echo '<label class = "text-danger">Please fill in all required fields</label';
   }
   //$result = find_member_by_nhsno($nhs_number);
@@ -41,9 +59,26 @@ if(is_post_request()){
      //  echo '<label class="text-danger">This is not a valid Kings College London email (@kcl.ac.uk domain)</label>';
   // } 
   else {
-       
-           $result1 = insert_referral( $patient_ID ,$consultant_name, $consultant_speciality, $organisation_hospital_name, $organisation_hospital_number, 
-           $bleep_number, $is_patient_aware, $is_interpreter_needed, $kch_doc_name, $current_issue, 
+          echo $consultant_name;
+          echo $organisation_hospital_name;
+          echo $organisation_hospital_number;
+          echo $referring_name;
+          echo $bleep_number;
+          echo $is_patient_aware;
+          echo $is_interpreter_needed;
+          echo $interpreter_language;
+          echo $kch_doc_name;
+          echo $current_issue;
+          echo $history_of_present_complaint;
+          echo $family_history;
+          echo $current_feeds;
+          echo $medications;
+          echo $other_investigations;
+          echo $date_time;
+          
+
+           $result1 = insert_referral( $patient_ID ,$consultant_name, $organisation_hospital_name, $organisation_hospital_number, $referring_name, 
+           $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
            $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $date_time);
            //$new_id = mysqli_insert_id($db);
            redirect_to(url_for('referral_page.php?id=' . $new_id));
@@ -64,16 +99,12 @@ if(is_post_request()){
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
     <!-- patient details form -->
-    <form action="<?php echo url_for("/referral_page.php"); ?>" method="post">    <!-- Consultant Name -->
+    <form action="<?php echo url_for("/referral_page.php"); ?>" method="post">   
+     <!-- Consultant Name -->
       <div class="field-column">
       <label>Consultant Name</label>
          <input type="text" name="consultantName" placeholder="Required" required>
         </div>
-    <!-- Consultant Specialty -->
-    <div class="field-column">
-      <label>Consultant Specialty</label>
-       <input type="text" name="consultantSpecialty" >
-    </div>
     <!-- Organisation Name -->
     <div class="field-column">
      <label>Organisation Hospital Name</label>
@@ -82,7 +113,12 @@ if(is_post_request()){
      <!-- Organisation Hospital Number -->
      <div class="field-column">
       <label>Organisation Hospital Number</label>
-       <input type="number" name="orgNumber" required>
+       <input type = "number" name = "orgNumber" required>
+    </div>
+    <!-- Referring Person's Name Specialty -->
+    <div class="field-column">
+      <label>Referring Person's Name</label>
+       <input type="text" name="referringName">
     </div>
      <!-- Bleep Number -->
      <div class="field-column">
@@ -111,9 +147,7 @@ if(is_post_request()){
       <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
       <input type="text" name="kchDocName">
     </div>
-
      <!-- Current Issue -->
-
      <div class="field-column">
       <label>Current Issue</label>
       <textarea name= "currentIssue"> </textarea>
@@ -138,11 +172,11 @@ if(is_post_request()){
     <label>Medications</label>
       <textarea name = "medications"> </textarea>
   </div>
-  <!-- Other Investigations -->
-  <div class="field-column">
-    <label>Other Investigations</label>
-    <textarea name = "otherInvestigations"> </textarea>
-  </div>
+   <!-- Other Investigations -->
+   <div class="field-column">
+     <label>Other Investigations</label>
+      <textarea name = "otherInvestigations"></textarea>
+   </div>
   <!-- Datetime -->
   <div class="field-column">
     <label>Date and Time</label>
