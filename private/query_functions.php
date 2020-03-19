@@ -238,7 +238,7 @@ function find_patient_by_email($email) {
     global $db;
 
     $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE email'" . $email . "' ";
+    $sql .= "WHERE email='" . $email . "' ";
     $result = mysqli_query($db, $sql);
 
     return $result;

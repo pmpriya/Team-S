@@ -49,7 +49,8 @@ if(is_post_request()) {
                        echo $mes;
                    } 
                     else { 
-                      $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number,$accessCode);
+                      $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode,
+                       $home_phone, $mobile_phone, $gp_address, $gp_number,$accessCode,$ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email);
                     
                     redirect_to(url_for('patients.php'));
                   }
@@ -116,7 +117,7 @@ if(is_post_request()) {
 
      <div class="field-column">
       <label>NHS number</label>
-       <input type="number" name="nhsnumber" pattern="[0-9]{10}" placeholder="Required" required>
+       <input type="number" name="nhsnumber" pattern="^\d{10}$" placeholder="Required" required>
     </div>
      <!-- date of birth -->
 
