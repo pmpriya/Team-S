@@ -7,8 +7,7 @@
 if(is_post_request()) {
     
     $first_name = $_POST["firstname"]; 
-    $last_name = $_POST["lastname"];
-    
+    $last_name = $_POST["lastname"]; 
     $dob = strtotime($_POST["dob"]);
     $dob = date('Y-m-d', $dob);
     $home_phone = $_POST["homenumber"];
@@ -28,10 +27,12 @@ if(is_post_request()) {
     $ref_hospital_name = $_POST["refhospital"];
 
     
-        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number=="")
+       if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
+            || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
+            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="")
 
-             echo '<label class="text-danger">Please fill in all required fields</label>';
-        
+            echo '<label class="text-danger">Please fill in all required fields</label>';
+   
         else {
             $result = find_member_by_nhsno($nhs_number);
            
@@ -50,10 +51,10 @@ if(is_post_request()) {
                     else { 
                       $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number,$accessCode);
                     
-                    redirect_to(url_for('referring_organisation.php'));
-                   }
-             }
-            }
+                    redirect_to(url_for('patients.php'));
+                  }
+               }
+        }
 }
 ?>
 <html>
@@ -83,11 +84,11 @@ if(is_post_request()) {
        <input type="text" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
     </div>
 
-
-    <div class="field-column">
-      <label>Email</label>
-       <input type="text" name="mail2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
+   <div class="field-column">
+      <label>Email (@nhs.net)</label>
+       <input type="text" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
     </div>
+   
 
 
 
@@ -115,7 +116,7 @@ if(is_post_request()) {
 
      <div class="field-column">
       <label>NHS number</label>
-       <input type="number" name="nhsnumber" placeholder="Required" required>
+       <input type="number" name="nhsnumber" pattern="[0-9]{10}" placeholder="Required" required>
     </div>
      <!-- date of birth -->
 
@@ -126,7 +127,7 @@ if(is_post_request()) {
 
     <div class="field-column">
       <label>Full Name of Referring Doctor</label>
-       <input type="text" name="refname" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
+       <input type="text" name="refname" pattern="^[a-z ,.'-]+$" placeholder="Required" required>
     </div>
      
     <div class="field-column">
@@ -144,11 +145,12 @@ if(is_post_request()) {
  
     <!-- email -->
 
-     <div class="field-column">
-            <label>Email</label>
-            <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
-            
-     </div>
+   
+  <div class="field-column">
+      <label>Email</label>
+       <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" required>
+    </div>
+
 
      <!-- home address -->
 
@@ -168,14 +170,14 @@ if(is_post_request()) {
 
      <div class="field-column">
       <label>Home Phone Number</label>
-      <input type="number" name="homenumber" placeholder="Required" required>
+      <input type="number" name="homenumber" placeholder="Required"  required>
     </div>
     
      <!-- Mobile telephone number -->
    
      <div class="field-column">
       <label>Mobile Phone Number</label>
-      <input type="number" name="mobilenumber" placeholder="Required" required>
+      <input type="number" name="mobilenumber"  placeholder="Required" required>
     </div>
 
      <!-- Patient's GP address -->
@@ -188,7 +190,7 @@ if(is_post_request()) {
      <!-- GP telephone number -->
 
      <div class="field-column">
-      <label>GP phone number</label> <input type="number" name="gpnumber" placeholder="Required" required>
+      <label>GP phone number</label> <input type="number" name="gpnumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Required" required>
     </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
