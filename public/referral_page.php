@@ -125,8 +125,11 @@ if(!isset($datetime) || empty($datetime)){
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
     <!-- patient details form -->
-    <form action="<?php echo url_for("/referral_page.php"); ?>" method="post">    <!-- Consultant Name -->
-      <div class="field-column">
+
+          <span id="alert_message" style="color:red"></span>
+
+   <form method="post" id="form"> 
+  <div class="field-column">
       <label>Consultant Name</label>
          <input type="text" name="consultantName" placeholder="Required" required>
         </div>
