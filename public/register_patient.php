@@ -529,10 +529,10 @@ $val = isOnlyNumber($mobile_phone);
         if(!isOnlyNumber(gpnumber,"GP Phone")){
             isOkay = false;
         }
-        if(!isOnlyCharacter(refDoctor,"Referring Doctor")){
+        if(!isOnlyCharacter(refDoctor,"Referring Doctor Name")){
             isOkay = false;
         }
-        if(!isOnlyCharacter(refHospital,"Referring Hospital")){
+        if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
             isOkay = false;
         }
 
