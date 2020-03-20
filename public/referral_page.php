@@ -131,92 +131,93 @@ if(!isset($datetime) || empty($datetime)){
    <form method="post" id="form"> 
   <div class="field-column">
       <label>Consultant Name</label>
-         <input type="text" name="consultantName" placeholder="Required" required>
-        </div>
+        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Name')" id="consultantName" name="consultantName" placeholder="Required" required>
+          </div>
     <!-- Consultant Specialty -->
     <div class="field-column">
       <label>Consultant Specialty</label>
-       <input type="text" name="consultantSpecialty" >
-    </div>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Specialty')" id="consultantSpecialty" name="consultantSpecialty" required>
+          </div>
     <!-- Organisation Name -->
     <div class="field-column">
      <label>Organisation Hospital Name</label>
-      <input type="text" name="orgName" required>
-   </div>
+      <input type="text" onfocusout="isOnlyCharacter(this,'Organisation Hospital Name')" id="orgName" name="orgName" required>
+          </div>
      <!-- Organisation Hospital Number -->
      <div class="field-column">
       <label>Organisation Hospital Number</label>
-       <input type="number" name="orgNumber" required>
-    </div>
+       <input type="number" onfocusout="isOnlyNumber(this,'Organisation Hospital Number')" id="orgNumber" name="orgNumber" required>
+          </div>
      <!-- Bleep Number -->
      <div class="field-column">
       <label>Bleep Number</label>
-       <input type = "number" name = "bleepNumber" required>
-    </div>
+       <input type = "number"  onfocusout="isOnlyNumber(this,'Bleep Number')" id="bleepNumber" name = "bleepNumber" required>
+          </div>
 
      <!-- Patient Aware -->
      <div class="field-column">
       <label>Is the patient aware of the referral?</label>
-        <input type = "checkbox" name = "isAware" optional>
-     </div>
+       <input type = "checkbox" id="isAware" name = "isAware" value='Y' >
+          </div>
 
      <!-- Interpreter Needed -->
      <div class="field-column">
       <label>Will there be a language interpreter needed?</label>
-       <input type = "checkbox" name = "isInterpreterNeeded" optional>
-    </div>
+       <input type = "checkbox" id="isInterpreterNeeded" name = "isInterpreterNeeded" value='Y'>
+          </div>
      <!-- Interpreter Language -->
      <div class="field-column">
       <label>Interpreter language(To be left empty if no interpreter is needed)</label>
-      <input type = "text" name = "interpreterLanguage" optional>
-    </div>
+      <input type = "text"  id="interpreterLanguage" name = "interpreterLanguage">
+          </div>
      <!-- Doctor at Kings -->
      <div class="field-column">
       <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
-      <input type="text" name="kchDocName">
+      <input type="text" id="kchDocName" name="kchDocName">
+          </div>
     </div>
 
      <!-- Current Issue -->
 
      <div class="field-column">
       <label>Current Issue</label>
-      <textarea name= "currentIssue"> </textarea>
-    </div>
+      <textarea id="currentIssue" required="" onfocusout="isEmpty(this,'Current Issue')" name= "currentIssue"> </textarea>
+          </div>
      <!-- History of Present Complaint -->
      <div class="field-column">
       <label>History of Present Complaint</label>
-       <textarea name = "complaintHistory"> </textarea>
-    </div>
+    <textarea id="complaintHistory" required="" onfocusout="isEmpty(this,'Complaint History')" name = "complaintHistory"> </textarea>
+          </div>
      <!-- Family History -->
      <div class="field-column">
       <label>Family History</label>
-        <textarea name = "familyHistory"> </textarea>
-    </div>
+       <textarea id="familyHistory" required="" onfocusout="isEmpty(this,'Family History')" name = "familyHistory"> </textarea>
+          </div>
     <!-- Current Feeds -->
     <div class="field-column">
      <label>Current Feeds</label>
-       <textarea name = "currentFeeds"> </textarea>
-   </div>
+      <textarea id="currentFeeds" required="" onfocusout="isEmpty(this,'Current Feeds')" name = "currentFeeds"> </textarea>
+          </div>
    <!-- Medications  -->
    <div class="field-column">
     <label>Medications</label>
-      <textarea name = "medications"> </textarea>
-  </div>
+ <textarea id="medications" required="" onfocusout="isEmpty(this,'Medications')" name = "medications"> </textarea>
+          </div>
   <!-- Other Investigations -->
   <div class="field-column">
     <label>Other Investigations</label>
-    <textarea name = "otherInvestigations"> </textarea>
-  </div>
+    <textarea id="otherInvestigations" required="" onfocusout="isEmpty(this,'Other Investigations')" name = "otherInvestigations"> </textarea>
+          </div>
   <!-- Datetime -->
   <div class="field-column">
     <label>Date and Time</label>
-    <input type = "datetime-local" name="datetime" required>
-  </div>
+   <input id="datetime" required="" onfocusout="isEmpty(this,'Date and Time')" type = "datetime-local" name="datetime" required>
+          </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
-     <button type = "submit" name="submit">Submit</button>
-  </div>
+    <button  type = "button" onclick="validateForm()" name="btnsubmit">Submit</button>
+          </div>
      <!-- reset button -->
      <div class="field-column">
      <button type = "reset" name="reset">Reset</button>
