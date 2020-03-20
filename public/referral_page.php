@@ -12,6 +12,8 @@ if (isset($_GET['id'])){
   $user_set = find_user_by_id($patient_ID);
 }
 else $patient_ID = 2;
+  $message = "";
+        $isValid = true;
 if(is_post_request()){
    
   $consultant_name = $_POST["consultantName"];
