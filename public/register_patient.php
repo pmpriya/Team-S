@@ -116,8 +116,50 @@ $val = isOnlyNumber($mobile_phone);
                 $isValid = false;
             }
 
+    $reg_surname = $_POST["lastname2"];
+     $val = isOnlyCharacter($reg_surname);
+        if($val!=1)
+        {
+            $message += getMessage($val,"Surname");
+            $isValid = false;
+        }
 
-    if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number=="")
+    $reg_forename = $_POST["firstname2"];
+     $val = isOnlyCharacter($reg_forename);
+        if($val!=1)
+        {
+            $message += getMessage($val,"Forename");
+            $isValid = false;
+        }
+    
+    $reg_email = $_POST["mail2"];
+     $val = validateUserEmail($reg_email);
+        if($val!=1)
+        {
+            $message += getMessage($val,"Email");
+            $isValid = false;
+        }
+    
+    $ref_dr_name = $_POST["refname"];
+     $val = isOnlyCharacter($ref_dr_name);
+        if($val!=1)
+        {
+            $message += getMessage($val,"Doctor name");
+            $isValid = false;
+        }
+    
+    $ref_hospital_name = $_POST["refhospital"];
+     $val = isOnlyCharacter($ref_hospital_name);
+        if($val!=1)
+        {
+            $message += getMessage($val,"Hospital name");
+            $isValid = false;
+        }
+
+
+    if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
+    || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
+    || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="")
 
              echo '<label class="text-danger">Please fill in all required fields</label>';
         
@@ -129,27 +171,21 @@ $val = isOnlyNumber($mobile_phone);
                        echo $mes;
                  } 
                 else {
-                    /*
                   $result2 = find_patient_by_email($email);
                                 
                    if(mysqli_num_rows($result2) > 0) {
                      
                        $mes = '<label class="text-danger">Email Already Exits</label>';
                        echo $mes;
-
-                    else { */
-                        if($isValid){
-                          $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode);
-                    
-                        redirect_to(url_for('patients.php'));
-                        }
-                        
                    }
-               }
-      
-       }
-
-
+                    else {
+                        $result1 = insert_member($nhs_number, $first_name, $last_name, $dob,$sex, $email, $home_address, $postcode,
+                       $home_phone, $mobile_phone, $gp_address, $gp_number,$accessCode,$ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email);
+                        redirect_to(url_for('patients.php'));
+                    } 
+                }
+            }
+        }
 ?>
     <html>
     <head>
@@ -163,11 +199,35 @@ $val = isOnlyNumber($mobile_phone);
 <h2> <div>Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 
-   <form method="post" id="form">    <!-- Patient's Surname -->
+   <form method="post" id="form">   
 
       <div class="field-column">
         <span id="alert_message" style="color:red"></span>
+    
+    <!-- porforma -->
 
+      <div class="field-column">
+      <label>Surname </label>
+         <input type="text" onfocusout="isOnlyCharacter(this,'Surname')" id="lastname2" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
+        </div>
+
+    <!--  forename -->
+
+    <div class="field-column">
+      <label>Forename</label>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Forename')" id="firstname2" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
+    </div>
+
+   <div class="field-column">
+      <label>Email (@nhs.net)</label>
+       <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
+    </div>
+
+<h2> <div>Patient Details(Please complete all fields) </div></h2>
+
+    <br>
+    
+    <!-- Patient's Surname -->
       <label>Surname</label>
          <input type="text"  onfocusout="isOnlyCharacter(this,'Surname')" id="lastname" name="lastname" placeholder="Required" required>
         </div>
@@ -193,6 +253,16 @@ $val = isOnlyNumber($mobile_phone);
       <label>Date of birth</label>
        <input type = "date" onfocusout="isEmpty(this,'Date of birth')"  id="dob" name = "dob" required>
 
+    </div>
+
+    <div class="field-column">
+      <label>Full Name of Referring Doctor</label>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Doctor Name')" id="refname" name="refname" placeholder="Required" required>
+    </div>
+     
+    <div class="field-column">
+      <label>Referring Hospital</label>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Hospital Name')" id="refhospital" name="refhospital" placeholder="Required" required>
     </div>
      
      <!-- sex -->
@@ -287,6 +357,37 @@ $val = isOnlyNumber($mobile_phone);
     }
 </script>
 <script type="text/javascript">
+    function ValidateNHSEmail() 
+    {
+        var mail = document.getElementById("email");
+        if(!isEmpty(mail,"Registering Person Mail")){
+            mail = mail.value;
+            if (/^\w+([\.-]?\w+)*@nhs.net$/.test(mail))
+            {
+                if(append)
+                    document.getElementById("alert_message").innerHTML += "";
+                else
+                    document.getElementById("alert_message").innerHTML = "";
+                return (true)
+            }else if (/^\w+([\.-]?\w+)*@[0-9a-zA-Z]+.nhs.uk$/.test(mail))
+            {
+                if(append)
+                    document.getElementById("alert_message").innerHTML += "";
+                else
+                    document.getElementById("alert_message").innerHTML = "";
+                return (true)
+            }
+            if(append)
+                document.getElementById("alert_message").innerHTML += "Invalid Email<br/>";
+            else
+                document.getElementById("alert_message").innerHTML = "Invalid Email";
+            return (false)    
+        }
+        return false;
+        
+    }
+</script>
+<script type="text/javascript">
     function isOnlyCharacter(r,e){
         if(!isEmpty(r,e)){
             if(r.value.length<2){
@@ -369,8 +470,11 @@ $val = isOnlyNumber($mobile_phone);
     function validateForm(){
         append = true;
         document.getElementById("alert_message").innerHTML = "";
-        var lastname = document.getElementById("lastname");
+        var regSurname = document.getElementById("lastname2");
+        var regForename = document.getElementById("firstname2");
+        var regEmail = document.getElementById("mail2");
 
+        var lastname = document.getElementById("lastname");
         var firstname = document.getElementById("firstname");
         var nhsnumber = document.getElementById("nhsnumber");
         var dob = document.getElementById("dob");
@@ -380,9 +484,21 @@ $val = isOnlyNumber($mobile_phone);
         var homenumber = document.getElementById("homenumber");
         var mobilenumber = document.getElementById("mobilenumber");
         var gpaddress = document.getElementById("gpaddress");
-        var gpnumber= document.getElementById("gpnumber");
+        var gpnumber = document.getElementById("gpnumber");
+        var refDoctor = document.getElementById("refname");
+        var refHospital = document.getElementById("refhospital");
 
         var isOkay = false;
+        if(!isOnlyCharacter(regSurname,"Registering Person Surname")){
+            isOkay = false;
+        }
+        if(!isOnlyCharacter(regForename,"Registering Person Forename")){
+            isOkay = false;
+        }
+        if(!ValidateNHSEmail()){
+            isOkay = false;
+        }
+
         if(!isOnlyCharacter(lastname,"Surname")){
             isOkay = false;
         }
@@ -413,7 +529,12 @@ $val = isOnlyNumber($mobile_phone);
         if(!isOnlyNumber(gpnumber,"GP Phone")){
             isOkay = false;
         }
-
+        if(!isOnlyCharacter(refDoctor,"Referring Doctor")){
+            isOkay = false;
+        }
+        if(!isOnlyCharacter(refHospital,"Referring Hospital")){
+            isOkay = false;
+        }
 
 
         if(isOkay){
