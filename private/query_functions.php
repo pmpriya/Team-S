@@ -9,11 +9,13 @@ function find_member_by_nhsno($nhs_number) {
 
     return $result;
 }
-function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
+function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
+ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) {
     global $db;
 
     $sql = "INSERT INTO Patient ";
-    $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
+    $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address,
+     gp_phone, accessCode, referring_doctor_name, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
@@ -26,8 +28,14 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, 
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
     $sql .= "'" . $gp_address . "', ";
-    $sql .= "'" . $gp_number . "',";
-    $sql .= "'" . $accessCode . "'";
+    $sql .= "'" . $gp_number . "', ";
+    $sql .= "'" . $accessCode . "', ";
+    $sql .= "'" . $ref_dr_name . "', ";
+    $sql .= "'" . $ref_hospital_name . "', ";
+    $sql .= "'" . $reg_surname . "', ";
+    $sql .= "'" . $reg_forename . "', ";
+    $sql .= "'" . $reg_email . "'";
+
     $sql .= ")";
     echo $sql;
     $result = mysqli_query($db, $sql);
@@ -230,7 +238,7 @@ function find_patient_by_email($email) {
     global $db;
 
     $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE email'" . $email . "' ";
+    $sql .= "WHERE email='" . $email . "' ";
     $result = mysqli_query($db, $sql);
 
     return $result;
