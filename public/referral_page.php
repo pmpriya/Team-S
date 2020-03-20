@@ -262,3 +262,101 @@ if(!isset($datetime) || empty($datetime)){
           document.getElementById("alert_message").innerHTML = "";
         return (true)
       }
+   
+      if(append)
+        document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
+      else
+        document.getElementById("alert_message").innerHTML = e+" can only contain characters<br/>";
+      return (false)    
+    }
+    return false;
+  }
+</script>
+<script type="text/javascript">
+  function isOnlyNumber(r,e){
+    if(!isEmpty(r,e)){
+      if (/^\d+$/.test(r.value.trim()))
+      {
+        if(append)
+          document.getElementById("alert_message").innerHTML += "";
+        else
+          document.getElementById("alert_message").innerHTML = "";
+        return (true)
+      }
+      if(append)
+        document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
+      else
+        document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
+      return (false)    
+    }
+    return false;
+  }
+</script>
+<script type="text/javascript">
+  function validateForm(){
+    document.getElementById("alert_message").innerHTML ="";
+    append = true;
+    var consultantName = document.getElementById("consultantName");
+    var consultantSpecialty = document.getElementById("consultantSpecialty");
+    var orgName = document.getElementById("orgName");
+    var orgNumber = document.getElementById("orgNumber");
+    var bleepNumber = document.getElementById("bleepNumber");
+    var currentIssue = document.getElementById("currentIssue");
+    var complaintHistory = document.getElementById("complaintHistory");
+    var familyHistory = document.getElementById("familyHistory");
+    var currentFeeds = document.getElementById("currentFeeds");
+    var medications = document.getElementById("medications");
+    var otherInvestigations = document.getElementById("otherInvestigations");
+    var datetime = document.getElementById("datetime");
+
+    var isOkay = true;
+    if(!isOnlyCharacter(consultantName,"Consultant Name")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(consultantSpecialty,"Consultant Specialty")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(orgName,"Organisation Name")){
+      isOkay = false;
+    }
+    if(!isOnlyNumber(orgNumber,"Organisation Number")){
+      isOkay = false;
+    }
+    if(!isOnlyNumber(bleepNumber,"Bleep Number")){
+      isOkay = false;
+    }
+    if(isEmpty(currentIssue,"Current Issue")){
+      isOkay = false;
+    }
+    if(isEmpty(complaintHistory,"Complaint History")){
+      isOkay = false;
+    }
+    if(isEmpty(familyHistory,"Family History")){
+      isOkay = false;
+    }
+
+    if(isEmpty(currentFeeds,"Current Feeds")){
+      isOkay = false;
+    }
+
+    if(isEmpty(medications,"Medications")){
+      isOkay = false;
+    }
+
+    if(isEmpty(otherInvestigations,"Other Investigations")){
+      isOkay = false;
+    }
+
+    if(isEmpty(datetime,"Date and Time")){
+      isOkay = false;
+    }
+    if(isOkay){
+      document.getElementById("form").submit();
+
+      return true;
+    }
+
+    append = false;
+    return false;
+  }
+</script>
