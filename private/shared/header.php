@@ -17,14 +17,14 @@
       <li><a href="<?php echo url_for('/index.php'); ?>">MAIN</a></li>
       
       <li><a href="<?php echo url_for('/register_patient.php'); ?>">REGISTER PATIENT</a></li> 
-      <li><a href="<?php echo url_for('/user_login.php'); ?>">LOG IN</a></li>
+     
         <li><a href="<?php echo url_for('/users.php'); ?>">STAFF</a></li>
        
         <li><a href="<?php echo url_for('/patients.php'); ?>">PATIENTS</a></li>
 
         <li><a href="<?php echo url_for('/register_member.php'); ?>">REFERRALS </a></li>
         <li><a href="<?php echo url_for('/external_access.php'); ?>">STATUS</a></li>
-
+        <li><a href="<?php echo url_for('/user_login.php'); ?>">LOG IN</a></li>
 
     </ul>
   </navigation>
