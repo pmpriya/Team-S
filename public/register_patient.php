@@ -511,6 +511,12 @@ $val = isOnlyNumber($mobile_phone);
         if(isEmpty(dob,"DOB")){
             isOkay = false;
         }
+        if(!isOnlyCharacter(refDoctor,"Referring Doctor Name")){
+            isOkay = false;
+        }
+        if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
+            isOkay = false;
+        }
         if(isEmpty(address,"Home Address")){
             isOkay = false;
         }
@@ -527,12 +533,6 @@ $val = isOnlyNumber($mobile_phone);
             isOkay = false;
         }
         if(!isOnlyNumber(gpnumber,"GP Phone")){
-            isOkay = false;
-        }
-        if(!isOnlyCharacter(refDoctor,"Referring Doctor Name")){
-            isOkay = false;
-        }
-        if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
             isOkay = false;
         }
 
