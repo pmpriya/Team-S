@@ -1,5 +1,7 @@
 <?php require_once('../private/initialise.php'); ?>
 <?php $page_title = 'Register patient'; ?>
+  <?php include(SHARED_PATH . '/validation.php'); ?>
+
 <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
 
