@@ -13,26 +13,83 @@ else $patient_ID = 2;
 if(is_post_request()){
    
   $consultant_name = $_POST["consultantName"];
+  $val = isOnlyCharacter($consultant_name);
+            if($val!=1)
+            {
+                $message += getMessage($val,"Consuttant Name");
+                $isValid = false;
+            }
+
   $consultant_specialty = $_POST["consultantSpecialty"];
+if(!isset($consultant_specialty) || empty($consultant_specialty)){
+                $isValid = false;
+                $message += "Consultant Specialty can not be empty";
+            }
   $organisation_hospital_name = $_POST["orgName"];
+  $val = isOnlyCharacter($organisation_hospital_name);
+            if($val!=1)
+            {
+                $message += getMessage($val,"Organiszation Hospital Name");
+                $isValid = false;
+            }
+
   $organisation_hospital_no = $_POST["orgNumber"];
+  if(!isset($organisation_hospital_no) || empty($organisation_hospital_no)){
+                $isValid = false;
+                $message += "Organiszation Hospital Name can not be empty";
+            }
+
   $bleep_number = $_POST["bleepNumber"];
+  if(!isset($bleep_number) || empty($bleep_number)){
+                $isValid = false;
+                $message += "Bleep Number can not be empty";
+            }
+
   $is_patient_aware = $_POST["isAware"];
   $is_interpreter_needed = $_POST["isInterpreterNeeded"];
   $interpreter_language = $_POST["interpreterLanguage"];
   $kch_doc_name = $_POST["kchDocName"];
+
   $current_issue = $_POST["currentIssue"];
+if(!isset($current_issue) || empty($current_issue)){
+                $isValid = false;
+                $message += "Current Issue can not be empty";
+            }
   $history_of_present_complaint = $_POST["complaintHistory"];
+if(!isset($history_of_present_complaint) || empty($history_of_present_complaint)){
+                $isValid = false;
+                $message += "history of patient compliant can not be empty";
+            }
   $family_history = $_POST["familyHistory"];
+if(!isset($family_history) || empty($family_history)){
+                $isValid = false;
+                $message += "Family History can not be empty";
+            }
   $current_feeds = $_POST["currentFeeds"];
+if(!isset($current_feeds) || empty($current_feeds)){
+                $isValid = false;
+                $message += "Curren Feeds can not be empty";
+            }
   $medications = $_POST["medications"];
-  $other_investigations = $POST["otherInvestigations"];
+if(!isset($medications) || empty($medications)){
+                $isValid = false;
+                $message += "Medications can not be empty";
+            }
+  $other_investigations = $_POST["otherInvestigations"];
+if(!isset($other_investigations) || empty($other_investigations)){
+                $isValid = false;
+                $message += "Other Investigations can not be empty";
+            }
   $datetime = $_POST["datetime"];
+if(!isset($datetime) || empty($datetime)){
+                $isValid = false;
+                $message += "Date Time can not be empty";
+            }
 
 
-  if(count(array_filters($_POST))!=count($_POST)){
-    echo '<label class = "text-danger">Please fill in all required fields</label';
-  }
+//   if(count(array_filters($_POST))!=count($_POST)){
+//     echo '<label class = "text-danger">Please fill in all required fields</label';
+//   }
   //$result = find_member_by_nhsno($nhs_number);
   // list($usr, $domain) = explode('@', $email);
 
@@ -40,7 +97,7 @@ if(is_post_request()){
        // use gmail
      //  echo '<label class="text-danger">This is not a valid Kings College London email (@kcl.ac.uk domain)</label>';
   // } 
-  else {
+//   else {
        
            $result1 = insert_referral( $patient_ID ,$consultant_name, $consultant_speciality, $organisation_hospital_name, $organisation_hospital_number, 
            $bleep_number, $is_patient_aware, $is_interpreter_needed, $kch_doc_name, $current_issue, 
@@ -48,7 +105,7 @@ if(is_post_request()){
            //$new_id = mysqli_insert_id($db);
            redirect_to(url_for('referral_page.php?id=' . $new_id));
        }
-     }
+    // }
 ?>
 <html>
     <head>
@@ -159,3 +216,49 @@ if(is_post_request()){
   </div>
 </form>
 <?php include(SHARED_PATH . '/footer.php'); ?>
+
+  
+<script type="text/javascript">
+  var append = false;
+</script>
+<script type="text/javascript">
+  function isEmpty(r,e){
+   if(r.value.trim()==""){
+    if(append)
+      document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
+    else
+      document.getElementById("alert_message").innerHTML =e+" can't be empty";
+    return true;
+  }
+  if(append) 
+    document.getElementById("alert_message").innerHTML += "";
+  else
+    document.getElementById("alert_message").innerHTML = "";
+  return false;
+}
+</script>
+<script type="text/javascript">
+  function isOnlyCharacter(r,e){
+    if(!isEmpty(r,e)){
+      if(r.value.length<2){
+        if(append)
+          document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
+        else
+          document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
+        return false;
+      }
+      if(r.value.length>10){
+        if(append)
+          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
+        else
+          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
+        return false;
+      }
+      if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
+      {
+        if(append)
+          document.getElementById("alert_message").innerHTML += "";
+        else
+          document.getElementById("alert_message").innerHTML = "";
+        return (true)
+      }
