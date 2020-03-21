@@ -9,11 +9,13 @@ function find_member_by_nhsno($nhs_number) {
 
     return $result;
 }
-function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
+function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
+ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) {
     global $db;
 
     $sql = "INSERT INTO Patient ";
-    $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
+    $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address,
+     gp_phone, accessCode, referring_doctor_name, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
@@ -26,8 +28,14 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, 
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
     $sql .= "'" . $gp_address . "', ";
-    $sql .= "'" . $gp_number . "',";
-    $sql .= "'" . $accessCode . "'";
+    $sql .= "'" . $gp_number . "', ";
+    $sql .= "'" . $accessCode . "', ";
+    $sql .= "'" . $ref_dr_name . "', ";
+    $sql .= "'" . $ref_hospital_name . "', ";
+    $sql .= "'" . $reg_surname . "', ";
+    $sql .= "'" . $reg_forename . "', ";
+    $sql .= "'" . $reg_email . "'";
+
     $sql .= ")";
     echo $sql;
     $result = mysqli_query($db, $sql);
@@ -72,28 +80,25 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     }
 }
 
-function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name,
-                         $bleep_number, $is_patient_aware, $is_interpreter_needed,  $interpreter_language, $kch_doc_name, $current_issue,
-                         $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $date_time) {
+function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+                        $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
+                        $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
     global $db;
 
     $sql = "INSERT INTO Referral ";
     $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, referring_name,
-    bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-    history_of_present_complaint, family_history, current_feeds, medications, other_investigations, date_time) ";
+             bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
+             history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
     $sql .= "VALUES (";
-    //$sql .= "'" . $ID . "', ";
     $sql .= "'" . $patient_ID . "', ";
     $sql .= "'" . $consultant_name . "', ";
     $sql .= "'" . $organisation_hospital_name . "', ";
-    
     $sql .= "'" . $organisation_hospital_no . "', ";
     $sql .= "'" . $referring_name . "', ";
     $sql .= "'" . $bleep_number . "', ";
     $sql .= "'" . $is_patient_aware . "', ";
     $sql .= "'" . $is_interpreter_needed . "', ";
     $sql .= "'" . $interpreter_language . "', ";
-    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $kch_doc_name . "', ";
     $sql .= "'" . $current_issue . "', ";
     $sql .= "'" . $history_of_present_complaint . "', ";
@@ -101,7 +106,7 @@ function insert_referral($patient_ID, $consultant_name, $organisation_hospital_n
     $sql .= "'" . $current_feeds . "', ";
     $sql .= "'" . $medications . "', ";
     $sql .= "'" . $other_investigations . "'";
-     $sql .= "'" . $date_time . "'";
+    // $sql .= "'" . $datetime . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -230,7 +235,7 @@ function find_patient_by_email($email) {
     global $db;
 
     $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE email'" . $email . "' ";
+    $sql .= "WHERE email='" . $email . "' ";
     $result = mysqli_query($db, $sql);
 
     return $result;
