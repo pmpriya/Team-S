@@ -18,42 +18,43 @@
             $username = $_POST['username'];
             if(!isset($username) || empty($username)){
                 $isValid = false;
-                $message += "Username can not be empty";
+                $message .= "Username can not be empty";
             }
             $name = $_POST['name'];
             $val = isOnlyCharacter($name);
             if($val!=1)
             {
-                $message += getMessage($val,"Name");
+                $message .= getMessage($val,"Name");
                 $isValid = false;
             }
             $surname = $_POST['surname'];
             $val = isOnlyCharacter($surname);
             if($val!=1)
             {
-                $message += getMessage($val,"Surname");
+                $message .= getMessage($val,"Surname");
                 $isValid = false;
             }
             $email = $_POST['email'];
             $val = validateUserEmail($email);
             if($val!=1)
             {
-                $message += getMessage($val,"Email");
+                $message .= getMessage($val,"Email");
                 $isValid = false;
             }
             $password = $_POST['password'];
             if(!isset($password) || empty($password)){
                 $isValid = false;
-                $message += "Password can not be empty";
+                $message .= "Password can not be empty";
             }
             $userLevel = $_POST['userLevel'] ?? '';
             $val = isOnlyNumber($userLevel);
             if($val!=1)
             {
-                $message += getMessage($val,"UserLevel");
+                $message .= getMessage($val,"UserLevel");
                 $isValid = false;
             }
             if(isValid){
+
                 add_user($username,$name,$surname,$email,$password, $userLevel);
                 header('Location: users.php');
                 exit;
@@ -203,6 +204,7 @@
         var email = document.getElementById("email");
         var password = document.getElementById("password");
         var userLevel = document.getElementById("userLevel");
+
         var isOkay = true;
         if(isEmpty(username,"Username")){
             isOkay = false;
@@ -222,11 +224,14 @@
         if(!isOnlyNumber(userLevel,"userLevel")){
             isOkay = false;
         }
+       
         if(isOkay){
+            
             document.getElementById("form").submit();
-           
+            
             return true;
         }
+        
         // if(!isEmpty(username,"Username")&&isOnlyCharacter(name,"Name")&&isOnlyCharacter(surname,"Surname")&&ValidateEmail()&&!isEmpty(password,"Password")&&isOnlyNumber(userLevel,"userLevel")){
         //     document.getElementById("form").submit();
            
@@ -236,6 +241,3 @@
         return false;
     }
 </script>
-              
-               
- 
