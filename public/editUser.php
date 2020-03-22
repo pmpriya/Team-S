@@ -29,9 +29,9 @@ if(mysqli_num_rows($query)>=1){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $new_username = $_POST['username'];
-                        if(!isset($new_username) || empty($new_username)){
+            if(!isset($new_username) || empty($new_username)){
                 $isValid = false;
-                $message += "Username can not be empty";
+                $message .= "Username can not be empty";
             }
 
 
@@ -39,7 +39,7 @@ if(mysqli_num_rows($query)>=1){
             $val = isOnlyCharacter($new_name);
             if($val!=1)
             {
-                $message += getMessage($val,"Name");
+                $message .= getMessage($val,"Name");
                 $isValid = false;
             }
 
@@ -47,7 +47,7 @@ if(mysqli_num_rows($query)>=1){
             $val = isOnlyCharacter($new_surname);
             if($val!=1)
             {
-                $message += getMessage($val,"Surname");
+                $message .= getMessage($val,"Surname");
                 $isValid = false;
             }
 
@@ -55,22 +55,26 @@ if(mysqli_num_rows($query)>=1){
               $val = validateUserEmail($new_email);
             if($val!=1)
             {
-                $message += getMessage($val,"Email");
+                $message .= getMessage($val,"Email");
                 $isValid = false;
             }
 
 
             $new_userLevel = $_POST['userLevel'];
- $val = isOnlyNumber($new_userLevel);
+              $val = isOnlyNumber($new_userLevel);
             if($val!=1)
             {
-                $message += getMessage($val,"UserLevel");
+                $message .= getMessage($val,"UserLevel");
                 $isValid = false;
             }
-            if(isValid){
+            if($isValid){
             edit_user($id, $new_username,$new_name,$new_surname,$new_email,$new_userLevel);
             header('Location: users.php');
             exit;
+
+        }
+        else {
+            echo $message;
         }
         }
         ?>
@@ -92,7 +96,7 @@ if(mysqli_num_rows($query)>=1){
 
                                         <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail(this,'Email')" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
 
-                                        <tr><td>userLevel:</td><td> <input type="number" required="" id="userLevel" onfocusout="isOnlyNumber(this,'userLevel')"  name="userLevel" rows="1" cols="10"><?php echo $userLevel; ?></input></td></tr>
+                                        <tr><td>userLevel:</td><td> <input value="<?php echo $userLevel; ?>" type="number" required="" id="userLevel" onfocusout="isOnlyNumber(this,'userLevel')"  name="userLevel" rows="1" cols="10"></input></td></tr>
                                     </table>
 
                                 <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
