@@ -186,3 +186,192 @@ if(!isset($datetime) || empty($datetime)){
             <label>Current Issue</label>
             <textarea id="currentIssue" required="" onfocusout="isEmpty(this,'Current Issue')" name= "currentIssue"> </textarea>
           </div>
+          <!-- History of Present Complaint -->
+          <div class="field-column">
+            <label>History of Present Complaint</label>
+            <textarea id="complaintHistory" required="" onfocusout="isEmpty(this,'Complaint History')" name = "complaintHistory"> </textarea>
+          </div>
+          <!-- Family History -->
+          <div class="field-column">
+            <label>Family History</label>
+            <textarea id="familyHistory" required="" onfocusout="isEmpty(this,'Family History')" name = "familyHistory"> </textarea>
+          </div>
+          <!-- Current Feeds -->
+          <div class="field-column">
+             <label>Current Feeds</label>
+             <textarea id="currentFeeds" required="" onfocusout="isEmpty(this,'Current Feeds')" name = "currentFeeds"> </textarea>
+          </div>
+       <!-- Medications  -->
+          <div class="field-column">
+            <label>Medications</label>
+            <textarea id="medications" required="" onfocusout="isEmpty(this,'Medications')" name = "medications"> </textarea>
+          </div>
+          <!-- Other Investigations -->
+          <div class="field-column">
+            <label>Other Investigations</label>
+            <textarea id="otherInvestigations" required="" onfocusout="isEmpty(this,'Other Investigations')" name = "otherInvestigations"> </textarea>
+          </div>
+          <!-- Datetime -->
+          <div class="field-column">
+            <label>Date and Time</label>
+            <input id="datetime" required="" onfocusout="isEmpty(this,'Date and Time')" type = "datetime-local" name="datetime" required>
+          </div>
+      <!-- submit -->
+      <!--<input type ="submit" name="submit"> -->
+          <div class="field-column">
+           <button  type = "button" onclick="validateForm()" name="btnsubmit">Submit</button>
+          </div>
+     <!-- reset button -->
+         <div class="field-column">
+           <button type = "reset" name="reset">Reset</button>
+         </div>
+    </form>
+<?php include(SHARED_PATH . '/footer.php'); ?>
+  
+<script type="text/javascript">
+  var append = false;
+</script>
+<script type="text/javascript">
+  function isEmpty(r,e){
+   if(r.value.trim()==""){
+    if(append)
+      document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
+    else
+      document.getElementById("alert_message").innerHTML =e+" can't be empty";
+    return true;
+  }
+  if(append) 
+    document.getElementById("alert_message").innerHTML += "";
+  else
+    document.getElementById("alert_message").innerHTML = "";
+  return false;
+}
+</script>
+<script type="text/javascript">
+  function isOnlyCharacter(r,e){
+    if(!isEmpty(r,e)){
+      if(r.value.length<2){
+        if(append)
+          document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
+        else
+          document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
+        return false;
+      }
+      if(r.value.length>10){
+        if(append)
+          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
+        else
+          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
+        return false;
+      }
+      if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
+      {
+        if(append)
+          document.getElementById("alert_message").innerHTML += "";
+        else
+          document.getElementById("alert_message").innerHTML = "";
+        return (true)
+      }
+      if(append)
+        document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
+      else
+        document.getElementById("alert_message").innerHTML = e+" can only contain characters<br/>";
+      return (false)    
+    }
+    return false;
+  }
+</script>
+<script type="text/javascript">
+  function isOnlyNumber(r,e){
+    if(!isEmpty(r,e)){
+      if (/^\d+$/.test(r.value.trim()))
+      {
+        if(append)
+          document.getElementById("alert_message").innerHTML += "";
+        else
+          document.getElementById("alert_message").innerHTML = "";
+        return (true)
+      }
+      if(append)
+        document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
+      else
+        document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
+      return (false)    
+    }
+    return false;
+  }
+</script>
+<script type="text/javascript">
+  function validateForm(){
+    document.getElementById("alert_message").innerHTML ="";
+    append = true;
+    var consultantName = document.getElementById("consultantName");
+    var consultantSpecialty = document.getElementById("consultantSpecialty");
+    var orgName = document.getElementById("orgName");
+    var orgNumber = document.getElementById("orgNumber");
+    var bleepNumber = document.getElementById("bleepNumber");
+    var currentIssue = document.getElementById("currentIssue");
+    var complaintHistory = document.getElementById("complaintHistory");
+    var familyHistory = document.getElementById("familyHistory");
+    var currentFeeds = document.getElementById("currentFeeds");
+    var medications = document.getElementById("medications");
+    var otherInvestigations = document.getElementById("otherInvestigations");
+    var datetime = document.getElementById("datetime");
+
+    var isOkay = true;
+    if(!isOnlyCharacter(consultantName,"Consultant Name")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(consultantSpecialty,"Consultant Specialty")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(orgName,"Organisation Name")){
+      isOkay = false;
+    }
+    if(!isOnlyNumber(orgNumber,"Organisation Number")){
+      isOkay = false;
+    }
+    if(!isOnlyNumber(bleepNumber,"Bleep Number")){
+      isOkay = false;
+    }
+    if(isEmpty(currentIssue,"Current Issue")){
+      isOkay = false;
+    }
+    if(isEmpty(complaintHistory,"Complaint History")){
+      isOkay = false;
+    }
+    if(isEmpty(familyHistory,"Family History")){
+      isOkay = false;
+    }
+
+    if(isEmpty(currentFeeds,"Current Feeds")){
+      isOkay = false;
+    }
+
+    if(isEmpty(medications,"Medications")){
+      isOkay = false;
+    }
+
+    if(isEmpty(otherInvestigations,"Other Investigations")){
+      isOkay = false;
+    }
+
+    if(isEmpty(datetime,"Date and Time")){
+      isOkay = false;
+    }
+
+
+
+
+
+
+    if(isOkay){
+      document.getElementById("form").submit();
+
+      return true;
+    }
+
+    append = false;
+    return false;
+  }
+</script>
