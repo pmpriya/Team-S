@@ -19,7 +19,7 @@
             $new_password = $_POST['password'];
             if(!isset($new_password) || empty($new_password)){
                 $isValid = false;
-                $message += "Password can not be empty";
+                $message .= "Password can not be empty";
             }
 
             if(isValid){
@@ -151,52 +151,15 @@
         document.getElementById("alert_message").innerHTML = "";
         var nhs_number = document.getElementById("nhs_number");
 
-        var first_name = document.getElementById("first_name");
-        var last_name = document.getElementById("last_name");
-        var date_of_birth = document.getElementById("date_of_birth");
-        var sex = document.getElementById("sex");
-        var home_address = document.getElementById("home_address");
-        var postcode = document.getElementById("postcode");
-        var home_phone = document.getElementById("home_phone");
-        var mobile_phone = document.getElementById("mobile_phone");
-        var gp_address = document.getElementById("gp_address");
-        var gp_phone = document.getElementById("gp_phone");
+        var password = document.getElementById("password");
+        
         append = true;
         var isOkay = true;
-        if(!isOnlyNumber(nhs_number,"NHS Number")){
+        
+        if(isEmpty(password,"New Password")){
             isOkay = false;
         }
-        if(!isOnlyCharacter(first_name,"First Name")){
-            isOkay = false;
-        }
-        if(!isOnlyCharacter(last_name,"Last Name")){
-            isOkay = false;
-        }
-        if(isEmpty(date_of_birth,"date_of_birth")){
-            isOkay = false;
-        }
-        if(!isOnlyCharacter(sex,"SEX")){
-            isOkay = false;
-        }
-        if(isEmpty(home_address,"Home Address")){
-            isOkay = false;
-        }
-        if(isEmpty(postcode,"Post Code")){
-            isOkay = false;
-        }
-        if(!isOnlyNumber(home_phone,"Home Phone")){
-            isOkay = false;
-        }
-        if(!isOnlyNumber(mobile_phone,"Mobile Phone")){
-            isOkay = false;
-        }
-        if(isEmpty(gp_address,"GP Address")){
-            isOkay = false;
-        }
-        if(!isOnlyNumber(gp_phone,"GP Phone"))
-        {
-            isOkay =false;
-        }
+        
 
 
         if(isOkay){

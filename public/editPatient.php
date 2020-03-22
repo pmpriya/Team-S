@@ -35,9 +35,6 @@ if(mysqli_num_rows($user_set)>=1){
         $gp_phone = $row['gp_phone'];
         $accessCode = $row['accessCode'];
 
-
-
-
     }}
 
 
@@ -49,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $val = isOnlyNumber($new_nhs_number);
             if($val!=1)
             {
-                $message += getMessage($val,"New Nhs Number");
+                $message .= getMessage($val,"New Nhs Number");
                 $isValid = false;
             }
 
@@ -57,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $val = isOnlyCharacter($new_first_name);
             if($val!=1)
             {
-                $message += getMessage($val,"First Name");
+                $message .= getMessage($val,"First Name");
                 $isValid = false;
             }
 
@@ -65,44 +62,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $val = isOnlyCharacter($new_last_name);
             if($val!=1)
             {
-                $message += getMessage($val,"Last Name");
+                $message .= getMessage($val,"Last Name");
                 $isValid = false;
             }
 
     $new_date_of_birth = $_POST['date_of_birth'];
     if(!isset($new_date_of_birth) || empty($new_date_of_birth)){
                 $isValid = false;
-                $message += "Date Of birth can not be empty";
+                $message .= "Date Of birth can not be empty";
             }
-
 
     $new_sex = $_POST['sex'];
-    $val = isOnlyCharacter($new_sex);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Sex");
+    if(!isset($new_sex) || empty($new_sex)){
                 $isValid = false;
+                $message .= "sex cant be empty.<br/>";
             }
 
-    $new_email = $_POST['email'];
+    $new_email = $_POST['new_email'];
+    
     $val = validateClientEmail($new_email);
             if($val!=1)
             {
-                $message += getMessage($val,"Email");
+                $message .= getMessage($val,"Email");
                 $isValid = false;
             }
 
     $new_home_address = $_POST['home_address'];
     if(!isset($new_home_address) || empty($new_home_address)){
                 $isValid = false;
-                $message += "Home Address can not be empty";
+                $message .= "Home Address can not be empty";
             }
 
 
     $new_postcode = $_POST['postcode'];
     if(!isset($new_postcode) || empty($new_postcode)){
                 $isValid = false;
-                $message += "Postcode can not be empty";
+                $message .= "Postcode can not be empty";
             }
 
     
@@ -110,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $val = isOnlyNumber($new_home_phone);
             if($val!=1)
             {
-                $message += getMessage($val,"Home Phone");
+                $message .= getMessage($val,"Home Phone");
                 $isValid = false;
             }
 
@@ -118,20 +113,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $val = isOnlyNumber($new_mobile_phone);
             if($val!=1)
             {
-                $message += getMessage($val,"Mobile Phone");
+                $message .= getMessage($val,"Mobile Phone");
                 $isValid = false;
             }
     $new_gp_address = $_POST['gp_address'];
-if(!isset($new_gp_address) || empty($new_gp_address)){
+            if(!isset($new_gp_address) || empty($new_gp_address)){
                 $isValid = false;
-                $message += "Gp Address can not be empty";
+                $message .= "Gp Address can not be empty";
             }
 
     $new_gp_phone = $_POST['gp_phone'];
     $val = isOnlyNumber($new_gp_phone);
             if($val!=1)
             {
-                $message += getMessage($val,"GP Phone");
+                $message .= getMessage($val,"GP Phone");
                 $isValid = false;
             }
 
@@ -139,12 +134,12 @@ if(!isset($new_gp_address) || empty($new_gp_address)){
     $val = isOnlyNumber($new_accessCode);
             if($val!=1)
             {
-                $message += getMessage($val,"Access Code");
+                $message .= getMessage($val,"Access Code");
                 $isValid = false;
             }
             if(isValid){
 
-    edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_email,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone, $new_accessCode);
+    edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth, $new_sex, $new_email, $new_home_address, $new_postcode, $new_home_phone, $new_mobile_phone, $new_gp_address,$new_gp_phone, $new_accessCode);
     header('Location: patients.php');
     exit;
     }
@@ -168,23 +163,26 @@ if(!isset($new_gp_address) || empty($new_gp_address)){
 
                     <tr><td>Last Name:</td><td> <textarea required="" id="last_name" onfocusout="isOnlyCharacter(this,'Last Name')" name="last_name" rows="1" cols="10"><?php echo $last_name; ?></textarea></td></tr>
 
+                    <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail()" name="new_email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
 
-                    <tr><td>DOB:</td><td> <input type="date" name="" required="" id="date_of_birth" onfocusout="isEmpty(this,'DOB')" name="date_of_birth" rows="1" cols="10"><?php echo $date_of_birth; ?></input></td></tr>
+                    <tr><td>DOB:</td><td> <input value="<?php echo $date_of_birth; ?>" type="date" name="date_of_birth" required="" id="date_of_birth" onfocusout="isEmpty(this,'DOB')" name="date_of_birth" rows="1" cols="10"></input></td></tr>
 
                     <tr><td>Sex:</td><td> <textarea required="" name="sex" onfocusout="isOnlyCharacter(this,'Sex')" id="sex" rows="1" cols="10"><?php echo $sex; ?></textarea></td></tr>
 
                     <tr><td>Home address:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home address')" id="home_address" name="home_address" rows="1" cols="10"><?php echo $home_address; ?></textarea></td></tr>
+                    
                     <tr><td>Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
 
-                    <!--  -->
-                    <tr><td>Home Phone:</td><td> <input type="number"required="" onfocusout="isOnlyNumber(this,'Home Phone')" id="home_phone" name="home_phone" rows="1" cols="10"><?php echo $home_phone; ?></input></td></tr>
+                    <tr><td>Home Phone:</td><td> <textarea value="<?php echo $home_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Home Phone')" required="" id="home_phone" name="home_phone" rows="1" cols="10"></textarea></td></tr>
 
-                    <!--  -->
-                    <tr><td>Mobile Phone:</td><td> <input type="number" required="" onfocusout="isOnlyNumber(this,'Mobile Phone')" id="mobile_phone"  name="mobile_phone" rows="1" cols="10"><?php echo $mobile_phone; ?></input></td></tr>
+                    <tr><td>Mobile Phone:</td><td> <textarea value="<?php echo $mobile_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Mobile Phone')" required="" id="mobile_phone" name="mobile_phone" rows="1" cols="10"></textarea></td></tr>
 
                     <tr><td>HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
 
-                    <tr><td>GP Phone:</td><td> <input type="number" onfocusout="isOnlyNumber(this,'GP Phone')" required="" id="gp_phone" name="gp_phone" rows="1" cols="10"><?php echo $gp_phone; ?></input></td></tr>
+                    <tr><td>GP Phone:</td><td> <input value="<?php echo $gp_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'GP Phone')" required="" id="gp_phone" name="gp_phone" rows="1" cols="10"></input></td></tr>
+                    
+                    <tr><td>Access Code</td><td> <input value="<?php echo $accessCode; ?>" type="number" onfocusout="isOnlyNumber(this,'Access Code')" required="" id="accessCode" name="accessCode" rows="1" cols="10"></input></td></tr>
+
                 </table>
 
                 <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
@@ -216,11 +214,11 @@ if(!isset($new_gp_address) || empty($new_gp_address)){
 <script type="text/javascript">
     function isOnlyCharacter(r,e){
         if(!isEmpty(r,e)){
-            if(r.value.length<2){
+            if(r.value.length<1){
                 if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
+                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 1 characters<br/>";
                 else
-                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
+                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 1 characters";
                 return false;
             }
             if(r.value.length>10){
@@ -342,7 +340,9 @@ if(!isset($new_gp_address) || empty($new_gp_address)){
         {
             isOkay =false;
         }
-
+        if(!ValidateEmail()){
+            isOkay = false;
+        }
 
         if(isOkay){
             document.getElementById("form").submit();
