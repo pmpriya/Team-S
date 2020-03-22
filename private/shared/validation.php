@@ -5,7 +5,7 @@
             if(strlen($var)<2){
                 return 2;
             }
-            if(strlen($var)>10){
+            if(strlen($var)>30){
                 return 3;
             }
             if (preg_match("/^([a-zA-Z]+\s)*[a-zA-Z]+$/",$var))
