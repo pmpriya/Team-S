@@ -29,7 +29,8 @@ if(is_post_request()) {
       echo "Incorrect username.";
     }
 
-  } else {
+  } 
+  else {
     echo "Please check your username and password.";
   }
     
