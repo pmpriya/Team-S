@@ -65,7 +65,7 @@
 				return $title." must have more than equal to 2 characters<br/>";
 				break;
 			case '3':
-				return $title." must have less than equal to 10 characters<br/>";
+				return $title." must have less than equal to 30 characters<br/>";
 				break;
 			case '4':
 				return $title." can only contain Characters<br/>";
