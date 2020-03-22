@@ -46,24 +46,24 @@
                     </tr>
                     <?php
                     while ($referrals = mysqli_fetch_assoc($referrals_set)) { ?>
-                        echo "<tr><td >" . $referrals["ID"] . "</td>
-                    <td>" . $referrals["patient_ID"] . "</td>
-                    <td>" . $referrals["consultant_ID"] . "</td>
-                    <td>" . $referrals["organisation_hospital_name"] . "</td>
-                    <td>" . $referrals["organisation_hospital_no"] . "</td>
-                    <td>" . $referrals["referring_name"] . "</td>
-                    <td>" . $referrals["bleep_number"] . "</td>
-                    <td>" . $referrals["is_patient_aware"] . "</td>
-                    <td>" . $referrals["is_interpreter_needed"] . "</td>
-                    <td>" . $referrals["interpreter_language"] . "</td>
-                    <td>" . $referrals["kch_doc_name"] . "</td>
-                    <td>" . $referrals["current_issue"] . "</td>
-                    <td>" . $referrals["history_of_present_complaint"] . "</td>
-                    <td>" . $referrals["family_history"] . "</td>
-                    <td>" . $referrals["current_feeds"] . "</td>
-                    <td>" . $referrals["medications"] . "</td>
-                    <td>" . $referrals["other_investigations"] . "</td>
-                    <td>" . $referrals["datetime"] . "</td>
+                        <tr><td > <?php echo h($referrals["ID"]); ?> </td>
+                    <td> <?php echo h($referrals["patient_ID"]); ?> </td>
+                    <td><?php echo h($referrals["consultant_ID"]); ?>  </td>
+                    <td><?php echo h($referrals["organisation_hospital_name"]); ?>  </td>
+                    <td><?php echo h($referrals["organisation_hospital_no"]); ?>  </td>
+                    <td><?php echo h($referrals["referring_name"] ); ?> </td>
+                    <td><?php echo h( $referrals["bleep_number"] ); ?></td>
+                    <td><?php echo h($referrals["is_patient_aware"] ); ?> </td>
+                    <td><?php echo h($referrals["is_interpreter_needed"] ); ?> </td>
+                    <td> <?php echo h($referrals["interpreter_language"] ); ?></td>
+                    <td><?php echo h($referrals["kch_doc_name"] ); ?> </td>
+                    <td> <?php echo h($referrals["current_issue"] ); ?></td>
+                    <td> <?php echo h($referrals["history_of_present_complaint"]); ?> </td>
+                    <td> <?php echo h($referrals["family_history"] ); ?></td>
+                    <td> <?php echo h($referrals["current_feeds"] ); ?></td>
+                    <td> <?php echo h($referrals["medications"] ); ?></td>
+                    <td> <?php echo h($referrals["other_investigations"] ); ?> </td>
+                    <td><?php echo h($referrals["datetime"] ); ?></td>
 
 
                 
@@ -77,3 +77,5 @@
     </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
+
+
