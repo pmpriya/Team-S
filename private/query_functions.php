@@ -26,9 +26,10 @@ function find_all_referrals(){
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
-  }
+
 
   function find_referrals_by_id($patient_ID){
+
     global $db;
   
     $sql = "SELECT * FROM Referral ";
@@ -48,7 +49,9 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     global $db;
   
     $sql = "INSERT INTO Patient ";
+
     $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone) ";
+
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
@@ -61,11 +64,15 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     $sql .= "'" . $mobile_phone . "', ";
     //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
+
     $sql .= "'" . $gp_number . "'";
+
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
+
       return true;
+
     } else {
       echo mysqli_error($db);
       db_disconnect($db);
@@ -105,28 +112,27 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     }
 }
 
-function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, 
-$bleep_number, $is_patient_aware, $is_interpreter_needed,  $interpreter_language, $kch_doc_name, $current_issue, 
-$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
+function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+                        $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
+                        $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
+
     global $db;
     
     $sql = "INSERT INTO Referral ";
-    $sql .= "(patient_ID, consultant_name, consultant_specialty, organisation_hospital_name, organisation_hospital_no, 
-    bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-    history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
+    $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, referring_name,
+             bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
+             history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
     $sql .= "VALUES (";
-    //$sql .= "'" . $ID . "', ";
     $sql .= "'" . $patient_ID . "', ";
     $sql .= "'" . $consultant_name . "', ";
-    $sql .= "'" . $consultant_specialty . "', ";
     $sql .= "'" . $organisation_hospital_name . "', ";
-    
+
     $sql .= "'" . $organisation_hospital_no . "', ";
+    $sql .= "'" . $referring_name . "', ";
     $sql .= "'" . $bleep_number . "', ";
     $sql .= "'" . $is_patient_aware . "', ";
     $sql .= "'" . $is_interpreter_needed . "', ";
     $sql .= "'" . $interpreter_language . "', ";
-    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $kch_doc_name . "', ";
     $sql .= "'" . $current_issue . "', ";
     $sql .= "'" . $history_of_present_complaint . "', ";
@@ -215,6 +221,7 @@ function edit_password($id, $new_password)
         confirm_result_set($result);
         return $result;
     }
+
     
     function delete_patient($userID)
     {
