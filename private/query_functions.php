@@ -39,10 +39,9 @@ function get_all_patientIds(){
   }
 
   function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
-  $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) {
-      
+ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) {
     global $db;
-  
+
     $sql = "INSERT INTO Patient ";
     $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address,
      gp_phone, accessCode, referring_doctor_name, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
@@ -51,12 +50,12 @@ function get_all_patientIds(){
     $sql .= "'" . $first_name . "', ";
     $sql .= "'" . $last_name . "', ";
     $sql .= "'" . $dob . "', ";
+    $sql .= "'" . $email . "', ";
     $sql .= "'" . $sex . "', ";
     $sql .= "'" . $home_address . "', ";
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
-    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
     $sql .= "'" . $gp_number . "', ";
     $sql .= "'" . $accessCode . "', ";
@@ -67,17 +66,16 @@ function get_all_patientIds(){
     $sql .= "'" . $reg_email . "'";
 
     $sql .= ")";
+    echo $sql;
     $result = mysqli_query($db, $sql);
     if($result) {
-
-      return true;
-
+        return $result;
     } else {
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
     }
-  }
+}
 
 function find_all_users() {
     global $db;
