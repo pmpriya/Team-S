@@ -62,11 +62,14 @@ function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_a
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
-    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
-
-    $sql .= "'" . $gp_number . "'";
-
+    $sql .= "'" . $gp_number . "', ";
+    $sql .= "'" . $accessCode . "', ";
+    $sql .= "'" . $ref_dr_name . "', ";
+    $sql .= "'" . $ref_hospital_name . "', ";
+    $sql .= "'" . $reg_surname . "', ";
+    $sql .= "'" . $reg_forename . "', ";
+    $sql .= "'" . $reg_email . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
