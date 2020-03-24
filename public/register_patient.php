@@ -5,7 +5,7 @@
 
 <?php
 if(is_post_request()) {
-  
+
     $first_name = $_POST["firstname"]; 
     $last_name = $_POST["lastname"]; 
     $dob = strtotime($_POST["dob"]);
