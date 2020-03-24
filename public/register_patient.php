@@ -165,12 +165,13 @@ $val = isOnlyNumber($mobile_phone);
         }
     
 
-    if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number=="")
+       if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
+            || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
+            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="")
 
-             echo '<label class="text-danger">Please fill in all required fields</label>';
-        
-    else{
-     
+            echo '<label class="text-danger">Please fill in all required fields</label>';
+   
+        else {
             $result = find_member_by_nhsno($nhs_number);
            
                 if(mysqli_num_rows($result) > 0) {
@@ -239,10 +240,11 @@ $val = isOnlyNumber($mobile_phone);
 
    <div class="field-column">
       <label>Email (@nhs.net)</label>
+    <h2> <div>Patient Details(Please complete all fields) </div></h2>
        <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
     </div>
    
-    <h2> <div>Patient Details(Please complete all fields) </div></h2>
+
 
 
       <label>Surname</label>
@@ -261,8 +263,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>NHS number</label>
-       <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"  required="" id="nhsnumber" name="nhsnumber" required>
-
+       <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"  required="" id="nhsnumber" name="nhsnumber" pattern="^\d{10}$" placeholder="Required" required>
     </div>
      <!-- date of birth -->
 
@@ -275,7 +276,7 @@ $val = isOnlyNumber($mobile_phone);
 
     <div class="field-column">
       <label>Full Name of Referring Doctor</label>
-       <input type="text" onfocusout="isOnlyCharacter(this,'Doctor Name')" id="refname" name="refname" placeholder="Required" required>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Doctor Name')" id="refname" name="refname" pattern="^[a-z ,.'-]+$" placeholder="Required" required>
     </div>
      
     <div class="field-column">
@@ -292,6 +293,15 @@ $val = isOnlyNumber($mobile_phone);
                
         </div>
  
+    <!-- email -->
+
+   
+  <div class="field-column">
+      <label>Email</label>
+       <input type="text" name="email" onfocusout="ValidateEmail()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
+    </div>
+
+
      <!-- home address -->
 
      <div class="field-column">
@@ -308,17 +318,12 @@ $val = isOnlyNumber($mobile_phone);
 
     </div>
 
-    <div class="field-column">
-      <label>Email</label>
-       <textarea name = "email" onfocusout="ValidateEmail()" id="email"> </textarea>
-
-    </div>
 
      <!-- Home telephone number -->
 
      <div class="field-column">
       <label>Home Phone Number</label>
-      <textarea type="number" onfocusout="isOnlyNumber(this,'Home Phone Number')" name="homenumber" id="homenumber"> </textarea>
+      <input type="number" name="homenumber" id="homenumber" placeholder="Required" onfocusout="isOnlyNumber(this,'Home Phone Number')" required>
 
     </div>
     
@@ -326,7 +331,8 @@ $val = isOnlyNumber($mobile_phone);
    
      <div class="field-column">
       <label>Mobile Phone Number</label>
-      <textarea type="number" onfocusout="isOnlyNumber(this,'Mobile Phone Number')" name="mobilenumber" id="mobilenumber" required> </textarea>
+
+      <input type="number" name="mobilenumber" id="mobilenumber" onfocusout="isOnlyNumber(this,'Mobile Phone Number')" placeholder="Required" required>
 
     </div>
 
@@ -342,8 +348,8 @@ $val = isOnlyNumber($mobile_phone);
      <!-- GP telephone number -->
 
      <div class="field-column">
-      <label>GP phone number</label> <textarea type="number" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" name="gpnumber"></textarea>
 
+      <label>GP phone number</label> <input type="number" name="gpnumber" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Required" required>
     </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->

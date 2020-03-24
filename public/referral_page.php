@@ -1,17 +1,19 @@
 <?php require_once('../private/initialise.php'); ?>
-<?php $page_title = 'Register patient'; ?>
-  <?php include(SHARED_PATH . '/validation.php'); ?>
+
+
+
+
+<?php $page_title = 'Referral Form'; ?>
 
 <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
-
+<?php include(SHARED_PATH . '/validation.php'); ?>
 <?php
-//$patient_ID = 2;
 if (isset($_GET['id'])){
   $patient_ID = intval($_GET['id']);
-  $user_set = find_user_by_id($patient_ID);
+  //$user_set = find_user_by_id($patient_ID);
 }
-else $patient_ID = 2;
+else $patient_ID = 15;
  $message = "";
         $isValid = true;
 if(is_post_request()){
@@ -102,29 +104,39 @@ if(!isset($datetime) || empty($datetime)){
      //  echo '<label class="text-danger">This is not a valid Kings College London email (@kcl.ac.uk domain)</label>';
   // } 
  // else {
+
+    if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
+    || $current_issue=="" || $history_of_present_complaint=="" 
+    || $family_history=="" || $current_feeds=="" || $medications=="" ){
+      
+      echo '<label class="text-danger">Please fill in all required fields</label>';
+
+    }
+
+else {
         if($isValid){
-           $result1 = insert_referral( $patient_ID ,$consultant_name, $consultant_speciality, $organisation_hospital_name, $organisation_hospital_no, 
-           $bleep_number, $is_patient_aware, $is_interpreter_needed, $kch_doc_name, $current_issue, 
-           $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $datetime);
-           $new_id = mysqli_insert_id($db);
-           redirect_to(url_for('referral_page.php?id=' . $new_id));
-         }else{
-          echo $message;
-         }
+            $result1 = insert_referral( $patient_ID ,$consultant_name, $consultant_speciality, $organisation_hospital_name, $organisation_hospital_no, 
+            $bleep_number, $is_patient_aware, $is_interpreter_needed, $kch_doc_name, $current_issue, 
+            $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $datetime);
+            $new_id = mysqli_insert_id($db);
+            redirect_to(url_for('referral_page.php?id=' . $new_id));
+        }else{
+        echo $message;
+      }
+      }
        }
+
+       
      //}
 ?>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Referral Form</title>
-        <!--<link rel="stylesheet" href="style.css">-->
-    </head>
+  <head>
+      <meta charset="utf-8">
+      <title>Referral Form</title>
+      <!--<link rel="stylesheet" href="style.css">-->
+  </head>
 <body>
-    <h1><b>REFERRAL FORM</b></h1>
-    
-<h3> <div>Patient Details(Please complete all fields) </div></h3>
-<h3><b><div> Referral is NOT accepted without filling ALL Fields in this page </div></b></h3>
+  <h1><b>REFERRAL FORM</b></h1>
 <br>
 <!--<form class = "form" action="contactform.php" method="post">  -->
     <!-- patient details form -->

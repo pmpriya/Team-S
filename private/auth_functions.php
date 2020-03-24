@@ -10,13 +10,6 @@
     return true;
   }
 
-  function log_out_member() {
-    unset($_SESSION['id']);
-    unset($_SESSION['userLevel']);
-    session_unset(); 
-    return true;
-  }
-
   function is_logged_in() {
     return isset($_SESSION['id']);
   }

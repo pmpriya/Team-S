@@ -15,33 +15,33 @@
         $isValid = true;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $username = $_POST['username'];
+            $username = $_POST['username'] ?? '';
             if(!isset($username) || empty($username)){
                 $isValid = false;
                 $message .= "Username can not be empty";
             }
-            $name = $_POST['name'];
+            $name = $_POST['name'] ?? '';
             $val = isOnlyCharacter($name);
             if($val!=1)
             {
                 $message .= getMessage($val,"Name");
                 $isValid = false;
             }
-            $surname = $_POST['surname'];
+            $surname = $_POST['surname'] ?? '';
             $val = isOnlyCharacter($surname);
             if($val!=1)
             {
                 $message .= getMessage($val,"Surname");
                 $isValid = false;
             }
-            $email = $_POST['email'];
+            $email = $_POST['email'] ?? '';
             $val = validateUserEmail($email);
             if($val!=1)
             {
                 $message .= getMessage($val,"Email");
                 $isValid = false;
             }
-            $password = $_POST['password'];
+            $password = $_POST['password'] ?? '';
             if(!isset($password) || empty($password)){
                 $isValid = false;
                 $message .= "Password can not be empty";
@@ -55,12 +55,10 @@
             }
             if(isValid){
 
-                add_user($username,$name,$surname,$email,$password, $userLevel);
+            add_user($username,$name,$surname,$email,password_hash($password, PASSWORD_DEFAULT), $userLevel);
                 header('Location: users.php');
                 exit;
             }
-
-            
         }
         ?>
 
