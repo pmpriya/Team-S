@@ -16,7 +16,7 @@ if(is_post_request()) {
     // User exists
     if($user) {
     
-      if(md5($password)===$user['password']) {
+      if(password_verify($password, $user['password'])) {
       
         log_in_user($user);
         redirect_to(url_for('patients.php'));
@@ -29,7 +29,8 @@ if(is_post_request()) {
       echo "Incorrect username.";
     }
 
-  } else {
+  } 
+  else {
     echo "Please check your username and password.";
   }
     
