@@ -74,6 +74,7 @@ $val = isOnlyNumber($mobile_phone);
             
     $sex = $_POST["gender"];
       if(!isset($sex) || empty($sex)){
+  
                 $isValid = false;
                 $message .= "sex must mark";
             }
@@ -240,8 +241,8 @@ $val = isOnlyNumber($mobile_phone);
 
    <div class="field-column">
       <label>Email (@nhs.net)</label>
+      <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
     <h2> <div>Patient Details(Please complete all fields) </div></h2>
-       <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
     </div>
    
 
