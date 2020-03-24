@@ -110,20 +110,19 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     }
 }
 
-function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no,
-                         $bleep_number, $is_patient_aware, $is_interpreter_needed,  $interpreter_language, $kch_doc_name, $current_issue,
-                         $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
+function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+                        $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
+                        $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) {
     global $db;
+
     $sql = "INSERT INTO Referral ";
-    $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, 
-    bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-    history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
+    $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, referring_name,
+             bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
+             history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
     $sql .= "VALUES (";
     $sql .= "'" . $patient_ID . "', ";
     $sql .= "'" . $consultant_name . "', ";
-    //$sql .= "'" . $consultant_specialty . "', ";
     $sql .= "'" . $organisation_hospital_name . "', ";
-
     $sql .= "'" . $organisation_hospital_no . "', ";
     $sql .= "'" . $referring_name . "', ";
     $sql .= "'" . $bleep_number . "', ";
@@ -139,7 +138,6 @@ function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $
     $sql .= "'" . $other_investigations . "'";
     // $sql .= "'" . $datetime . "'";
     $sql .= ")";
-    echo $sql;
     $result = mysqli_query($db, $sql);
     if($result) {
         return true;
