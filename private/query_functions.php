@@ -403,4 +403,5 @@ function find_all_patients() {
                 db_disconnect($db);
                 exit;
             }
+        }
 ?>
