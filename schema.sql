@@ -84,7 +84,8 @@ CREATE TABLE `Referral` (
   `family_history` mediumtext NOT NULL,
   `current_feeds` text,
   `medications` text,
-  `other_investigations` text
+  `other_investigations` text,
+  `urgent` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -179,9 +180,3 @@ ALTER TABLE `User`
 ALTER TABLE `Referral`
   ADD CONSTRAINT `Foreign Key(patient)` FOREIGN KEY (`patient_ID`) REFERENCES `Patient` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
-
---
--- Urgent referrals for table 'Referral'
---
-ALTER TABLE 'Referral'
-  ADD 'urgent' varchar(32) NOT NULL DEFAULT "Not urgent";
