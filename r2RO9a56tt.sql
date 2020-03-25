@@ -1,13 +1,35 @@
-DROP DATABASE project_main;
-CREATE DATABASE project_main;
-Use project_main;
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Mar 01, 2020 at 01:51 PM
+-- Server version: 8.0.13-4
+-- PHP Version: 7.2.24-0ubuntu0.18.04.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `r2RO9a56tt`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Investigations`
 --
 
 CREATE TABLE `Investigations` (
-  `id` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `patient_ID` int(11) NOT NULL,
   `date` date NOT NULL,
   `Bili T/D` tinytext NOT NULL,
@@ -97,21 +119,12 @@ CREATE TABLE `User` (
   `ID` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `userLevel` int(1) DEFAULT '1'
+  `username` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL,
-  `password` varchar(32) DEFAULT '',
-  `name` varchar(10) NOT NULL,
-  `surname` varchar(10) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `userLevel` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `Investigations`
@@ -155,7 +168,7 @@ ALTER TABLE `Investigations`
 -- AUTO_INCREMENT for table `Patient`
 --
 ALTER TABLE `Patient`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Referral`
@@ -180,8 +193,6 @@ ALTER TABLE `Referral`
   ADD CONSTRAINT `Foreign Key(patient)` FOREIGN KEY (`patient_ID`) REFERENCES `Patient` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
---
--- Urgent referrals for table 'Referral'
---
-ALTER TABLE 'Referral'
-  ADD 'urgent' varchar(32) NOT NULL DEFAULT "Not urgent";
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -8,36 +8,70 @@
  
   return $result;
 }
-function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode) {
+function get_all_patientIds(){
     global $db;
+  
+    $sql = "SELECT id FROM Patient ";
+    
+    $result = mysqli_query($db, $sql);
+    return $result;
+  }
 
+function find_all_referrals(){
+    global $db;
+  
+    $sql = "SELECT * FROM Referral ";
+    $sql .= "ORDER BY ID ASC";
+    
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_referrals_by_id($patient_ID){
+    global $db;
+  
+    $sql = "SELECT * FROM Referral ";
+    $sql .= "WHERE patient_ID ='" . db_escape($db, $patient_ID) . "' ";
+    $sql .= "ORDER BY date ASC";
+    echo $sql;
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $referral = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+
+    //returns empty
+    return $referral;
+  }
+
+function insert_member($nhs_number, $first_name, $last_name, $dob, $sex, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number) {
+    global $db;
+  
     $sql = "INSERT INTO Patient ";
-    $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone, accessCode) ";
+    $sql .= "(nhs_number, first_name, last_name, date_of_birth, sex, home_address, postcode, home_phone, mobile_phone, gp_address, gp_phone) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
     $sql .= "'" . $last_name . "', ";
     $sql .= "'" . $dob . "', ";
     $sql .= "'" . $sex . "', ";
-    $sql .= "'" . $email . "', ";
     $sql .= "'" . $home_address . "', ";
     $sql .= "'" . $postcode . "', ";
     $sql .= "'" . $home_phone . "', ";
     $sql .= "'" . $mobile_phone . "', ";
+    //$sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $gp_address . "', ";
-    $sql .= "'" . $gp_number . "',";
-    $sql .= "'" . $accessCode . "'";
+    $sql .= "'" . $gp_number . "'";
     $sql .= ")";
-    echo $sql;
     $result = mysqli_query($db, $sql);
     if($result) {
-        return true;
+      return true;
     } else {
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
     }
-}
+  }
 
 function find_all_users() {
     global $db;
@@ -155,105 +189,31 @@ function edit_password($id, $new_password)
             exit;
         }
     }
-
-
-
-function add_user($username,$name,$surname,$email,$password, $userLevel) {
-    global $db;
-    $MD5Pass = md5($password);
-    $sql = "INSERT INTO User VALUES (null, '$username','$MD5Pass','$name','$surname','$email', '$userLevel')";
-    $result = mysqli_query($db, $sql);
-    if($result) {
-        return true;
-        echo '<script>window.location.replace("users.php"); </script>';
-        header('users.php');
-    } else {
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
+    function add_user($username,$name,$surname,$email,$password, $userLevel) {
+        global $db;
+        $MD5Pass = md5($password);
+        $sql = "INSERT INTO User VALUES (null, '$username','$MD5Pass','$name','$surname','$email', '$userLevel')";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+            echo '<script>window.location.replace("users.php"); </script>';
+            header('users.php');
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+        
+        
     }
-
-
-}
-
-function find_all_patients() {
-    global $db;
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "ORDER BY id ASC";
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    return $result;
-}
-
-function find_patient_by_id($ID) {
-    global $db;
-
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE ID='" . $ID . "'";
-    $query = mysqli_query($db, "SELECT * FROM Patient WHERE id = '$ID'") or die(mysqli_error());
-
-
-    return $query;
-
-
-}
-function find_patient_by_nhsno($nhs_number) {
-    global $db;
-
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE nhs_number='" . $nhs_number . "' ";
-    $result = mysqli_query($db, $sql);
-
-    return $result;
-}
-
-
-function find_patient_by_email($email) {
-    global $db;
-
-    $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE email'" . $email . "' ";
-    $result = mysqli_query($db, $sql);
-
-    return $result;
-}
-function find_patient_by_nhsno_and_accesscode($nhsno, $accessCode) {
-    global $db;
-
-    $sql = "SELECT * FROM Patient";
-    $sql .= " WHERE nhs_number='" . $nhsno . "'";
-    $sql .= " AND accessCode='" . $accessCode . "'";
-    $result = mysqli_query($db, $sql);
-
-    return $result;
-
-
-}
-
-function find_all_referrals() {
-    global $db;
-    $sql = "SELECT * FROM Referral ";
-    $sql .= "ORDER BY id ASC";
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    return $result;
-}
-
-function delete_patient($userID)
-{
-    global $db;
-    $sql = "DELETE FROM Patient ";
-    $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
-    $sql .= "LIMIT 1";
-    $result = mysqli_query($db, $sql);
-    if ($result) {
-        return true;
-    } else {
-        // DELETE failed
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
-
+    
+    function find_all_patients() {
+        global $db;
+        $sql = "SELECT * FROM Patient ";
+        $sql .= "ORDER BY id ASC";
+        $result = mysqli_query($db, $sql);
+        confirm_result_set($result);
+        return $result;
     }
     
     function delete_patient($userID)
@@ -274,13 +234,12 @@ function delete_patient($userID)
     }
     
     
-    function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone)
-    {
+    function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone) {
         global $db;
         $sql = "UPDATE `Patient` SET `nhs_number`='$new_nhs_number',`first_name`='$new_first_name',`last_name`='$new_last_name',`date_of_birth`='$new_date_of_birth',`sex`='$new_sex',`home_address`='$new_home_address',`postcode`='$new_postcode',`home_phone`='$new_home_phone',`mobile_phone`='$new_mobile_phone',`gp_address`='$new_gp_address',`gp_phone`='$new_gp_phone' WHERE ID=$id";
         echo($sql);
         $result = mysqli_query($db, $sql);
-        if ($result) {
+        if($result) {
             return true;
             echo '<script>window.location.replace("patients.php"); </script>';
             header('users.php');
@@ -289,8 +248,8 @@ function delete_patient($userID)
             db_disconnect($db);
             exit;
         }
-
-    }
+        
+        
         
         
         
@@ -345,27 +304,6 @@ function delete_patient($userID)
         }
         
     }
-
+    ?>
     
-
-
-function access_investigation($ID) {
-    global $db;
-    $sql = "SELECT * FROM Investigations WHERE patient_ID='$ID'";
-    $result = mysqli_query($db, $sql);
-    return $result;
-}
-
-function access_referral($ID) {
-    global $db;
-    $sql = "SELECT * FROM Referral WHERE patient_ID='$ID'";
-    $result = mysqli_query($db, $sql);
-    return $result;
-}
-
-  ?>
-
-
-
-
-
+    

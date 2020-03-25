@@ -52,10 +52,10 @@ if(mysqli_num_rows($user_set)>=1){
         }
         elseif(mysqli_num_rows(access_investigation($patient_id))){
             echo 'You currently have an investigation in progress, use the link below to update the results.<br>';
-            echo '<b><a href=editInvestigation.php>Update Investigation</a></b>';
+            echo "<b><a href=InvestigationsShow.php?id=" . $patient_id . '>Update investigations</a></td></b>';
         }else{
             echo 'You currently have no cases in progress, use the link below to submit results for a review<br>';
-            echo '<b><a href=newInvestigation.php>Complete Referral</a></b>';
+            echo '<b><a href=newInvestigation.php>Start new investigation</a></b>';
         }
 
 

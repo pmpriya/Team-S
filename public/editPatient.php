@@ -1,10 +1,8 @@
 <?php require_once('../private/initialise.php'); ?>
+<?php $page_title = 'Edit patient'; ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
-<?php
-$page_title = 'KCL Paedriatic Liver Service';
 
-?>
 
 <?php
 if(isset($_GET['id'])){
@@ -26,12 +24,14 @@ if(mysqli_num_rows($user_set)>=1){
         $last_name = $row['last_name'];
         $date_of_birth = $row['date_of_birth'];
         $sex = $row['sex'];
+        $email = $row['email'];
         $home_address = $row['home_address'];
         $postcode = $row['postcode'];
         $home_phone = $row['home_phone'];
         $mobile_phone = $row['mobile_phone'];
         $gp_address = $row['gp_address'];
         $gp_phone = $row['gp_phone'];
+        $accessCode = $row['accessCode'];
 
 
 
@@ -46,13 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_last_name = $_POST['last_name'] ?? '';
     $new_date_of_birth = $_POST['date_of_birth'] ?? '';
     $new_sex = $_POST['sex'] ?? '';
+    $new_email = $_POST['email'] ?? '';
     $new_home_address = $_POST['home_address'] ?? '';
     $new_postcode = $_POST['postcode'] ?? '';
     $new_home_phone = $_POST['home_phone'] ?? '';
     $new_mobile_phone = $_POST['mobile_phone'] ?? '';
     $new_gp_address = $_POST['gp_address'] ?? '';
     $new_gp_phone = $_POST['gp_phone'] ?? '';
-    edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone);
+    $new_accessCode = $_POST['accessCode'] ?? '';
+    edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_email,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone, $new_accessCode);
     header('Location: patients.php');
     exit;
 }
@@ -73,12 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <tr><td>Last Name:</td><td> <textarea  name="last_name" rows="1" cols="10"><?php echo $last_name; ?></textarea></td></tr>
                     <tr><td>DOB:</td><td> <textarea  name="date_of_birth" rows="1" cols="10"><?php echo $date_of_birth; ?></textarea></td></tr>
                     <tr><td>Sex:</td><td> <textarea  name="sex" rows="1" cols="10"><?php echo $sex; ?></textarea></td></tr>
+                    <tr><td>E-mail:</td><td> <textarea  name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
                     <tr><td>Home address:</td><td> <textarea  name="home_address" rows="1" cols="10"><?php echo $home_address; ?></textarea></td></tr>
                     <tr><td>Postcode:</td><td> <textarea  name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
                     <tr><td>Home Phone:</td><td> <textarea  name="home_phone" rows="1" cols="10"><?php echo $home_phone; ?></textarea></td></tr>
                     <tr><td>Mobile Phone:</td><td> <textarea  name="mobile_phone" rows="1" cols="10"><?php echo $mobile_phone; ?></textarea></td></tr>
                     <tr><td>HP Address:</td><td> <textarea  name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
                     <tr><td>GP Phone:</td><td> <textarea  name="gp_phone" rows="1" cols="10"><?php echo $gp_phone; ?></textarea></td></tr>
+                    <tr><td>Access Code:</td><td> <textarea  name="accessCode" rows="1" cols="10"><?php echo $accessCode; ?></textarea></td></tr>
                 </table>
 
                 <button type="submit" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>

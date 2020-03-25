@@ -21,7 +21,7 @@
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
             $userLevel = $_POST['userLevel'] ?? '';
-            add_user($username,$name,$surname,$email,$password, $userLevel);
+            add_user($username,$name,$surname,$email,password_hash($password, PASSWORD_DEFAULT), $userLevel);
             header('Location: users.php');
             exit;
         }
