@@ -1,4 +1,4 @@
-<?php require_once ('../../private/initialise.php'); ?>
+<?php require_once ('../private/initialise.php'); ?>
 <?php
     $referrals_set = find_all_referrals();
     $patient_set = get_all_patientIds()
