@@ -498,4 +498,24 @@ function validate_investigation($investigation)
     //validate type of rest AST...
     return $errors;
 }
+
+function search_by_username($user_name) 
+{
+    global $db;
+    $sql = "SELECT * FROM User WHERE username LIKE '%".$user_name."%'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function search_by_nhs_no($nhs_no) 
+{
+    global $db;
+    $sql = "SELECT * FROM Patient WHERE nhs_number LIKE '%".$nhs_no."%'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
 ?>
