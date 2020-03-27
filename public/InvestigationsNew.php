@@ -489,16 +489,12 @@
 
 
         if(isOkay){
-            alert("all good");
+            //alert("all good");
             document.getElementById("form").submit();
             return true;
         }
 
-        // if(isOnlyCharacter(lastname,"Surname")&&isOnlyCharacter(firstname,"Forename")&&isOnlyNumber(nhsnumber,"NHS Number") &&!isEmpty(dob,"DOB")&&!isEmpty(address,"Home Address") &&!isEmpty(postcode,"Post Code") &&isOnlyNumber(homenumber,"Home Phone") &&isOnlyNumber(mobilenumber,"Mobile Phone") &&!isEmpty(gpaddress,"GP Address") &&isOnlyNumber(gpnumber,"GP Phone") ){
-        //     document.getElementById("form").submit();
-
-        //     return true;
-        // }
+      
         append = false;
         return false;
     }
