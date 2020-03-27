@@ -237,8 +237,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
          <input type="text" onfocusout="isOnlyCharacter(this,'Surname')" id="lastname2" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
         </div>
 
-    <!--  forename -->
-
     <div class="field-column">
       <label>Forename</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Forename')" id="firstname2" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
@@ -549,16 +547,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         if(isOkay){
-          alert("all good");
+          //alert("all good");
             document.getElementById("form").submit();
             return true;
         }
-
-        // if(isOnlyCharacter(lastname,"Surname")&&isOnlyCharacter(firstname,"Forename")&&isOnlyNumber(nhsnumber,"NHS Number") &&!isEmpty(dob,"DOB")&&!isEmpty(address,"Home Address") &&!isEmpty(postcode,"Post Code") &&isOnlyNumber(homenumber,"Home Phone") &&isOnlyNumber(mobilenumber,"Mobile Phone") &&!isEmpty(gpaddress,"GP Address") &&isOnlyNumber(gpnumber,"GP Phone") ){
-        //     document.getElementById("form").submit();
-
-        //     return true;
-        // }
         append = false;
         return false;
     }
