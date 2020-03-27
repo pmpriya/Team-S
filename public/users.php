@@ -11,7 +11,13 @@ if (isset($_GET["delete"])) {
     delete_user($var);
     header('Location: users.php');
 }
+
+if (isset($_POST['submitbtn'])) {
+    $q = $_POST['search'];
+    $user_set = search_by_username($q);
+}
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
 
             tr:nth-child(odd) {background-color: #f2f2f2;}
@@ -19,6 +25,38 @@ if (isset($_GET["delete"])) {
             table {
                 border-collapse: collapse;
                 width: 50%;
+            }
+
+            form.example input[type=text] {
+                padding: 10px;
+                font-size: 17px;
+                border: 1px solid grey;
+                float: left;
+                width: 80%;
+                background: #f1f1f1;
+            }
+
+            form.example button {
+                float: left;
+                width: 20%;
+                padding: 10px;
+                background: #333;
+                color: white;
+                font-size: 17px;
+                border: 1px solid grey;
+                border-left: none;
+                cursor: pointer;
+                height: 42px;
+            }
+
+            form.example button:hover {
+                background: black;
+            }
+
+            form.example::after {
+                content: "";
+                clear: both;
+                display: table;
             }
         </style>
 
@@ -30,6 +68,12 @@ if (isset($_GET["delete"])) {
         <center>
 
                 <h1>Staff</h1>
+                <form method="post" class="example" action="users.php" style="margin:auto;max-width:700px">
+                    <input type="text" name="search" placeholder="Enter Username to Search">
+                    <button name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <br>
+                <br>
                 <table>
                     <tr>
                         <th><b>Username</b></th>
