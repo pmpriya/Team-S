@@ -52,7 +52,10 @@
             {
                 $message .= getMessage($val,"UserLevel");
                 $isValid = false;
+
+    
             }
+           
             if(isValid){
 
             add_user($username,$name,$surname,$email,password_hash($password, PASSWORD_DEFAULT), $userLevel);
@@ -77,12 +80,14 @@
                                         <tr><td>Name:</td><td> <textarea name="name" minlength="2" maxlength="10" id="name" onfocusout="isOnlyCharacter(this,'Name')" required="" name="name" rows="1" cols="10"></textarea></td></tr>
                                         <tr><td>Surname:</td><td> <textarea name="surname" minlength="2" maxlength="10" id="surname" onfocusout="isOnlyCharacter(this,'Surname')" required=""  name="surname" rows="1" cols="10"></textarea></td></tr>
                                         <tr><td>Email:</td><td> <textarea required="" name="email" id="email" onfocusout="ValidateEmail()" name="email" rows="1" cols="10"></textarea></td></tr>
-                                        <tr><td>Password:</td><td> <textarea name="password" id="password" onfocusout="isEmpty(this,'Password')" minlength="2" maxlength="32" required="" name="password" rows="1" cols="10"></textarea></td></tr>
+                                        <tr><td>Password:</td><td> <input name="password" id="password" onfocusout="isEmpty(this,'Password')" type="password" minlength="2" maxlength="32" required="" name="password" rows="1" cols="10"></input></td></tr>
+                                        <tr><td>Confirm Password:</td><td> <input name="confirmpassword" id="confirmpassword" type="password" onfocusout="isEmpty(this,'Confirm Password')" minlength="2" maxlength="32" required="" name="confirmpassword" rows="1" cols="10"></input></td></tr>
                                         <tr><td>userLevel:</td><td> <input type="text" name="userLevel" id="userLevel" onfocusout="isOnlyNumber(this,'UserLevel')" required="" name="userLevel" rows="1" cols="10"></textarea></td></tr>
-
+ 
                                     </table>
-
+                             <br>
                                 <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
+                                </br>
                             </form>
                <br><br>
 
@@ -154,7 +159,9 @@
                 else
                     document.getElementById("alert_message").innerHTML = "";
                 return (true)
-            }else if (/^\w+([\.-]?\w+)*@[0-9a-zA-Z]+.nhs.uk$/.test(mail))
+            }
+            else 
+                if (/^\w+([\.-]?\w+)*@[0-9a-zA-Z]+.nhs.uk$/.test(mail))
             {
                 if(append)
                     document.getElementById("alert_message").innerHTML += "";
@@ -162,7 +169,7 @@
                     document.getElementById("alert_message").innerHTML = "";
                 return (true)
             }
-            if(append)
+                if(append)
                 document.getElementById("alert_message").innerHTML += "Invalid Email<br/>";
             else
                 document.getElementById("alert_message").innerHTML = "Invalid Email";
@@ -191,6 +198,8 @@
         }
         return false;
     }
+
+    
 </script>
 <script type="text/javascript">
     function validateForm(){
@@ -201,9 +210,20 @@
         var surname = document.getElementById("surname");
         var email = document.getElementById("email");
         var password = document.getElementById("password");
+        var confirm_password = document.getElementById("confirmpassword");
         var userLevel = document.getElementById("userLevel");
+        
+        var isOkay = true; 
+        
+        if(password.value != confirm_password.value) {
+            document.getElementById("alert_message").innerHTML = " Passwords don't match";
+            isOkay=false;
+         } 
+       
 
-        var isOkay = true;
+        //password.onchange = validatePassword;
+        //confirm_password.onkeyup = validatePassword;
+
         if(isEmpty(username,"Username")){
             isOkay = false;
         }
@@ -222,6 +242,10 @@
         if(!isOnlyNumber(userLevel,"userLevel")){
             isOkay = false;
         }
+        if (isEmpty(confirm_password,"Confirm Password")) { 
+                   
+                    isOkay = false; 
+                } 
        
         if(isOkay){
             
