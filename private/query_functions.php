@@ -14,7 +14,7 @@ function get_all_patientIds()
     global $db;
     $sql = "SELECT id FROM Patient ";
     $result = mysqli_query($db, $sql);
-    return result;
+    return $result;
 }
 
 function find_referrals_by_id($patient_ID)
