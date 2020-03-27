@@ -180,15 +180,16 @@ $val = isOnlyNumber($mobile_phone);
                        echo $mes;
                  } 
                 else {
-                    /*
+                    
                   $result2 = find_patient_by_email($email);
                                 
                    if(mysqli_num_rows($result2) > 0) {
                      
                        $mes = '<label class="text-danger">Email Already Exits</label>';
                        echo $mes;
+                   }  
 
-                    else { */
+                    else { 
                       
                         if($isValid){
                           
@@ -205,7 +206,7 @@ $val = isOnlyNumber($mobile_phone);
                }
       
        }
-
+    }
 
 ?>
     <html>
@@ -240,14 +241,14 @@ $val = isOnlyNumber($mobile_phone);
     </div>
 
    <div class="field-column">
-      <label>Email (@nhs.net)</label>
+      <label>Email (@nhs.net)</label> </div>
       <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
-    <h2> <div>Patient Details(Please complete all fields) </div></h2>
-    </div>
+
+   </div>
    
+    <h2> <div>Patient Details(Please complete all fields) </div></h2>
 
-
-
+    <div class="field-column">
       <label>Surname</label>
          <input type="text"  onfocusout="isOnlyCharacter(this,'Surname')" id="lastname" name="lastname" placeholder="Required" required>
         </div>
@@ -256,7 +257,7 @@ $val = isOnlyNumber($mobile_phone);
 
     <div class="field-column">
       <label>Forename</label>
-       <input type="text"  onfocusout="isOnlyCharacter(this,'Forename')" id="firstname" name="firstname" required>
+       <input type="text"  onfocusout="isOnlyCharacter(this,'Forename')" id="firstname" name="firstname" placeholder="Required"  required>
 
     </div>
 
@@ -264,7 +265,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>NHS number</label>
-       <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"  required="" id="nhsnumber" name="nhsnumber" pattern="^\d{10}$" placeholder="Required" required>
+       <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"   id="nhsnumber" name="nhsnumber" pattern="^\d{10}$" placeholder="Required" required>
     </div>
      <!-- date of birth -->
 
@@ -307,7 +308,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>Home address</label>
-     <textarea name = "address" onfocusout="isEmpty(this,'Home address')" id="address"> </textarea>
+     <textarea name = "address" onfocusout="isEmpty(this,'Home address')" placeholder="Required" id="address" required> </textarea>
 
     </div>
 
@@ -315,7 +316,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>Postcode</label>
-      <textarea name = "postcode" onfocusout="isOnlyNumber(this,'Postcode')"  id="postcode"> </textarea>
+      <textarea name = "postcode" onfocusout="isOnlyNumber(this,'Postcode')" placeholder="Required"  id="postcode"  required> </textarea>
 
     </div>
 
@@ -341,7 +342,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>GP address</label>
-       <textarea name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"> </textarea>
+       <textarea name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"  placeholder="Required" required> </textarea>
 
     </div>
 
