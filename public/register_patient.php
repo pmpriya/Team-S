@@ -594,9 +594,9 @@ $val = isOnlyNumber($mobile_phone);
 function isNHS(r,e) {
     if(r.value.length !== 10 && r.value.length !== 0){
             if(append)
-                document.getElementById("alert_message").innerHTML += e+" must have only 10 digits</br>";
+                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
             else
-                document.getElementById("alert_message").innerHTML =e+" must have only 10 digits";
+                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
             return true;
        }
 }
