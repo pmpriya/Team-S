@@ -507,7 +507,7 @@ $val = isOnlyNumber($mobile_phone);
         if(!isOnlyCharacter(firstname,"Forename")){
             isOkay = false;
         }
-        if(!isOnlyNumber(nhsnumber,"NHS Number")){
+        if(!isOnlyNumber(nhsnumber,"NHS Number") || isNHS(nhsnumber, "NHS number")){
             isOkay = false;
         }
         if(isEmpty(dob,"DOB")){
@@ -590,3 +590,14 @@ $val = isOnlyNumber($mobile_phone);
         
     }
 </script>
+  <script type="text/javascript">
+function isNHS(r,e) {
+    if(r.value.length !== 10 && r.value.length !== 0){
+            if(append)
+                document.getElementById("alert_message").innerHTML += e+" must have only 10 digits</br>";
+            else
+                document.getElementById("alert_message").innerHTML =e+" must have only 10 digits";
+            return true;
+       }
+}
+</script> 
