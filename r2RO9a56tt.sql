@@ -51,7 +51,8 @@ CREATE TABLE `Investigations` (
   `Fibrinogen` tinytext NOT NULL,
   `Cortisol` tinytext NOT NULL,
   `Urea` tinytext NOT NULL,
-  `Creatinine` tinytext NOT NULL
+  `Creatinine` tinytext NOT NULL,
+  `Urgent` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

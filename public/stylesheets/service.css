@@ -210,7 +210,6 @@
    width: 33.3%;
  }
 
- 
  #gender {
    display: inline-block;
    float: left;
@@ -224,3 +223,7 @@
  
  .checkbox-container input[type="checkbox"]{display:inline-block; width: 15px; vertical-align: top;}
  .checkbox-container label{display: inline-block; width: 200px; word-break: keep-all; }
+
+ol{
+  background-color: white;
+} 

@@ -8,8 +8,9 @@ if (isset($_GET['id'])){
   $patient_ID = intval($_GET['id']);
   //$user_set = find_user_by_id($patient_ID);
 }
-else 
+else {
 $patient_ID = 15;
+}
 if(is_post_request()){
   $consultant_name = $_POST["consultant_name"]; 
   $organisation_hospital_name  = $_POST["organisation_hospital_name"];
@@ -26,19 +27,11 @@ if(is_post_request()){
   $current_feeds =  $_POST["current_feeds"];
   $medications = $_POST["medications"];
   $other_investigations = $_POST["other_investigations"];
-  if ($_POST["hasAbnormalClotting"]=="urgent" || $_POST["hasConjugatedJaundice"]=="urgent" 
-    || $_POST["hasPaleStools"]=="urgent" || $_POST["hasAcuteHepatitisPlus"]=="urgent" || $_POST["hasParacetamolOD"]=="urgent" ){
-  $urgent = "urgent";
-  }
-  else{
-    $urgent = "Not urgent";
-  }
 
   
      if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
           || $current_issue=="" || $history_of_present_complaint=="" 
           || $family_history=="" || $current_feeds=="" || $medications=="" ){
-            
             echo '<label class="text-danger">Please fill in all required fields</label>';
 
           }
@@ -46,7 +39,7 @@ if(is_post_request()){
       else {
                     $result1 = insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $urgent);
+                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations);
                     
        
                   redirect_to(url_for('patients.php'));
@@ -114,28 +107,6 @@ if(is_post_request()){
     <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
      <input type="text" name="kch_doc_name" placeholder="Optional">
   </div>
-
-    <!-- Asking for indication of urgent symptoms -->
-    <div class="field-column">
-      <label>Does the patient have any of the following symptoms?</label>
-
-      <!-- The checkboxes for urgent symptoms-->
-        <div class="checkbox-container">    
-          <input type = "checkbox" name = "hasAbnormalClotting" value = "urgent" ><label> Abnormal clotting</label>
-        </div>
-        <div class="checkbox-container">
-          <input type = "checkbox" name = "hasConjugatedJaundice" value = "urgent" > <label> Conjugated jaundice</label>
-        </div>
-        <div class="checkbox-container">
-          <input type = "checkbox" name = "hasPaleStools" value = "urgent" > <label> Pale stools</label>
-        </div>
-        <div class="checkbox-container">
-          <input type = "checkbox" name = "hasAcuteHepatitisPlus" value = "urgent" > <label> Acute hepatitis with elevated transaminase levels and jaundice</label>
-        </div>
-        <div class="checkbox-container">
-          <input type = "checkbox" name = "hasParacetamolOD" > <label> Paracetamol overdose</label>
-        </div>
-      </div>
       
    <!-- Current Issue -->
 

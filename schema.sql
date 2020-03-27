@@ -29,7 +29,8 @@ CREATE TABLE `Investigations` (
   `Fibrinogen` tinytext NOT NULL,
   `Cortisol` tinytext NOT NULL,
   `Urea` tinytext NOT NULL,
-  `Creatinine` tinytext NOT NULL
+  `Creatinine` tinytext NOT NULL,
+  `Urgent` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -85,7 +86,7 @@ CREATE TABLE `Referral` (
   `current_feeds` text,
   `medications` text,
   `other_investigations` text,
-  `urgent` varchar(32) NOT NULL
+  `urgent` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -179,4 +180,11 @@ ALTER TABLE `User`
 --
 ALTER TABLE `Referral`
   ADD CONSTRAINT `Foreign Key(patient)` FOREIGN KEY (`patient_ID`) REFERENCES `Patient` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+--
+-- Constraints for table `Referral`
+--
+ALTER TABLE `Referral`
+  ADD CONSTRAINT `Foreign Key(investigation)` FOREIGN KEY (`urgent`) REFERENCES `Investigations` (`Urgent`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
