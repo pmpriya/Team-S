@@ -10,7 +10,7 @@
         $isValid = true;
         
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $first_name = $_POST["firstname"];
+     $first_name = $_POST["firstname"];
     
      $val = isOnlyCharacter($first_name);
             if($val!=1)
@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     $home_phone = $_POST["homenumber"];
     
-$val = isOnlyNumber($home_phone);
+    $val = isOnlyNumber($home_phone);
             if($val!=1)
             {
                 $message .= getMessage($val,"Home Phone");
@@ -50,7 +50,7 @@ $val = isOnlyNumber($home_phone);
 
 
     $mobile_phone = $_POST["mobilenumber"];
-$val = isOnlyNumber($mobile_phone);
+    $val = isOnlyNumber($mobile_phone);
             if($val!=1)
             {
                 $message .= getMessage($val,"Mobile Number");
@@ -195,8 +195,11 @@ $val = isOnlyNumber($mobile_phone);
                           
                           $result1 = insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
                           $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email);
-                            
-                            redirect_to(url_for('patients.php'));
+
+                          $new_id = mysqli_insert_id($db);
+
+                          redirect_to(url_for('InvestigationsNew.php?patient_ID=' . $new_id));
+                           
                         }
                         else {
                             echo $message;
@@ -308,7 +311,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>Home address</label>
-     <textarea name = "address" onfocusout="isEmpty(this,'Home address')" placeholder="Required" id="address" required> </textarea>
+     <input name = "address" onfocusout="isEmpty(this,'Home address')" placeholder="Required" id="address" required> </input>
 
     </div>
 
@@ -316,7 +319,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>Postcode</label>
-      <textarea name = "postcode" onfocusout="isOnlyNumber(this,'Postcode')" placeholder="Required"  id="postcode"  required> </textarea>
+      <input name = "postcode"  id="postcode" onfocusout="isOnlyNumber(this,'Postcode')" placeholder="Required"    required> </input>
 
     </div>
 
@@ -342,7 +345,7 @@ $val = isOnlyNumber($mobile_phone);
 
      <div class="field-column">
       <label>GP address</label>
-       <textarea name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"  placeholder="Required" required> </textarea>
+       <input name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"  placeholder="Required" required> </input>
 
     </div>
 
