@@ -111,13 +111,13 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
 
 function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
 $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) 
+$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $urgent) 
 {
     global $db;
     $sql = "INSERT INTO Referral ";
     $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, referring_name,
              bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-             history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
+             history_of_present_complaint, family_history, current_feeds, medications, other_investigations, Urgent) ";
     $sql .= "VALUES (";
     $sql .= "'" . $patient_ID . "', ";
     $sql .= "'" . $consultant_name . "', ";
@@ -134,7 +134,8 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
     $sql .= "'" . $family_history . "', ";
     $sql .= "'" . $current_feeds . "', ";
     $sql .= "'" . $medications . "', ";
-    $sql .= "'" . $other_investigations . "'";
+    $sql .= "'" . $other_investigations . "', ";
+    $sql .= "'" . $urgent . "'";
     // $sql .= "'" . $datetime . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
@@ -260,7 +261,7 @@ function find_all_referrals()
 {
     global $db;
     $sql = "SELECT * FROM Referral ";
-    $sql .= "ORDER BY id ASC";
+    $sql .= "ORDER BY Urgent desc, id asc";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
@@ -379,14 +380,14 @@ function delete_referral($referralID)
 }
         
 
-function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine)
+function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent)
 {
     global $db;
     // $errors = validate_investigation($investigation);
     // if(!empty($errors)){
     //   return $errors;
     // }
-    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine')";
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Urgent) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Urgent')";
     //remove spaces
     $result = mysqli_query($db, $sql);
     if($result) 
@@ -402,10 +403,10 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
     }
 }
     
-function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine) 
+function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent) 
 {
     global $db;
-    $sql = "UPDATE Investigations SET date='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine' WHERE id=$id";
+    $sql = "UPDATE Investigations SET `date`='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine',Urgent='$new_Urgent' WHERE id=$id";
     $result = mysqli_query($db, $sql);
     if($result) 
     {
@@ -474,6 +475,14 @@ function find_investigations_by_patientid($patient_ID)
     return $result;
 }
 
+function find_urgent_investigations_by_patientid($patient_ID)
+{
+    global $db;
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "WHERE patient_id='" . $patient_ID . "' AND Urgent='Y'";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
 function find_investigation_dates_of_id($patient_ID)
 {
     global $db;
@@ -517,5 +526,15 @@ function search_by_nhs_no($nhs_no)
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
+}
+
+function check_investigation_urgent($investigation_ID){
+    global $db;
+    $sql = "SELECT Urgent FROM Investigations WHERE id = $investigation_ID";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $row = mysqli_fetch_array($result);
+    if ($row[0] =="Y"){return true;}
+    else{return false;}
 }
 ?>

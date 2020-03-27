@@ -42,6 +42,7 @@
                         <th><b>medications</b></th>
                         <th><b>other_investigations</b></th>
                         <th><b>datetime</b></th>
+                        <th><b>Urgent (Y/N)</b></th>
 
                         <th colspan="4"><b>Manage</b></th>
                     </tr>
@@ -67,7 +68,7 @@
                     <td> <?php echo h($referrals["medications"] ); ?></td>
                     <td> <?php echo h($referrals["other_investigations"] ); ?> </td>
                     <td><?php echo h($referrals["datetime"] ); ?></td>
-
+                    <td><?php echo h($referrals["Urgent"] ); ?></td>
 
                 
                    <?php } ?>

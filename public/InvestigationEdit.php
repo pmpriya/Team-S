@@ -45,6 +45,7 @@ if(mysqli_num_rows($investigation_set)>=1){
         $Cortisol = $row['Cortisol'];
         $Urea = $row['Urea'];
         $Creatinine = $row['Creatinine'];
+        $is_urgent = check_investigation_urgent(intval($_GET['id']));
 
 
 
@@ -75,8 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_Cortisol = $_POST['Cortisol'] ?? '';
     $new_Urea = $_POST['Urea'] ?? '';
     $new_Creatinine = $_POST['Creatinine'] ?? '';
+    ($_POST['hasSymptoms'] == "Y") ? $new_Urgent = "Y": $new_Urgent = "N";
 
-    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine);
+    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent);
     header('Location: patients.php');
     exit;
 }
@@ -175,12 +177,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                             <dt> Creatinine </dt>
                                                                                             <dd> <input type="text" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
                                                                                             </dl>
+                                                                                        
+                                                                                                                                                                                
+                                                                                            <!-- Asking for indication of urgent symptoms -->
+                                                                                            <div class="field-column">
+                                                                                            <label>Does the patient have any of the following symptoms?</label>
+                                                                                            
+                                                                                            
+                                                                                            
+                                                                                                <ol> - Abnormal clotting  </ol> <br>
+                                                                                                <ol> - Conjugated jaundice  </ol> <br>
+                                                                                                <ol> - Pale stools  </ol> <br>
+                                                                                                <ol> - Acute hepatitis with elevated transaminase levels and jaundice </ol> <br>
+                                                                                                <ol> - Paracetamol overdose  </ol> <br>
+                                                                                            
+                                                                                            
+                                                                                            <!-- The checkboxes for urgent symptoms-->
+                                                                                                <div class="checkbox-container">
+                                                                                                <input type = "checkbox" name = "hasSymptoms" value="Y" <?php if ($is_urgent) {echo "checked";}?> > <label> Yes </label>
+                                                                                                </div>
+                                                                                            </div>
                                                                                             <div id="operations">
                                                                                                 <input type="submit" value="Edit Investigation"/>
                                                                                             </div>
-        </form>
-        <?php echo"<a href=?delete=" . $investigation_id . " onclick=\"return confirm('Are you sure that you want to delete this investigation?');\">Delete</a></td>" ?>
-        <br><br>
-
+                                                                                                </form>
+                                                                                                <?php echo"<a href=?delete=" . $investigation_id . " onclick=\"return confirm('Are you sure that you want to delete this investigation?');\">Delete</a></td>" ?>
+                                                                                                <br><br>
+        
     </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>

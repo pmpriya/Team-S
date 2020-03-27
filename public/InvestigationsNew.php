@@ -175,8 +175,9 @@
                 $message += getMessage($val,"Creatinine");
                 $isValid = false;
             }
-
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine);
+        
+        $Urgent = $_POST['hasSymptoms'] ?? 'N';
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     
@@ -337,7 +338,7 @@
       
       <!-- The checkboxes for urgent symptoms-->
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasSymptoms" value="Yes"> <label> Yes</label>
+          <input type = "checkbox" name = "hasSymptoms" value="Y"> <label> Yes</label>
         </div>
     </div>
 

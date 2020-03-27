@@ -27,7 +27,8 @@ if(is_post_request()){
   $current_feeds =  $_POST["current_feeds"];
   $medications = $_POST["medications"];
   $other_investigations = $_POST["other_investigations"];
-
+  if( mysqli_num_rows( find_urgent_investigations_by_patientid($patient_ID) ) > 0 ){$urgent = "Y";}
+  else{ $urgent = "N";};
   
      if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
           || $current_issue=="" || $history_of_present_complaint=="" 
@@ -39,7 +40,7 @@ if(is_post_request()){
       else {
                     $result1 = insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations);
+                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $urgent);
                     
        
                   redirect_to(url_for('patients.php'));
@@ -55,7 +56,7 @@ if(is_post_request()){
       <!--<link rel="stylesheet" href="style.css">-->
   </head>
 <body>
-  <h1><b>REFERRAL FORM</b></h1>
+  <h1><b>REFERRAL FORM </b></h1>
 <br>
 
 <form action="<?php echo url_for("/referral_page.php"); ?>" method="post">
