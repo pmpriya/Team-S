@@ -9,12 +9,12 @@ function find_member_by_nhsno($nhs_number)
     return $result;
 }
 
-function get_all_patientIds()
+function get_all_patients()
 {
     global $db;
-    $sql = "SELECT id FROM Patient ";
+    $sql = "SELECT * FROM Patient ";
     $result = mysqli_query($db, $sql);
-    return result;
+    return $result;
 }
 
 function find_referrals_by_id($patient_ID)
@@ -444,7 +444,7 @@ function find_all_investigations()
     $sql .= "ORDER BY patient_ID ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
-    return result;
+    return $result;
 }
 
 function find_investigations_by_id($id) 
