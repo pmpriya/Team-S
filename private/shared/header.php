@@ -1,5 +1,5 @@
 <?php
-  if(!isset($page_title)) { $page_title = 'Paediatric liver service KCL'; }
+  if(!isset($page_title)) { $page_title = 'Paediatric liver service KCL';}
 ?>
 <!doctype html>
 
@@ -16,17 +16,46 @@
     <ul>
       <li><a href="<?php echo url_for('/index.php'); ?>">MAIN</a></li>
       
-      <li><a href="<?php echo url_for('/register_patient.php'); ?>">REGISTER PATIENT</a></li> 
-     
-        <li><a href="<?php echo url_for('/users.php'); ?>">STAFF</a></li>
-       
-        <li><a href="<?php echo url_for('/patients.php'); ?>">PATIENTS</a></li>
+      <li><a href="<?php echo url_for('/register_patient.php'); ?>">REGISTER PATIENT</a></li>
 
-        <li><a href="<?php echo url_for('/register_member.php'); ?>">REFERRALS </a></li>
-        <li><a href="<?php echo url_for('/external_access.php'); ?>">STATUS</a></li>
-        <li><a href="<?php echo url_for('/user_login.php'); ?>">LOG IN</a></li>
+       <?php
+       if (isset($_SESSION['userLevel'])) {
+           if($_SESSION['userLevel'] > 2)
+           echo '<li><a href=users.php>STAFF</a></li>';
+       }
+        ?>
 
-        <li><a href="<?php echo url_for('/user_logout.php'); ?>">LOG OUT</a></li>
+        <?php
+        if (isset($_SESSION['userLevel'])) {
+            if($_SESSION['userLevel'] > 0)
+                echo '<li><a href=patients.php>PATIENTS</a></li>';
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['userLevel'])) {
+            if($_SESSION['userLevel'] > 0)
+                echo '<li><a href=referral_list.php>REFERRALS</a></li>';
+        }
+        ?>
+
+        <?php
+        if (!isset($_SESSION['userLevel'])) {
+                echo '<li><a href=user_login.php>STAFF LOGIN</a></li>';
+        }
+        ?>
+
+        <?php
+        if (!isset($_SESSION['userLevel'])) {
+            echo '<li><a href=external_access.php>REFEREE LOGIN</a></li>';
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['userLevel']) || isset($_SESSION['nhs_no'])) {
+                echo '<li><a href=user_logout.php>LOGOUT</a></li>';
+        }
+        ?>
 
 
     </ul>

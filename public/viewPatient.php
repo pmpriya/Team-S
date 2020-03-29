@@ -4,6 +4,11 @@
 <?php
 $page_title = 'KCL Paedriatic Liver Service';
 
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
+
 ?>
 
 <?php

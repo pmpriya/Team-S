@@ -12,6 +12,11 @@ if (isset($_GET["delete"])) {
     header('Location: users.php');
 }
 
+if ($_SESSION['userLevel'] < 2) {
+    redirect_to('index.php');
+
+}
+
 if (isset($_POST['submitbtn'])) {
     $q = $_POST['search'];
     $user_set = search_by_username($q);

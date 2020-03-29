@@ -5,8 +5,11 @@
   <?php include(SHARED_PATH . '/validation.php'); ?>
 
 
-
 <?php
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $user_set = find_patient_by_id($_GET['id']);

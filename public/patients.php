@@ -11,6 +11,9 @@ if (isset($_GET["delete"])) {
     delete_patient($var);
     header('Location: patients.php');
 }
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+}
 
 if (isset($_POST['submitbtn'])) {
     $q = $_POST['search'];

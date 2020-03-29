@@ -2,6 +2,11 @@
 <?php
      $referrals_set = find_all_referrals();
      $user_set = find_all_patients();
+
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
 ?> 
 <php $page_title = 'Referrals'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
