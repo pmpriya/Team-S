@@ -21,15 +21,11 @@ function find_referrals_by_id($patient_ID)
 {
     global $db;  
     $sql = "SELECT * FROM Referral ";
-    $sql .= "WHERE patient_ID ='" . db_escape($db, $patient_ID) . "' ";
+    $sql .= "WHERE patient_ID ='" . $patient_ID . "' ";
     $sql .= "ORDER BY date ASC";
-    echo $sql;
     $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    $referral = mysqli_fetch_assoc($result);
-    mysqli_free_result($result);
-    //returns empty
-    return $referral;
+ 
+    return $result;
 }
 
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
