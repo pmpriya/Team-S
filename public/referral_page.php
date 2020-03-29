@@ -1,4 +1,6 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php 
+session_start();
+require_once('../private/initialise.php'); ?>
 <?php $page_title = 'Referral Form'; ?>
 <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
@@ -49,10 +51,11 @@ if(is_post_request()){
       
 
 ?>
+
 <html>
   <head>
       <meta charset="utf-8">
-      <title>Referral Form</title>
+      <title>Referral Form <?php echo $_GET['id'];?></title>
       <!--<link rel="stylesheet" href="style.css">-->
   </head>
 <body>
@@ -133,7 +136,7 @@ if(is_post_request()){
    <!-- Current Feeds -->
  
    <div class="field-column">
-    <label>Current Feeds</label>
+    <label>Current Feeds </label>
     <input type="textarea" name="current_feeds"  placeholder="Required" required>
   </div>
 

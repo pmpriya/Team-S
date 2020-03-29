@@ -48,7 +48,7 @@
                     </tr>
                     <?php
                     while ($referrals = mysqli_fetch_assoc($referrals_set)) { ?>
-                        <tr>
+                    
                     <td ><?php echo h($referrals["urgent"]); ?></td>
                     <td ><?php echo h($referrals["ID"]); ?> </td>
                     <td><?php echo h($referrals["patient_ID"]); ?> </td>
