@@ -29,9 +29,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $isValid = false;
             }
     
-    $dob = strtotime($_POST["dob"]);
+    $date_of_birth = strtotime($_POST["dob"]);
     
-    if(!isset($dob) || empty($dob)){
+    if(!isset($date_of_birth) || empty($date_of_birth)){
                 $isValid = false;
                 $message .= "Date Of birth can not be empty";
             }
