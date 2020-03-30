@@ -20,6 +20,8 @@ if (isset($_POST['submitbtn'])) {
                     <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
    </form>
+   <br>
+   <br>
     <table class= "list">
         <th> Name </th>
         <th> NHS number </th>

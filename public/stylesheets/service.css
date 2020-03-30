@@ -20,18 +20,18 @@
   display: table;
 }
 
- #searchbutton{
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #333;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-    height: 42px;
- }
+#searchbutton{
+  float: left;
+  width: 10%;
+  padding: 10px;
+  background: #333;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  height: 42px;
+}
 
  #searchbutton:hover {
   background: black;
@@ -225,20 +225,21 @@
 
 table{
   border-collapse: collapse;
+  margin: 0;
 }
- 
+table.center { margin-left:auto; margin-right:auto; }
  th, td {
    border-collapse: collapse;
    border: 1px solid black;
    text-align: center;
-   padding: 15px;
+   padding: 9px;
    background-color: white;
  }
  
  th {
    background-color: rgb(92, 92, 92);
    color: white;
-   width: 33.3%;
+   width: 20%;
  }
 
  
