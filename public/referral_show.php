@@ -1,9 +1,8 @@
 <?php ?>
-<?php require_once ('../../private/initialise.php'); ?>
-<?php include('../../private/shared/header.php'); ?>
+<?php require_once ('../private/initialise.php'); ?>
+<?php include('../private/shared/header.php'); ?>
 <?php 
-    $patient_ID = $_GET['patient_ID']?? '1';
-    echo $patient_ID;
+    $patient_ID = $_GET['id'] ?? '1';
     $referral = find_referrals_by_id($patient_ID);
 ?> 
 
