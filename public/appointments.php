@@ -44,7 +44,7 @@ if (isset($_GET["delete"])) {
                     <td>" . $appointment["patient_id"] . "</td>
                     <td>" . $appointment["date"] . "</td>
                     <td>" . $appointment["time"] . "</td>
-                <td><a href=#>Edit</a></td>
+               
                 <td><a href=?delete=" . $appointment["id"] . " onclick=\"return confirm('Are you sure that you want to delete this Appointment?');\">Delete</a></td></tr>";
                     } ?>
 
