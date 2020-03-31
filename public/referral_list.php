@@ -22,6 +22,7 @@ if (isset($_POST['submitbtn'])) {
    </form>
    <br>
    <br>
+   <center>
     <table class= "list">
         <th> Name </th>
         <th> NHS number </th>
@@ -40,7 +41,7 @@ if (isset($_POST['submitbtn'])) {
             </tr> 
         <?php } ?>
     </table>
-    
+    </center>
         <?php mysqli_free_result($patient_set); ?> 
 
     </div>
