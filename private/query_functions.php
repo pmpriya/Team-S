@@ -519,7 +519,7 @@ function search_by_username($user_name)
 function search_by_nhs_no($nhs_no) 
 {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE nhs_number LIKE '%".$nhs_no."%'";
+    $sql = "SELECT * FROM Patient WHERE date_of_birth LIKE '%".$nhs_no."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
