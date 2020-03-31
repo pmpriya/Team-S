@@ -14,7 +14,7 @@ if (isset($_GET["delete"])) {
 
 if (isset($_POST['submitbtn'])) {
     $q = $_POST['search'];
-    $user_set = search_by_nhs_no($q);
+    $users_set = search_by_nhs_no($q);
     //echo $user_set;
 }
 

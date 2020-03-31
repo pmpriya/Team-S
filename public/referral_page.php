@@ -5,14 +5,14 @@
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
 <?php
-if (isset($_GET['id'])){
-  $patient_ID = intval($_GET['id']);
-  $user_set = find_user_by_id($patient_ID);
-}
-else 
-$patient_ID = 15;
-$message = "";
-$isValid = true;
+
+  $patient_ID = $_GET['id']?? '1';
+  $patient = find_patient_by_id($patient_ID);
+  $patient_values = mysqli_fetch_assoc($patient);
+
+?>
+<?php
+
 if(is_post_request()){
 
   $consultant_name = $_POST["consultant_name"]; 
@@ -119,12 +119,11 @@ if(is_post_request()){
   $date = strtotime($_POST["date"]);
   $date = date('Y-m-d', $date);
     
-  if(!isset($dob) || empty($dob)){
+  if(!isset($date) || empty($date)){
               $isValid = false;
-              $message .= "Date Of birth can not be empty";
+              $message .= "Date can not be empty";
           }
 
-  $dob = date('Y-m-d', $dob);
   
       if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
           || $current_issue=="" || $history_of_present_complaint=="" 
@@ -156,7 +155,7 @@ if(is_post_request()){
       <!--<link rel="stylesheet" href="style.css">-->
   </head>
 <body>
-  <h1><b>REFERRAL FORM</b></h1>
+  <h1><b>REFERRAL FORM for <?php echo $patient_values["first_name"] . " ". $patient_values["last_name"];?> </b></h1>
 <br>
 <span id="alert_message" style="color:red"></span>
 <form action="<?php echo url_for("/referral_page.php"); ?>" method="post" id="form">
