@@ -31,7 +31,7 @@ if (isset($_POST['submitbtn'])) {
 
                 <h1>Patients</h1>
                 <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Date of Birth to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
