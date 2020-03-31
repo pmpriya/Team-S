@@ -516,10 +516,10 @@ function search_by_username($user_name)
     return $result;
 }
 
-function search_by_nhs_no($nhs_no) 
+function search_by_dob($date_of_birth) 
 {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE date_of_birth LIKE '%".$nhs_no."%'";
+    $sql = "SELECT * FROM Patient WHERE date_of_birth LIKE '%".$date_of_birth."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
