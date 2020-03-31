@@ -22,6 +22,8 @@
        
         <li><a href="<?php echo url_for('/patients.php'); ?>">PATIENTS</a></li>
 
+      <li><a href="<?php echo url_for('/appointments.php'); ?>">Appointments</a></li>
+      
         <li><a href="<?php echo url_for('/referral_list.php'); ?>">REFERRALS </a></li>
         <li><a href="<?php echo url_for('/external_access.php'); ?>">STATUS</a></li>
         <li><a href="<?php echo url_for('/user_login.php'); ?>">LOG IN</a></li>
