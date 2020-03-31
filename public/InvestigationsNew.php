@@ -176,7 +176,15 @@
                 $isValid = false;
             }
         
-        $Urgent = $_POST['hasSymptoms'] ?? 'N';
+        $hasAbnormalCLotting = $_POST['hasAbnormalCLotting'] ?? 'N';
+        $hasConjugatedJaundice = $_POST['hasConjugatedJaundice'] ?? 'N';
+        $hasPStools = $_POST['hasPStools'] ?? 'N';
+        $hasAcuteHepPlus = $_POST['hasAcuteHepPlus'] ?? 'N';
+        $hasParacetamolOD = $_POST['hasParacetamolOD'] ?? 'N';
+        if($hasAbnormalCLotting=="Y" || $hasConjugatedJaundice=="Y" || $hasPStools=="Y" || $hasAcuteHepPlus=="Y" || $hasParacetamolOD=="Y"){
+            $Urgent = "Y";
+        }
+        else{ $Urgent = "N";}
         $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
@@ -327,18 +335,21 @@
     <div class="field-column">
       <label>Does the patient have any of the following symptoms?</label>
       
-      
-      
-        <ol> - Abnormal clotting  </ol> <br>
-        <ol> - Conjugated jaundice  </ol> <br>
-        <ol> - Pale stools  </ol> <br>
-        <ol> - Acute hepatitis with elevated transaminase levels and jaundice </ol> <br>
-        <ol> - Paracetamol overdose  </ol> <br>
-      
-      
       <!-- The checkboxes for urgent symptoms-->
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasSymptoms" value="Y"> <label> Yes</label>
+          <input type = "checkbox" name = "hasAbnormalCLotting" value="Y"> <label> Abnormal clotting</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasConjugatedJaundice" value="Y"> <label> Conjugated jaundice</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasPStools" value="Y"> <label> Pale stools </label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasAcuteHepPlus" value="Y"> <label> Acute hepatitis with elevated transaminase levels and jaundice</label>
+        </div>
+        <div class="checkbox-container">
+          <input type = "checkbox" name = "hasParacetamolOD" value="Y"> <label> Paracetamol overdose</label>
         </div>
     </div>
 
