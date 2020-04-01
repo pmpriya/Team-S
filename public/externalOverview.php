@@ -41,6 +41,9 @@ if(mysqli_num_rows($user_set)>=1){
 
     <center>
         <h1>Current status</h1>
+        <?php echo $_SESSION['nhsno'];
+        echo $_SESSION['accessCode']
+        ?>
         You're currently viewing status of the referral for <?php echo $first_name ?> <?php echo $last_name ?>.<br>
         <td><b><a href=editPatient.php>Update Patient's details</a></b></td><br><br>
         <?php

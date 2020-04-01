@@ -1,6 +1,25 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php
+
+     $referrals_set = find_all_referrals();
+     $user_set = find_all_patients();
+
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
     $patient_set = get_all_patients();
+?> 
+<php $page_title = 'Referrals'; ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+
+<!-- // settype($var, 'integer');
+// $var = $_GET["delete"] ?? '';
+// if (isset($_GET["delete"])) {
+//     delete_patient($var);
+//     header('Location: patients.php');
+// } -->
+
 ?>
 <?php $page_title = 'Referrals';  ?>
 <?php include (SHARED_PATH. '/header.php'); ?> 

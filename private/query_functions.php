@@ -321,7 +321,6 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
 {
     global $db;
     $sql = "UPDATE `Patient` SET `nhs_number`='$new_nhs_number',`first_name`='$new_first_name',`last_name`='$new_last_name',`date_of_birth`='$new_date_of_birth',`sex`='$new_sex',`email`='$new_email',`home_address`='$new_home_address',`postcode`='$new_postcode',`home_phone`='$new_home_phone',`mobile_phone`='$new_mobile_phone',`gp_address`='$new_gp_address',`gp_phone`='$new_gp_phone',`accessCode`='$new_accessCode' WHERE ID=$id";
-    echo($sql);
     $result = mysqli_query($db, $sql);
     if ($result) 
     {

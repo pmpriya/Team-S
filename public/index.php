@@ -9,6 +9,7 @@
         <br>
 
         <img src="images/kcl.jpg" alt="Logo" id="logo">
+        <?php echo $_SESSION['userLevel'];?>
     </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>

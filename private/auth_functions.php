@@ -6,7 +6,7 @@
     session_start();
     session_regenerate_id();
     $_SESSION['id'] = $user['id'];
-    $_SESSION['accesslevel'] = $user['userLevel'];
+    $_SESSION['userLevel'] = $user['userLevel'];
     return true;
   }
 
