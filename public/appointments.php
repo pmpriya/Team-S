@@ -37,16 +37,19 @@ if (isset($_POST['submitbtn'])) {
 
         <center>
 
+
+        <h1>Appointments</h1>
+
+           
             <form method="post" class="example" id="searchbar" action="appointments.php" style="margin:auto;max-width:700px">
                     <input type="text" name="search" id="searchinput" placeholder="Enter Date to Search (yyyy-mm-dd)">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>  
-            
-                <h1>Appointments</h1>
+            <br>
                 <table>
                     <tr>
                         <th><b>ID</b></th>
-                        <th><b>Patient ID</b></th>
+                        <th><b>Patient Name</b></th>
                         <th><b>Date</b></th>
                         <th><b>Time</b></th>
                         <th colspan="3"><b>Manage</b></th>
@@ -54,7 +57,7 @@ if (isset($_POST['submitbtn'])) {
                     <?php
                     while ($appointment = mysqli_fetch_assoc($appointment_set)) {
                         echo "<tr><td >" . $appointment["id"] . "</td>
-                    <td>" . $appointment["patient_id"] . "</td>
+                        <td>" . $appointment["first_name"].' '.$appointment["last_name"]. "</td>
                     <td>" . $appointment["date"] . "</td>
                     <td>" . $appointment["time"] . "</td>
                
