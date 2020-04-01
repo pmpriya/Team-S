@@ -11,7 +11,15 @@ if (isset($_GET["delete"])) {
     delete_appointment($var);
     header('Location: appointments.php');
 }
+if (isset($_POST['submitbtn'])) {
+    $q = $_POST['search'];
+    $appointment_set = search_by_date($q);
+    
+}       
+        
 ?>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">      
+        
         <style>
 
             tr:nth-child(odd) {background-color: #f2f2f2;}
@@ -29,6 +37,11 @@ if (isset($_GET["delete"])) {
 
         <center>
 
+            <form method="post" class="example" id="searchbar" action="appointments.php" style="margin:auto;max-width:700px">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Date to Search (yyyy-mm-dd)">
+                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
+                </form>  
+            
                 <h1>Appointments</h1>
                 <table>
                     <tr>
