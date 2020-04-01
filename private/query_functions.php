@@ -594,6 +594,17 @@ function insert_appointment_member($data) {
         db_disconnect($db);
         exit;
     }
+ 
+}
+
+function search_by_date($date) 
+{
+    global $db;
+    $sql = "SELECT * FROM appointments WHERE date LIKE '%".$date."%'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
 }
 
 ?>
