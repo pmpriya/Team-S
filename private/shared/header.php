@@ -18,12 +18,15 @@
       
       <li><a href="<?php echo url_for('/register_patient.php'); ?>">REGISTER PATIENT</a></li>
 
+
        <?php
        if (isset($_SESSION['userLevel'])) {
            if($_SESSION['userLevel'] > 2)
            echo '<li><a href=users.php>STAFF</a></li>';
        }
         ?>
+
+      <li><a href="<?php echo url_for('/appointments.php'); ?>">APPOINTMENTS</a></li>
 
         <?php
         if (isset($_SESSION['userLevel'])) {

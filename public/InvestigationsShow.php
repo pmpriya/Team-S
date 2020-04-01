@@ -16,7 +16,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1> Investigations overview for <?php echo $patient["first_name"] ?> <?php echo $patient["last_name"] ?> </h1>
+    <h1> Investigations overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 

@@ -9,27 +9,33 @@ function find_member_by_nhsno($nhs_number)
     return $result;
 }
 
-function get_all_patientIds()
+function find_referral_by_id($id){
+
+    global $db;
+    $sql = "SELECT * FROM Referral ";
+    $sql .="WHERE ID='" . $id . "' ";
+    $result = mysqli_query($db, $sql);
+    return $result;
+} 
+
+function get_all_patients()
 {
     global $db;
-    $sql = "SELECT id FROM Patient ";
+    $sql = "SELECT * FROM Patient ";
     $result = mysqli_query($db, $sql);
-    return result;
+    return $result;
 }
 
 function find_referrals_by_id($patient_ID)
 {
     global $db;  
     $sql = "SELECT * FROM Referral ";
-    $sql .= "WHERE patient_ID ='" . db_escape($db, $patient_ID) . "' ";
-    $sql .= "ORDER BY date ASC";
-    echo $sql;
+    $sql .= "WHERE patient_ID ='" . $patient_ID . "'";
+  
     $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    $referral = mysqli_fetch_assoc($result);
-    mysqli_free_result($result);
-    //returns empty
-    return $referral;
+ 
+    return $result;
+   
 }
 
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
@@ -109,18 +115,19 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     }
 }
 
-function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
 $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations) 
+$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date) 
 {
     global $db;
     $sql = "INSERT INTO Referral ";
-    $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, referring_name,
+    $sql .= "(patient_ID, consultant_name,consultant_specialty, organisation_hospital_name, organisation_hospital_no, referring_name,
              bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-             history_of_present_complaint, family_history, current_feeds, medications, other_investigations) ";
+             history_of_present_complaint, family_history, current_feeds, medications, other_investigations,date) ";
     $sql .= "VALUES (";
     $sql .= "'" . $patient_ID . "', ";
     $sql .= "'" . $consultant_name . "', ";
+    $sql .= "'" . $consultant_specialty . "', ";
     $sql .= "'" . $organisation_hospital_name . "', ";
     $sql .= "'" . $organisation_hospital_no . "', ";
     $sql .= "'" . $referring_name . "', ";
@@ -134,8 +141,8 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
     $sql .= "'" . $family_history . "', ";
     $sql .= "'" . $current_feeds . "', ";
     $sql .= "'" . $medications . "', ";
-    $sql .= "'" . $other_investigations . "'";
-    // $sql .= "'" . $datetime . "'";
+    $sql .= "'" . $other_investigations . "', ";
+    $sql .= "'" . $date . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -443,7 +450,7 @@ function find_all_investigations()
     $sql .= "ORDER BY patient_ID ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
-    return result;
+    return $result;
 }
 
 function find_investigations_by_id($id) 
@@ -508,13 +515,95 @@ function search_by_username($user_name)
     return $result;
 }
 
-function search_by_nhs_no($nhs_no) 
+function search_by_dob($date_of_birth) 
 {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE nhs_number LIKE '%".$nhs_no."%'";
+    $sql = "SELECT * FROM Patient WHERE date_of_birth LIKE '%".$date_of_birth."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
 }
+
+function find_all_appointments() {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function delete_appointment($id)
+{
+    global $db;
+    $sql = "DELETE FROM appointments ";
+    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if ($result) {
+        return true;
+    } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+function get_time_slots($date) {
+    global $db;
+    $sql = "SELECT * FROM `appointments` ";
+    $sql .= "where `date` = '".db_escape($db, $date)."'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+
+    $appointments =    mysqli_fetch_all($result);
+
+    $times = [];
+    for ($i=1; $i <= 7; $i++) { 
+        $add = true;
+        foreach($appointments as $appointment){
+             if(strtotime($i.":00") == strtotime($appointment[3])){
+                $add = false;    
+            } 
+        }
+        if($add){
+            $times[] = $i.':00';
+        }
+     }
+     return $times;
+}
+
+function insert_appointment_member($data) {
+    global $db;
+
+    $sql = "INSERT INTO appointments ";
+    $sql .= "(patient_id, date, time) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . db_escape($db, $data['patient_id']) . "', ";
+    $sql .= "'" . db_escape($db, $data['date']) . "', ";
+    $sql .= "'" . db_escape($db, $data['time']) . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+    } else {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+ 
+}
+
+function search_by_date($date) 
+{
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id` WHERE `appointments`.`date` LIKE '%".$date."%'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
 ?>

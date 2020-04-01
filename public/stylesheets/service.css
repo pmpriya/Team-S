@@ -1,4 +1,3 @@
-
 .public {
   margin: auto;
   background-color:white;
@@ -14,9 +13,38 @@
    margin-right: auto;
    width: 50%
  }
+
+ #searchbar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#searchbutton{
+  float: left;
+  width: 10%;
+  padding: 10px;
+  background: #333;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  height: 42px;
+}
+
+ #searchbutton:hover {
+  background: black;
+}
  
- 
- 
+#searchinput {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
  
  ul {
    display: flex;
@@ -107,7 +135,7 @@
  body{
    margin: 0px;
    background-color: white;
-   color: #D0D0D0;
+   color: rgb(117, 117, 117);
    font-family: "Trebuchet MS", Helvetica, sans-serif;
    position: relative;
    min-height: 100%;
@@ -195,20 +223,23 @@
    padding-bottom: 20px;
  }
 
-
- 
+table{
+  border-collapse: collapse;
+  margin: 0;
+}
+table.center { margin-left:auto; margin-right:auto; }
  th, td {
    border-collapse: collapse;
    border: 1px solid black;
    text-align: center;
-   padding: 15px;
+   padding: 9px;
    background-color: white;
  }
  
  th {
-   background-color: #333;
+   background-color: rgb(92, 92, 92);
    color: white;
-   width: 33.3%;
+   width: 20%;
  }
 
  
@@ -222,4 +253,3 @@
  #genderOption {
    padding-left: 40px;
  }
- 

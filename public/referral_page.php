@@ -16,6 +16,9 @@ $isValid = true;
 if(is_post_request()){
 
   $consultant_name = $_POST["consultant_name"]; 
+
+  $consultant_specialty=$_POST["consultant_specialty"];
+
   $val = isOnlyCharacter($consultant_name);
   if($val!=1)
   {
@@ -113,10 +116,19 @@ if(is_post_request()){
     $isValid = false;
     $message .= "Other Investigations can not be empty";
   }
+  $date = strtotime($_POST["date"]);
+  $date = date('Y-m-d', $date);
+    
+  if(!isset($dob) || empty($dob)){
+              $isValid = false;
+              $message .= "Date Of birth can not be empty";
+          }
+
+  $dob = date('Y-m-d', $dob);
   
       if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
           || $current_issue=="" || $history_of_present_complaint=="" 
-          || $family_history=="" || $current_feeds=="" || $medications=="" ){
+          || $family_history=="" || $current_feeds=="" || $medications=="" || $date==""){
             
             echo '<label class="text-danger">Please fill in all required fields</label>';
 
@@ -125,9 +137,9 @@ if(is_post_request()){
       else  {
                 if($isValid)
                 {
-                    $result1 = insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+                    $result1 = insert_referral($patient_ID, $consultant_name,$consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations);
+                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
                     redirect_to(url_for('patients.php'));
                 }
                 else 
@@ -154,6 +166,10 @@ if(is_post_request()){
         <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Name')" name="consultant_name" id="consultant_name" placeholder="Required" required>
     </div>
 
+    <div class="field-column">
+    <label>Consultant Specialty </label>
+        <input type="text" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
+    </div>
   <!--  Organisation Hospital Name -->
 
   <div class="field-column">
@@ -185,7 +201,7 @@ if(is_post_request()){
    <!-- Is the patient aware of the referral -->
 
    <div class="field-column">
-    <label>Is the patient aware of this referral?</label>
+    <label>Are parents aware of this referral?</label>
      <input id="aware" type="radio" name="is_patient_aware" value="y" checked><label id="awareOption">Yes</label>
      <input id="aware" type="radio" name="is_patient_aware" value="n" ><label id="awareOption">No</label>
   </div>
@@ -206,6 +222,12 @@ if(is_post_request()){
     <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
      <input type="text" onfocusout="isOnlyCharacter(this,'Doctor's Name)" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
   </div>
+
+  <div class="field-column">
+      <label>Date of referral</label>
+       <input type = "date"   id="date" name = "date" required>
+
+    </div>
    <!-- Current Issue -->
 
    <div class="field-column">
