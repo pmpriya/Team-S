@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
     $investigation_set = find_investigations_by_id($investigation_id);
 }
 elseif(isset($_SESSION['nhsno'])){
-    //$user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
+    $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
 
 }
 else{
