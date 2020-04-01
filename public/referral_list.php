@@ -7,7 +7,7 @@
 <?php
 if (isset($_POST['submitbtn'])) {
     $data = $_POST['search'];
-    $user_set = search_by_nhs_no($data);
+    $patient_set = search_by_dob($data);
    
 }
 
@@ -17,7 +17,7 @@ if (isset($_POST['submitbtn'])) {
     <div class= "Referrals listing">
     <h1> Referrals  </h1>
     <form method="post" class="example" id="searchbar" action="referral_list.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Date of Birth to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
    </form>
    <br>
