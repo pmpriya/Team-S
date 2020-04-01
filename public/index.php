@@ -8,7 +8,7 @@
         <title>KCL Paedriatic Liver Service</title>
         <br>
 
-        <img src="images/kcl.jpg" alt="Logo" id="logo">
+        <img src="images/nhs.png" alt="Logo" id="logo">
     </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
