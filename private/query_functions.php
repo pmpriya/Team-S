@@ -528,7 +528,7 @@ function search_by_dob($date_of_birth)
 
 function find_all_appointments() {
     global $db;
-    $sql = "SELECT * FROM appointments ";
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -600,7 +600,7 @@ function insert_appointment_member($data) {
 function search_by_date($date) 
 {
     global $db;
-    $sql = "SELECT * FROM appointments WHERE date LIKE '%".$date."%'";
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id` WHERE `appointments`.`date` LIKE '%".$date."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
