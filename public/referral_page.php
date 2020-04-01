@@ -16,16 +16,21 @@
 if(is_post_request()){
 
   $consultant_name = $_POST["consultant_name"]; 
-
-  $consultant_specialty=$_POST["consultant_specialty"];
-
   $val = isOnlyCharacter($consultant_name);
   if($val!=1)
   {
     $message .= getMessage($val,"Consultant Name");
     $isValid = false;
   }
-
+  
+  $consultant_specialty=$_POST["consultant_specialty"];
+  $val = isOnlyCharacter($consultant_specialty);
+  if($val!=1)
+  {
+    $message .= getMessage($val,"Consultant Specialty");
+    $isValid = false;
+  }
+  
   $organisation_hospital_name  = $_POST["organisation_hospital_name"];
   $val = isOnlyCharacter($organisation_hospital_name);
   if($val!=1)
@@ -58,22 +63,8 @@ if(is_post_request()){
 
   $is_patient_aware  = $_POST["is_patient_aware"];
   $is_interpreter_needed  = $_POST["is_interpreter_needed"];
-
   $interpreter_language = $_POST["interpreter_language"];
-  $val = isOnlyCharacter($interpreter_language);
-  if($val!=1)
-  {
-    $message .= getMessage($val,"Interpreter Language");
-    $isValid = false;
-  }
-
   $kch_doc_name =  $_POST["kch_doc_name"];
-  $val = isOnlyCharacter($kch_doc_name);
-  if($val!=1)
-  {
-    $message .= getMessage($val,"Doctor's Name");
-    $isValid = false;
-  }
 
   $current_issue = $_POST["current_issue"];
   if(!isset($current_issue) || empty($current_issue))
@@ -157,7 +148,9 @@ if(is_post_request()){
 <body>
   <h1><b>REFERRAL FORM for <?php echo $patient_values["first_name"] . " ". $patient_values["last_name"];?> </b></h1>
 <br>
+<center>
 <span id="alert_message" style="color:red"></span>
+</center>
 <form action="<?php echo url_for("/referral_page.php"); ?>" method="post" id="form">
  <!-- Consultant Name -->
     <div class="field-column">
@@ -167,7 +160,7 @@ if(is_post_request()){
 
     <div class="field-column">
     <label>Consultant Specialty </label>
-        <input type="text" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
+        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Specialty')" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
     </div>
   <!--  Organisation Hospital Name -->
 
@@ -214,12 +207,12 @@ if(is_post_request()){
     <!-- Interpreter language -->         
   <div class="field-column">
     <label>Interpreter language(To be left empty if no interpreter is needed)</label>
-     <input type="text" onfocusout="isOnlyCharacter(this,'Interpreter Language)" name="interpreter_language" id="interpreter_language" placeholder="Optional">
+     <input type="text" name="interpreter_language" id="interpreter_language" placeholder="Optional">
   </div>
     <!-- KCH DOC NAME -->
   <div class="field-column">
     <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
-     <input type="text" onfocusout="isOnlyCharacter(this,'Doctor's Name)" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
+     <input type="text" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
   </div>
 
   <div class="field-column">
@@ -313,11 +306,11 @@ if(is_post_request()){
           document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
         return false;
       }
-      if(r.value.length>10){
+      if(r.value.length>30){
         if(append)
-          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
+          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 30 characters<br/>";
         else
-          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
+          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 30 characters";
         return false;
       }
       if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
@@ -362,6 +355,7 @@ if(is_post_request()){
     document.getElementById("alert_message").innerHTML ="";
     append = true;
     var consultantName = document.getElementById("consultant_name");
+    var consultantSpec = document.getElementById("consultant_specialty");
     var orgName = document.getElementById("organisation_hospital_name");
     var orgNumber = document.getElementById("organisation_hospital_no");
     var refName = document.getElementById("referring_name");
@@ -379,6 +373,9 @@ if(is_post_request()){
     if(!isOnlyCharacter(consultantName,"Consultant Name")){
       isOkay = false;
     }
+    if(!isOnlyCharacter(consultantSpec,"Consultant Specialty")){
+      isOkay = false;
+    }
     if(!isOnlyCharacter(orgName,"Organisation Name")){
       isOkay = false;
     }
@@ -389,12 +386,6 @@ if(is_post_request()){
       isOkay = false;
     }
     if(!isOnlyNumber(bleepNumber,"Bleep Number")){
-      isOkay = false;
-    }
-    if(!isOnlyCharacter(interLang,"Interpreter Language")){
-      isOkay = false;
-    }
-    if(!isOnlyCharacter(kchDoctor,"Doctor's Name")){
       isOkay = false;
     }
     if(isEmpty(currentIssue,"Current Issue")){
