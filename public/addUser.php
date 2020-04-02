@@ -61,7 +61,7 @@
            
             if(isValid){
 
-            add_user($username,$name,$surname,$email,password_hash($password, PASSWORD_DEFAULT), $userLevel);
+            add_user($username,$name,$surname,$email,$password, $userLevel);
                 header('Location: users.php');
                 exit;
             }
