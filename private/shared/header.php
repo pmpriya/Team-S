@@ -26,7 +26,12 @@
        }
         ?>
 
-      <li><a href="<?php echo url_for('/appointments.php'); ?>">APPOINTMENTS</a></li>
+        <?php
+        if (isset($_SESSION['userLevel'])) {
+            if($_SESSION['userLevel'] > 0)
+                echo '<li><a href=appointments.php>APPOINTMENTS</a></li>';
+        }
+        ?>
 
         <?php
         if (isset($_SESSION['userLevel'])) {
