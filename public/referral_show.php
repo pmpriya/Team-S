@@ -46,7 +46,9 @@
         <?php } ?>
     </table>
 
-
+    <center>       
+             <br><br><a class="action" href= "<?php echo url_for('referral_page.php?id=' . $patient_ID); ?>"> Add Referral </a>
+    </center>
 
 
 
