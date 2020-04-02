@@ -20,9 +20,6 @@ if ($_SESSION['userLevel'] < 1) {
 //     header('Location: patients.php');
 // } -->
 
-?>
-<?php $page_title = 'Referrals';  ?>
-<?php include (SHARED_PATH. '/header.php'); ?> 
 <?php
 if (isset($_POST['submitbtn'])) {
     $data = $_POST['search'];
