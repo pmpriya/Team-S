@@ -117,7 +117,7 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
 
 function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
 $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date) 
+$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $date) 
 {
     global $db;
     $sql = "INSERT INTO Referral ";

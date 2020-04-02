@@ -6,7 +6,7 @@
 
 <?php
 
-  $patient_ID = $_GET['id']?? '1';
+  $patient_ID = $_GET['patient_id'];
   $patient = find_patient_by_id($patient_ID);
   $patient_values = mysqli_fetch_assoc($patient);
 
@@ -14,7 +14,7 @@
 <?php
 
 if(is_post_request()){
-
+$isValid = true;
   $consultant_name = $_POST["consultant_name"]; 
   $val = isOnlyCharacter($consultant_name);
   if($val!=1)
@@ -114,11 +114,14 @@ if(is_post_request()){
               $isValid = false;
               $message .= "Date can not be empty";
           }
+        
+ 
 
   
-      if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
+      if ($consultant_name=="" || $consultant_specialty=="" || $organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
           || $current_issue=="" || $history_of_present_complaint=="" 
-          || $family_history=="" || $current_feeds=="" || $medications=="" || $date==""){
+          || $family_history=="" || $current_feeds=="" || $medications=="" || $date=="")
+          {
             
             echo '<label class="text-danger">Please fill in all required fields</label>';
 
@@ -127,10 +130,10 @@ if(is_post_request()){
       else  {
                 if($isValid)
                 {
-                    $result1 = insert_referral($patient_ID, $consultant_name,$consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+                    $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
                     $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
-                    redirect_to(url_for('patients.php'));
+                    header('Location: referral_show.php?id=' . $patient_ID);
                 }
                 else 
                 {
