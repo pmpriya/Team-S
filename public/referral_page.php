@@ -6,7 +6,7 @@
 
 <?php
 
-  $patient_ID = $_GET['id'];
+  $patient_ID = $_GET["id"];
   $patient = find_patient_by_id($patient_ID);
   $patient_values = mysqli_fetch_assoc($patient);
 
@@ -154,7 +154,7 @@ $isValid = true;
 <center>
 <span id="alert_message" style="color:red"></span>
 </center>
-<form action="<?php echo url_for("/referral_page.php"); ?>" method="post" id="form">
+<form action="<?php echo url_for("/referral_page.php?id=" . $patient_ID); ?>" method="post" id="form">
  <!-- Consultant Name -->
     <div class="field-column">
     <label>Consultant Name </label>
