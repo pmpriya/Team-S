@@ -333,7 +333,7 @@ function find_all_patients()
 {
     global $db;
     $sql = "SELECT * FROM Patient ";
-    $sql .= "ORDER BY id ASC";
+    $sql .= "ORDER BY last_name ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
