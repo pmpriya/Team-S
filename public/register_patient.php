@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $message .= "Date Of birth can not be empty";
             }
 
-    $dob = date('Y-m-d', $dob);
+    $dob = date('Y-m-d', $date_of_birth);
         
     $home_phone = $_POST["homenumber"];
     
