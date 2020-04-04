@@ -44,6 +44,7 @@
         if (isset($_SESSION['userLevel'])) {
             if($_SESSION['userLevel'] > 0)
                 echo '<li><a href=referral_list.php>REFERRALS</a></li>';
+                echo '<li><a href=InvestigationsOfAllPatients.php>INVESTIGATIONS</a></li>';
         }
         ?>
 
