@@ -502,20 +502,20 @@ function validate_investigation($investigation)
     return $errors;
 }
 
-function search_by_username($user_name) 
+function search_by_staff_surname($surname) 
 {
     global $db;
-    $sql = "SELECT * FROM User WHERE username LIKE '%".$user_name."%'";
+    $sql = "SELECT * FROM User WHERE surname LIKE '%".$surname."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
 }
 
-function search_by_dob($date_of_birth) 
+function search_by_surname($surname) 
 {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE date_of_birth LIKE '%".$date_of_birth."%'";
+    $sql = "SELECT * FROM Patient WHERE last_name LIKE '%".$surname."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
