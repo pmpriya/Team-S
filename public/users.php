@@ -19,7 +19,7 @@ if ($_SESSION['userLevel'] < 2) {
 
 if (isset($_POST['submitbtn'])) {
     $q = $_POST['search'];
-    $user_set = search_by_username($q);
+    $user_set = search_by_staff_surname($q);
 }
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -74,7 +74,7 @@ if (isset($_POST['submitbtn'])) {
 
                 <h1>Staff</h1>
                 <form method="post" class="example" action="users.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" placeholder="Enter Username to Search">
+                    <input type="text" name="search" placeholder="Enter Surname to Search">
                     <button name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>

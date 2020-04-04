@@ -17,7 +17,7 @@ if ($_SESSION['userLevel'] < 1) {
 
 if (isset($_POST['submitbtn'])) {
     $q = $_POST['search'];
-    $user_set = search_by_dob($q);
+    $user_set = search_by_surname($q);
     //echo $user_set;
 }
 
@@ -34,7 +34,7 @@ if (isset($_POST['submitbtn'])) {
 
                 <h1>Patients</h1>
                 <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter Date of Birth to Search">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
