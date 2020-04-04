@@ -212,7 +212,7 @@ function delete_referral($referral_id){
     $sql = "DELETE FROM Referral ";
     $sql .= "WHERE ID='" . $referral_id . "' ";
     $sql .= "LIMIT 1";
-
+    $result = mysqli_query($db,$sql);
   if($result) 
     {
         return true;
