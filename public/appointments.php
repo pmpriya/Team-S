@@ -46,26 +46,34 @@ if (isset($_POST['submitbtn'])) {
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>  
             <br>
+
+            <br><td><a href=add_appointment.php>Add an appointment</a></td>
+
+            <br>
+
                 <table>
                     <tr>
                         <th><b>ID</b></th>
                         <th><b>Patient Name</b></th>
                         <th><b>Date</b></th>
+                        <th><b>Admission</b></th>
                         <th><b>Time</b></th>
+
                         <th colspan="3"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($appointment = mysqli_fetch_assoc($appointment_set)) {
-                        echo "<tr><td >" . $appointment["id"] . "</td>
-                        <td>" . $appointment["first_name"].' '.$appointment["last_name"]. "</td>
+         echo "<tr><td >" . $appointment["id"] . "</td>
+                    <td>" . $appointment["first_name"].' '.$appointment["last_name"]. "</td>
                     <td>" . $appointment["date"] . "</td>
+                    <td>" . $appointment["option_admission"] . "</td>
                     <td>" . $appointment["time"] . "</td>
-               
+
                 <td><a href=?delete=" . $appointment["id"] . " onclick=\"return confirm('Are you sure that you want to delete this Appointment?');\">Delete</a></td></tr>";
                     } ?>
 
                 </table>
-            <br><td><a href=add_appointment.php>Add an appointment</a></td>
+           
 
         </center>
 

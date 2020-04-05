@@ -1,13 +1,12 @@
 <?php require_once('../private/initialise.php'); 
 $patients = find_all_patients();
 ?>
-<?php $page_title = 'Register patient'; ?>
+<?php $page_title = 'Patient Appointment'; ?>
 <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <?php
 if(is_post_request()) {
-
 	insert_appointment_member($_POST);
 	redirect_to(url_for('add_appointment.php?success'));
 
@@ -16,7 +15,7 @@ if(is_post_request()) {
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Referral Form</title>
+        <title>Appointment</title>
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
 	<style>
@@ -46,13 +45,23 @@ table {
 		<input type="text" name="patient_id" value="<?=$_GET['patient_id']?>"  readonly/>
 		</div>
 
-    <!-- Patient's forename -->
     <div class="field-column">
       <label>Date</label>
        <input type="date" value="<?=$_GET['date']?>" name="date" required  readonly>
     </div>
+
+	<div class="field-column">
+      <label>Admission Type</label>
+       <input type="text" value="<?=$_GET['option_admission']?>" name="option_admission" required  readonly>
+    </div>
+
+	<div class="field-column">
+      <label>Time</label>
+       <input type="text" value="<?=$_GET['time']?>" name="time" required  readonly>
+    </div>
+
 			<center>
-	<?php 
+	<!-- <?php 
 	$times =	get_time_slots($_GET['date']);
 	if($times){
 	?>
@@ -77,7 +86,8 @@ table {
 	</table>
 	<?php } else { ?>
 		<h5>Sorry! there is no time slot available</h5>
-	<?php } ?>
+	<?php } ?> -->
+
 	</center>
 
 
@@ -86,11 +96,12 @@ table {
      <div class="field-column">
      <button type="submit" name="submit">Submit</button>
 	</div>
-     <!-- reset button -->
-     <div class="field-column">
-     <button type="reset" name="reset">Reset</button>
-    </div>
-	</form>
+     
+     <!-- back -->
+     <!--<input type ="back" name="back"> -->
+	<div class="field-column">
+	<button type="button" onclick="history.back();">Back</button>
+	</div>
 
 	<?php } else { ?>
 
@@ -100,7 +111,7 @@ table {
       <div class="field-column">
       <label>Select Patient</label>
 		<select name="patient_id" required>
-			<option></option
+			<option></option>
 			<?php while($patient = mysqli_fetch_assoc($patients)) { ?>
 			<option value="<?= $patient['ID'] ?>"><?= $patient["first_name"].' '.$patient["last_name"] ?></option>
 			<?php } ?>
@@ -111,6 +122,26 @@ table {
       <label>Date</label>
        <input type="date" name="date" min="<?= date('yy-m-d') ?>" required >
     </div>
+<br>
+
+	<!-- Option For Admission -->
+
+	<div class="field-column">
+    <label>Options For Admission</label>
+     <input id="option_admission" type="radio" name="option_admission" value="inpatient" checked><label id="awareOption">Inpatient (Rays of Sunshine)</label>
+     <input id="option_admission" type="radio" name="option_admission" value="outpatient" checked><label id="awareOption">Outpatient</label>
+	 <input id="option_admission" type="radio" name="option_admission" value="daycase" checked><label id="awareOption">Day Case (Phillip Isaac)</label>
+  </div>
+
+<br>
+
+  <!-- Time -->
+
+  <div class="field-column">
+    <label>Time</label>
+    <textarea onfocusout="isEmpty(this,'time')" name="time" id="time" placeholder="Required" required>
+    </textarea>
+  </div>
 
 	<!-- submit -->
      <!--<input type ="submit" name="submit"> -->
