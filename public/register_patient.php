@@ -243,7 +243,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
    <div class="field-column">
-      <label>Email (@nhs.net)</label> </div>
+      <label>Email (@nhs.net or @*.nhs.uk)</label> </div>
       <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
 
    </div>

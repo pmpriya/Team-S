@@ -82,8 +82,9 @@
         $Cortisol = $_POST['Cortisol'] ?? '';
         $Urea = $_POST['Urea'] ?? '';
         $Creatinine = $_POST['Creatinine'] ?? '';
+        $Notes = $_POST['Notes'] ?? '';
 
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine);
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     
@@ -226,10 +227,16 @@
     <dl>
         <dt> Creatinine <input type="text" id="Creatinine" name= "Creatinine" placeholder="optional"> </dt>
     </dl>
-    <d1> 
+    <d1>
 
-    
-    <div id="operations">
+        <d1>
+            <dl>
+                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"> </dt>
+            </dl>
+            <d1>
+
+
+            <div id="operations">
     <input type="button" onclick="submitInvestigation()" name="btnsubmit" value="Add Investigation"/>
     </div>
     

@@ -4,6 +4,7 @@
 <?php 
     $patient_ID = $_GET['id']?? '1';
     $investigations_of_id = find_investigations_by_patientid($patient_ID);
+$find_notes = find_notes($patient_ID);
     $patient_set = find_patient_by_id($patient_ID);
 $patient = mysqli_fetch_assoc($patient_set);
 ?> 
@@ -16,7 +17,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1> Investigations overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
+    <h1> Results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 
@@ -70,9 +71,20 @@ $patient = mysqli_fetch_assoc($patient_set);
         <?php } ?>
     </table>
           <center>       
-             <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a>
-          </center>
+             <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
+              <h1>Additional notes</h1>
 
+
+    <table class= "InvestigationsTable">
+
+        <?php while ($allInvetigations2= mysqli_fetch_assoc($find_notes)){ ?>
+            <tr>
+                <td><a href=InvestigationEdit.php?id=<?php echo h($allInvetigations2['id']); ?>><?php echo h($allInvetigations2['date']); ?></a></td>
+                <td> <?php echo h($allInvetigations2['Notes']); ?> </td>
+
+            </tr>
+        <?php } ?>
+    </table>          </center>
 
 
     </div>
