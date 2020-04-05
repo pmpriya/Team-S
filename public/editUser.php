@@ -5,7 +5,7 @@
 
         <?php
         $page_title = 'KCL Paedriatic Liver Service';
-        if ($_SESSION['userLevel'] < 2) {
+        if ($_SESSION['userLevel'] < 3) {
             redirect_to('index.php');
 
         }

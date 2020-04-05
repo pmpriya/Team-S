@@ -6,7 +6,7 @@
 
 
 <?php
-if ($_SESSION['userLevel'] < 1) {
+if ($_SESSION['userLevel'] < 2) {
     redirect_to('index.php');
 
 }
