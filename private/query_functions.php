@@ -583,12 +583,12 @@ function get_time_slots($date) {
 
 function insert_appointment_member($data) {
     global $db;
-
     $sql = "INSERT INTO appointments ";
-    $sql .= "(patient_id, date, time) ";
+    $sql .= "(patient_id, date, option_admission, time) ";
     $sql .= "VALUES (";
     $sql .= "'" . db_escape($db, $data['patient_id']) . "', ";
     $sql .= "'" . db_escape($db, $data['date']) . "', ";
+    $sql .= "'" . db_escape($db, $data['option_admission']) . "', ";
     $sql .= "'" . db_escape($db, $data['time']) . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
@@ -611,5 +611,14 @@ function search_by_date($date)
     confirm_result_set($result);
     return $result;
 }
+
+// function delete_expired_appointments($id)
+// {
+//     global $db;
+//     $sql = "DELETE FROM appointments 
+//     $sql .= WHERE id= ' . db_escape($db, $id)'
+//     $sql .= AND Validity < '".date('Y-m-d H:i:s', time())."'";
+//     $result = mysqli_query($db, $sql);
+// }
 
 ?>
