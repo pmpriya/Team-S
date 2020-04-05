@@ -21,7 +21,7 @@ function find_referral_by_id($id){
 function get_all_patients()
 {
     global $db;
-    $sql = "SELECT * FROM Patient ";
+    $sql = "SELECT * FROM Patient ORDER BY last_name ASC ";
     $result = mysqli_query($db, $sql);
     return $result;
 }
