@@ -45,6 +45,8 @@ if(mysqli_num_rows($investigation_set)>=1){
         $Cortisol = $row['Cortisol'];
         $Urea = $row['Urea'];
         $Creatinine = $row['Creatinine'];
+        $Notes = $row['Notes'];
+
 
 
 
@@ -75,8 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_Cortisol = $_POST['Cortisol'] ?? '';
     $new_Urea = $_POST['Urea'] ?? '';
     $new_Creatinine = $_POST['Creatinine'] ?? '';
+    $new_Notes = $_POST['Notes'] ?? '';
 
-    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine);
+    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Notes);
     header('Location: patients.php');
     exit;
 }
@@ -172,9 +175,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                         <dd> <input type="text" name= "Urea" value = "<?php echo $Urea;?> " /> </dd>
                                                                                         </dl>
                                                                                         <d1>
-                                                                                            <dt> Creatinine </dt>
-                                                                                            <dd> <input type="text" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
-                                                                                            </dl>
+                                                                                                <dt> Creatinine </dt>
+                                                                                                <dd> <input type="text" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
+                                                                                                </dl>
+                                                                                            <d1>
+                                                                                                <dt> Notes </dt>
+                                                                                                <dd> <input type="text" name= "Notes" value = "<?php echo $Notes;?> " /> </dd>
+                                                                                                </dl>
                                                                                             <div id="operations">
                                                                                                 <input type="submit" value="Edit Investigation"/>
                                                                                             </div>
