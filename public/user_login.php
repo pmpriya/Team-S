@@ -75,28 +75,12 @@ if(!isset($password) || empty($password)){
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
+<script type="text/javascript" src="../private/validation_functions.js"></script>
 
 <script type="text/javascript">
   var append = false;
 </script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-        if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-        }
-        if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-        return false;
-    }
-</script>
    
-
 <script type="text/javascript">
     function validateForm(){
         document.getElementById("alert_message").innerHTML = ""

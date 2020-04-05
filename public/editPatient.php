@@ -195,103 +195,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
         
+<script type="text/javascript" src="../private/validation_functions.js"></script>
+
 <script type="text/javascript">
     var append = false;
 </script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-       if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-       }
-       if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-       return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyCharacter(r,e){
-        if(!isEmpty(r,e)){
-            if(r.value.length<1){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 1 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 1 characters";
-                return false;
-            }
-            if(r.value.length>10){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
-                return false;
-            }
-            if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain characters";
-            return (false)    
-        }
-        return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyNumber(r,e){
-        if(!isEmpty(r,e)){
-            if (/^\d+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-            return (false)    
-        }
-        return false;
-    }
-</script>        
-<script type="text/javascript">
-    function ValidateEmail() 
-    {
-        var mail = document.getElementById("email");
-        if(!isEmpty(mail,"Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
-</script>
+
 <script type="text/javascript">
     function validateForm(){
         document.getElementById("alert_message").innerHTML = "";
@@ -361,14 +270,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return false;
     }
 </script>
-  <script type="text/javascript">
-function isNHS(r,e) {
-    if(r.value.length !== 10 && r.value.length !== 0){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
-            return true;
-       }
-}
-</script>
+
