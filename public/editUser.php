@@ -97,7 +97,7 @@ if(mysqli_num_rows($query)>=1){
                                         <tr><td>Name:</td><td> <textarea  required="" id="name" onfocusout="isOnlyCharacter(this,'Name')" name="name" rows="1" cols="10"><?php echo $name; ?></textarea></td></tr>
                                         <tr><td>Surname:</td><td> <textarea  required="" id="surname" onfocusout="isOnlyCharacter(this,'Surname')"  name="surname" rows="1" cols="10"><?php echo $surname; ?></textarea></td></tr>
 
-                                        <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail(this,'Email')" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
+                                        <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateNHSEmail(this,'Email')" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
 
                                         <tr><td>userLevel:</td><td> <input value="<?php echo $userLevel; ?>" type="number" required="" id="userLevel" onfocusout="isOnlyNumber(this,'userLevel')"  name="userLevel" rows="1" cols="10"></input></td></tr>
                                     </table>
@@ -109,111 +109,11 @@ if(mysqli_num_rows($query)>=1){
 
                       </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
+<script type="text/javascript" src="../private/validation_functions.js"></script>
+
 <script type="text/javascript">
     var append = false;
 </script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-       if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-       }
-       if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-       return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyCharacter(r,e){
-        if(!isEmpty(r,e)){
-            if(r.value.length<2){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
-                return false;
-            }
-            if(r.value.length>10){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
-                return false;
-            }
-            if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain characters<br/>";
-            return (false)    
-        }
-        return false;
-    }
-</script>
-<script type="text/javascript">
-    function ValidateEmail() 
-    {
-        var mail = document.getElementById("email");
-        if(!isEmpty(mail,"Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@nhs.net$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }else if (/^\w+([\.-]?\w+)*@[0-9a-zA-Z]+.nhs.uk$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyNumber(r,e){
-        if(!isEmpty(r,e)){
-            if (/^\d+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-            return (false)    
-        }
-        return false;
-    }
-</script>
-
 
 <script type="text/javascript">
     function validateForm(){
@@ -235,7 +135,7 @@ if(mysqli_num_rows($query)>=1){
         if(!isOnlyCharacter(surname,"Sur Name")){
             isOkay = false;
         }
-        if(!ValidateEmail(email,"Email")){
+        if(!ValidateNHSEmail(email,"Email")){
             isOkay = false;
         }
         if(!isOnlyNumber(userLevel,"User Level")){
