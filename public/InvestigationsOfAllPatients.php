@@ -9,7 +9,7 @@
 <div id="content">
     <div class= "Investigations listing">
     <h1> Investigations  </h1>
-
+<center>
     <table class= "list">
         <th> Name </th>
         <th> NHS number </th>
@@ -28,7 +28,7 @@
             </tr> 
         <?php } ?>
     </table>
-    
+        </center>
         <?php mysqli_free_result($patient_set); ?> 
 
     </div>
