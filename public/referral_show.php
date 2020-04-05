@@ -14,18 +14,17 @@
 <div class= "Show Referral">
     <h1>Referrals for <?php echo $patient["first_name"] . " ". $patient["last_name"]; ?> </h1>
 
-    <a class="back-link" href="<?php echo url_for('/referral_list.php'); ?>">Back to List</a>
+
+    <center>
     <br>
     <br>
     <table class= "ReferralsTable">
-        <th> ID </th>
         <th> Date </th>
         <th> Consultant name</th> 
         <th> Consultant Specialty</th>
         <th> Organisation Hospital Name</th>
-        <th> Organisation Hospital Number </th>
-        <th> Bleep Number</th>
-        <th> Name of KCH Doctor </th>
+
+        <th> View </th>
  
      
        
@@ -33,24 +32,25 @@
  
         <?php while ($allReferrals = mysqli_fetch_assoc($referrals_of_id)){ ?>
             <tr>
-                <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>><?php echo h($allReferrals['ID']); ?> </a></td>
                 <td><?php echo h($allReferrals['date']); ?></td>
                 <td><?php echo h($allReferrals['consultant_name']); ?></td>
                 <td><?php echo h($allReferrals['consultant_specialty']); ?></td>
                 <td><?php echo h($allReferrals['organisation_hospital_name']); ?></td>
-                <td><?php echo h($allReferrals['organisation_hospital_no']); ?></td>
-                <td><?php echo h($allReferrals['bleep_number']); ?></td>
-                <td><?php echo h($allReferrals['kch_doc_name']); ?></td>
+                <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>>Details</a></td>
             
             </tr> 
         <?php } ?>
     </table>
-
-    <center>       
+    <?php if (!$_SESSION['userLevel'] == 1) { ?>
              <br><br><a class="action" href= "<?php echo url_for('referral_page.php?id=' . $patient_ID); ?>"> Add Referral </a>
+
+        <a class="back-link" href="<?php echo url_for('/referral_list.php'); ?>">Back to List</a>
     </center>
-
-
+<?php } ?>
+    <?php if ($_SESSION['userLevel'] == 1) { ?>
+        <br><br>
+        <a class="back-link" href=patients.php>Go back</a>
+    <?php } ?>
 
     </div>
 </div>

@@ -15,9 +15,15 @@
   <navigation>
     <ul>
       <li><a href="<?php echo url_for('/index.php'); ?>">MAIN</a></li>
-      
-      <li><a href="<?php echo url_for('/register_patient.php'); ?>">REGISTER PATIENT</a></li>
 
+        <?php
+        if (isset($_SESSION['userLevel'])) {
+            if(!$_SESSION['userLevel'] == 1) {
+                echo '<li><a href=register_patient.php>REGISTER PATIENT</a></li>';
+            }} else{
+            echo '<li><a href=register_patient.php>REGISTER PATIENT</a></li>';
+        }
+        ?>
 
        <?php
        if (isset($_SESSION['userLevel'])) {
@@ -42,14 +48,14 @@
 
         <?php
         if (isset($_SESSION['userLevel'])) {
-            if($_SESSION['userLevel'] > 0)
+            if($_SESSION['userLevel'] > 1)
                 echo '<li><a href=referral_list.php>REFERRALS</a></li>';
         }
         ?>
 
         <?php
         if (isset($_SESSION['userLevel'])) {
-            if($_SESSION['userLevel'] > 0)
+            if($_SESSION['userLevel'] > 1)
                 echo '<li><a href=InvestigationsOfAllPatients.php>INVESTIGATIONS</a></li>';
         }
         ?>
