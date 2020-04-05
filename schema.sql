@@ -70,17 +70,18 @@ CREATE TABLE `appointments` (
   `id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL
+  `option_admission` varchar(32) NOT NULL,
+  `time` text NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`id`, `patient_id`, `date`, `time`) VALUES
-(1, 2, '2020-03-12', '02:00:00'),
-(2, 3, '2020-03-12', '03:00:00'),
-(4, 3, '2020-03-13', '01:00:00');
+INSERT INTO `appointments` (`id`, `patient_id`, `date`, `option_admission`,`time`) VALUES
+(1, 2, '2020-03-12', 'inpatient','8pm'),
+(2, 3, '2020-03-12', 'outpatient','7 am'),
+(4, 3, '2020-03-13', 'daycase','6 pm');
 
 -- --------------------------------------------------------
 
