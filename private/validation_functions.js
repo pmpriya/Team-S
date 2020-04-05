@@ -64,3 +64,56 @@ function isNHS(r, e) {
     return true;
   }
 }
+
+function isOnlyCharacter(r, e) {
+  if (!isEmpty(r, e)) {
+    if (r.value.length < 2) {
+      if (append)
+        document.getElementById("alert_message").innerHTML +=
+          e + " must have more than equal to 2 characters<br/>";
+      else
+        document.getElementById("alert_message").innerHTML =
+          e + " must have more than equal to 2 characters";
+      return false;
+    }
+    if (r.value.length > 30) {
+      if (append)
+        document.getElementById("alert_message").innerHTML +=
+          e + " must have less than equal to 30 characters<br/>";
+      else
+        document.getElementById("alert_message").innerHTML =
+          e + " must have less than equal to 30 characters";
+      return false;
+    }
+    if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim())) {
+      if (append) document.getElementById("alert_message").innerHTML += "";
+      else document.getElementById("alert_message").innerHTML = "";
+      return true;
+    }
+    if (append)
+      document.getElementById("alert_message").innerHTML +=
+        e + " can only contain characters<br/>";
+    else
+      document.getElementById("alert_message").innerHTML =
+        e + "can only contain characters";
+    return false;
+  }
+  return false;
+}
+
+function ValidateEmail() {
+  var mail = document.getElementById("email");
+  if (!isEmpty(mail, "Mail")) {
+    mail = mail.value;
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      if (append) document.getElementById("alert_message").innerHTML += "";
+      else document.getElementById("alert_message").innerHTML = "";
+      return true;
+    }
+    if (append)
+      document.getElementById("alert_message").innerHTML += "Invalid Email";
+    else document.getElementById("alert_message").innerHTML = "Invalid Email";
+    return false;
+  }
+  return false;
+}
