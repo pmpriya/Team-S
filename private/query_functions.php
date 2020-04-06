@@ -38,6 +38,7 @@ function find_referrals_by_id($patient_ID)
    
 }
 
+
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
 $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) 
 {
@@ -67,12 +68,74 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
     $sql .= ")";
     echo $sql;
     $result = mysqli_query($db, $sql);
+
+    $subject = 'Signup Verification';
+    $message = '
+
+       Thanks for signing up !
+       Your account has been created . You can login with your username and password using the credintials below :
+
+       ----------
+       Username : '.$first_name.'
+       Password : '.$accessCode.'
+       ----------
+
+       Please log in to your account :
+       http://kingshospitallondon.herokuapp.com/login.php
+
+       ';
+
     if($result) {
+        sendmail($email,$subject,$message);
         return $result;
     } else {
         echo mysqli_error($db);
         db_disconnect($db);
         exit;
+    }
+}
+
+function sendmail($recipient,$subject,$body)
+{
+
+     
+    // Identify the sender, recipient, mail subject, and body
+    $sender    = "ticketmachineproject@gmail.com";
+    // $recipient = "ticketmachineproject@gmail.com";
+    // $subject = "[Site Message]";
+    // $body = "PEAR Mail successfully sent this email.";
+ 
+    // Identify the mail server, username, password, and port
+     $server   = "ssl://smtp.gmail.com";
+    $username = "ticketmachineproject@gmail.com";
+    $password = "KCLproject";
+    $port     = "465";
+ 
+    // Set up the mail headers
+    $headers = array(
+        "From"    => $sender,
+        "To"      => $recipient,
+        "Subject" => $subject
+    );
+
+    // Configure the mailer mechanism
+    $smtp = Mail::factory("smtp",
+        array(
+            "host"     => $server,
+            "username" => $username,
+            "password" => $password,
+            "auth"     => true,
+            "port"     => $port
+        )
+    );
+ 
+    // Send the message
+    $mail = $smtp->send($recipient, $headers, $body);
+ 
+    if (PEAR::isError($mail)) {
+        echo("<p>" . $mail->getMessage() . "</p>");
+    } else {
+        echo("<p>Message successfully sent!</p>");
     }
 }
 
