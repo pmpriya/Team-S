@@ -306,7 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         var gp_phone = document.getElementById("gp_phone");
         append = true;
         var isOkay = true;
-        if(!isOnlyNumber(nhs_number,"NHS Number")){
+        if(!isOnlyNumber(nhs_number,"NHS Number") || isNHS(nhs_number, "NHS number")){
             isOkay = false;
         }
         if(!isOnlyCharacter(first_name,"First Name")){
@@ -357,4 +357,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         append = false;
         return false;
     }
+</script>
+  <script type="text/javascript">
+function isNHS(r,e) {
+    if(r.value.length !== 10 && r.value.length !== 0){
+            if(append)
+                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
+            else
+                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
+            return true;
+       }
+}
 </script>

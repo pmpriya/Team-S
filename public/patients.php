@@ -20,47 +20,7 @@ if (isset($_POST['submitbtn'])) {
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-
-            tr:nth-child(odd) {background-color: #f2f2f2;}
-
-            table {
-                border-collapse: collapse;
-                width: 50%;
-            }
-
-            form.example input[type=text] {
-                padding: 10px;
-                font-size: 17px;
-                border: 1px solid grey;
-                float: left;
-                width: 80%;
-                background: #f1f1f1;
-            }
-
-            form.example button {
-                float: left;
-                width: 20%;
-                padding: 10px;
-                background: #333;
-                color: white;
-                font-size: 17px;
-                border: 1px solid grey;
-                border-left: none;
-                cursor: pointer;
-                height: 42px;
-            }
-
-            form.example button:hover {
-                background: black;
-            }
-
-            form.example::after {
-                content: "";
-                clear: both;
-                display: table;
-            }
-        </style>
+ 
 
     <div class="public">
 
@@ -70,9 +30,9 @@ if (isset($_POST['submitbtn'])) {
         <center>
 
                 <h1>Patients</h1>
-                <form method="post" class="example" action="patients.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" placeholder="Enter NHS Number to Search">
-                    <button name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
+                <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
+                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
                 <br>
@@ -93,10 +53,10 @@ if (isset($_POST['submitbtn'])) {
                     <td>" . $users["nhs_number"] . "</td>
                     <td>" . $users["accessCode"] . "</td>
                     <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
-                <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
-                <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
-                <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>
-                <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">View Investigations</a></td></tr>";
+                    <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
+                    <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
+                    <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>
+                    <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">View Investigations</a></td></tr>";
                     }
                 ?>
 

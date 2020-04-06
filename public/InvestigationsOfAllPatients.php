@@ -1,25 +1,30 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php
     $investigations_set = find_all_investigations();
-    $patient_set = get_all_patientIds()
+    $patient_set = get_all_patients();
 ?>
-<php $page_title = 'Investigations'; ?>
-<? include (SHARED_PATH. '/staff_header.php'); ?> 
+<?php $page_title = 'Investigations';  ?>
+<?php include (SHARED_PATH. '/header.php'); ?> 
 
 <div id="content">
     <div class= "Investigations listing">
-    <h1> Investigation </h1>
+    <h1> Investigations  </h1>
 
     <table class= "list">
-        <th> ID </th>
-        <th> Last Name </th> 
-        <th> First Name </th>
+        <th> Name </th>
+        <th> NHS number </th>
+        <th> Date of Birth </th>
+        <th> Email </th>
+        <th> Referring Doctor Name </th>
+    
 
         <?php while ($patient = mysqli_fetch_assoc($patient_set)){ ?>
             <tr>
-                <td> <a class="actions" href = "<?php echo url_for('/InvestigationsShow.php?patient_ID=' . $patient['patient_ID']); ?> " ><?php echo h($patient['patient_ID']); ?> </a></td> 
-                <td> <?php echo h($patient['last_name']); ?> </td> 
-                <td> <?php echo h($patient['first_name']); ?> </td> 
+                <td> <a class="actions" href = "<?php echo url_for('/InvestigationsShow.php?id=' . $patient["ID"]); ?> " ><?php echo h($patient["first_name"]); echo " "; echo h($patient["last_name"]);  ?> </a></td> 
+                <td> <?php echo h($patient["nhs_number"]); ?> </td>
+                <td> <?php echo h($patient["date_of_birth"]); ?> </td>
+                <td> <?php echo h($patient["email"]) ?> </td>
+                <td> <?php echo h($patient["referring_doctor_name"]) ?> </td>
             </tr> 
         <?php } ?>
     </table>

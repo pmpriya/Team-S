@@ -239,13 +239,14 @@
         if(isEmpty(password,"Password")){
             isOkay = false;
         }
+        if (isEmpty(confirm_password,"Confirm Password")) { 
+
+            isOkay = false; 
+        }
         if(!isOnlyNumber(userLevel,"userLevel")){
             isOkay = false;
         }
-        if (isEmpty(confirm_password,"Confirm Password")) { 
-                   
-                    isOkay = false; 
-                } 
+ 
        
         if(isOkay){
             

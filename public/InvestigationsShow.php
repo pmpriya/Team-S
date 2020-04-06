@@ -16,7 +16,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1> Investigations overview for <?php echo $patient["first_name"] ?> <?php echo $patient["last_name"] ?> </h1>
+    <h1> Investigations overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 
@@ -43,6 +43,7 @@ $patient = mysqli_fetch_assoc($patient_set);
         <th> Urea </th>
         <th> Creatinine </th>
         <th> Urgent (Y/N) </th>
+        <th> # of Symptoms </th>
  
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
             <tr>
@@ -67,7 +68,8 @@ $patient = mysqli_fetch_assoc($patient_set);
                 <td> <?php echo h($allInvetigations['Cortisol']); ?> </td> 
                 <td> <?php echo h($allInvetigations['Urea']); ?> </td> 
                 <td> <?php echo h($allInvetigations['Creatinine']); ?> </td> 
-                <td> <?php echo h($allInvetigations['Urgent']); ?> </td> 
+                <td> <?php echo h($allInvetigations['Urgent']); ?> </td>
+                <td> <?php echo h($allInvetigations['SymptomCount']); ?> </td> 
             </tr> 
         <?php } ?>
     </table>

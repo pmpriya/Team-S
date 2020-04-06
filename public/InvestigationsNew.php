@@ -181,11 +181,13 @@
         $hasPStools = $_POST['hasPStools'] ?? 'N';
         $hasAcuteHepPlus = $_POST['hasAcuteHepPlus'] ?? 'N';
         $hasParacetamolOD = $_POST['hasParacetamolOD'] ?? 'N';
-        if($hasAbnormalCLotting=="Y" || $hasConjugatedJaundice=="Y" || $hasPStools=="Y" || $hasAcuteHepPlus=="Y" || $hasParacetamolOD=="Y"){
+        $SymptomCount = count($_POST['checkbox']) ?? null;
+        if(count($_POST['checkbox']) > 0){
             $Urgent = "Y";
+            echo $_POST['checkbox'];
         }
         else{ $Urgent = "N";}
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent);
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent, $SymptomCount );
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     
@@ -337,19 +339,19 @@
       
       <!-- The checkboxes for urgent symptoms-->
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasAbnormalCLotting" value="Y"> <label> Abnormal clotting</label>
+          <input type = "checkbox" name = "checkbox[]" value="Abnormal clotting"> <label> Abnormal clotting</label>
         </div>
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasConjugatedJaundice" value="Y"> <label> Conjugated jaundice</label>
+          <input type = "checkbox" name = "checkbox[]" value="Conjugated jaundice"> <label> Conjugated jaundice</label>
         </div>
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasPStools" value="Y"> <label> Pale stools </label>
+          <input type = "checkbox" name = "checkbox[]" value="Pale stools"> <label> Pale stools </label>
         </div>
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasAcuteHepPlus" value="Y"> <label> Acute hepatitis with elevated transaminase levels and jaundice</label>
+          <input type = "checkbox" name = "checkbox[]" value="Acute hepatitis with elevated transaminase levels and jaundice"> <label> Acute hepatitis with elevated transaminase levels and jaundice</label>
         </div>
         <div class="checkbox-container">
-          <input type = "checkbox" name = "hasParacetamolOD" value="Y"> <label> Paracetamol overdose</label>
+          <input type = "checkbox" name = "checkbox[]" value="Paracetamol overdose"> <label> Paracetamol overdose</label>
         </div>
     </div>
 

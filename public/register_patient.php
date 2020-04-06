@@ -29,9 +29,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $isValid = false;
             }
     
-    $dob = strtotime($_POST["dob"]);
+    $date_of_birth = strtotime($_POST["dob"]);
     
-    if(!isset($dob) || empty($dob)){
+    if(!isset($date_of_birth) || empty($date_of_birth)){
                 $isValid = false;
                 $message .= "Date Of birth can not be empty";
             }
@@ -236,8 +236,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       <label>Surname </label>
          <input type="text" onfocusout="isOnlyCharacter(this,'Surname')" id="lastname2" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
         </div>
-
-    <!--  forename -->
 
     <div class="field-column">
       <label>Forename</label>
@@ -511,7 +509,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!isOnlyCharacter(firstname,"Forename")){
             isOkay = false;
         }
-        if(!isOnlyNumber(nhsnumber,"NHS Number")){
+        if(!isOnlyNumber(nhsnumber,"NHS Number") || isNHS(nhsnumber, "NHS number")){
             isOkay = false;
         }
         if(isEmpty(dob,"DOB")){
@@ -549,16 +547,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         if(isOkay){
-          alert("all good");
+          //alert("all good");
             document.getElementById("form").submit();
             return true;
         }
-
-        // if(isOnlyCharacter(lastname,"Surname")&&isOnlyCharacter(firstname,"Forename")&&isOnlyNumber(nhsnumber,"NHS Number") &&!isEmpty(dob,"DOB")&&!isEmpty(address,"Home Address") &&!isEmpty(postcode,"Post Code") &&isOnlyNumber(homenumber,"Home Phone") &&isOnlyNumber(mobilenumber,"Mobile Phone") &&!isEmpty(gpaddress,"GP Address") &&isOnlyNumber(gpnumber,"GP Phone") ){
-        //     document.getElementById("form").submit();
-
-        //     return true;
-        // }
         append = false;
         return false;
     }
@@ -594,3 +586,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     }
 </script>
+  <script type="text/javascript">
+function isNHS(r,e) {
+    if(r.value.length !== 10 && r.value.length !== 0){
+            if(append)
+                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
+            else
+                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
+            return true;
+       }
+}
+</script> 

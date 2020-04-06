@@ -9,10 +9,19 @@ function find_member_by_nhsno($nhs_number)
     return $result;
 }
 
-function get_all_patientIds()
+function find_referral_by_id($id){
+
+    global $db;
+    $sql = "SELECT * FROM Referral ";
+    $sql .="WHERE ID='" . $id . "' ";
+    $result = mysqli_query($db, $sql);
+    return $result;
+} 
+
+function get_all_patients()
 {
     global $db;
-    $sql = "SELECT id FROM Patient ";
+    $sql = "SELECT * FROM Patient ";
     $result = mysqli_query($db, $sql);
     return $result;
 }
@@ -21,15 +30,12 @@ function find_referrals_by_id($patient_ID)
 {
     global $db;  
     $sql = "SELECT * FROM Referral ";
-    $sql .= "WHERE patient_ID ='" . db_escape($db, $patient_ID) . "' ";
-    $sql .= "ORDER BY date ASC";
-    echo $sql;
+    $sql .= "WHERE patient_ID ='" . $patient_ID . "'";
+  
     $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    $referral = mysqli_fetch_assoc($result);
-    mysqli_free_result($result);
-    //returns empty
-    return $referral;
+ 
+    return $result;
+   
 }
 
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
@@ -109,18 +115,19 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     }
 }
 
-function insert_referral($patient_ID, $consultant_name, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+function insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
 $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $urgent) 
+$history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $date, $urgent) 
 {
     global $db;
     $sql = "INSERT INTO Referral ";
-    $sql .= "(patient_ID, consultant_name, organisation_hospital_name, organisation_hospital_no, referring_name,
+    $sql .= "(patient_ID, consultant_name,consultant_specialty, organisation_hospital_name, organisation_hospital_no, referring_name,
              bleep_number, is_patient_aware, is_interpreter_needed, interpreter_language, kch_doc_name, current_issue, 
-             history_of_present_complaint, family_history, current_feeds, medications, other_investigations, Urgent) ";
+             history_of_present_complaint, family_history, current_feeds, medications, other_investigations,date, Urgent) ";
     $sql .= "VALUES (";
     $sql .= "'" . $patient_ID . "', ";
     $sql .= "'" . $consultant_name . "', ";
+    $sql .= "'" . $consultant_specialty . "', ";
     $sql .= "'" . $organisation_hospital_name . "', ";
     $sql .= "'" . $organisation_hospital_no . "', ";
     $sql .= "'" . $referring_name . "', ";
@@ -135,8 +142,8 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
     $sql .= "'" . $current_feeds . "', ";
     $sql .= "'" . $medications . "', ";
     $sql .= "'" . $other_investigations . "', ";
+    $sql .= "'" . $date . "'";
     $sql .= "'" . $urgent . "'";
-    // $sql .= "'" . $datetime . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -380,14 +387,14 @@ function delete_referral($referralID)
 }
         
 
-function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent)
+function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent, $SymptomCount)
 {
     global $db;
     // $errors = validate_investigation($investigation);
     // if(!empty($errors)){
     //   return $errors;
     // }
-    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Urgent) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Urgent')";
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Urgent, SymptomCount) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Urgent', '$SymptomCount')";
     //remove spaces
     $result = mysqli_query($db, $sql);
     if($result) 
