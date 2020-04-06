@@ -21,7 +21,7 @@ function find_referral_by_id($id){
 function get_all_patients()
 {
     global $db;
-    $sql = "SELECT * FROM Patient ORDER BY last_name ASC ";
+    $sql = "SELECT * FROM Patient ";
     $result = mysqli_query($db, $sql);
     return $result;
 }
@@ -67,6 +67,26 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
     $sql .= ")";
     echo $sql;
     $result = mysqli_query($db, $sql);
+   
+
+    $subject = 'Signup verification'; 
+    $message = '
+     
+    Thanks for signing up!
+    Your account has been created, you can now login with your username and password with the credentials below:
+     
+    ------------------------
+    Username: '.$first_name.'
+    Password: '.$accessCode.'
+    ------------------------
+     
+    Please log in to your account:
+    http://kingshospitallondon.herokuapp.com/login.php
+     
+    ';
+    echo $message;
+    send_email($email,$subject,$message);
+    
     if($result) {
         return $result;
     } else {
@@ -74,6 +94,7 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
         db_disconnect($db);
         exit;
     }
+
 }
 
 function find_all_users() 
@@ -206,28 +227,6 @@ function delete_user($userID)
     }
 }
 
-function delete_referral($referral_id){
-
-    global $db;
-    $sql = "DELETE FROM Referral ";
-    $sql .= "WHERE ID='" . $referral_id . "' ";
-    $sql .= "LIMIT 1";
-    $result = mysqli_query($db,$sql);
-  if($result) 
-    {
-        return true;
-    } 
-    else 
-    {
-        // DELETE failed
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
-    }
-
-
-}
-
 function delete_investigation($userID)
 {
     global $db;
@@ -270,7 +269,7 @@ function find_patient_by_email($email)
 {
     global $db;
     $sql = "SELECT * FROM Patient ";
-    $sql .= "WHERE email'" . $email . "' ";
+    $sql .= "WHERE '" . $email . "' ";
     $result = mysqli_query($db, $sql);
     return $result;
 }
@@ -333,7 +332,7 @@ function find_all_patients()
 {
     global $db;
     $sql = "SELECT * FROM Patient ";
-    $sql .= "ORDER BY last_name ASC";
+    $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
@@ -343,6 +342,7 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
 {
     global $db;
     $sql = "UPDATE `Patient` SET `nhs_number`='$new_nhs_number',`first_name`='$new_first_name',`last_name`='$new_last_name',`date_of_birth`='$new_date_of_birth',`sex`='$new_sex',`email`='$new_email',`home_address`='$new_home_address',`postcode`='$new_postcode',`home_phone`='$new_home_phone',`mobile_phone`='$new_mobile_phone',`gp_address`='$new_gp_address',`gp_phone`='$new_gp_phone',`accessCode`='$new_accessCode' WHERE ID=$id";
+    echo($sql);
     $result = mysqli_query($db, $sql);
     if ($result) 
     {
@@ -358,18 +358,25 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
     }
 }
 
-function edit_referral($referral_id,$new_consultant_name,$new_consultant_specialty,$new_organisation_hospital_name,$new_organisation_h_no,$new_referring_doctor_name,
-$new_bleep_no,$new_parents_aware,$new_interpreter_needed,$new_interpreter_language,$new_doctor_kch_name,$new_current_issue,
-$new_history_of_present_complaint,$new_family_history,$new_current_feeds,$new_medications,$new_other_inv,$new_date_of_referral) 
+function edit_referral($ID, $new_consultant_name, $new_consultant_speciality, $new_organisation_name, $new_organisation_hospital_no, 
+$new_bleepnumber, $new_parent_aware, $new_interpreter_needed, $new_kch_doctor_name, $new_date_time, $new_current_issue, 
+$new_history_of_present_complaint, $new_family_history, $new_medications, $new_other_investigations) 
 {
     global $db;
-    $sql = "UPDATE Referral SET consultant_name='$new_consultant_name',consultant_specialty='$new_consultant_specialty',organisation_hospital_name='$new_organisation_hospital_name',organisation_hospital_no='$new_organisation_h_no'
-    ,referring_name='$new_referring_doctor_name', bleep_number='$new_bleep_no',is_patient_aware='$new_parents_aware',is_interpreter_needed='$new_interpreter_needed',interpreter_language='$new_interpreter_language',
-    kch_doc_name='$new_doctor_kch_name',current_issue='$new_current_issue',history_of_present_complaint='$new_history_of_present_complaint',family_history='$new_family_history',current_feeds='$new_current_feeds',medications='$new_medications',other_investigations='$new_other_inv',date='$new_date_of_referral' WHERE id=$referral_id";
+    $sql = "UPDATE `Referral` SET `consultant_name`='$new_consultant_name',
+    `consultant_speciality`='$new_consultant_speciality',`organisation_name`='$new_organisation_name',
+    `organisation_hospital_no`='$new_organisation_hospital_no',`bleepnumber`='$new_bleepnumber',
+    `parent_aware`='$new_parent_aware',`interpreter_needed`='$new_interpreter_needed',`kch_doctor_name`='$new_kch_doctor_name',
+    `date_time`='$new_date_time', `current_issue` = '$new_current_issue', `history_of_present_complain` = '$new_history_of_present_complaint',
+    `family_history`='$new_family_history', `current_issue` = '$new_current_issue',`medications` = '$new_medications', `other_investigations` = '$new_other_investigations',
+    WHERE ID=$ID";
+    echo($sql);
     $result = mysqli_query($db, $sql);
     if($result) 
     {
         return true;
+        echo '<script>window.location.replace("referral_page.php"); </script>';
+        header('users.php');
     } 
     else 
     {
@@ -379,17 +386,35 @@ $new_history_of_present_complaint,$new_family_history,$new_current_feeds,$new_me
     }
 }
         
-
+function delete_referral($referralID)
+{
+    global $db;
+    $sql = "DELETE FROM Referral ";
+    $sql .= "WHERE ID='" . db_escape($db, $referralID) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if ($result) 
+    {
+        return true;
+    } 
+    else 
+    {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
         
 
-function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes)
+function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine)
 {
     global $db;
     // $errors = validate_investigation($investigation);
     // if(!empty($errors)){
     //   return $errors;
     // }
-    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Notes) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Notes')";
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine')";
     //remove spaces
     $result = mysqli_query($db, $sql);
     if($result) 
@@ -405,10 +430,10 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
     }
 }
     
-function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Notes)
+function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine) 
 {
     global $db;
-    $sql = "UPDATE Investigations SET date='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine',Notes='$new_Notes' WHERE id=$id";
+    $sql = "UPDATE Investigations SET date='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine' WHERE id=$id";
     $result = mysqli_query($db, $sql);
     if($result) 
     {
@@ -477,15 +502,6 @@ function find_investigations_by_patientid($patient_ID)
     return $result;
 }
 
-function find_notes($patient_ID)
-{
-    global $db;
-    $sql = "SELECT * FROM Investigations ";
-    $sql .= "WHERE patient_id='" . $patient_ID . "' AND Notes IS NOT NULL ";
-    $result = mysqli_query($db, $sql);
-    return $result;
-}
-
 function find_investigation_dates_of_id($patient_ID)
 {
     global $db;
@@ -511,114 +527,23 @@ function validate_investigation($investigation)
     return $errors;
 }
 
-function search_by_staff_surname($surname) 
+function search_by_username($user_name) 
 {
     global $db;
-    $sql = "SELECT * FROM User WHERE surname LIKE '%".$surname."%'";
+    $sql = "SELECT * FROM User WHERE username LIKE '%".$user_name."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
 }
 
-function search_by_surname($surname) 
+function search_by_dob($date_of_birth) 
 {
     global $db;
-    $sql = "SELECT * FROM Patient WHERE last_name LIKE '%".$surname."%'";
+    $sql = "SELECT * FROM Patient WHERE date_of_birth LIKE '%".$date_of_birth."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
 }
-
-function find_all_appointments() {
-    global $db;
-    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
-    $sql .= "ORDER BY id ASC";
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    return $result;
-}
-
-function delete_appointment($id)
-{
-    global $db;
-    $sql = "DELETE FROM appointments ";
-    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
-    $sql .= "LIMIT 1";
-    $result = mysqli_query($db, $sql);
-    if ($result) {
-        return true;
-    } else {
-        // DELETE failed
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
-    }
-}
-
-function get_time_slots($date) {
-    global $db;
-    $sql = "SELECT * FROM `appointments` ";
-    $sql .= "where `date` = '".db_escape($db, $date)."'";
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-
-    $appointments =    mysqli_fetch_all($result);
-
-    $times = [];
-    for ($i=1; $i <= 7; $i++) { 
-        $add = true;
-        foreach($appointments as $appointment){
-             if(strtotime($i.":00") == strtotime($appointment[3])){
-                $add = false;    
-            } 
-        }
-        if($add){
-            $times[] = $i.':00';
-        }
-     }
-     return $times;
-}
-
-function insert_appointment_member($data) {
-    global $db;
-    $sql = "INSERT INTO appointments ";
-    $sql .= "(patient_id, date, option_admission, time) ";
-    $sql .= "VALUES (";
-    $sql .= "'" . db_escape($db, $data['patient_id']) . "', ";
-    $sql .= "'" . db_escape($db, $data['date']) . "', ";
-    $sql .= "'" . db_escape($db, $data['option_admission']) . "', ";
-    $sql .= "'" . db_escape($db, $data['time']) . "'";
-    $sql .= ")";
-    $result = mysqli_query($db, $sql);
-    if($result) {
-        return true;
-    } else {
-        echo mysqli_error($db);
-        db_disconnect($db);
-        exit;
-    }
- 
-}
-
-function search_by_date($date) 
-{
-    global $db;
-    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id` WHERE `appointments`.`date` LIKE '%".$date."%'";
-    $sql .= "ORDER BY id ASC";
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    return $result;
-}
-
-// function delete_expired_appointments($id)
-// {
-//     global $db;
-//     $sql = "DELETE FROM appointments 
-//     $sql .= WHERE id= ' . db_escape($db, $id)'
-//     $sql .= AND Validity < '".date('Y-m-d H:i:s', time())."'";
-//     $result = mysqli_query($db, $sql);
-// }
-
 ?>
