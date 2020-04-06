@@ -1,3 +1,4 @@
+<?php require_once('Mail.php'); ?>
 <?php
  
 function find_member_by_nhsno($nhs_number) 
