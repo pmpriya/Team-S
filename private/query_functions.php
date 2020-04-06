@@ -656,7 +656,14 @@ function insert_appointment_member($data) {
     $sql .= "'" . db_escape($db, $data['time']) . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
+ 
     if($result) {
+     $patient = find_patient_by_id($data['patient_id']);
+        $patient_values = mysqli_fetch_assoc($patient);
+        $email=$patient_values['email'];
+        $subject="Regarding Appointment";
+        $message="Appointment fixed at " . $data['date'] . " " . $data['time'];
+        sendmail($email,$subject,$message);
         return true;
     } else {
         echo mysqli_error($db);
