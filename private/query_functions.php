@@ -322,6 +322,16 @@ function find_patient_by_id($ID)
     return $query;
 }
 
+function find_investigation_by_id($ID) 
+{
+    global $db;
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "WHERE ID='" . $ID . "'";
+    $query = mysqli_query($db, "SELECT * FROM Investigations WHERE id = '$ID'") or die(mysqli_error());
+    return $query;
+
+}
+
 function find_patient_by_nhsno($nhs_number) 
 {
     global $db;
@@ -482,6 +492,18 @@ function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $ne
     $result = mysqli_query($db, $sql);
     if($result) 
     {
+     $get_investigation = find_investigation_by_id($id);
+        $investigation_values = mysqli_fetch_assoc($get_investigation);
+        $patientid = $investigation_values['patient_ID'];
+        echo($patientid); 
+        $patient = find_patient_by_id($patientid);
+        $patient_values = mysqli_fetch_assoc($patient);
+        echo($patient_values);
+        $email=$patient_values['email'];
+        // $email = 'ticketmachineproject@gmail.com';
+        $subject="Investigation edited ";
+        $message=" The investigation form is edited.";
+        sendmail($email,$subject,$message);
         return true;
         echo '<script>window.location.replace("index.php"); </script>';
         header('users.php');
