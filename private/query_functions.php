@@ -210,6 +210,7 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
     $sql .= ")";
     $result = mysqli_query($db, $sql);
     if($result) {
+     
         return true;
     } else {
         echo mysqli_error($db);
@@ -458,7 +459,12 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
     $result = mysqli_query($db, $sql);
     if($result) 
     {
-
+      $patient = find_patient_by_id($patient_ID);
+        $patient_values = mysqli_fetch_assoc($patient);
+        $email=$patient_values['email'];
+        $subject="Investigation added ";
+        $message=" The investigation form is added.";
+        sendmail($email,$subject,$message);
         return true;
     } 
     else 
