@@ -11,10 +11,13 @@ if (isset($_GET["delete"])) {
     delete_patient($var);
     header('Location: patients.php');
 }
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+}
 
 if (isset($_POST['submitbtn'])) {
     $q = $_POST['search'];
-    $user_set = search_by_nhs_no($q);
+    $user_set = search_by_surname($q);
     //echo $user_set;
 }
 
@@ -31,11 +34,12 @@ if (isset($_POST['submitbtn'])) {
 
                 <h1>Patients</h1>
                 <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
                 <br>
+            <?php if ($_SESSION['userLevel'] > 1) { ?>
                 <table>
                     <tr>
                         <th><b>Name</b></th>
@@ -63,8 +67,35 @@ if (isset($_POST['submitbtn'])) {
                 </table>
             <br><td><a href=register_patient.php>Add patient</a></td>
 
-        </center>
 
+<?php }
+else{ ?>
+
+                    <table>
+                    <tr>
+                        <th><b>Name</b></th>
+                        <th><b>Surname</b></th>
+                        <th><b>DOB</b></th>
+                        <th><b>NHS Number</b></th>
+                        <th colspan="2"><b>View</b></th>
+                    </tr>
+                    <?php
+                    while ($users = mysqli_fetch_assoc($user_set)) {
+                        echo "<tr><td >" . $users["first_name"] . "</td>
+                    <td>" . $users["last_name"] . "</td>
+                    <td>" . $users["date_of_birth"] . "</td>
+                    <td>" . $users["nhs_number"] . "</td>
+                    <td><a href=viewPatient.php?id=" . $users["ID"] . ">Details</a></td>
+                    <td><a href=referral_show.php?id=" . $users["ID"] . ">Referral</a></td></tr>";
+                    }
+                ?>
+
+            </table>
+
+
+           <?php }
+    ?>
+        </center>
     </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>

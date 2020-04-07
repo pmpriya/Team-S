@@ -4,7 +4,10 @@
         <?php include(SHARED_PATH . '/validation.php'); ?>
         <?php
         $page_title = 'KCL Paedriatic Liver Service';
+        if ($_SESSION['userLevel'] < 2) {
+            redirect_to('index.php');
 
+        }
         ?>
 
         <?php
@@ -58,7 +61,7 @@
            
             if(isValid){
 
-            add_user($username,$name,$surname,$email,password_hash($password, PASSWORD_DEFAULT), $userLevel);
+            add_user($username,$name,$surname,$email,$password, $userLevel);
                 header('Location: users.php');
                 exit;
             }

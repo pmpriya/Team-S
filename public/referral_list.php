@@ -1,42 +1,33 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php
-    $referrals_set = find_all_referrals();
+
+     $referrals_set = find_all_referrals();
+     
+
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
     $patient_set = get_all_patients();
-?>
-<!--         
-    <div class="public">
+?> 
+<php $page_title = 'Referrals'; ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
-        <title>Referrals Form</title>
+<!-- // settype($var, 'integer');
+// $var = $_GET["delete"] ?? '';
+// if (isset($_GET["delete"])) {
+//     delete_patient($var);
+//     header('Location: patients.php');
+// } -->
 
-        <center>
+<?php
+if (isset($_POST['submitbtn'])) {
+    $data = $_POST['search'];
+    $patient_set = search_by_surname($data);
+   
+}
 
-                <h1>Referrals</h1>
-                <table>
-                    <tr>
-                        <th><b>Status</b></th>
-                        <th><b>ID</b></th>
-                        <th><b>patient_ID</b></th>
-                        <th><b>consultant_name</b></th>
-                        <th><b>organisation_hospital_name</b></th>
-                        <th><b>organisation_hospital_no</b></th>
-                        <th><b>referring_name</b></th>
-                        <th><b>bleep_number</b></th>
-                        <th><b>is_patient_aware</b></th>
-                        <th><b>is_interpreter_needed</b></th>
-                        <th><b>interpreter_language</b></th>
-                        <th><b>kch_doc_name</b></th>
-                        <th><b>current_issue</b></th>
-                        <th><b>history_of_present_complaint</b></th>
-                        <th><b>family_history</b></th>
-                        <th><b>current_feeds</b></th>
-                        <th><b>medications</b></th>
-                        <th><b>other_investigations</b></th>
-                        <th><b>datetime</b></th>
-                        <th><b>Urgent (Y/N)</b></th>
 
-                        <th colspan="4"><b>Manage</b></th>
-                    </tr>
-                    <?php
                     while ($referrals = mysqli_fetch_assoc($referrals_set)) { ?>
                     <tr>
                     <td ><?php echo h($referrals["urgent"]); ?></td>
@@ -66,17 +57,18 @@
         
     </div>
 
-?>  -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div class= "Referrals listing">
     <h1> Referrals  </h1>
     <form method="post" class="example" id="searchbar" action="referral_list.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
    </form>
    <br>
    <br>
+   <center>
     <table class= "list">
         <th> Name </th>
         <th> NHS number </th>
@@ -95,7 +87,7 @@
             </tr> 
         <?php } ?>
     </table>
-    
+    </center>
         <?php mysqli_free_result($patient_set); ?> 
 
     </div>

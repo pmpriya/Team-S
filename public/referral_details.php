@@ -30,7 +30,9 @@ $patient_values = mysqli_fetch_assoc($patient);
         $interpreter_language = $referral_values['interpreter_language'];
         $doctor_kch_name = $referral_values['kch_doc_name'];
         $current_issue = $referral_values['current_issue'];
+        $date_of_referral = $referral_values['date'];
         $history_of_present_complaint = $referral_values['history_of_present_complaint'];
+        $family_history = $referral_values['family_history'];
         $current_feeds = $referral_values['current_feeds'];
         $medications = $referral_values['medications'];
         $other_inv=$referral_values['other_investigations'];
@@ -54,8 +56,10 @@ $patient_values = mysqli_fetch_assoc($patient);
             <?php if($interpreter_language != ""): ?>   <p><b> Interpreter language :</b> <?php echo $interpreter_language; ?> </p> 
             <?php endif; ?>    
             <p><b> Name of King's Hospital Doctor :</b> <?php echo $doctor_kch_name; ?> </p>
+            <p><b> Date of Referral :</b> <?php echo $date_of_referral; ?> </p>
             <p><b> Current issue :</b> <?php echo $current_issue; ?> </p>
             <p><b> Present Complaint History :</b> <?php echo $history_of_present_complaint; ?> </p>
+            <p><b> Family History :</b> <?php echo $family_history; ?> </p>
             <p><b> Current feeds :</b> <?php echo $current_feeds; ?> </p>
             <p><b> Medications :</b> <?php echo $medications; ?> </p>
             <p><b> Other investigations :</b> <?php echo $other_inv; ?> </p>
@@ -65,10 +69,14 @@ $patient_values = mysqli_fetch_assoc($patient);
 
 
 
-
+            <?php if (!$_SESSION['userLevel'] == 1) { ?>
     <br><a href="referral_edit.php?id=<?php echo $id?>">Edit Referral</a><br>
     <br><a href="referral_show.php?id=<?php echo $patient_ID?>">Go Back</a>
+    <?php } ?>
 
+        <?php if ($_SESSION['userLevel'] == 1) { ?>
+            <br><a href="patients.php">Go Back</a>
+        <?php } ?>
 
 
 

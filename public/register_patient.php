@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $message .= "Date Of birth can not be empty";
             }
 
-    $dob = date('Y-m-d', $dob);
+    $dob = date('Y-m-d', $date_of_birth);
         
     $home_phone = $_POST["homenumber"];
     
@@ -243,7 +243,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
    <div class="field-column">
-      <label>Email (@nhs.net)</label> </div>
+      <label>Email (@nhs.net or @*.nhs.uk)</label> </div>
       <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
 
    </div>

@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
     $investigation_set = find_investigations_by_id($investigation_id);
 }
 elseif(isset($_SESSION['nhsno'])){
-    //$user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
+    $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
 
 }
 else{
@@ -46,6 +46,8 @@ if(mysqli_num_rows($investigation_set)>=1){
         $Urea = $row['Urea'];
         $Creatinine = $row['Creatinine'];
         $is_urgent = check_investigation_urgent(intval($_GET['id']));
+        $Notes = $row['Notes'];
+
 
 
 
@@ -76,9 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_Cortisol = $_POST['Cortisol'] ?? '';
     $new_Urea = $_POST['Urea'] ?? '';
     $new_Creatinine = $_POST['Creatinine'] ?? '';
+    $new_Notes = $_POST['Notes'] ?? '';
     ($_POST['hasSymptoms'] == "Y") ? $new_Urgent = "Y": $new_Urgent = "N";
 
-    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent);
+    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent, $new_Notes);
     header('Location: patients.php');
     exit;
 }
@@ -175,8 +178,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                         </dl>
                                                                                         <d1>
                                                                                             <dt> Creatinine </dt>
-                                                                                            <dd> <input type="text" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
-                                                                                            </dl>
+                                                                                                <dd> <input type="text" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
+                                                                                                </dl>
+                                                                                            <d1>
+                                                                                                <dt> Notes </dt>
+                                                                                                <dd> <input type="text" name= "Notes" value = "<?php echo $Notes;?> " /> </dd>
+                                                                                                </dl>
                                                                                         
                                                                                                                                                                                 
                                                                                             <!-- Asking for indication of urgent symptoms -->

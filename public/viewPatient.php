@@ -4,6 +4,11 @@
 <?php
 $page_title = 'KCL Paedriatic Liver Service';
 
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
+
 ?>
 
 <?php
@@ -64,10 +69,11 @@ if(mysqli_num_rows($query)>=1){
         <h4>GP Address: <b><?php echo $gp_address?></b></h4>
 
         <h4>GP Phone: <b><?php echo $gp_phone?></b></h4>
-
+            <?php if (!$_SESSION['userLevel'] == 1) { ?>
         <h4>Access Code: <b><?php echo $accessCode?></b></h4>
 
         <br><a href="editPatient.php?id=<?php echo $id?>">Edit Patient</a><br>
+        <?php } ?>
         <br><a href="patients.php">Go Back</a>
 
 
