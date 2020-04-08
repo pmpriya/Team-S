@@ -157,7 +157,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message .= getMessage($val,"Doctor name");
             $isValid = false;
         }
-    
+    $ref_email = $_POST["ref_mail"];
     $ref_hospital_name = $_POST["refhospital"];
      $val = isOnlyCharacter($ref_hospital_name);
         if($val!=1)
@@ -169,7 +169,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
             || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
-            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="")
+            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="" || $reg_email=="")
 
             echo '<label class="text-danger">Please fill in all required fields</label>';
    
@@ -193,13 +193,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     else { 
                       
                         if($isValid){
-                          
+
+                          send_mail_registration($email,$first_name);
+                          send_mail_ref_doctor($ref_email,$first_name,$last_name,$nhs_number,$accessCode);
                           $result1 = insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
-                          $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email);
+                          $ref_dr_name,$ref_hospital_name,$ref_email,$reg_surname,$reg_forename,$reg_email);
 
                           $new_id = mysqli_insert_id($db);
 
-                          redirect_to(url_for('InvestigationsNew.php?patient_ID=' . $new_id));
+                          redirect_to(url_for('referral_page.php?id=' . $new_id));
                            
                         }
                         else {
@@ -244,7 +246,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
       <label>Email (@nhs.net or @*.nhs.uk)</label> </div>
-      <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
+      <input type="text" id="email2" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
 
    </div>
    
@@ -282,6 +284,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       <label>Full Name of Referring Doctor</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Doctor Name')" id="refname" name="refname" pattern="^[a-z ,.'-]+$" placeholder="Required" required>
     </div>
+
+    <div class="field-column">
+      <label>Email of Referee</label>
+       <input type="text" name="ref_mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
+    </div>
      
     <div class="field-column">
       <label>Referring Hospital</label>
@@ -289,7 +296,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
      <!-- sex -->
-
      <div class="field-column">
             <label>Gender</label>
                 <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
@@ -301,8 +307,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    
   <div class="field-column">
-      <label>Email</label>
-       <input type="text" name="email" onfocusout="ValidateEmail()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
+      <label>Email of Patient</label>
+       <input type="text" name="email" onfocusout="ValidateEmail() pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
     </div>
 
 
@@ -558,7 +564,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script type="text/javascript">
     function ValidateNHSEmail() 
     {
-        var mail = document.getElementById("email");
+        var mail = document.getElementById("email2");
         if(!isEmpty(mail,"Registering Person Mail")){
             mail = mail.value;
             if (/^\w+([\.-]?\w+)*@nhs.net$/.test(mail))
