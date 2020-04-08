@@ -41,7 +41,7 @@ if (isset($_POST['submitbtn'])) {
                 background: #f1f1f1;
             }
 
-            form.example button {
+/*             form.example button {
                 float: left;
                 width: 20%;
                 padding: 10px;
@@ -52,7 +52,9 @@ if (isset($_POST['submitbtn'])) {
                 border-left: none;
                 cursor: pointer;
                 height: 42px;
-            }
+            } */
+            
+            
 
             form.example button:hover {
                 background: black;
@@ -63,6 +65,26 @@ if (isset($_POST['submitbtn'])) {
                 clear: both;
                 display: table;
             }
+            a {
+                background-color: white;
+    box-shadow: -1 1px 0 blue;
+    color: rgb(42,103,204);
+    padding: 0.3em 1em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+} 
+
+a:hover {
+  background-color: rgb(19, 26, 102);
+  cursor: pointer;
+}
+
+a:active {
+  box-shadow: none;
+  top: 5px;
+}
+
         </style>
 
     <div class="public">
@@ -72,20 +94,20 @@ if (isset($_POST['submitbtn'])) {
 
         <center>
 
-                <h1>Staff</h1>
+                <h1 id="title-page">Staff</h1>
                 <form method="post" class="example" action="users.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" placeholder="Enter Surname to Search">
-                    <button name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
+                    <input id="searchinput" type="text" name="search" placeholder="Enter Surname to Search">
+                    <button id = "searchbutton" name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
                 <br>
                 <table>
                     <tr>
-                        <th><b>Username</b></th>
-                        <th><b>Name</b></th>
-                        <th><b>Surname</b></th>
-                        <th><b>Level</b></th>
-                        <th colspan="2"><b>Manage</b></th>
+                        <th id = "darkblue"><b>Username</b></th>
+                        <th id = "lightblue"><b>Name</b></th>
+                        <th id = "darkblue"><b>Surname</b></th>
+                        <th id = "lightblue"><b>Level</b></th>
+                        <th id = "darkblue" colspan="2"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
