@@ -5,8 +5,11 @@
   <?php include(SHARED_PATH . '/validation.php'); ?>
 
 
-
 <?php
+if ($_SESSION['userLevel'] < 2) {
+    redirect_to('index.php');
+
+}
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $user_set = find_patient_by_id($_GET['id']);
@@ -137,12 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $message .= getMessage($val,"Access Code");
                 $isValid = false;
             }
-            if(isValid){
+
 
     edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth, $new_sex, $new_email, $new_home_address, $new_postcode, $new_home_phone, $new_mobile_phone, $new_gp_address,$new_gp_phone, $new_accessCode);
     header('Location: patients.php');
     exit;
-    }
+
 }
 ?>
     <style>textarea {

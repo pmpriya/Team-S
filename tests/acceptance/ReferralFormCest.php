@@ -5,7 +5,7 @@ class ReferralFormCest
     public function _before(AcceptanceTester $I)
     {
     }
-    public function referralSubmitTest(AcceptanceTester $I)
+    public function referralSuccessfulSubmitTest(AcceptanceTester $I)
         {
             $I->amOnPage('/referral_page.php?id=96');
                     $I->fillField('consultant_name','testname');
@@ -30,6 +30,18 @@ class ReferralFormCest
                     $I->see('testname');
                     
 
+                 
+        }
+        public function referralIncompleteSubmitTest(AcceptanceTester $I)
+        {
+            $I->amOnPage('/referral_page.php?id=96');
+                    
+
+                    
+                    $I->click('Submit');
+                    $I->see("REFERRAL FORM for Test Test");
+                    $I->canSeeInCurrentUrl('/referral_page.php?id=96');
+                    
                  
         }
     // tests
