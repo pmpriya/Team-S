@@ -19,7 +19,7 @@ if ($_SESSION['userLevel'] < 1) {
 //     delete_patient($var);
 //     header('Location: patients.php');
 // } -->
-
+<!-- 
 <?php
 if (isset($_POST['submitbtn'])) {
     $data = $_POST['search'];
@@ -55,7 +55,7 @@ if (isset($_POST['submitbtn'])) {
                    <?php } ?>
                 </table>
         
-    </div>
+    </div> -->
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
