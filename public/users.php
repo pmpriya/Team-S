@@ -97,7 +97,7 @@ a:active {
                 <h1 id="title-page">Staff</h1>
                 <form method="post" class="example" action="users.php" style="margin:auto;max-width:700px">
                     <input id="searchinput" type="text" name="search" placeholder="Enter Surname to Search">
-                    <button id = "searchbutton" name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
+                    <button id = "searchbutton" style = "width : 30%;height : 06%;"name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
                 <br>
