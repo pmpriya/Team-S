@@ -75,7 +75,7 @@ if (isset($_POST['submitbtn'])) {
         <th> Date of Birth </th>
         <th> Email </th>
         <th> Referring Doctor Name </th>
-     -->
+
 
         <?php while ($patient = mysqli_fetch_assoc($patient_set)){ ?>
             <tr>

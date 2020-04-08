@@ -23,7 +23,7 @@
         <th> Consultant name</th> 
         <th> Consultant Specialty</th>
         <th> Organisation Hospital Name</th>
-
+        <th> Urgent</th>
         <th> View </th>
  
      
@@ -36,6 +36,7 @@
                 <td><?php echo h($allReferrals['consultant_name']); ?></td>
                 <td><?php echo h($allReferrals['consultant_specialty']); ?></td>
                 <td><?php echo h($allReferrals['organisation_hospital_name']); ?></td>
+                <td><?php echo h($allReferrals['Urgent']); ?></td>
                 <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>>Details</a></td>
             
             </tr> 

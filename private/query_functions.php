@@ -19,20 +19,29 @@ function find_referral_by_id($id){
     return $result;
 } 
 
-function get_all_patients()
-{
+// function get_all_patients()
+// {
+//     global $db;
+//     $sql = "SELECT * FROM Patient ORDER BY last_name ASC ";
+//     $result = mysqli_query($db, $sql);
+//     return $result;
+// }
+
+function get_all_patients(){
     global $db;
-    $sql = "SELECT * FROM Patient ORDER BY last_name ASC ";
+    $sql = "SELECT DISTINCT p.* ";
+    $sql .= "FROM Patient p ";
+    $sql .= "INNER JOIN Referral r ON p.ID = r.patient_ID";
+    //$sql .= "ORDER BY Urgent desc, id asc";
     $result = mysqli_query($db, $sql);
     return $result;
 }
-
 function find_referrals_by_id($patient_ID)
 {
     global $db;  
     $sql = "SELECT * FROM Referral ";
     $sql .= "WHERE patient_ID ='" . $patient_ID . "'";
-  
+    $sql .= "ORDER BY Urgent desc, id asc";
     $result = mysqli_query($db, $sql);
  
     return $result;
