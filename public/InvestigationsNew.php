@@ -25,12 +25,6 @@
                 }
 
         $AST = $_POST['AST'] ?? '';
-        $val = isOnlyNumber($AST);
-            if($val!=1)
-            {
-                $message += getMessage($val,"AST");
-                $isValid = false;
-            }
 
         $ALT = $_POST['ALT'] ?? '';
         $val = isOnlyNumber($ALT);
@@ -41,44 +35,10 @@
             }
 
         $ALP = $_POST['ALP'] ?? '';
-        $val = isOnlyNumber($ALP);
-            if($val!=1)
-            {
-                $message += getMessage($val,"ALP");
-                $isValid = false;
-            }
-
         $GGT = $_POST['GGT'] ?? '';
-        $val = isOnlyNumber($GGT);
-        if($val!=1)
-        {
-            $message += getMessage($val,"GGT");
-            $isValid = false;
-        }
-
         $Prot = $_POST['Prot'] ?? '';
-        $val = isOnlyNumber($Prot);
-        if($val!=1)
-            {
-                $message += getMessage($val,"Prot");
-                $isValid = false;
-            }
-
         $Alb = $_POST['Alb'] ?? '';
-        $val = isOnlyNumber($Alb);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Alb");
-                $isValid = false;
-            }
-
         $CK = $_POST['CK'] ?? '';
-        $val = isOnlyNumber($CK);
-            if($val!=1)
-            {
-                $message += getMessage($val,"CK");
-                $isValid = false;
-            }
 
         $HbHct = $_POST['HbHct'] ?? '';
         $val = isOnlyNumber($HbHct);
@@ -97,12 +57,6 @@
             }
         
         $Neutro = $_POST['Neutro'] ?? '';
-        $val = isOnlyNumber($Neutro);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Neutro");
-                $isValid = false;
-            }
 
         $Platelets = $_POST['Platelets'] ?? '';
         $val = isOnlyNumber($Platelets);
@@ -113,20 +67,7 @@
             }
 
         $CRP = $_POST['CRP'] ?? '';
-        $val = isOnlyNumber($CRP);
-            if($val!=1)
-            {
-                $message += getMessage($val,"CRP");
-                $isValid = false;
-            }
-
         $ESR = $_POST['ESR'] ?? '';
-        $val = isOnlyNumber($ESR);
-            if($val!=1)
-            {
-                $message += getMessage($val,"ESR");
-                $isValid = false;
-            }
         
         $PTINR = $_POST['PTINR'] ?? '';
         $val = isOnlyNumber($PTINR);
@@ -137,46 +78,13 @@
             }
 
         $APTR = $_POST['APTR'] ?? '';
-        $val = isOnlyNumber($APTR);
-            if($val!=1)
-            {
-                $message += getMessage($val,"APTR");
-                $isValid = false;
-            }
-
         $Fibrinogen = $_POST['Fibrinogen'] ?? '';
-        $val = isOnlyNumber($Fibrinogen);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Fibrinogen");
-                $isValid = false;
-            }
-
         $Cortisol = $_POST['Cortisol'] ?? '';
-        $val = isOnlyNumber($Cortisol);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Cortisol");
-                $isValid = false;
-            }
-
         $Urea = $_POST['Urea'] ?? '';
-        $val = isOnlyNumber($Urea);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Urea");
-                $isValid = false;
-            }
-
         $Creatinine = $_POST['Creatinine'] ?? '';
-        $val = isOnlyNumber($Creatinine);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Creatinine");
-                $isValid = false;
-            }
+        $Notes = $_POST['Notes'] ?? '';
 
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine);
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     
@@ -197,132 +105,138 @@
 <span id="alert_message" style="color:red"></span>
 <d1>
      <dl>
-        <dt> Date<input type="date" onfocusout="isEmpty(this,'Date')" id="date" name= "date"/> </dt>
+        <dt> Date<input type="date" onfocusout="isEmpty(this,'Date')" id="date" name= "date"> </dt>
     </dl>
     <d1>
     
    <d1>
     <dl>
-        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD"/> </dt>
+        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="required" required> </dt>
     </dl>
     <d1> 
 
     <d1>
     <dl>
-        <dt> AST <input type="text" onfocusout="isOnlyNumber(this,'AST')" id="AST" name= "AST"/> </dt>
+        <dt> AST <input type="text" id="AST" name= "AST" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT"/> </dt>
+        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="required" required> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> ALP <input type="text" onfocusout="isOnlyNumber(this,'ALP')" id="ALP" name= "ALP"/> </dt>
+        <dt> ALP <input type="text" id="ALP" name= "ALP" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> GGT <input type="text" onfocusout="isOnlyNumber(this,'GGT')" id="GGT" name= "GGT"/> </dt>
+        <dt> GGT <input type="text" id="GGT" name= "GGT" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Prot <input type="text" onfocusout="isOnlyNumber(this,'Prot')" id="Prot" name= "Prot"/> </dt>
+        <dt> Prot <input type="text" id="Prot" name= "Prot" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Alb <input type="text" onfocusout="isOnlyNumber(this,'Alb')" id="Alb" name= "Alb"/> </dt>
+        <dt> Alb <input type="text" id="Alb" name= "Alb" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> CK <input type="text" onfocusout="isOnlyNumber(this,'CK')" id="CK" name= "CK"/> </dt>
+        <dt> CK <input type="text" id="CK" name= "CK" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct"/> </dt>
+        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="required" required> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC"/> </dt>
+        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="required" required> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Neutro <input type="tinytext" onfocusout="isOnlyNumber(this,'Neutro')" id="Neutro" name="Neutro"/> </dt>
+        <dt> Neutro <input type="tinytext" id="Neutro" name="Neutro" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets"/> </dt>
+        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="required" required> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> CRP <input type="text" onfocusout="isOnlyNumber(this,'CRP')" id="CRP" name= "CRP"/> </dt>
+        <dt> CRP <input type="text" id="CRP" name= "CRP" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> ESR <input type="text" onfocusout="isOnlyNumber(this,'ESR')" id="ESR" name= "ESR"/> </dt>
+        <dt> ESR <input type="text" id="ESR" name= "ESR" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR"/> </dt>
+        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="required" required> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> APTR <input type="text" onfocusout="isOnlyNumber(this,'APTR')" id="APTR" name= "APTR"/> </dt>
+        <dt> APTR <input type="text" id="APTR" name= "APTR" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Fibrinogen <input type="text" onfocusout="isOnlyNumber(this,'Fibrinogen')" id="Fibrinogen" name= "Fibrinogen"/> </dt>
+        <dt> Fibrinogen <input type="text" id="Fibrinogen" name= "Fibrinogen" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Cortisol <input type="text" onfocusout="isOnlyNumber(this,'Cortisol')" id="Cortisol" name= "Cortisol"/> </dt>
+        <dt> Cortisol <input type="text" id="Cortisol" name= "Cortisol" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Urea <input type="text" onfocusout="isOnlyNumber(this,'Urea')" id="Urea" name= "Urea"/> </dt>
+        <dt> Urea <input type="text" id="Urea" name= "Urea" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> Creatinine <input type="text" onfocusout="isOnlyNumber(this,'Creatinine')" id="Creatinine" name= "Creatinine"/> </dt>
+        <dt> Creatinine <input type="text" id="Creatinine" name= "Creatinine" placeholder="optional"> </dt>
     </dl>
-    <d1> 
+    <d1>
 
-    
-    <div id="operations">
+        <d1>
+            <dl>
+                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"> </dt>
+            </dl>
+            <d1>
+
+
+            <div id="operations">
     <input type="button" onclick="submitInvestigation()" name="btnsubmit" value="Add Investigation"/>
     </div>
     
@@ -356,7 +270,7 @@
 <script type="text/javascript">
     function isOnlyNumber(r,e){
         if(!isEmpty(r,e)){
-            if (/^\d+$/.test(r.value.trim()))
+            if (/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/.test(r.value.trim()))
             {
                 if(append)
                     document.getElementById("alert_message").innerHTML += "";
@@ -410,32 +324,8 @@
             console.log(2);
             isOkay = false;
         }
-        if(!isOnlyNumber(AST,"AST")){
-            console.log(3);
-            isOkay = false;
-        }
         if(!isOnlyNumber(ALT,"ALT")){
             console.log(4);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(ALP,"ALP")){
-            console.log(5);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(GGT,"GGT")){
-            console.log(6);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Prot,"Prot")){
-            console.log(7);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Alb,"Alb")){
-            console.log(8);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(CK,"CK")){
-            console.log(9);
             isOkay = false;
         }
         if(!isOnlyNumber(HbHct,"Hb/Hct")){
@@ -446,47 +336,14 @@
             console.log(11);
             isOkay = false;
         }
-        if(!isOnlyNumber(Neutro,"Neutro")){
-            console.log(12);
-            isOkay = false;
-        }
         if(!isOnlyNumber(Platelets,"Platelets")){
             console.log(13);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(CRP,"CRP")){
-            console.log(14);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(ESR,"ESR")){
-            console.log(15);
             isOkay = false;
         }
         if(!isOnlyNumber(PTINR,"PT/INR")){
             console.log(16);
             isOkay = false;
         }
-        if(!isOnlyNumber(APTR,"APTR")){
-            console.log(17);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Fibrinogen,"Fibrinogen")){
-            console.log(18);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Cortisol,"Cortisol")){
-            console.log(19);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Urea,"Urea")){
-            console.log(20);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Creatinine,"Creatinine")){
-            console.log(21);
-            isOkay = false;
-        }
-
 
         if(isOkay){
             //alert("all good");

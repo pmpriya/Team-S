@@ -5,27 +5,32 @@
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
 <?php
-if (isset($_GET['id'])){
-  $patient_ID = intval($_GET['id']);
-  $user_set = find_user_by_id($patient_ID);
-}
-else 
-$patient_ID = 15;
-$message = "";
-$isValid = true;
+
+  $patient_ID = $_GET["id"];
+  $patient = find_patient_by_id($patient_ID);
+  $patient_values = mysqli_fetch_assoc($patient);
+
+?>
+<?php
+
 if(is_post_request()){
-
+$isValid = true;
   $consultant_name = $_POST["consultant_name"]; 
-
-  $consultant_specialty=$_POST["consultant_specialty"];
-
   $val = isOnlyCharacter($consultant_name);
   if($val!=1)
   {
     $message .= getMessage($val,"Consultant Name");
     $isValid = false;
   }
-
+  
+  $consultant_specialty=$_POST["consultant_specialty"];
+  $val = isOnlyCharacter($consultant_specialty);
+  if($val!=1)
+  {
+    $message .= getMessage($val,"Consultant Specialty");
+    $isValid = false;
+  }
+  
   $organisation_hospital_name  = $_POST["organisation_hospital_name"];
   $val = isOnlyCharacter($organisation_hospital_name);
   if($val!=1)
@@ -58,22 +63,8 @@ if(is_post_request()){
 
   $is_patient_aware  = $_POST["is_patient_aware"];
   $is_interpreter_needed  = $_POST["is_interpreter_needed"];
-
   $interpreter_language = $_POST["interpreter_language"];
-  $val = isOnlyCharacter($interpreter_language);
-  if($val!=1)
-  {
-    $message .= getMessage($val,"Interpreter Language");
-    $isValid = false;
-  }
-
   $kch_doc_name =  $_POST["kch_doc_name"];
-  $val = isOnlyCharacter($kch_doc_name);
-  if($val!=1)
-  {
-    $message .= getMessage($val,"Doctor's Name");
-    $isValid = false;
-  }
 
   $current_issue = $_POST["current_issue"];
   if(!isset($current_issue) || empty($current_issue))
@@ -119,16 +110,18 @@ if(is_post_request()){
   $date = strtotime($_POST["date"]);
   $date = date('Y-m-d', $date);
     
-  if(!isset($dob) || empty($dob)){
+  if(!isset($date) || empty($date)){
               $isValid = false;
-              $message .= "Date Of birth can not be empty";
+              $message .= "Date can not be empty";
           }
+        
+ 
 
-  $dob = date('Y-m-d', $dob);
   
-      if ($organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
+      if ($consultant_name=="" || $consultant_specialty=="" || $organisation_hospital_name=="" || $organisation_hospital_no=="" || $referring_name=="" || $bleep_number==""  
           || $current_issue=="" || $history_of_present_complaint=="" 
-          || $family_history=="" || $current_feeds=="" || $medications=="" || $date==""){
+          || $family_history=="" || $current_feeds=="" || $medications=="" || $date=="")
+          {
             
             echo '<label class="text-danger">Please fill in all required fields</label>';
 
@@ -137,10 +130,10 @@ if(is_post_request()){
       else  {
                 if($isValid)
                 {
-                    $result1 = insert_referral($patient_ID, $consultant_name,$consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
+                    $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
                     $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
-                    redirect_to(url_for('patients.php'));
+                    header('Location: referral_show.php?id=' . $patient_ID);
                 }
                 else 
                 {
@@ -156,10 +149,12 @@ if(is_post_request()){
       <!--<link rel="stylesheet" href="style.css">-->
   </head>
 <body>
-  <h1><b>REFERRAL FORM</b></h1>
+  <h1><b>REFERRAL FORM for <?php echo $patient_values["first_name"] . " ". $patient_values["last_name"];?> </b></h1>
 <br>
+<center>
 <span id="alert_message" style="color:red"></span>
-<form action="<?php echo url_for("/referral_page.php"); ?>" method="post" id="form">
+</center>
+<form action="<?php echo url_for("/referral_page.php?id=" . $patient_ID); ?>" method="post" id="form">
  <!-- Consultant Name -->
     <div class="field-column">
     <label>Consultant Name </label>
@@ -168,7 +163,7 @@ if(is_post_request()){
 
     <div class="field-column">
     <label>Consultant Specialty </label>
-        <input type="text" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
+        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Specialty')" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
     </div>
   <!--  Organisation Hospital Name -->
 
@@ -215,12 +210,12 @@ if(is_post_request()){
     <!-- Interpreter language -->         
   <div class="field-column">
     <label>Interpreter language(To be left empty if no interpreter is needed)</label>
-     <input type="text" onfocusout="isOnlyCharacter(this,'Interpreter Language)" name="interpreter_language" id="interpreter_language" placeholder="Optional">
+     <input type="text" name="interpreter_language" id="interpreter_language" placeholder="Optional">
   </div>
     <!-- KCH DOC NAME -->
   <div class="field-column">
     <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
-     <input type="text" onfocusout="isOnlyCharacter(this,'Doctor's Name)" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
+     <input type="text" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
   </div>
 
   <div class="field-column">
@@ -232,42 +227,48 @@ if(is_post_request()){
 
    <div class="field-column">
     <label>Current Issue</label>
-    <input type = "textarea" onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
+    <textarea onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
+    </textarea>
   </div>
 
    <!-- History Of Present Complaint -->
 
    <div class="field-column">
     <label>History Of Present Complaint</label>
-    <input type="textarea" onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
+    <textarea onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
+    </textarea>
   </div>
 
    <!-- Family History -->
 
    <div class="field-column">
     <label>Family History</label>
-    <input type="textarea" onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
+    <textarea onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
+    </textarea>
   </div>
   
    <!-- Current Feeds -->
  
    <div class="field-column">
     <label>Current Feeds</label>
-    <input type="textarea" onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
+    <textarea onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
+    </textarea>
   </div>
 
    <!-- Medications -->
 
    <div class="field-column">
     <label>Medications</label>
-    <input type="textarea" onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
+    <textarea onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
+    </textarea>
   </div>
 
    <!-- Other Investigations -->
 
    <div class="field-column">
     <label>Other Investigations</label> 
-    <input type="textarea" onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
+    <textarea onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
+    </textarea>
   </div>
    <!-- submit -->
    <!--<input type ="submit" name="submit"> -->
@@ -314,11 +315,11 @@ if(is_post_request()){
           document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
         return false;
       }
-      if(r.value.length>10){
+      if(r.value.length>30){
         if(append)
-          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
+          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 30 characters<br/>";
         else
-          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
+          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 30 characters";
         return false;
       }
       if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
@@ -363,6 +364,7 @@ if(is_post_request()){
     document.getElementById("alert_message").innerHTML ="";
     append = true;
     var consultantName = document.getElementById("consultant_name");
+    var consultantSpec = document.getElementById("consultant_specialty");
     var orgName = document.getElementById("organisation_hospital_name");
     var orgNumber = document.getElementById("organisation_hospital_no");
     var refName = document.getElementById("referring_name");
@@ -380,6 +382,9 @@ if(is_post_request()){
     if(!isOnlyCharacter(consultantName,"Consultant Name")){
       isOkay = false;
     }
+    if(!isOnlyCharacter(consultantSpec,"Consultant Specialty")){
+      isOkay = false;
+    }
     if(!isOnlyCharacter(orgName,"Organisation Name")){
       isOkay = false;
     }
@@ -390,12 +395,6 @@ if(is_post_request()){
       isOkay = false;
     }
     if(!isOnlyNumber(bleepNumber,"Bleep Number")){
-      isOkay = false;
-    }
-    if(!isOnlyCharacter(interLang,"Interpreter Language")){
-      isOkay = false;
-    }
-    if(!isOnlyCharacter(kchDoctor,"Doctor's Name")){
       isOkay = false;
     }
     if(isEmpty(currentIssue,"Current Issue")){

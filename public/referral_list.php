@@ -1,13 +1,29 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php
+
+     $referrals_set = find_all_referrals();
+     
+
+if ($_SESSION['userLevel'] < 1) {
+    redirect_to('index.php');
+
+}
     $patient_set = get_all_patients();
-?>
-<?php $page_title = 'Referrals';  ?>
-<?php include (SHARED_PATH. '/header.php'); ?> 
+?> 
+<php $page_title = 'Referrals'; ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+
+<!-- // settype($var, 'integer');
+// $var = $_GET["delete"] ?? '';
+// if (isset($_GET["delete"])) {
+//     delete_patient($var);
+//     header('Location: patients.php');
+// } -->
+
 <?php
 if (isset($_POST['submitbtn'])) {
     $data = $_POST['search'];
-    $user_set = search_by_nhs_no($data);
+    $patient_set = search_by_surname($data);
    
 }
 
@@ -17,7 +33,7 @@ if (isset($_POST['submitbtn'])) {
     <div class= "Referrals listing">
     <h1> Referrals  </h1>
     <form method="post" class="example" id="searchbar" action="referral_list.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter NHS Number to Search">
+                    <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
    </form>
    <br>

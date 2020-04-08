@@ -9,6 +9,7 @@
         <br>
 
         <img src="images/kcl.jpg" alt="Logo" id="logo">
+    
     </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
