@@ -1,4 +1,4 @@
-<?php require_once('Mail.php'); ?>
+
 <?php
  
 function find_member_by_nhsno($nhs_number) 
@@ -41,12 +41,12 @@ function find_referrals_by_id($patient_ID)
 
 
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
-$ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) 
+$ref_dr_name,$ref_email,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) 
 {
     global $db;
     $sql = "INSERT INTO Patient ";
     $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address,
-    gp_phone, accessCode, referring_doctor_name, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
+    gp_phone, accessCode, referring_doctor_name,referring_doc_email, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
@@ -62,32 +62,19 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
     $sql .= "'" . $gp_number . "', ";
     $sql .= "'" . $accessCode . "', ";
     $sql .= "'" . $ref_dr_name . "', ";
+    $sql .= "'" . $ref_email . "', ";
     $sql .= "'" . $ref_hospital_name . "', ";
     $sql .= "'" . $reg_surname . "', ";
     $sql .= "'" . $reg_forename . "', ";
     $sql .= "'" . $reg_email . "'";
     $sql .= ")";
-    echo $sql;
     $result = mysqli_query($db, $sql);
+    
+   
 
-    $subject = 'Signup Verification';
-    $message = '
-
-       Thanks for signing up !
-       Your account has been created . You can login with your username and password using the credintials below :
-
-       ----------
-       Username : '.$first_name.'
-       Password : '.$accessCode.'
-       ----------
-
-       Please log in to your account :
-       http://kingshospitallondon.herokuapp.com/login.php
-
-       ';
 
     if($result) {
-        sendmail($email,$subject,$message);
+       
         return $result;
     } else {
         echo mysqli_error($db);
@@ -96,50 +83,52 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
     }
 }
 
-function sendmail($recipient,$subject,$body)
-{
+function send_mail_ref_doctor($ref_email,$first_name,$last_name,$nhs_number,$accessCode){
 
-     
-    // Identify the sender, recipient, mail subject, and body
-    $sender    = "ticketmachineproject@gmail.com";
-    // $recipient = "ticketmachineproject@gmail.com";
-    // $subject = "[Site Message]";
-    // $body = "PEAR Mail successfully sent this email.";
- 
-    // Identify the mail server, username, password, and port
-     $server   = "ssl://smtp.gmail.com";
-    $username = "ticketmachineproject@gmail.com";
-    $password = "KCLproject";
-    $port     = "465";
- 
-    // Set up the mail headers
-    $headers = array(
-        "From"    => $sender,
-        "To"      => $recipient,
-        "Subject" => $subject
-    );
-
-    // Configure the mailer mechanism
-    $smtp = Mail::factory("smtp",
-        array(
-            "host"     => $server,
-            "username" => $username,
-            "password" => $password,
-            "auth"     => true,
-            "port"     => $port
-        )
-    );
- 
-    // Send the message
-    $mail = $smtp->send($recipient, $headers, $body);
- 
-    if (PEAR::isError($mail)) {
-        echo("<p>" . $mail->getMessage() . "</p>");
-    } else {
-        echo("<p>Message successfully sent!</p>");
-    }
+    
+  $to  = $ref_email; 
+  $subject = 'Signup verification'; 
+  $message = '
+   
+  As a patient of yours: '.$first_name . $last_name. '  has been registered with Kings College Health Centre - Paediatric Liver Section, you have been created a KCH account automatically.
+  You can now login with your username and password with the credentials below:
+   
+  ------------------------
+  NHS number: '.$nhs_number.'
+  Password: '.$accessCode.'
+  ------------------------
+   
+  Please log in to your account if you want to view or edit data of your newly registered patient:
+  http://project.juliusz.uk/public/external_access.php
+   
+  '; 
+                       
+  $headers = 'From:noreply@nhs.net' . "\r\n"; 
+  mail($to, $subject, $message, $headers); 
 }
 
+function send_mail_registration($email,$first_name){
+    $subject = 'Patient registration'; 
+    $message = '
+
+       Hello '.$first_name.',
+        
+       We are happy to let you know that you have been fully registered with Kings College Health Centre - Paediatric Liver Section.
+       Now we have access to your investigations and personal data and you will be notified by email before every appointment with us.
+
+
+       Kind Regards,
+
+       Kings College London NHS Health Centre
+       
+      
+
+       ';
+    $to = $email; 
+    $headers = 'From:noreply@nhs.net' . "\r\n"; 
+    mail($to, $subject, $message, $headers); 
+  
+  }
 function find_all_users() 
 {
     global $db;
@@ -661,9 +650,9 @@ function insert_appointment_member($data) {
      $patient = find_patient_by_id($data['patient_id']);
         $patient_values = mysqli_fetch_assoc($patient);
         $email=$patient_values['email'];
-        $subject="Regarding Appointment";
-        $message="Appointment fixed at " . $data['date'] . " " . $data['time'];
-        sendmail($email,$subject,$message);
+        $subject="King's Hospital Appointment";
+        $message="You have an appointment at King's Hospital fixed on the " . $data['date'] . " at " . $data['time'];
+       // send_mail($email,$subject,$message);
         return true;
     } else {
         echo mysqli_error($db);
