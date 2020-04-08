@@ -333,6 +333,21 @@ function delete_referral($referral_id){
 
 function delete_investigation($userID)
 {
+  $get_inves= find_investigation_by_id($userID);
+        $inves_values = mysqli_fetch_assoc($get_inves);
+        $patientid = $inves_values['patient_ID'];
+        echo($patientid); 
+        $patient = find_patient_by_id($patientid);
+        $patient_values = mysqli_fetch_assoc($patient);
+        echo($patient_values);
+        // $email=$patient_values['email'];
+    // $patient = find_patient_by_id($id);
+    //     $patient_values = mysqli_fetch_assoc($patient);
+        
+        $delete_investigation_email=$patient_values['email'];
+        $delete_investigation_subject=" Investigation Deleted ";
+        $delete_investigation_message=" Your appointment has been deleted.";
+
     global $db;
     $sql = "DELETE FROM Investigations ";
     $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
@@ -340,6 +355,7 @@ function delete_investigation($userID)
     $result = mysqli_query($db, $sql);
     if ($result) 
     {
+      sendmail($delete_investigation_email,$delete_investigation_subject,$delete_investigation_message);
         return true;
     } 
     else 
