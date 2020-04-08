@@ -1,4 +1,3 @@
-<?php require_once('Mail.php'); ?>
 <?php
  
 function find_member_by_nhsno($nhs_number) 
@@ -41,12 +40,12 @@ function find_referrals_by_id($patient_ID)
 
 
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
-$ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) 
+$ref_dr_name,$ref_email,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) 
 {
     global $db;
     $sql = "INSERT INTO Patient ";
     $sql .= "(nhs_number, first_name, last_name, date_of_birth, email, sex, home_address, postcode, home_phone, mobile_phone, gp_address,
-    gp_phone, accessCode, referring_doctor_name, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
+    gp_phone, accessCode, referring_doctor_name,referring_doc_email, referring_hospital, person_registering_surname, person_registering_forename, person_registering_email) ";
     $sql .= "VALUES (";
     $sql .= "'" . $nhs_number . "', ";
     $sql .= "'" . $first_name . "', ";
@@ -62,106 +61,24 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
     $sql .= "'" . $gp_number . "', ";
     $sql .= "'" . $accessCode . "', ";
     $sql .= "'" . $ref_dr_name . "', ";
+    $sql .= "'" . $ref_email . "', ";
     $sql .= "'" . $ref_hospital_name . "', ";
     $sql .= "'" . $reg_surname . "', ";
     $sql .= "'" . $reg_forename . "', ";
     $sql .= "'" . $reg_email . "'";
     $sql .= ")";
-    echo $sql;
     $result = mysqli_query($db, $sql);
+    
+   
 
-    $subject = 'Signup Verification';
-    $message = '
-
-       Thanks for signing up !
-       Your account has been created . You can login with your username and password using the credintials below :
-
-       ----------
-       Username : '.$first_name.'
-       Password : '.$accessCode.'
-       ----------
-
-       Please log in to your account :
-       http://project.juliusz.uk/public/external_access.php
-
-
-       ';
-
-       $doc_subject = 'Patient Registered';
-
-       $doc_message = '
-
-      Hi !
-     Your patient '.$first_name.' has been registered with Kings College Hospital Paediatric Liver Section . You can login with the username and password using the credintials below :
-
-       ----------
-       Username : '.$first_name.'
-       Password : '.$accessCode.'
-       ----------
-
-       Please log in to your account :
-       http://project.juliusz.uk/public/external_access.php
-
-
-       ';
 
     if($result) {
-        sendmail($email,$subject,$message);
-
-
-      sendmail($ref_mail,$doc_subject,$doc_message);
-      
-
-
+       
         return $result;
     } else {
         echo mysqli_error($db);
         db_disconnect($db);
         exit;
-    }
-}
-
-function sendmail($recipient,$subject,$body)
-{
-
-     
-    // Identify the sender, recipient, mail subject, and body
-    $sender    = "ticketmachineproject@gmail.com";
-    // $recipient = "ticketmachineproject@gmail.com";
-    // $subject = "[Site Message]";
-    // $body = "PEAR Mail successfully sent this email.";
- 
-    // Identify the mail server, username, password, and port
-     $server   = "ssl://smtp.gmail.com";
-    $username = "ticketmachineproject@gmail.com";
-    $password = "KCLproject";
-    $port     = "465";
- 
-    // Set up the mail headers
-    $headers = array(
-        "From"    => $sender,
-        "To"      => $recipient,
-        "Subject" => $subject
-    );
-
-    // Configure the mailer mechanism
-    $smtp = Mail::factory("smtp",
-        array(
-            "host"     => $server,
-            "username" => $username,
-            "password" => $password,
-            "auth"     => true,
-            "port"     => $port
-        )
-    );
- 
-    // Send the message
-    $mail = $smtp->send($recipient, $headers, $body);
- 
-    if (PEAR::isError($mail)) {
-        echo("<p>" . $mail->getMessage() . "</p>");
-    } else {
-        echo("<p>Message successfully sent!</p>");
     }
 }
 
@@ -234,21 +151,7 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
     $sql .= "'" . $date . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
-    $referral_email_receiver = "kingscollegehc@nhs.net";
-    // $referral_email_receiver = "pmpriya.music@gmail.com";
- $referral_email_subject = 'Patient Referral form submitted';
-    $referral_email_message = '
-
-       Hi   
-     
-    This email is a confirmation that a referral has been filled for your patient with id '.$patient_ID.'. You will be notified by email if the referral every time referral is updated. 
-
-
-       ';
-
-
     if($result) {
-        sendmail($referral_email_receiver,$referral_email_subject,$referral_email_message);
         return true;
     } else {
         echo mysqli_error($db);
@@ -333,21 +236,6 @@ function delete_referral($referral_id){
 
 function delete_investigation($userID)
 {
-  $get_inves= find_investigation_by_id($userID);
-        $inves_values = mysqli_fetch_assoc($get_inves);
-        $patientid = $inves_values['patient_ID'];
-        echo($patientid); 
-        $patient = find_patient_by_id($patientid);
-        $patient_values = mysqli_fetch_assoc($patient);
-        echo($patient_values);
-        // $email=$patient_values['email'];
-    // $patient = find_patient_by_id($id);
-    //     $patient_values = mysqli_fetch_assoc($patient);
-        
-        $delete_investigation_email=$patient_values['email'];
-        $delete_investigation_subject=" Investigation Deleted ";
-        $delete_investigation_message=" Your appointment has been deleted.";
-
     global $db;
     $sql = "DELETE FROM Investigations ";
     $sql .= "WHERE id='" . db_escape($db, $userID) . "' ";
@@ -355,7 +243,6 @@ function delete_investigation($userID)
     $result = mysqli_query($db, $sql);
     if ($result) 
     {
-      sendmail($delete_investigation_email,$delete_investigation_subject,$delete_investigation_message);
         return true;
     } 
     else 
@@ -374,16 +261,6 @@ function find_patient_by_id($ID)
     $sql .= "WHERE ID='" . $ID . "'";
     $query = mysqli_query($db, "SELECT * FROM Patient WHERE id = '$ID'") or die(mysqli_error());
     return $query;
-}
-
-function find_investigation_by_id($ID) 
-{
-    global $db;
-    $sql = "SELECT * FROM Investigations ";
-    $sql .= "WHERE ID='" . $ID . "'";
-    $query = mysqli_query($db, "SELECT * FROM Investigations WHERE id = '$ID'") or die(mysqli_error());
-    return $query;
-
 }
 
 function find_patient_by_nhsno($nhs_number) 
@@ -523,12 +400,7 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
     $result = mysqli_query($db, $sql);
     if($result) 
     {
-      $patient = find_patient_by_id($patient_ID);
-        $patient_values = mysqli_fetch_assoc($patient);
-        $email=$patient_values['email'];
-        $subject="Investigation added ";
-        $message=" The investigation form is added.";
-        sendmail($email,$subject,$message);
+
         return true;
     } 
     else 
@@ -546,18 +418,6 @@ function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $ne
     $result = mysqli_query($db, $sql);
     if($result) 
     {
-     $get_investigation = find_investigation_by_id($id);
-        $investigation_values = mysqli_fetch_assoc($get_investigation);
-        $patientid = $investigation_values['patient_ID'];
-        echo($patientid); 
-        $patient = find_patient_by_id($patientid);
-        $patient_values = mysqli_fetch_assoc($patient);
-        echo($patient_values);
-        $email=$patient_values['email'];
-        // $email = 'ticketmachineproject@gmail.com';
-        $subject="Investigation edited ";
-        $message=" The investigation form is edited.";
-        sendmail($email,$subject,$message);
         return true;
         echo '<script>window.location.replace("index.php"); </script>';
         header('users.php');
@@ -688,28 +548,12 @@ function find_all_appointments() {
 
 function delete_appointment($id)
 {
-  $get_appointment = find_appointment_by_id($id);
-        $appointment_values = mysqli_fetch_assoc($get_appointment);
-        $patientid = $appointment_values['patient_id'];
-        echo($patientid); 
-        $patient = find_patient_by_id($patientid);
-        $patient_values = mysqli_fetch_assoc($patient);
-        echo($patient_values);
-        // $email=$patient_values['email'];
-    // $patient = find_patient_by_id($id);
-    //     $patient_values = mysqli_fetch_assoc($patient);
-        
-        $delete_appointment_email=$patient_values['email'];
-        $delete_appointment_subject=" Appointment Cancelled ";
-        $delete_appointment_message=" Your appointment has been cancelled.";
-        
     global $db;
     $sql = "DELETE FROM appointments ";
     $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
     if ($result) {
-     sendmail($delete_appointment_email,$delete_appointment_subject,$delete_appointment_message);
         return true;
     } else {
         // DELETE failed
@@ -756,14 +600,12 @@ function insert_appointment_member($data) {
     $result = mysqli_query($db, $sql);
  
     if($result) {
-     d_patient_by_id($data['patient_id']);
+     $patient = find_patient_by_id($data['patient_id']);
         $patient_values = mysqli_fetch_assoc($patient);
         $email=$patient_values['email'];
-        $subject="Kings College Hospital Appointment ";
-        $message="
-        Hi 
-        Your Appointment has been fixed on the " . $data['date'] . " at " . $data['time'];
-        sendmail($email,$subject,$message);
+        $subject="King's Hospital Appointment";
+        $message="You have an appointment at King's Hospital fixed on the " . $data['date'] . " at " . $data['time'];
+       // send_mail($email,$subject,$message);
         return true;
     } else {
         echo mysqli_error($db);
