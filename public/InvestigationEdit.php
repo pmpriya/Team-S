@@ -8,6 +8,7 @@
 if(isset($_GET['id'])){
     $investigation_id= $_GET['id'];
     $investigation_set = find_investigations_by_id($investigation_id);
+   
 }
 elseif(isset($_SESSION['nhsno'])){
     $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
@@ -19,7 +20,7 @@ else{
 $delete = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_investigation($delete);
-    header('Location: patients.php');
+    header('Location: InvestigationsOfAllPatients.php');
 }
 
 if(mysqli_num_rows($investigation_set)>=1){
@@ -46,7 +47,7 @@ if(mysqli_num_rows($investigation_set)>=1){
         $Urea = $row['Urea'];
         $Creatinine = $row['Creatinine'];
         $Notes = $row['Notes'];
-
+      $patient_ID = $row['patient_ID'];
 
 
 
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_Notes = $_POST['Notes'] ?? '';
 
     edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Notes);
-    header('Location: patients.php');
+    redirect_to(url_for('InvestigationsShow.php?id=' . $patient_ID));
     exit;
 }
 ?>
