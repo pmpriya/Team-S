@@ -142,13 +142,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     
     $reg_email = $_POST["mail2"];
-     $val = validateUserEmail($reg_email);
-        if($val!=1)
-        {
-            echo "not valid email 123";
-            $message .= getMessage($val,"Email");
-            $isValid = false;
-        }
+   //  $val = validateUserEmail($reg_email);
+        //if($val!=1)
+       // {
+        //    echo "not valid email 123";
+         //   $message .= getMessage($val,"Email");
+          //  $isValid = false;
+      //  }
     
     $ref_dr_name = $_POST["refname"];
      $val = isOnlyCharacter($ref_dr_name);
@@ -246,7 +246,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
       <label id="label">Email (@nhs.net or @*.nhs.uk)</label> </div>
-      <input type="text" id="email2" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
+      <input type="text" id="email2" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
 
    </div>
    
@@ -308,7 +308,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
    
   <div class="field-column">
       <label id="label">Email of Patient</label>
-       <input type="text" name="email" onfocusout="ValidateEmail() pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
+       <input type="text" name="email" onfocusout="ValidateEmail()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
     </div>
 
 
@@ -547,9 +547,9 @@ float:left;
         if(!isOnlyCharacter(regForename,"Registering Person Forename")){
             isOkay = false;
         }
-        if(!ValidateNHSEmail()){
-            isOkay = false;
-        }
+      //  if(!ValidateNHSEmail()){
+        //    isOkay = false;
+       // }
 
         if(!isOnlyCharacter(lastname,"Surname")){
             isOkay = false;
