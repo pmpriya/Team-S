@@ -13,6 +13,7 @@
   <body>
 
   <navigation>
+    <img src="images/nhs.png" alt="Logo" id="logo">
     <ul>
       <li><a href="<?php echo url_for('/index.php'); ?>">MAIN</a></li>
 
