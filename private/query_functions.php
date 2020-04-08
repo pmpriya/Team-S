@@ -82,12 +82,37 @@ $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email)
        ----------
 
        Please log in to your account :
-       http://kingshospitallondon.herokuapp.com/login.php
+       http://project.juliusz.uk/public/external_access.php
+
+
+       ';
+
+       $doc_subject = 'Patient Registered';
+
+       $doc_message = '
+
+      Hi !
+     Your patient '.$first_name.' has been registered with Kings College Hospital Paediatric Liver Section . You can login with the username and password using the credintials below :
+
+       ----------
+       Username : '.$first_name.'
+       Password : '.$accessCode.'
+       ----------
+
+       Please log in to your account :
+       http://project.juliusz.uk/public/external_access.php
+
 
        ';
 
     if($result) {
         sendmail($email,$subject,$message);
+
+
+      sendmail($ref_mail,$doc_subject,$doc_message);
+      
+
+
         return $result;
     } else {
         echo mysqli_error($db);
@@ -209,8 +234,21 @@ $history_of_present_complaint, $family_history, $current_feeds, $medications, $o
     $sql .= "'" . $date . "'";
     $sql .= ")";
     $result = mysqli_query($db, $sql);
-    if($result) {
+    $referral_email_receiver = "kingscollegehc@nhs.net";
+    // $referral_email_receiver = "pmpriya.music@gmail.com";
+ $referral_email_subject = 'Patient Referral form submitted';
+    $referral_email_message = '
+
+       Hi   
      
+    This email is a confirmation that a referral has been filled for your patient with id '.$patient_ID.'. You will be notified by email if the referral every time referral is updated. 
+
+
+       ';
+
+
+    if($result) {
+        sendmail($referral_email_receiver,$referral_email_subject,$referral_email_message);
         return true;
     } else {
         echo mysqli_error($db);
@@ -634,12 +672,28 @@ function find_all_appointments() {
 
 function delete_appointment($id)
 {
+  $get_appointment = find_appointment_by_id($id);
+        $appointment_values = mysqli_fetch_assoc($get_appointment);
+        $patientid = $appointment_values['patient_id'];
+        echo($patientid); 
+        $patient = find_patient_by_id($patientid);
+        $patient_values = mysqli_fetch_assoc($patient);
+        echo($patient_values);
+        // $email=$patient_values['email'];
+    // $patient = find_patient_by_id($id);
+    //     $patient_values = mysqli_fetch_assoc($patient);
+        
+        $delete_appointment_email=$patient_values['email'];
+        $delete_appointment_subject=" Appointment Cancelled ";
+        $delete_appointment_message=" Your appointment has been cancelled.";
+        
     global $db;
     $sql = "DELETE FROM appointments ";
     $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
     if ($result) {
+     sendmail($delete_appointment_email,$delete_appointment_subject,$delete_appointment_message);
         return true;
     } else {
         // DELETE failed
@@ -686,11 +740,13 @@ function insert_appointment_member($data) {
     $result = mysqli_query($db, $sql);
  
     if($result) {
-     $patient = find_patient_by_id($data['patient_id']);
+     d_patient_by_id($data['patient_id']);
         $patient_values = mysqli_fetch_assoc($patient);
         $email=$patient_values['email'];
-        $subject="Regarding Appointment";
-        $message="Appointment fixed at " . $data['date'] . " " . $data['time'];
+        $subject="Kings College Hospital Appointment ";
+        $message="
+        Hi 
+        Your Appointment has been fixed on the " . $data['date'] . " at " . $data['time'];
         sendmail($email,$subject,$message);
         return true;
     } else {
