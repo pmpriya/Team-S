@@ -23,7 +23,6 @@
         <th> Consultant name</th> 
         <th> Consultant Specialty</th>
         <th> Organisation Hospital Name</th>
-        <th> Urgent</th>
         <th> View </th>
  
      
@@ -32,12 +31,11 @@
  
         <?php while ($allReferrals = mysqli_fetch_assoc($referrals_of_id)){ ?>
             <tr>
-                <td><?php echo h($allReferrals['date']); ?></td>
+                <td><?php if (h($allReferrals['Urgent']) == "Y"){echo "&#10071 " . h($allReferrals['date']);}else{ echo h($allReferrals['date']);} ?></td>
                 <td><?php echo h($allReferrals['consultant_name']); ?></td>
                 <td><?php echo h($allReferrals['consultant_specialty']); ?></td>
                 <td><?php echo h($allReferrals['organisation_hospital_name']); ?></td>
-                <td><?php echo h($allReferrals['Urgent']); ?></td>
-                <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>>Details</a></td>
+                <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>> Details</a></td>
             
             </tr> 
         <?php } ?>

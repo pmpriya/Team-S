@@ -29,10 +29,10 @@ function find_referral_by_id($id){
 
 function get_all_patients(){
     global $db;
-    $sql = "SELECT DISTINCT p.* ";
+    $sql = "SELECT DISTINCT p.* , r.Urgent ";
     $sql .= "FROM Patient p ";
-    $sql .= "INNER JOIN Referral r ON p.ID = r.patient_ID";
-    //$sql .= "ORDER BY Urgent desc, id asc";
+    $sql .= "INNER JOIN Referral r ON p.ID = r.patient_ID ";
+    $sql .= "ORDER BY Urgent desc, id asc";
     $result = mysqli_query($db, $sql);
     return $result;
 }

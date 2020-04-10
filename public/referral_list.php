@@ -76,10 +76,9 @@ if (isset($_POST['submitbtn'])) {
         <th> Email </th>
         <th> Referring Doctor Name </th>
 
-
         <?php while ($patient = mysqli_fetch_assoc($patient_set)){ ?>
             <tr>
-                <td> <a class="actions" href = "<?php echo url_for('/referral_show.php?id=' . $patient["ID"]); ?> " ><?php echo h($patient["first_name"]); echo " "; echo h($patient["last_name"]);  ?> </a></td> 
+                <td> <a class="actions" href = "<?php echo url_for('/referral_show.php?id=' . $patient["ID"]); ?> " ><?php if(h($patient["Urgent"]) == "Y"){echo "&#10071 ";}echo h($patient["first_name"]).  " ".  h($patient["last_name"]);  ?> </a></td> 
                 <td> <?php echo h($patient["nhs_number"]); ?> </td>
                 <td> <?php echo h($patient["date_of_birth"]); ?> </td>
                 <td> <?php echo h($patient["email"]) ?> </td>
