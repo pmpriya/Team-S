@@ -153,48 +153,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
     <label>Current Issue</label>
-    <textarea value = "<?php echo h($current_issue);?>" name = "current_issue" id="current_issue" placeholder="Required" required>
-    </textarea>
+    <textarea name = "current_issue"  id="current_issue"><?php echo h($current_issue);?> </textarea>
   </div>
 
    <!-- History Of Present Complaint -->
 
    <div class="field-column">
     <label>History Of Present Complaint</label>
-    <textarea  value = "<?php echo h($history_of_present_complaint);?>" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
-    </textarea>
+    <textarea  name="history_of_present_complaint" id="history_of_present_complaint" ><?php echo h($history_of_present_complaint);?></textarea>
   </div>
 
    <!-- Family History -->
 
    <div class="field-column">
     <label>Family History</label>
-    <textarea  name="family_history" value = "<?php echo h($family_history);?>" id="family_history" placeholder="Required"  required>
-    </textarea>
+    <textarea  name="family_history"  id="family_history"><?php echo h($family_history);?> </textarea>
   </div>
   
    <!-- Current Feeds -->
  
    <div class="field-column">
     <label>Current Feeds</label>
-    <textarea  value = "<?php echo h($current_feeds);?>"  name="current_feeds" id="current_feeds" placeholder="Required" required>
-    </textarea>
+    <textarea  name="current_feeds" id="current_feeds" ><?php echo h($current_feeds);?></textarea>
   </div>
 
    <!-- Medications -->
 
    <div class="field-column">
     <label>Medications</label>
-    <textarea  name="medications" value = "<?php echo h($medications);?>" id="medications" placeholder="Required" required>
-    </textarea>
+    <textarea  name="medications"  id="medications" ><?php echo h($medications);?></textarea>
   </div>
 
    <!-- Other Investigations -->
 
    <div class="field-column">
     <label>Other Investigations</label> 
-    <textarea name="other_investigations" value = "<?php echo h($other_inv);?>"  id="other_investigations" placeholder="Required" required>
-    </textarea>
+    <textarea name="other_investigations" style="white-space:normal;" id="other_investigations" ><?php echo h($other_inv);?></textarea>
     <div>
       <input type="submit" value="Edit Referral"/>
    </div>
