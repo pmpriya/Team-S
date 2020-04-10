@@ -176,9 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <tr><td>Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
 
-                    <tr><td>Home Phone:</td><td> <textarea value="<?php echo $home_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Home Phone')" required="" id="home_phone" name="home_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td>Home phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home phone')" id="home_phone" name="home_phone" rows="1" cols="10"><?php echo $home_phone; ?></textarea></td></tr>
 
-                    <tr><td>Mobile Phone:</td><td> <textarea value="<?php echo $mobile_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Mobile Phone')" required="" id="mobile_phone" name="mobile_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td>Mobile Phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="mobile_phone" name="mobile_phone" rows="1" cols="10"><?php echo $mobile_phone; ?></textarea></td></tr>
 
                     <tr><td>HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
 
