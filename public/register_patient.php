@@ -159,17 +159,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     $ref_email = $_POST["ref_mail"];
     $ref_hospital_name = $_POST["refhospital"];
-     $val = isOnlyCharacter($ref_hospital_name);
-        if($val!=1)
-        {
-            $message .= getMessage($val,"Hospital name");
-            $isValid = false;
-        }
     
 
        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
             || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
-            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="" || $reg_email=="")
+            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $reg_email=="")
 
             echo '<label class="text-danger">Please fill in all required fields</label>';
    
@@ -292,7 +286,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      
     <div class="field-column">
       <label id="label">Referring Hospital</label>
-       <input type="text" onfocusout="isOnlyCharacter(this,'Hospital Name')" id="refhospital" name="refhospital" placeholder="Required" required>
+       <input type="text" id="refhospital" name="refhospital" placeholder="Optional">
     </div>
 
      <!-- sex -->
@@ -538,7 +532,6 @@ float:left;
         var gpaddress = document.getElementById("gpaddress");
         var gpnumber = document.getElementById("gpnumber");
         var refDoctor = document.getElementById("refname");
-        var refHospital = document.getElementById("refhospital");
         
         var isOkay = true;
         if(!isOnlyCharacter(regSurname,"Registering Person Surname")){
@@ -564,9 +557,6 @@ float:left;
             isOkay = false;
         }
         if(!isOnlyCharacter(refDoctor,"Referring Doctor Name")){
-            isOkay = false;
-        }
-        if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
             isOkay = false;
         }
         if(isEmpty(address,"Home Address")){
