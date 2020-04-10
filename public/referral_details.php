@@ -68,14 +68,13 @@ $patient_values = mysqli_fetch_assoc($patient);
 
 
 
-            <?php if (!$_SESSION['userLevel'] == 1) { ?>
+           
     <br><a href="referral_edit.php?id=<?php echo $id?>">Edit Referral</a><br>
     <br><a href="referral_show.php?id=<?php echo $patient_ID?>">Go Back</a>
-    <?php } ?>
+   
 
-        <?php if ($_SESSION['userLevel'] == 1) { ?>
-            <br><a href="patients.php">Go Back</a>
-        <?php } ?>
+           
+  
 
 
 

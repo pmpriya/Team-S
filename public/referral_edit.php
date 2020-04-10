@@ -33,6 +33,7 @@ $bleep_no = $referral_values['bleep_number'];
 $parents_aware = $referral_values['is_patient_aware'];
 $interpreter_needed = $referral_values['is_interpreter_needed'];
 $interpreter_language = $referral_values['interpreter_language'];
+$family_history = $referral_values['family_history'];
 $doctor_kch_name = $referral_values['kch_doc_name'];
 $date_of_referral = $referral_values['date'];
 $current_issue = $referral_values['current_issue'];
@@ -78,26 +79,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
      <form method="post">
 
+  
+
          <!-- Consultant Name -->
     <div class="field-column">
     <label>Consultant Name </label>
-        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Name')" name="consultant_name" id="consultant_name" placeholder="Required" required>
+        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Name')" name="consultant_name" value = "<?php echo h($consultant_name);?>" id="consultant_name" placeholder="Required" required>
     </div>
 
     <div class="field-column">
     <label>Consultant Specialty </label>
-        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Specialty')" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
+        <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Specialty')" name="consultant_specialty" value = "<?php echo h($consultant_specialty);?>" id="consultant_specialty" placeholder="Required" required>
     </div>
   <!--  Organisation Hospital Name -->
 
   <div class="field-column">
     <label>Organisation Hospital Name</label>
-        <input type="text" onfocusout="isOnlyCharacter(this,'Organisation Hospital Name')" name="organisation_hospital_name" id="organisation_hospital_name" placeholder="Required" required>
+        <input type="text" onfocusout="isOnlyCharacter(this,'Organisation Hospital Name')" name="organisation_hospital_name" value = "<?php echo h($organisation_hospital_name);?>" id="organisation_hospital_name" placeholder="Required" required>
   </div>
 
  <div class="field-column">
     <label>Organisation Hospital Number</label>
-     <input type="number" onfocusout="isOnlyNumber(this,'Organisation Hospital Number')" name="organisation_hospital_no" id="organisation_hospital_no" placeholder="Required" required>
+     <input type="number" onfocusout="isOnlyNumber(this,'Organisation Hospital Number')" name="organisation_hospital_no" value = "<?php echo h($organisation_h_no);?>" id="organisation_hospital_no" placeholder="Required" required>
   </div>
 
 <br>
@@ -106,14 +109,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Referring Person's Name -->
     <div class="field-column">
     <label>Referring Person's Name</label>
-       <input type="text" onfocusout="isOnlyCharacter(this,'Referring Person's Name')" name="referring_name" id="referring_name"  placeholder="Required" required>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Referring Person's Name')" name="referring_name" id="referring_name" value = "<?php echo h($referring_doctor_name);?>" placeholder="Required" required>
       </div>
 
   <!-- Bleep Number -->
 
   <div class="field-column">
     <label>Bleep Number</label>
-     <input type="number" onfocusout="isOnlyNumber(this,'Bleep Number')" name="bleep_number" id="bleep_number" placeholder="Required" required>
+     <input type="number" onfocusout="isOnlyNumber(this,'Bleep Number')" name="bleep_number"  value = "<?php echo h($bleep_no);?>" id="bleep_number" placeholder="Required" required>
   </div>
 
    <!-- Is the patient aware of the referral -->
@@ -133,24 +136,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Interpreter language -->         
   <div class="field-column">
     <label>Interpreter language(To be left empty if no interpreter is needed)</label>
-     <input type="text" name="interpreter_language" id="interpreter_language" placeholder="Optional">
+     <input type="text" name="interpreter_language" value = "<?php echo h($interpreter_language);?>" id="interpreter_language" placeholder="Optional">
   </div>
     <!-- KCH DOC NAME -->
   <div class="field-column">
     <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
-     <input type="text" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
+     <input type="text" name="kch_doc_name" value = "<?php echo h($doctor_kch_name);?>" id="kch_doc_name" placeholder="Optional">
   </div>
 
   <div class="field-column">
       <label>Date of referral</label>
-       <input type = "date"   id="date" name = "date" required>
+       <input type = "date" value = "<?php echo h($date_of_referral);?>"  id="date" name = "date" required>
 
     </div>
    <!-- Current Issue -->
 
    <div class="field-column">
     <label>Current Issue</label>
-    <textarea onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
+    <textarea value = "<?php echo h($current_issue);?>" name = "current_issue" id="current_issue" placeholder="Required" required>
     </textarea>
   </div>
 
@@ -158,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
     <label>History Of Present Complaint</label>
-    <textarea onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
+    <textarea  value = "<?php echo h($history_of_present_complaint);?>" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
     </textarea>
   </div>
 
@@ -166,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
     <label>Family History</label>
-    <textarea onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
+    <textarea  name="family_history" value = "<?php echo h($family_history);?>" id="family_history" placeholder="Required"  required>
     </textarea>
   </div>
   
@@ -174,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  
    <div class="field-column">
     <label>Current Feeds</label>
-    <textarea onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
+    <textarea  value = "<?php echo h($current_feeds);?>"  name="current_feeds" id="current_feeds" placeholder="Required" required>
     </textarea>
   </div>
 
@@ -182,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
     <label>Medications</label>
-    <textarea onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
+    <textarea  name="medications" value = "<?php echo h($medications);?>" id="medications" placeholder="Required" required>
     </textarea>
   </div>
 
@@ -190,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
     <label>Other Investigations</label> 
-    <textarea onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
+    <textarea name="other_investigations" value = "<?php echo h($other_inv);?>"  id="other_investigations" placeholder="Required" required>
     </textarea>
     <div>
       <input type="submit" value="Edit Referral"/>
