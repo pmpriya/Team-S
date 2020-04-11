@@ -22,70 +22,7 @@ if (isset($_POST['submitbtn'])) {
     $user_set = search_by_staff_surname($q);
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-
-            tr:nth-child(odd) {background-color: #f2f2f2;}
-
-            table {
-                border-collapse: collapse;
-                width: 50%;
-            }
-
-            form.example input[type=text] {
-                padding: 10px;
-                font-size: 17px;
-                border: 1px solid grey;
-                float: left;
-                width: 80%;
-                background: #f1f1f1;
-            }
-
-/*             form.example button {
-                float: left;
-                width: 20%;
-                padding: 10px;
-                background: #333;
-                color: white;
-                font-size: 17px;
-                border: 1px solid grey;
-                border-left: none;
-                cursor: pointer;
-                height: 42px;
-            } */
-            
-            
-
-            form.example button:hover {
-                background: black;
-            }
-
-            form.example::after {
-                content: "";
-                clear: both;
-                display: table;
-            }
-            a {
-                background-color: white;
-    box-shadow: -1 1px 0 blue;
-    color: rgb(42,103,204);
-    padding: 0.3em 1em;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-} 
-
-a:hover {
-  background-color: rgb(19, 26, 102);
-  cursor: pointer;
-}
-
-a:active {
-  box-shadow: none;
-  top: 5px;
-}
-
-        </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
     <div class="public">
 
