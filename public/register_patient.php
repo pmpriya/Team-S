@@ -142,13 +142,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     
     $reg_email = $_POST["mail2"];
-     $val = validateUserEmail($reg_email);
-        if($val!=1)
-        {
-            echo "not valid email 123";
-            $message .= getMessage($val,"Email");
-            $isValid = false;
-        }
+   //  $val = validateUserEmail($reg_email);
+        //if($val!=1)
+       // {
+        //    echo "not valid email 123";
+         //   $message .= getMessage($val,"Email");
+          //  $isValid = false;
+      //  }
     
     $ref_dr_name = $_POST["refname"];
      $val = isOnlyCharacter($ref_dr_name);
@@ -222,9 +222,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
 <body>
-    <h1><b>PATIENT REGISTRATION</b></h1>
+    <h1 id = "patient-registration"><b>PATIENT REGISTRATION</b></h1>
 
-<h2> <div>Details of the person registering the patient(Please complete all fields) </div></h2>
+<h2> <div id = "registration-heading">Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 
    <form method="post" id="form">    <!-- Patient's Surname -->
@@ -235,32 +235,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- porforma -->
 
     <div class="field-column">
-      <label>Surname </label>
+      <label id="label">Surname </label>
          <input type="text" onfocusout="isOnlyCharacter(this,'Surname')" id="lastname2" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
         </div>
 
     <div class="field-column">
-      <label>Forename</label>
+      <label id="label">Forename</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Forename')" id="firstname2" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
     </div>
 
    <div class="field-column">
-      <label>Email (@nhs.net or @*.nhs.uk)</label> </div>
-      <input type="text" id="email2" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
+      <label id="label">Email (@nhs.net or @*.nhs.uk)</label> </div>
+      <input type="text" id="email2" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
 
    </div>
    
-    <h2> <div>Patient Details(Please complete all fields) </div></h2>
+    <h2 id = "registration-heading"> <div>Patient Details(Please complete all fields) </div></h2>
 
     <div class="field-column">
-      <label>Surname</label>
+      <label id="label">Surname</label>
          <input type="text"  onfocusout="isOnlyCharacter(this,'Surname')" id="lastname" name="lastname" placeholder="Required" required>
         </div>
 
     <!-- Patient's forename -->
 
     <div class="field-column">
-      <label>Forename</label>
+      <label id="label">Forename</label>
        <input type="text"  onfocusout="isOnlyCharacter(this,'Forename')" id="firstname" name="firstname" placeholder="Required"  required>
 
     </div>
@@ -268,36 +268,36 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- NHS number -->
 
      <div class="field-column">
-      <label>NHS number</label>
+      <label id="label">NHS number</label>
        <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"   id="nhsnumber" name="nhsnumber" pattern="^\d{10}$" placeholder="Required" required>
     </div>
      <!-- date of birth -->
 
      <div class="field-column">
-      <label>Date of birth</label>
+      <label id="label">Date of birth</label>
        <input type = "date" onfocusout="isEmpty(this,'Date of birth')"  id="dob" name = "dob" required>
 
     </div>
      
 
     <div class="field-column">
-      <label>Full Name of Referring Doctor</label>
+      <label id="label">Full Name of Referring Doctor</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Doctor Name')" id="refname" name="refname" pattern="^[a-z ,.'-]+$" placeholder="Required" required>
     </div>
 
     <div class="field-column">
-      <label>Email of Referee</label>
+      <label id="label">Email of Referee</label>
        <input type="text" name="ref_mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
     </div>
      
     <div class="field-column">
-      <label>Referring Hospital</label>
+      <label id="label">Referring Hospital</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Hospital Name')" id="refhospital" name="refhospital" placeholder="Required" required>
     </div>
 
      <!-- sex -->
      <div class="field-column">
-            <label>Gender</label>
+            <label id="label">Gender</label>
                 <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
                 <input id="gender" type="radio" name="gender" value="f"> <label id="genderOption">Female</label>
                
@@ -307,15 +307,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    
   <div class="field-column">
-      <label>Email of Patient</label>
-       <input type="text" name="email" onfocusout="ValidateEmail() pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
+      <label id="label">Email of Patient</label>
+       <input type="text" name="email" onfocusout="ValidateEmail()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
     </div>
 
 
      <!-- home address -->
 
      <div class="field-column">
-      <label>Home address</label>
+      <label id="label">Home address</label>
      <input name = "address" onfocusout="isEmpty(this,'Home address')" placeholder="Required" id="address" required> </input>
 
     </div>
@@ -323,7 +323,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- post code -->
 
      <div class="field-column">
-      <label>Postcode</label>
+      <label id="label">Postcode</label>
       <input name = "postcode"  id="postcode" onfocusout="isOnlyNumber(this,'Postcode')" placeholder="Required"    required> </input>
 
     </div>
@@ -332,7 +332,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Home telephone number -->
 
      <div class="field-column">
-      <label>Home Phone Number</label>
+      <label id="label">Home Phone Number</label>
       <input type="number" name="homenumber" id="homenumber" placeholder="Required" onfocusout="isOnlyNumber(this,'Home Phone Number')" required>
 
     </div>
@@ -340,7 +340,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Mobile telephone number -->
    
      <div class="field-column">
-      <label>Mobile Phone Number</label>
+      <label id="label">Mobile Phone Number</label>
 
       <input type="number" name="mobilenumber" id="mobilenumber" onfocusout="isOnlyNumber(this,'Mobile Phone Number')" placeholder="Required" required>
 
@@ -349,7 +349,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Patient's GP address -->
 
      <div class="field-column">
-      <label>GP address</label>
+      <label id="label">GP address</label>
        <input name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"  placeholder="Required" required> </input>
 
     </div>
@@ -359,7 +359,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
      <div class="field-column">
 
-      <label>GP phone number</label> <input type="number" name="gpnumber" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Required" required>
+      <label id="label">GP phone number</label> <input type="number" name="gpnumber" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Required" required>
     </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
@@ -374,7 +374,49 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </form>
 
+<style>
+#patient-registration {
+    font-size: 30px;
+    color : rgb(42,103,204);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    }
 
+    #registration-heading {
+    font-size: 15px;
+    color : rgb(148, 148, 148);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    padding-left: 20px;
+    }
+
+    #label {
+    font-size: 13px;
+    font-weight: bold;
+    color : rgb(42,103,204);
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    /* font-weight: 300; */
+    }
+
+    #button {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    background-color : rgb(42,103,204);
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    width: 50%;
+    height: 5%;
+    border-radius: 4px;
+    border: 0.5px solid grey;
+border-left: none;
+cursor: pointer;
+float:left;
+    }
+
+    </style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
     
@@ -505,9 +547,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!isOnlyCharacter(regForename,"Registering Person Forename")){
             isOkay = false;
         }
-        if(!ValidateNHSEmail()){
-            isOkay = false;
-        }
+      //  if(!ValidateNHSEmail()){
+        //    isOkay = false;
+       // }
 
         if(!isOnlyCharacter(lastname,"Surname")){
             isOkay = false;

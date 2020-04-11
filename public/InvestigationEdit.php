@@ -8,6 +8,7 @@
 if(isset($_GET['id'])){
     $investigation_id= $_GET['id'];
     $investigation_set = find_investigations_by_id($investigation_id);
+   
 }
 elseif(isset($_SESSION['nhsno'])){
     $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
@@ -19,7 +20,7 @@ else{
 $delete = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_investigation($delete);
-    header('Location: patients.php');
+    header('Location: InvestigationsOfAllPatients.php');
 }
 
 if(mysqli_num_rows($investigation_set)>=1){
@@ -47,7 +48,8 @@ if(mysqli_num_rows($investigation_set)>=1){
         $Creatinine = $row['Creatinine'];
         $is_urgent = check_investigation_urgent(intval($_GET['id']));
         $Notes = $row['Notes'];
-
+      $patient_ID = $row['patient_ID'];
+      $Symptoms = explode(", ", $row['SymptomCount']);
 
 
 
@@ -79,10 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_Urea = $_POST['Urea'] ?? '';
     $new_Creatinine = $_POST['Creatinine'] ?? '';
     $new_Notes = $_POST['Notes'] ?? '';
-    ($_POST['hasSymptoms'] == "Y") ? $new_Urgent = "Y": $new_Urgent = "N";
-
-    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent, $new_Notes);
-    header('Location: patients.php');
+    if(count($_POST['checkbox']) > 0){
+        $new_Urgent = "Y";
+        $new_Symptoms =  implode(", ", $_POST['checkbox']);
+    }
+    else{ $Urgent = "N";}
+    edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent, $new_Notes, $new_Symptoms);
+    redirect_to(url_for('InvestigationsShow.php?id=' . $patient_ID));
     exit;
 }
 ?>
@@ -189,24 +194,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                             <!-- Asking for indication of urgent symptoms -->
                                                                                             <div class="field-column">
                                                                                             <label>Does the patient have any of the following symptoms?</label>
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                                <ol> - Abnormal clotting  </ol> <br>
-                                                                                                <ol> - Conjugated jaundice  </ol> <br>
-                                                                                                <ol> - Pale stools  </ol> <br>
-                                                                                                <ol> - Acute hepatitis with elevated transaminase levels and jaundice </ol> <br>
-                                                                                                <ol> - Paracetamol overdose  </ol> <br>
-                                                                                            
-                                                                                            
-                                                                                            <!-- The checkboxes for urgent symptoms-->
+                                                                                                <!-- The checkboxes for urgent symptoms-->
+                                                                                                
                                                                                                 <div class="checkbox-container">
-                                                                                                <input type = "checkbox" name = "hasSymptoms" value="Y" <?php if ($is_urgent) {echo "checked";}?> > <label> Yes </label>
+                                                                                                <input type = "checkbox" name = "checkbox[]" value="Abnormal clotting" <?php if (in_array("Abnormal clotting", $Symptoms)){echo "checked";}?>> <label> Abnormal clotting </label>
+                                                                                                </div>
+                                                                                                <div class="checkbox-container">
+                                                                                                <input type = "checkbox" name = "checkbox[]" value="Conjugated jaundice" <?php if (in_array("Conjugated jaundice", $Symptoms)){echo "checked";}?>> <label> Conjugated jaundice</label>
+                                                                                                </div>
+                                                                                                <div class="checkbox-container">
+                                                                                                <input type = "checkbox" name = "checkbox[]" value="Pale stools" <?php if (in_array("Pale stools", $Symptoms)){echo "checked";}?>> <label> Pale stools </label>
+                                                                                                </div>
+                                                                                                <div class="checkbox-container">
+                                                                                                <input type = "checkbox" name = "checkbox[]" value="Acute hepatitis with elevated transaminase levels and jaundice" <?php if (in_array("Acute hepatitis with elevated transaminase levels and jaundice", $Symptoms)){echo "checked";}?>> <label> Acute hepatitis with elevated transaminase levels and jaundice</label>
+                                                                                                </div>
+                                                                                                <div class="checkbox-container">
+                                                                                                <input type = "checkbox" name = "checkbox[]" value="Paracetamol overdose" <?php if (in_array("Paracetamol overdose", $Symptoms)){echo "checked";}?>> <label> Paracetamol overdose</label>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div id="operations">
                                                                                                 <input type="submit" value="Edit Investigation"/>
-                                                                                            </div>
+                                                                                            </div> 
                                                                                                 </form>
                                                                                                 <?php echo"<a href=?delete=" . $investigation_id . " onclick=\"return confirm('Are you sure that you want to delete this investigation?');\">Delete</a></td>" ?>
                                                                                                 <br><br>

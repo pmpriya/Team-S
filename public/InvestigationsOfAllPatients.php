@@ -8,14 +8,14 @@
 
 <div id="content">
     <div class= "Investigations listing">
-    <h1> Investigations  </h1>
+    <h1 id="title-page"> Investigations  </h1>
 
     <table class= "list">
-        <th> Name </th>
+        <th id = "darkblue"> Name </th>
         <th> NHS number </th>
-        <th> Date of Birth </th>
+        <th id = "darkblue"> Date of Birth </th>
         <th> Email </th>
-        <th> Referring Doctor Name </th>
+        <th id = "darkblue"> Referring Doctor Name </th>
     
 
         <?php while ($patient = mysqli_fetch_assoc($patient_set)){ ?>

@@ -32,7 +32,7 @@ if (isset($_POST['submitbtn'])) {
 
         <center>
 
-                <h1>Patients</h1>
+                <h1 id="title-page">Patients</h1>
                 <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
                     <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
@@ -42,12 +42,12 @@ if (isset($_POST['submitbtn'])) {
             <?php if ($_SESSION['userLevel'] > 1) { ?>
                 <table>
                     <tr>
-                        <th><b>Name</b></th>
-                        <th><b>Surname</b></th>
-                        <th><b>DOB</b></th>
-                        <th><b>NHS Number</b></th>
-                        <th><b>Access Code</b></th>
-                        <th colspan="5"><b>Manage</b></th>
+                        <th id = "darkblue"><b>Name</b></th>
+                        <th id = "lightblue"><b>Surname</b></th>
+                        <th id = "darkblue"><b>DOB</b></th>
+                        <th id = "lightblue"><b>NHS Number</b></th>
+                        <th id = "darkblue"><b>Access Code</b></th>
+                        <th id = "lightblue" colspan="5"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
@@ -73,11 +73,11 @@ else{ ?>
 
                     <table>
                     <tr>
-                        <th><b>Name</b></th>
-                        <th><b>Surname</b></th>
-                        <th><b>DOB</b></th>
-                        <th><b>NHS Number</b></th>
-                        <th colspan="2"><b>View</b></th>
+                        <th id = "darkblue"><b>Name</b></th>
+                        <th  id = "lightblue"><b>Surname</b></th>
+                        <th id = "darkblue"><b>DOB</b></th>
+                        <th  id = "lightblue"><b>NHS Number</b></th>
+                        <th id = "darkblue" colspan="2"><b>View</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
@@ -98,4 +98,25 @@ else{ ?>
         </center>
     </div>
 
+    <style>
+        a {
+                background-color: white;
+    box-shadow: -1 1px 0 blue;
+    color: rgb(42,103,204);
+    padding: 0.3em 1em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+} 
+
+a:hover {
+  background-color: rgb(19, 26, 102);
+  cursor: pointer;
+}
+
+a:active {
+  box-shadow: none;
+  top: 5px;
+}
+</style>
 <?php include(SHARED_PATH . '/footer.php'); ?>

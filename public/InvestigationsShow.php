@@ -17,34 +17,32 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1> Results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
+    <h1 id="title-page"> Results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 
     <table class= "InvestigationsTable">
-        <th> Date </th>
+        <th id = "darkblue"> Date </th>
         <th> BiliTD</th> 
-        <th> AST </th>
+        <th id = "darkblue"> AST </th>
         <th> ALT </th>
-        <th> ALP </th>
+        <th id = "darkblue"> ALP </th>
         <th> GGT </th>
-        <th> Prot </th>
+        <th id = "darkblue"> Prot </th>
         <th> Alb </th>
-        <th> CK </th>
+        <th id = "darkblue"> CK </th>
         <th> Hb/Hct </th>
-        <th> WCC </th>
+        <th id = "darkblue"> WCC </th>
         <th> Neutro </th>
-        <th> Platelets </th>
+        <th id = "darkblue"> Platelets </th>
         <th> CRP </th>
-        <th> ESR </th>
+        <th id = "darkblue"> ESR </th>
         <th> PT/INR </th>
-        <th> APTR </th>
+        <th id = "darkblue"> APTR </th>
         <th> Fibrinogen </th>
-        <th> Cortisol </th>
+        <th id = "darkblue"> Cortisol </th>
         <th> Urea </th>
-        <th> Creatinine </th>
-        <th> Urgent (Y/N) </th>
-        <th> # of Symptoms </th>
+        <th id = "darkblue"> Creatinine </th>
  
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
             <tr>
@@ -69,8 +67,6 @@ $patient = mysqli_fetch_assoc($patient_set);
                 <td> <?php echo h($allInvetigations['Cortisol']); ?> </td> 
                 <td> <?php echo h($allInvetigations['Urea']); ?> </td> 
                 <td> <?php echo h($allInvetigations['Creatinine']); ?> </td> 
-                <td> <?php echo h($allInvetigations['Urgent']); ?> </td>
-                <td> <?php echo h($allInvetigations['SymptomCount']); ?> </td> 
             </tr> 
         <?php } ?>
     </table>
