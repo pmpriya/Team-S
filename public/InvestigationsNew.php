@@ -1,13 +1,19 @@
 <?php require_once ('../private/initialise.php');?>
 <?php include('../private/shared/header.php'); ?>
+
 <?php $page_title = 'Add Investigation'; ?>
+
 <div class="public">
+
 <?php $patient_ID = $_GET['patient_ID']?? '3'; ?>
+
+<?php $row = mysqli_fetch_array(find_active_referral($patient_ID)); 
+$referral_id = $row["ID"]; ?>
+
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
 <?php
-    //$patient_ID = GET['patient_ID']?? '1';
-    //mysqli_insert_id($db);
+   
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $date = $_POST['date'] ?? '';
@@ -84,7 +90,7 @@
         $Creatinine = $_POST['Creatinine'] ?? '';
         $Notes = $_POST['Notes'] ?? '';
 
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes);
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes,$referral_id);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     

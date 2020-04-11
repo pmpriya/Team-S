@@ -53,7 +53,7 @@ if (isset($_POST['submitbtn'])) {
                     while ($users = mysqli_fetch_assoc($user_set)) {
 
                         echo "<tr><td >" . $users["first_name"] . "</td>
-                        
+
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
@@ -100,25 +100,6 @@ else{ ?>
         </center>
     </div>
 
-    <style>
-        a {
-                background-color: white;
-    box-shadow: -1 1px 0 blue;
-    color: rgb(42,103,204);
-    padding: 0.3em 1em;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-} 
 
-a:hover {
-  background-color: rgb(19, 26, 102);
-  cursor: pointer;
-}
 
-a:active {
-  box-shadow: none;
-  top: 5px;
-}
-</style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
