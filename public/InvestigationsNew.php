@@ -112,7 +112,7 @@ if ($_SESSION['userLevel'] > 1) {
 
 
 <div id= "content";>
-<a class = "back-Link" href="<?php echo url_for('InvestigationsShow.php?patient_ID=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+<a class = "back-Link" href="<?php echo url_for('InvestigationsShow.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
 </div>
 <div class = "new investigation">
 <center>

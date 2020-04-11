@@ -6,15 +6,15 @@ $page_title = 'KCL Paedriatic Liver Service';
 $user_set = find_all_patients();
 
 settype($var, 'integer');
-$var = $_GET["delete"] ?? '';
-if (isset($_GET["delete"])) {
-    delete_patient($var);
-    header('Location: patients.php');
-}
 if ($_SESSION['userLevel'] < 1) {
     redirect_to('index.php');
 }
 
+if (isset($_GET["close"])) {
+    $var = $_GET["close"];
+    close_case($var);
+    header('Location: activeCases.php');
+}
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,6 +38,8 @@ if ($_SESSION['userLevel'] < 1) {
                         <th id = "lightblue"><b>NHS Number</b></th>
                         <th id = "darkblue"><b>Access Code</b></th>
                         <th id = "lightblue" colspan="3"><b>View</b></th>
+                        <th id = "darkblue"><b>Close case</b></th>
+
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
@@ -50,7 +52,8 @@ if ($_SESSION['userLevel'] < 1) {
                     <td>" . $users["accessCode"] . "</td>
                     <td><a href=referral_show.php?id=" . $users["ID"] . ">Referral</a></td>
                     <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">Investigations</a></td>
-                            <td><a href=appointments_patient.php?id=" . $users["ID"] . ">Appointments</a></td></tr>";
+                            <td><a href=appointments_patient.php?id=" . $users["ID"] . ">Appointments</a></td>
+                             <td> <a href=?close=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to close this case?');\">Close</a></td></tr>";
                     }else {}}
 
                 ?>

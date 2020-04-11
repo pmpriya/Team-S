@@ -574,7 +574,7 @@ function search_by_surname($surname)
 function find_confirmed_appointments() {
     global $db;
     $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
-    $sql .= "WHERE Confirmed='1'";
+    $sql .= "WHERE Confirmed='1' AND Active ='1'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -584,7 +584,7 @@ function find_confirmed_appointments() {
 function find_unconfirmed_appointments() {
     global $db;
     $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
-    $sql .= "WHERE Confirmed='0'";
+    $sql .= "WHERE Confirmed='0' AND Active ='1'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -634,6 +634,28 @@ function confirm_appointment($id)
 {
     global $db;
     $sql = "UPDATE appointments SET Confirmed='1' WHERE id=$id";
+    $result = mysqli_query($db, $sql);
+    if ($result)
+    {
+        return true;
+    }
+    else
+    {
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+
+function close_case($id)
+{
+    global $db;
+    $sql = "UPDATE Referral SET Active='0' WHERE patient_id ='$id'";
+    $result = mysqli_query($db, $sql);
+    $sql = "UPDATE Investigations SET Active='0' WHERE patient_id ='$id'";
+    $result = mysqli_query($db, $sql);
+    $sql = "UPDATE appointments SET Active='0' WHERE patient_id ='$id'";
     $result = mysqli_query($db, $sql);
     if ($result)
     {

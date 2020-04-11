@@ -194,7 +194,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                           $ref_dr_name,$ref_hospital_name,$ref_email,$reg_surname,$reg_forename,$reg_email);
 
                           $new_id = mysqli_insert_id($db);
-
+                            session_unset();
+                            grant_external_access($nhs_number, $accessCode);
                           redirect_to(url_for('referral_page.php?id=' . $new_id));
                            
                         }
