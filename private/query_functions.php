@@ -583,10 +583,20 @@ function find_unconfirmed_appointments() {
 }
 
 
-function find_patient_appointments($id) {
+function find_patient_confirmed_appointments($id) {
     global $db;
     $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
-    $sql .= "WHERE patient_id='" . db_escape($db, $id) . "' ";
+    $sql .= "WHERE patient_id='" . db_escape($db, $id) . "' AND Confirmed='1'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function find_patient_unconfirmed_appointments($id) {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE patient_id='" . db_escape($db, $id) . "' AND Confirmed='0'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
