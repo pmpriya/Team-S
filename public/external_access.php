@@ -41,7 +41,7 @@
                 <input type="password" class="demo-input-box" name="accessCode" value="">
             </div><br>
             <div class="field-column">
-                <input type="submit" name="register-user" value="Access" class="btnRegister">
+                <input type="submit" name="register-user" style = "width : 50% ; height: 40px ; background-color : rgb(42,103,204); color:white;font-weight : bolder ; " value="Access" class="btnRegister">
             </div>
 
     </div>
