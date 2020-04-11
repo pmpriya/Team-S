@@ -15,11 +15,6 @@ if ($_SESSION['userLevel'] < 1) {
     redirect_to('index.php');
 }
 
-if (isset($_POST['submitbtn'])) {
-    $q = $_POST['search'];
-    $user_set = search_by_surname($q);
-    //echo $user_set;
-}
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,10 +28,6 @@ if (isset($_POST['submitbtn'])) {
         <center>
 
                 <h1 id="title-page">Active Cases</h1>
-                <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
-                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
-                </form>
                 <br>
                 <br>
                 <table>
