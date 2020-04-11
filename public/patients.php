@@ -35,7 +35,7 @@ if (isset($_POST['submitbtn'])) {
                 <h1 id="title-page">Patients</h1>
                 <form method="post" class="example" id="searchbar" action="patients.php" style="margin:auto;max-width:700px">
                     <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
-                    <button name="submitbtn" id="searchbutton" type="submit" style = " margin-left :10px; height:5%"><i class="fa fa-search"></i></button>
+                    <button name="submitbtn" id="searchbutton" type="submit" style = " margin-left :10px; height:6%"><i class="fa fa-search"></i></button>
                 </form>
                 <br>
                 <br>
@@ -48,11 +48,12 @@ if (isset($_POST['submitbtn'])) {
                         <th id = "lightblue"><b>NHS Number</b></th>
                         <th id = "darkblue"><b>Access Code</b></th>
                         <th id = "lightblue" colspan="5"><b>Manage</b></th>
-                        
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
+
                         echo "<tr><td >" . $users["first_name"] . "</td>
+
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
@@ -60,8 +61,8 @@ if (isset($_POST['submitbtn'])) {
                     <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
                     <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
                     <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
-                    <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>
-                    <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">View Investigations</a></td></tr>";
+                    <td><a href=referral_show.php?id=" . $users["ID"] . ">Referrals</a></td>
+                    <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">Investigations</a></td></tr>";
                     }
                 ?>
 
@@ -98,5 +99,7 @@ else{ ?>
     ?>
         </center>
     </div>
+
+
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
