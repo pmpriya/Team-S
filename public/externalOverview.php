@@ -75,6 +75,7 @@ if(mysqli_num_rows($user_set)>=1){
                <a href=?confirm=" . $appointment["id"] . " onclick=\"return confirm('Are you sure that you want to confirm this Appointment?');\">Confirm</a><br>";
                 };
 
+
             }
         } else{
             echo 'You currently have no cases in progress, use the link below to start a new referral<br>';
