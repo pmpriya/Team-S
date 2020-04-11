@@ -46,6 +46,7 @@ if(mysqli_num_rows($user_set)>=1){
         }</style>
 
     <center>
+
         <h1 id = "title-page">My case</h1>
         You're currently viewing case status for <b><?php echo $first_name ?> <?php echo $last_name ?></b>.<br><br>
         <td><i><a href=editPatient.php>Update personal details</a></i></td><br><br><br>
@@ -54,7 +55,9 @@ if(mysqli_num_rows($user_set)>=1){
 
         if(mysqli_num_rows(access_actve_referral($patient_id))){
             echo 'You currently have a case with us.<br>';
+
             echo 'Please use the link below to update your results<br><br>';
+
             echo "<i><a href=InvestigationsShow.php>Update investigations</a></td></i><br><br><br>";
 
 
@@ -78,7 +81,9 @@ if(mysqli_num_rows($user_set)>=1){
 
             }
         } else{
+
             echo 'You currently have no cases in progress, use the link below to start a new referral<br><br>';
+
             echo '<b><a href=referral_page.php>Start new referral</a></b>';
         }
 

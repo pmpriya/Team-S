@@ -172,9 +172,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <tr><td id = "lightblue">Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
 
+
                     <tr><td id = "darkblue">Home phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home phone')" id="home_phone" name="home_phone" rows="1" cols="10"><?php echo $home_phone; ?></textarea></td></tr>
 
                     <tr><td id = "lightblue">Mobile Phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="mobile_phone" name="mobile_phone" rows="1" cols="10"><?php echo $mobile_phone; ?></textarea></td></tr>
+
 
                     <tr><td id = "darkblue">HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
 

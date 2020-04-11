@@ -10,6 +10,15 @@ function find_member_by_nhsno($nhs_number)
     return $result;
 }
 
+function find_active_referral($patient_ID){
+    global $db;
+    $sql="SELECT ID FROM Referral ";
+    $sql .="WHERE patient_ID='$patient_ID'" . "AND Active='1'";
+    $result = mysqli_query($db,$sql);
+
+    return $result;
+    }
+
 function find_referral_by_id($id){
 
     global $db;
@@ -37,6 +46,20 @@ function find_referrals_by_id($patient_ID)
  
     return $result;
    
+}
+
+function find_active_referrals($patient_ID)
+{
+    global $db;
+    $sql = "SELECT COUNT(*) as total FROM Referral";
+    $sql .= "WHERE patient_ID ='" . $patient_ID . "'";
+    $result = mysqli_query($db,$sql);
+    $rowcount=mysqli_num_rows($result);
+
+
+    return $rowcount;
+
+
 }
 
 
@@ -346,6 +369,8 @@ function find_all_patients()
     return $result;
 }
 
+
+
 function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_email,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone,$new_accessCode)
 {
     global $db;
@@ -389,14 +414,14 @@ $new_history_of_present_complaint,$new_family_history,$new_current_feeds,$new_me
 
         
 
-function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes)
+function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes,$referral_id)
 {
     global $db;
     // $errors = validate_investigation($investigation);
     // if(!empty($errors)){
     //   return $errors;
     // }
-    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Notes) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Notes')";
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Notes,referral_id) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Notes','$referral_id')";
     //remove spaces
     $result = mysqli_query($db, $sql);
     if($result) 
@@ -443,6 +468,14 @@ function access_referral($ID)
 {
     global $db;
     $sql = "SELECT * FROM Referral WHERE patient_ID='$ID'";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+function access_actve_referral($ID)
+{
+    global $db;
+    $sql = "SELECT * FROM Referral WHERE Active='1' AND patient_ID='$ID' LIMIT 1";
     $result = mysqli_query($db, $sql);
     return $result;
 }
@@ -538,9 +571,41 @@ function search_by_surname($surname)
     return $result;
 }
 
-function find_all_appointments() {
+function find_confirmed_appointments() {
     global $db;
     $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE Confirmed='1'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function find_unconfirmed_appointments() {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE Confirmed='0'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+
+function find_patient_confirmed_appointments($id) {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE patient_id='" . db_escape($db, $id) . "' AND Confirmed='1'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function find_patient_unconfirmed_appointments($id) {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE patient_id='" . db_escape($db, $id) . "' AND Confirmed='0'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -558,6 +623,24 @@ function delete_appointment($id)
         return true;
     } else {
         // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+
+function confirm_appointment($id)
+{
+    global $db;
+    $sql = "UPDATE appointments SET Confirmed='1' WHERE id=$id";
+    $result = mysqli_query($db, $sql);
+    if ($result)
+    {
+        return true;
+    }
+    else
+    {
         echo mysqli_error($db);
         db_disconnect($db);
         exit;
@@ -625,6 +708,8 @@ function search_by_date($date)
     confirm_result_set($result);
     return $result;
 }
+
+
 
 // function delete_expired_appointments($id)
 // {

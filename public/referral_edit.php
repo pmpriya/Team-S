@@ -108,14 +108,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
      <!-- Referring Person's Name -->
     <div class="field-column">
+
     <label id="label">Referring Person's Name</label>
+
        <input type="text"  name="referring_name" id="referring_name" value = "<?php echo h($referring_doctor_name);?>" placeholder="Required" required>
       </div>
 
   <!-- Bleep Number -->
 
   <div class="field-column">
+
     <label id="label">Bleep Number</label>
+
      <input type="number" name="bleep_number"  value = "<?php echo h($bleep_no);?>" id="bleep_number" placeholder="Required" required>
   </div>
 
