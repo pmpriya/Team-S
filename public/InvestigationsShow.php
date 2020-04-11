@@ -89,5 +89,3 @@ $patient = mysqli_fetch_assoc($patient_set);
 
     </div>
 </div>
-
-
