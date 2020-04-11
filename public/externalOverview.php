@@ -35,9 +35,7 @@ if(mysqli_num_rows($user_set)>=1){
 
     }}
 ?>
-    <style>textarea {
-            width: 200px;
-        }</style>
+
 
     <center>
         <h1 id="title-page">Current status</h1>
