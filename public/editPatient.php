@@ -6,24 +6,20 @@
 
 
 <?php
-if ($_SESSION['userLevel'] < 2) {
-    redirect_to('index.php');
-
-}
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $user_set = find_patient_by_id($_GET['id']);
-}
-elseif(isset($_SESSION['nhsno'])){
-    $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
-
-}else{
+    if (isset($_SESSION['userLevel'])) {
+if ($_SESSION['userLevel'] > 1) {
+     if(isset($_GET['id'])){
+          $user_set = find_patient_by_id($_GET['id']);
+     }}}
+     elseif(isset($_SESSION['nhsno'])){
+         $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
+     }else{
     header('Location: index.php');
 }
 
-
 if(mysqli_num_rows($user_set)>=1){
     while($row = mysqli_fetch_array($user_set)) {
+        $id = $row['ID'];
         $nhs_number = $row['nhs_number'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
@@ -148,10 +144,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 ?>
- 
+    <style>textarea {
+            width: 200px;
+        }</style>
 
     <center>
-        <h1 id="title-page">Edit Patient</h1>
+        <h1 id="title-page">Edit patient</h1>
 
 
          <form method="post" id="form">
@@ -160,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <table>
                     <tr><td id = "darkblue">NHS Number:</td><td> <textarea required="" onfocusout="isOnlyNumber(this,'NHS Number')"  name="nhs_number" id="nhs_number" rows="1" cols="10"><?php echo $nhs_number; ?></textarea></td> </tr>
 
-                      <tr><td id = "lightblue">First Name:</td><td> <textarea required="" id="first_name" onfocusout="isOnlyCharacter(this,'First Name')" name="first_name" rows="1" cols="10"><?php echo $first_name; ?></textarea></td></tr>
+                      <tr><td id = "lightblue" >First Name:</td><td> <textarea required="" id="first_name" onfocusout="isOnlyCharacter(this,'First Name')" name="first_name" rows="1" cols="10"><?php echo $first_name; ?></textarea></td></tr>
 
                     <tr><td id = "darkblue">Last Name:</td><td> <textarea required="" id="last_name" onfocusout="isOnlyCharacter(this,'Last Name')" name="last_name" rows="1" cols="10"><?php echo $last_name; ?></textarea></td></tr>
 
@@ -174,9 +172,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <tr><td id = "lightblue">Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
 
-                    <tr><td id = "darkblue">Home Phone:</td><td> <textarea value="<?php echo $home_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Home Phone')" required="" id="home_phone" name="home_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td id = "darkblue">Home phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home phone')" id="home_phone" name="home_phone" rows="1" cols="10"><?php echo $home_phone; ?></textarea></td></tr>
 
-                    <tr><td id = "lightblue">Mobile Phone:</td><td> <textarea value="<?php echo $mobile_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Mobile Phone')" required="" id="mobile_phone" name="mobile_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td id = "lightblue">Mobile Phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="mobile_phone" name="mobile_phone" rows="1" cols="10"><?php echo $mobile_phone; ?></textarea></td></tr>
 
                     <tr><td id = "darkblue">HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
 
@@ -186,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 </table>
 
-                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary" style = " margin-top : 10px ; margin-bottom:10px; margin-left :30%;width: 40% ; margin-right:30%"><i class="far fa-save"></i> Submit Changes</button>
+                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary" style = " margin-top : 10px ; margin-bottom:10px; margin-left :30%;width: 20% ; height : 5%; margin-right:30% ; background-color: rgb(42,103,204);color : white;"><i class="far fa-save"></i> Submit Changes</button>
             </form>
         <br><br>
 
