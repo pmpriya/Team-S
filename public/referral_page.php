@@ -163,7 +163,7 @@ $isValid = true;
       <!--<link rel="stylesheet" href="style.css">-->
   </head>
 <body>
-  <h1 id="title-page"><b>Referral Form for <?php echo $patient_values["first_name"] . " ". $patient_values["last_name"];?> </b></h1>
+  <h1><b>REFERRAL FORM for <?php echo $patient_values["first_name"] . " ". $patient_values["last_name"];?> </b></h1>
 <br>
 <center>
 <span id="alert_message" style="color:red"></span>
@@ -171,23 +171,23 @@ $isValid = true;
 <form action="<?php echo url_for("/referral_page.php?id=" . $patient_ID); ?>" method="post" id="form">
  <!-- Consultant Name -->
     <div class="field-column">
-    <label id='label'>Consultant Name </label>
+    <label>Consultant Name </label>
         <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Name')" name="consultant_name" id="consultant_name" placeholder="Required" required>
     </div>
 
     <div class="field-column">
-    <label id='label'>Consultant Specialty </label>
+    <label>Consultant Specialty </label>
         <input type="text" onfocusout="isOnlyCharacter(this,'Consultant Specialty')" name="consultant_specialty" id="consultant_specialty" placeholder="Required" required>
     </div>
   <!--  Organisation Hospital Name -->
 
   <div class="field-column">
-    <label id='label'>Organisation Hospital Name</label>
+    <label>Organisation Hospital Name</label>
         <input type="text" onfocusout="isOnlyCharacter(this,'Organisation Hospital Name')" name="organisation_hospital_name" id="organisation_hospital_name" placeholder="Required" required>
   </div>
 
  <div class="field-column">
-    <label id='label'>Organisation Hospital Number</label>
+    <label>Organisation Hospital Number</label>
      <input type="number" onfocusout="isOnlyNumber(this,'Organisation Hospital Number')" name="organisation_hospital_no" id="organisation_hospital_no" placeholder="Required" required>
   </div>
 
@@ -196,103 +196,103 @@ $isValid = true;
 
      <!-- Referring Person's Name -->
     <div class="field-column">
-    <label id='label'>Referring Person's Name</label>
+    <label>Referring Person's Name</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Referring Person's Name')" name="referring_name" id="referring_name"  placeholder="Required" required>
       </div>
 
   <!-- Bleep Number -->
 
   <div class="field-column">
-    <label id='label'>Bleep Number</label>
+    <label>Bleep Number</label>
      <input type="number" onfocusout="isOnlyNumber(this,'Bleep Number')" name="bleep_number" id="bleep_number" placeholder="Required" required>
   </div>
 
    <!-- Is the patient aware of the referral -->
 
    <div class="field-column">
-    <label id='label'>Are parents aware of this referral?</label>
-     <input id="aware" type="radio" name="is_patient_aware" value="y" checked><label id="awareOption">yes</label>
-     <input id="aware" type="radio" name="is_patient_aware" value="n" ><label id="awareOption">no</label>
+    <label>Are parents aware of this referral?</label>
+     <input id="aware" type="radio" name="is_patient_aware" value="y" checked><label id="awareOption">Yes</label>
+     <input id="aware" type="radio" name="is_patient_aware" value="n" ><label id="awareOption">No</label>
   </div>
    <!-- Is interpreter needed -->
 
    <div class="field-column">
-    <label id='label'>Will there be an interpreter needed?</label>
-    <input id="interpreter" type="radio" name="is_interpreter_needed" value="y" checked><label id="interpreterOption">yes</label>
-    <input id="interpreter" type="radio" name="is_interpreter_needed" value="n" ><label id="interpreterOption">no</label>
+    <label>Will there be an interpreter needed?</label>
+    <input id="interpreter" type="radio" name="is_interpreter_needed" value="y" checked><label id="interpreterOption">Yes</label>
+    <input id="interpreter" type="radio" name="is_interpreter_needed" value="n" ><label id="interpreterOption">No</label>
   </div>
     <!-- Interpreter language -->         
   <div class="field-column">
-    <label id='label'>Interpreter language(To be left empty if no interpreter is needed)</label>
+    <label>Interpreter language(To be left empty if no interpreter is needed)</label>
      <input type="text" name="interpreter_language" id="interpreter_language" placeholder="Optional">
   </div>
     <!-- KCH DOC NAME -->
   <div class="field-column">
-    <label id='label'>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
+    <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
      <input type="text" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
   </div>
 
   <div class="field-column">
-      <label id='label'>Date of referral</label>
+      <label>Date of referral</label>
        <input type = "date"   id="date" name = "date" required>
 
     </div>
    <!-- Current Issue -->
 
    <div class="field-column">
-    <label id='label'>Current Issue</label>
-    <textarea style = "margin-right : 30% ; width : 100%"onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
+    <label>Current Issue</label>
+    <textarea onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
     </textarea>
   </div>
 
    <!-- History Of Present Complaint -->
 
    <div class="field-column">
-    <label id='label'>History Of Present Complaint</label>
-    <textarea style = "margin-right : 30% ; width : 100%" onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
+    <label>History Of Present Complaint</label>
+    <textarea onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
     </textarea>
   </div>
 
    <!-- Family History -->
 
    <div class="field-column">
-    <label id='label'>Family History</label>
-    <textarea style = "margin-right : 30% ; width : 100%" onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
+    <label>Family History</label>
+    <textarea onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
     </textarea>
   </div>
   
    <!-- Current Feeds -->
  
    <div class="field-column">
-    <label id='label'>Current Feeds</label>
-    <textarea style = "margin-right : 30% ; width : 100%" onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
+    <label>Current Feeds</label>
+    <textarea onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
     </textarea>
   </div>
 
    <!-- Medications -->
 
    <div class="field-column">
-    <label id='label'>Medications</label>
-    <textarea style = "margin-right : 30% ; width : 100%" onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
+    <label>Medications</label>
+    <textarea onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
     </textarea>
   </div>
 
    <!-- Other Investigations -->
 
    <div class="field-column">
-    <label id='label'>Other Investigations</label> 
-    <textarea style = "margin-right : 30% ; width : 100%" onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
+    <label>Other Investigations</label> 
+    <textarea onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
     </textarea>
   </div>
    <!-- submit -->
    <!--<input type ="submit" name="submit"> -->
    <div class="field-column">
-   <button type = "submit" onclick="validateForm()" name="submitbtn" style = " width : 30% ; margin-left :50px; height:5% ; margin-bottom: 10px">Submit</button>
+   <button type = "submit" onclick="validateForm()" name="submitbtn">Submit</button>
 
-  
+  </div>
    <!-- reset button -->
-   <!-- <div class="field-column"> -->
-   <button type = "reset" name="reset" style = " width : 30% ;margin-left :10px; height:5% ; margin-bottom: 10px">Reset</button>
+   <div class="field-column">
+   <button type = "reset" name="reset">Reset</button>
   </div>
 </form>
 

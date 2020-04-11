@@ -359,12 +359,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
 
-     <button type = "button" onclick="validateForm()" name="btnsubmit" style = "width : 100px ; height: 40px ; margin-bottom : 10px">Submit</button>
-<!-- </div> -->
+     <button type = "button" onclick="validateForm()" name="btnsubmit">Submit</button>
+</div>
 
      <!-- reset button -->
-     <!-- <div class="field-column"> -->
-     <button type = "reset" name="reset" style = "width : 100px ; margin-left : 20px ;height:40px ; margin-bottom : 10px">Reset</button>
+     <div class="field-column">
+     <button type = "reset" name="reset">Reset</button>
     </div>
 </form>
 

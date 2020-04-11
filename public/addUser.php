@@ -68,28 +68,28 @@
         }
         ?>
 
-
+<style>textarea {
+        width: 200px;
+    }</style>
 
            <center>
-               <h1 id="title-page">Add user</h1>
+               <h1>Add user</h1>
 
 <form method="post" id="form">
                                 <div class="form-group" align="center">
                                     <span id="alert_message" style="color:red"></span>
                                     <table>
-                                        <tr><td id = "darkblue">Username:</td><td> <textarea minlength="2" maxlength="10" required="" name="username" id="username" onfocusout="isEmpty(this,'Username')"  rows="1" cols="10"></textarea></td></tr>
-                                        <tr><td id = "lightblue">Name:</td><td> <textarea name="name" minlength="2" maxlength="10" id="name" onfocusout="isOnlyCharacter(this,'Name')" required="" name="name" rows="1" cols="10"></textarea></td></tr>
-                                        <tr><td id = "darkblue">Surname:</td><td> <textarea name="surname" minlength="2" maxlength="10" id="surname" onfocusout="isOnlyCharacter(this,'Surname')" required=""  name="surname" rows="1" cols="10"></textarea></td></tr>
-                                        <tr><td id = "lightblue">Email:</td><td> <textarea required="" name="email" id="email" onfocusout="ValidateEmail()" name="email" rows="1" cols="10"></textarea></td></tr>
-                                        <tr><td id = "darkblue">Password:</td><td> <input name="password" id="password" onfocusout="isEmpty(this,'Password')" type="password" minlength="2" maxlength="32" required="" name="password" rows="1" cols="10"></input></td></tr>
-                                        <tr><td id = "lightblue">Confirm Password:</td><td> <input name="confirmpassword" id="confirmpassword" type="password" onfocusout="isEmpty(this,'Confirm Password')" minlength="2" maxlength="32" required="" name="confirmpassword" rows="1" cols="10"></input></td></tr>
-                                        <tr><td id = "darkblue">userLevel:</td><td> <input type="text" name="userLevel" id="userLevel" onfocusout="isOnlyNumber(this,'UserLevel')" required="" name="userLevel" rows="1" cols="10"></textarea></td></tr>
-                                        
+                                        <tr><td>Username:</td><td> <textarea minlength="2" maxlength="10" required="" name="username" id="username" onfocusout="isEmpty(this,'Username')"  rows="1" cols="10"></textarea></td></tr>
+                                        <tr><td>Name:</td><td> <textarea name="name" minlength="2" maxlength="10" id="name" onfocusout="isOnlyCharacter(this,'Name')" required="" name="name" rows="1" cols="10"></textarea></td></tr>
+                                        <tr><td>Surname:</td><td> <textarea name="surname" minlength="2" maxlength="10" id="surname" onfocusout="isOnlyCharacter(this,'Surname')" required=""  name="surname" rows="1" cols="10"></textarea></td></tr>
+                                        <tr><td>Email:</td><td> <textarea required="" name="email" id="email" onfocusout="ValidateEmail()" name="email" rows="1" cols="10"></textarea></td></tr>
+                                        <tr><td>Password:</td><td> <input name="password" id="password" onfocusout="isEmpty(this,'Password')" type="password" minlength="2" maxlength="32" required="" name="password" rows="1" cols="10"></input></td></tr>
+                                        <tr><td>Confirm Password:</td><td> <input name="confirmpassword" id="confirmpassword" type="password" onfocusout="isEmpty(this,'Confirm Password')" minlength="2" maxlength="32" required="" name="confirmpassword" rows="1" cols="10"></input></td></tr>
+                                        <tr><td>userLevel:</td><td> <input type="text" name="userLevel" id="userLevel" onfocusout="isOnlyNumber(this,'UserLevel')" required="" name="userLevel" rows="1" cols="10"></textarea></td></tr>
+ 
                                     </table>
                              <br>
-                            
-                                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary" style = " margin-left :30%;width: 40% ; margin-right:30%"><i class="far fa-save"></i> Submit Changes</button>
-                               
+                                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
                                 </br>
                             </form>
                <br><br>

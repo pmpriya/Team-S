@@ -65,7 +65,7 @@ if(!isset($password) || empty($password)){
             <input type="password" class="demo-input-box" onfocusout="isEmpty(this,'Password')" required="" id="password" name="password" value="">
         </div><br>
         <div class="field-column">
-            <input type="button" style = "width : 30% ;margin-left :35%; height:4% ; margin-bottom: 10px ;background-color: rgb(42,103,204);color : white;" onclick="validateForm()" name="register-user" value="Sign in" class="btnRegister">
+            <input type="button" onclick="validateForm()" name="register-user" value="Sign in" class="btnRegister">
         </div>
       </div>
 
@@ -73,7 +73,15 @@ if(!isset($password) || empty($password)){
     </form>
 </div>
 
-
+<style>
+    #label {
+    font-size: 13px;
+    font-weight: bold;
+    color : rgb(42,103,204);
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    }
+    </style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
 

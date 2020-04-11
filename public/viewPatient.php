@@ -43,41 +43,46 @@ if(mysqli_num_rows($query)>=1){
 ?>
 
     <center>
-        <h1 id="title-page">Patient Details</h1>
+        <h1>Patient details</h1>
 
 
-        <h4 style = "color :  rgb(116,174,219);"> NHS Number: <b></h4> <h4><?php echo $nhs_number ?></b></h4>
+        <h4>NHS Number: <b><?php echo $nhs_number ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">First name: <b></h4><h4><?php echo $first_name ?></b></h4>
+        <h4>First name: <b><?php echo $first_name ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">Last Name: <b></h4><h4><?php echo $last_name ?></b></h4>
+        <h4>Last Name: <b><?php echo $last_name ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">DOB: <b></h4><h4><?php echo $date_of_birth ?></b></h4>
+        <h4>DOB: <b><?php echo $date_of_birth ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">Sex: <b></h4><h4><?php echo $sex ?></b></h4>
+        <h4>Sex: <b><?php echo $sex ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">E-mail: <b></h4><h4><?php echo $email ?></b></h4>
+        <h4>E-mail: <b><?php echo $email ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">Address: <b></h4><h4><?php echo $home_address?></b></h4>
+        <h4>Address: <b><?php echo $home_address?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">Postcode: <b></h4><h4><?php echo $postcode ?></b></h4>
+        <h4>Postcode: <b><?php echo $postcode ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">Landline: <b></h4><h4><?php echo $home_phone ?></b></h4>
+        <h4>Landline: <b><?php echo $home_phone ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">Mobile: <b></h4><h4><?php echo $mobile_phone ?></b></h4>
+        <h4>Mobile: <b><?php echo $mobile_phone ?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">GP Address: <b></h4><h4><?php echo $gp_address?></b></h4>
+        <h4>GP Address: <b><?php echo $gp_address?></b></h4>
 
-        <h4 style = "color :  rgb(116,174,219);">GP Phone: <b></h4><h4><?php echo $gp_phone?></b></h4>
+        <h4>GP Phone: <b><?php echo $gp_phone?></b></h4>
             <?php if (!$_SESSION['userLevel'] == 1) { ?>
-        <h4 style = "color :  rgb(116,174,219);">Access Code: <b></h4><h4><?php echo $accessCode?></b></h4>
+        <h4>Access Code: <b><?php echo $accessCode?></b></h4>
 
         <br><a href="editPatient.php?id=<?php echo $id?>">Edit Patient</a><br>
         <?php } ?>
-       <a href="patients.php">Go Back</a>
+        <br><a href="patients.php">Go Back</a>
+
+
+
+
+
+
 
 
 
     </center>
-
 <?php include(SHARED_PATH . '/footer.php'); ?>

@@ -38,25 +38,25 @@ $patient = mysqli_fetch_assoc($patient_set);
 
     <table class= "InvestigationsTable">
         <th id = "darkblue"> Date </th>
-        <th id = "lightblue"> BiliTD</th> 
+        <th> BiliTD</th> 
         <th id = "darkblue"> AST </th>
-        <th id = "lightblue"> ALT </th>
+        <th> ALT </th>
         <th id = "darkblue"> ALP </th>
-        <th id = "lightblue"> GGT </th>
+        <th> GGT </th>
         <th id = "darkblue"> Prot </th>
-        <th id = "lightblue"> Alb </th>
+        <th> Alb </th>
         <th id = "darkblue"> CK </th>
-        <th id = "lightblue"> Hb/Hct </th>
+        <th> Hb/Hct </th>
         <th id = "darkblue"> WCC </th>
-        <th id = "lightblue"> Neutro </th>
+        <th> Neutro </th>
         <th id = "darkblue"> Platelets </th>
-        <th id = "lightblue"> CRP </th>
+        <th> CRP </th>
         <th id = "darkblue"> ESR </th>
-        <th id = "lightblue"> PT/INR </th>
+        <th> PT/INR </th>
         <th id = "darkblue"> APTR </th>
-        <th id = "lightblue"> Fibrinogen </th>
+        <th> Fibrinogen </th>
         <th id = "darkblue"> Cortisol </th>
-        <th id = "lightblue"> Urea </th>
+        <th> Urea </th>
         <th id = "darkblue"> Creatinine </th>
  
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
@@ -87,7 +87,7 @@ $patient = mysqli_fetch_assoc($patient_set);
     </table>
           <center>       
              <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
-              <h3 style = "font-size: 30px; color :	rgb(72,72,72);font-family: 'Open Sans', sans-serif;font-weight: bold;">additional notes</h3>
+              <h1>Additional notes</h1>
 
 
     <table class= "InvestigationsTable">
@@ -104,3 +104,5 @@ $patient = mysqli_fetch_assoc($patient_set);
 
     </div>
 </div>
+
+

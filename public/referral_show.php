@@ -12,7 +12,7 @@
 
 <div id="content">
 <div class= "Show Referral">
-    <h1 id="title-page">Referrals for <?php echo $patient["first_name"] . " ". $patient["last_name"]; ?> </h1>
+    <h1>Referrals for <?php echo $patient["first_name"] . " ". $patient["last_name"]; ?> </h1>
 
 
     <center>
@@ -23,12 +23,12 @@
         <?php }?>
         <br>
     <table class= "ReferralsTable">
-        <th id = "darkblue"> Date </th>
-        <th id = "lightblue"> Consultant name</th> 
-        <th id = "darkblue"> Consultant Specialty</th>
-        <th id = "lightblue"> Organisation Hospital Name</th>
+        <th> Date </th>
+        <th> Consultant name</th> 
+        <th> Consultant Specialty</th>
+        <th> Organisation Hospital Name</th>
 
-        <th id = "darkblue"> View </th>
+        <th> View </th>
  
      
        

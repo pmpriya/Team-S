@@ -18,8 +18,17 @@ if(is_post_request()) {
         <title>Appointment</title>
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
+	<style>
+
+tr:nth-child(odd) {background-color: #f2f2f2;}
+
+table {
+	border-collapse: collapse;
+	width: 50%;
+}
+</style>
 <body>
-    <h1 id="title-page"><b>PATIENT APPOINTMENT</b></h1>
+    <h1><b>PATIENT APPOINTMENT</b></h1>
 
 <h3> <div> 
 	<?php if (isset($_GET['success'])){ echo "Appointment has been created"; } ?>
@@ -32,22 +41,22 @@ if(is_post_request()) {
     <!-- patient details form -->
     <form action="<?php echo url_for("/add_appointment.php"); ?>" method="post"> 
       <div class="field-column">
-      <label id='label'>Selected Patient ID</label>
+      <label>Selected Patient ID</label>
 		<input type="text" name="patient_id" value="<?=$_GET['patient_id']?>"  readonly/>
 		</div>
 
     <div class="field-column">
-      <label id='label'>Date</label>
+      <label>Date</label>
        <input type="date" value="<?=$_GET['date']?>" name="date" required  readonly>
     </div>
 
 	<div class="field-column">
-      <label id='label'>Admission Type</label>
+      <label>Admission Type</label>
        <input type="text" value="<?=$_GET['option_admission']?>" name="option_admission" required  readonly>
     </div>
 
 	<div class="field-column">
-      <label id='label'>Time</label>
+      <label>Time</label>
        <input type="text" value="<?=$_GET['time']?>" name="time" required  readonly>
     </div>
 
@@ -100,7 +109,7 @@ if(is_post_request()) {
     <!-- patient details form -->
     <form action="<?php echo url_for("/add_appointment.php"); ?>" method="get">    <!-- Patient's Surname -->
       <div class="field-column">
-      <label id='label'>Select Patient</label>
+      <label>Select Patient</label>
 		<select name="patient_id" required>
 			<option></option>
 			<?php while($patient = mysqli_fetch_assoc($patients)) { ?>
@@ -110,7 +119,7 @@ if(is_post_request()) {
         </div>
     <!-- Patient's forename -->
     <div class="field-column">
-      <label id='label'>Date</label>
+      <label>Date</label>
        <input type="date" name="date" min="<?= date('yy-m-d') ?>" required >
     </div>
 <br>
@@ -118,31 +127,35 @@ if(is_post_request()) {
 	<!-- Option For Admission -->
 
 	<div class="field-column">
-    <label id='label'>Options For Admission</label>
+    <label>Options For Admission</label>
      <input id="option_admission" type="radio" name="option_admission" value="inpatient" checked><label id="awareOption">Inpatient (Rays of Sunshine)</label>
      <input id="option_admission" type="radio" name="option_admission" value="outpatient" checked><label id="awareOption">Outpatient</label>
 	 <input id="option_admission" type="radio" name="option_admission" value="daycase" checked><label id="awareOption">Day Case (Phillip Isaac)</label>
   </div>
 
+<br>
+
   <!-- Time -->
 
-  <div class="field-column" align="center">
-    <label id='label'>Time</label>
-    <textarea onfocusout="isEmpty(this,'time')" name="time" style = "width:100%" id="time" placeholder="Required" required>
+  <div class="field-column">
+    <label>Time</label>
+    <textarea onfocusout="isEmpty(this,'time')" name="time" id="time" placeholder="Required" required>
     </textarea>
   </div>
 
 	<!-- submit -->
      <!--<input type ="submit" name="submit"> -->
      <div class="field-column">
-     <button type="submit" name="submit"  style = " width : 30% ; margin-left :50px; height:5% ; margin-bottom: 10px">Submit</button>
-	
+     <button type="submit" name="submit">Submit</button>
+	</div>
      <!-- reset button -->
-     <!-- <div class="field-column"> -->
-     <button type="reset" name="reset"  style = " width : 30% ;margin-left :10px; height:5% ; margin-bottom: 10px">Reset</button>
+     <div class="field-column">
+     <button type="reset" name="reset">Reset</button>
     </div>
 </form>
 
 	<?php } ?>
 
+
 <?php include(SHARED_PATH . '/footer.php'); ?>
+

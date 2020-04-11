@@ -17,7 +17,7 @@ $patient_values = mysqli_fetch_assoc($patient);
 
 <div id="content">
 <div class= "Show Referral">
-    <h1 id="title-page">Referral Details for <?php echo $patient_values["first_name"] . " " . $patient_values["last_name"];?> from <?php echo $referral_values["date"]; ?> </h1>
+    <h1>Referral for <?php echo $patient_values["first_name"] . " " . $patient_values["last_name"];?> from <?php echo $referral_values["date"]; ?> </h1>
  <?php   
 
         $consultant_name = $referral_values['consultant_name'];
@@ -42,28 +42,27 @@ $patient_values = mysqli_fetch_assoc($patient);
 ?>
 
     <center>
-        <!-- <h2 >Referral details</h2> -->
+        <h2>Referral details</h2>
 
 
         <div>
-            <p><b style = "color : rgb(9, 66, 112)"> Consultant name :</b> <?php echo $consultant_name; ?> </p>
-            <p><b style = "color : rgb(26, 201, 178)"> Consultant specialty :</b> <?php echo $consultant_specialty; ?> </p>
-            <p><b style = "color : rgb(9, 66, 112)"> Name of organisation hospital :</b> <?php echo $organisation_hospital_name; ?> </p>
-            <p><b style = "color :rgb(26, 201, 178)"> Number of organisation hospital :</b> <?php echo $organisation_h_no; ?> </p>
-            <p><b style = "color : rgb(9, 66, 112)"> Name of referring doctor :</b> <?php echo $referring_doctor_name; ?> </p>
-            <p><b style = "color :rgb(26, 201, 178)"> Bleep number :</b> <?php echo $bleep_no; ?> </p>
-            <p><b style = "color : rgb(9, 66, 112)"> Are parents aware of referral? :</b> <?php echo $parents_aware; ?> </p>
-            <?php if($interpreter_language != ""): ?>   <p><b style = "color : rgb(26, 201, 178)"> Interpreter language :</b> <?php echo $interpreter_language; ?> </p> 
+            <p><b> Consultant name :</b> <?php echo $consultant_name; ?> </p>
+            <p><b> Consultant specialty :</b> <?php echo $consultant_specialty; ?> </p>
+            <p><b> Name of organisation hospital :</b> <?php echo $organisation_hospital_name; ?> </p>
+            <p><b> Number of organisation hospital :</b> <?php echo $organisation_h_no; ?> </p>
+            <p><b> Name of referring doctor :</b> <?php echo $referring_doctor_name; ?> </p>
+            <p><b> Bleep number :</b> <?php echo $bleep_no; ?> </p>
+            <p><b> Are parents aware of referral? :</b> <?php echo $parents_aware; ?> </p>
+            <?php if($interpreter_language != ""): ?>   <p><b> Interpreter language :</b> <?php echo $interpreter_language; ?> </p> 
             <?php endif; ?>    
-            <p><b style = "color : rgb(9, 66, 112)"> Name of King's Hospital Doctor :</b> <?php echo $doctor_kch_name; ?> </p>
-            <p><b style = "color :rgb(26, 201, 178)"> Date of Referral :</b> <?php echo $date_of_referral; ?> </p>
-            <p><b style = "color : rgb(9, 66, 112)"> Current issue :</b> <?php echo $current_issue; ?> </p>
-            <p><b style = "color :rgb(26, 201, 178)"> Present Complaint History :</b> <?php echo $history_of_present_complaint; ?> </p>
-            <p><b style = "color : rgb(9, 66, 112)"> Family History :</b> <?php echo $family_history; ?> </p>
-            <p><b style = "color :rgb(26, 201, 178)"> Current feeds :</b> <?php echo $current_feeds; ?> </p>
-            <p><b style = "color : rgb(9, 66, 112)"> Medications :</b> <?php echo $medications; ?> </p>
-            <p ><b style = "color :rgb(26, 201, 178)"> Other investigations :</b>
-             <?php echo $other_inv; ?> </p>
+            <p><b> Name of King's Hospital Doctor :</b> <?php echo $doctor_kch_name; ?> </p>
+            <p><b> Date of Referral :</b> <?php echo $date_of_referral; ?> </p>
+            <p><b> Current issue :</b> <?php echo $current_issue; ?> </p>
+            <p><b> Present Complaint History :</b> <?php echo $history_of_present_complaint; ?> </p>
+            <p><b> Family History :</b> <?php echo $family_history; ?> </p>
+            <p><b> Current feeds :</b> <?php echo $current_feeds; ?> </p>
+            <p><b> Medications :</b> <?php echo $medications; ?> </p>
+            <p><b> Other investigations :</b> <?php echo $other_inv; ?> </p>
 
     </div>
 
