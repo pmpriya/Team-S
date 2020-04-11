@@ -178,3 +178,184 @@ $isValid = true;
   </div>
 
 <br>
+<!--<form class = "form" action="contactform.php" method="post">  -->
+
+     <!-- Referring Person's Name -->
+    <div class="field-column">
+    <label>Referring Person's Name</label>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Referring Person's Name')" name="referring_name" id="referring_name"  placeholder="Required" required>
+      </div>
+
+  <!-- Bleep Number -->
+
+  <div class="field-column">
+    <label>Bleep Number</label>
+     <input type="number" onfocusout="isOnlyNumber(this,'Bleep Number')" name="bleep_number" id="bleep_number" placeholder="Required" required>
+  </div>
+
+   <!-- Is the patient aware of the referral -->
+
+   <div class="field-column">
+    <label>Are parents aware of this referral?</label>
+     <input id="aware" type="radio" name="is_patient_aware" value="y" checked><label id="awareOption">Yes</label>
+     <input id="aware" type="radio" name="is_patient_aware" value="n" ><label id="awareOption">No</label>
+  </div>
+   <!-- Is interpreter needed -->
+
+   <div class="field-column">
+    <label>Will there be an interpreter needed?</label>
+    <input id="interpreter" type="radio" name="is_interpreter_needed" value="y" checked><label id="interpreterOption">Yes</label>
+    <input id="interpreter" type="radio" name="is_interpreter_needed" value="n" ><label id="interpreterOption">No</label>
+  </div>
+    <!-- Interpreter language -->         
+  <div class="field-column">
+    <label>Interpreter language(To be left empty if no interpreter is needed)</label>
+     <input type="text" name="interpreter_language" id="interpreter_language" placeholder="Optional">
+  </div>
+    <!-- KCH DOC NAME -->
+  <div class="field-column">
+    <label>Doctor at King's College Hospital this case was discussed with(To be left empty if the case wasn't discussed with anyone at King's)</label>
+     <input type="text" name="kch_doc_name" id="kch_doc_name" placeholder="Optional">
+  </div>
+
+  <div class="field-column">
+      <label>Date of referral</label>
+       <input type = "date"   id="date" name = "date" required>
+
+    </div>
+   <!-- Current Issue -->
+
+   <div class="field-column">
+    <label>Current Issue</label>
+    <textarea onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
+    </textarea>
+  </div>
+
+   <!-- History Of Present Complaint -->
+
+   <div class="field-column">
+    <label>History Of Present Complaint</label>
+    <textarea onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
+    </textarea>
+  </div>
+
+   <!-- Family History -->
+
+   <div class="field-column">
+    <label>Family History</label>
+    <textarea onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
+    </textarea>
+  </div>
+  
+   <!-- Current Feeds -->
+ 
+   <div class="field-column">
+    <label>Current Feeds</label>
+    <textarea onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
+    </textarea>
+  </div>
+
+   <!-- Medications -->
+
+   <div class="field-column">
+    <label>Medications</label>
+    <textarea onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
+    </textarea>
+  </div>
+
+   <!-- Other Investigations -->
+
+   <div class="field-column">
+    <label>Other Investigations</label> 
+    <textarea onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
+    </textarea>
+  </div>
+   <!-- submit -->
+   <!--<input type ="submit" name="submit"> -->
+   <div class="field-column">
+   <button type = "submit" onclick="validateForm()" name="submitbtn">Submit</button>
+
+  </div>
+   <!-- reset button -->
+   <div class="field-column">
+   <button type = "reset" name="reset">Reset</button>
+  </div>
+</form>
+
+
+<?php include(SHARED_PATH . '/footer.php'); ?>
+
+
+<script type="text/javascript">
+  var append = false;
+</script>
+
+<script type="text/javascript" src="../private/validation_functions.js"></script>
+
+<script type="text/javascript">
+  function validateForm(){
+    document.getElementById("alert_message").innerHTML ="";
+    append = true;
+    var consultantName = document.getElementById("consultant_name");
+    var consultantSpec = document.getElementById("consultant_specialty");
+    var orgName = document.getElementById("organisation_hospital_name");
+    var orgNumber = document.getElementById("organisation_hospital_no");
+    var refName = document.getElementById("referring_name");
+    var bleepNumber = document.getElementById("bleep_number");
+    var interLang = document.getElementById("interpreter_language");    
+    var kchDoctor = document.getElementById("kch_doc_name");    
+    var currentIssue = document.getElementById("current_issue");
+    var complaintHistory = document.getElementById("history_of_present_complaint");
+    var familyHistory = document.getElementById("family_history");
+    var currentFeeds = document.getElementById("current_feeds");
+    var medications = document.getElementById("medications");
+    var otherInvestigations = document.getElementById("other_investigations");
+
+    var isOkay = true;
+    if(!isOnlyCharacter(consultantName,"Consultant Name")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(consultantSpec,"Consultant Specialty")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(orgName,"Organisation Name")){
+      isOkay = false;
+    }
+    if(!isOnlyNumber(orgNumber,"Organisation Number")){
+      isOkay = false;
+    }
+    if(!isOnlyCharacter(refName,"Referring Doctor's Name")){
+      isOkay = false;
+    }
+    if(!isOnlyNumber(bleepNumber,"Bleep Number")){
+      isOkay = false;
+    }
+    if(isEmpty(currentIssue,"Current Issue")){
+      isOkay = false;
+    }
+    if(isEmpty(complaintHistory,"Complaint History")){
+      isOkay = false;
+    }
+    if(isEmpty(familyHistory,"Family History")){
+      isOkay = false;
+    }
+    if(isEmpty(currentFeeds,"Current Feeds")){
+      isOkay = false;
+    }
+    if(isEmpty(medications,"Medications")){
+      isOkay = false;
+    }
+    if(isEmpty(otherInvestigations,"Other Investigations")){
+      isOkay = false;
+    }
+
+    if(isOkay){
+      document.getElementById("form").submit();
+
+      return true;
+    }
+
+    append = false;
+    return false;
+  }
+</script>
