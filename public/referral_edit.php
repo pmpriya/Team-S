@@ -21,7 +21,7 @@ $delete = $_GET["delete"] ?? '';
 
 if (isset($_GET["delete"])) {
     delete_referral($delete);
-    redirect_to(url_for('referral_list.php?'));
+    redirect_to(url_for('patients.php'));
 }
 
 $consultant_name = $referral_values['consultant_name'];
@@ -109,29 +109,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Referring Person's Name -->
     <div class="field-column">
     <label id="label">Referring Person's Name</label>
-       <input type="text" onfocusout="isOnlyCharacter(this,'Referring Person's Name')" name="referring_name" id="referring_name" value = "<?php echo h($referring_doctor_name);?>" placeholder="Required" required>
+       <input type="text"  name="referring_name" id="referring_name" value = "<?php echo h($referring_doctor_name);?>" placeholder="Required" required>
       </div>
 
   <!-- Bleep Number -->
 
   <div class="field-column">
     <label id="label">Bleep Number</label>
-     <input type="number" onfocusout="isOnlyNumber(this,'Bleep Number')" name="bleep_number"  value = "<?php echo h($bleep_no);?>" id="bleep_number" placeholder="Required" required>
+     <input type="number" name="bleep_number"  value = "<?php echo h($bleep_no);?>" id="bleep_number" placeholder="Required" required>
   </div>
 
    <!-- Is the patient aware of the referral -->
 
    <div class="field-column">
     <label id="label">Are parents aware of this referral?</label>
-     <input id="aware" type="radio" name="is_patient_aware" value="y" checked><label id="awareOption">yes</label> 
-     <input id="aware" type="radio" name="is_patient_aware" value="n" ><label id="awareOption">no</label>
+     <input id="aware" type="radio" name="is_patient_aware" value="y" checked><label id="awareOption">Yes</label>
+     <input id="aware" type="radio" name="is_patient_aware" value="n" ><label id="awareOption">No</label>
   </div>
    <!-- Is interpreter needed -->
 
    <div class="field-column">
     <label id="label">Will there be an interpreter needed?</label>
-    <input id="interpreter" type="radio" name="is_interpreter_needed" value="y" checked><label id="interpreterOption">yes</label>
-    <input id="interpreter" type="radio" name="is_interpreter_needed" value="n" ><label id="interpreterOption">no</label>
+    <input id="interpreter" type="radio" name="is_interpreter_needed" value="y" checked><label id="interpreterOption">Yes</label>
+    <input id="interpreter" type="radio" name="is_interpreter_needed" value="n" ><label id="interpreterOption">No</label>
   </div>
     <!-- Interpreter language -->         
   <div class="field-column">
