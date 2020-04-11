@@ -19,16 +19,6 @@ if (isset($_POST['submitbtn'])) {
         
 ?>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">      
-        
-        <style>
-
-            tr:nth-child(odd) {background-color: #f2f2f2;}
-
-            table {
-                border-collapse: collapse;
-                width: 50%;
-            }
-        </style>
 
     <div class="public">
 
@@ -79,25 +69,4 @@ if (isset($_POST['submitbtn'])) {
 
     </div>
 
-    <style>
-        a {
-                background-color: white;
-    box-shadow: -1 1px 0 blue;
-    color: rgb(42,103,204);
-    padding: 0.3em 1em;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-} 
-
-a:hover {
-  background-color: rgb(19, 26, 102);
-  cursor: pointer;
-}
-
-a:active {
-  box-shadow: none;
-  top: 5px;
-}
-</style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
