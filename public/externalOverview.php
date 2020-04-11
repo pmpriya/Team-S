@@ -40,11 +40,11 @@ if(mysqli_num_rows($user_set)>=1){
         }</style>
 
     <center>
-        <h1>Current status</h1>
+        <h1 id="title-page">Current status</h1>
         <?php echo $_SESSION['nhsno'];
         echo $_SESSION['accessCode']
         ?>
-        You're currently viewing status of the referral for <?php echo $first_name ?> <?php echo $last_name ?>.<br>
+        You're currently viewing status of the referral for <?php echo $first_name ?> <?php echo $last_name ?>.<br> <br>
         <td><b><a href=editPatient.php>Update Patient's details</a></b></td><br><br>
         <?php
 
@@ -54,10 +54,10 @@ if(mysqli_num_rows($user_set)>=1){
             echo '<b><a href=newReferral.php>Complete Referral</a></b>';
         }
         elseif(mysqli_num_rows(access_investigation($patient_id))){
-            echo 'You currently have an investigation in progress, use the link below to update the results.<br>';
+            echo 'You currently have an investigation in progress, use the link below to update the results.<br><br>';
             echo "<b><a href=InvestigationsShow.php?id=" . $patient_id . '>Update investigations</a></td></b>';
         }else{
-            echo 'You currently have no cases in progress, use the link below to submit results for a review<br>';
+            echo 'You currently have no cases in progress, use the link below to submit results for a review<br><br>';
             echo '<b><a href=newInvestigation.php>Start new investigation</a></b>';
         }
 
