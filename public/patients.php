@@ -51,7 +51,9 @@ if (isset($_POST['submitbtn'])) {
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
+
                         echo "<tr><td >" . $users["first_name"] . "</td>
+                        
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>

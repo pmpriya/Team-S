@@ -368,49 +368,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </form>
 
-<style>
-#patient-registration {
-    font-size: 30px;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    }
 
-    #registration-heading {
-    font-size: 15px;
-    color : rgb(148, 148, 148);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    padding-left: 20px;
-    }
 
-    #label {
-    font-size: 13px;
-    font-weight: bold;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    /* font-weight: 300; */
-    }
 
-    #button {
-    font-size: 13px;
-    font-weight: bold;
-    padding: 10px;
-    background-color : rgb(42,103,204);
-    color:white;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    width: 50%;
-    height: 5%;
-    border-radius: 4px;
-    border: 0.5px solid grey;
-border-left: none;
-cursor: pointer;
-float:left;
-    }
 
-    </style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
     
