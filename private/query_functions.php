@@ -48,6 +48,20 @@ function find_referrals_by_id($patient_ID)
    
 }
 
+function find_active_referrals($patient_ID)
+{
+    global $db;
+    $sql = "SELECT COUNT(*) as total FROM Referral";
+    $sql .= "WHERE patient_ID ='" . $patient_ID . "'";
+    $result = mysqli_query($db,$sql);
+    $rowcount=mysqli_num_rows($result);
+
+
+    return $rowcount;
+
+
+}
+
 
 function insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
 $ref_dr_name,$ref_email,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email) 
@@ -355,6 +369,8 @@ function find_all_patients()
     return $result;
 }
 
+
+
 function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth,$new_sex,$new_email,$new_home_address,$new_postcode,$new_home_phone,$new_mobile_phone,$new_gp_address,$new_gp_phone,$new_accessCode)
 {
     global $db;
@@ -452,6 +468,14 @@ function access_referral($ID)
 {
     global $db;
     $sql = "SELECT * FROM Referral WHERE patient_ID='$ID'";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+function access_actve_referral($ID)
+{
+    global $db;
+    $sql = "SELECT * FROM Referral WHERE Active='1' AND patient_ID='$ID' LIMIT 1";
     $result = mysqli_query($db, $sql);
     return $result;
 }
@@ -556,6 +580,17 @@ function find_all_appointments() {
     return $result;
 }
 
+
+function find_patient_appointments($id) {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE patient_id='" . db_escape($db, $id) . "' ";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
 function delete_appointment($id)
 {
     global $db;
@@ -634,6 +669,8 @@ function search_by_date($date)
     confirm_result_set($result);
     return $result;
 }
+
+
 
 // function delete_expired_appointments($id)
 // {

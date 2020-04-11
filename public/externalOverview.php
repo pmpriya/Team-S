@@ -40,25 +40,19 @@ if(mysqli_num_rows($user_set)>=1){
         }</style>
 
     <center>
-        <h1>Current status</h1>
-        <?php echo $_SESSION['nhsno'];
-        echo $_SESSION['accessCode']
-        ?>
-        You're currently viewing status of the referral for <?php echo $first_name ?> <?php echo $last_name ?>.<br>
-        <td><b><a href=editPatient.php>Update Patient's details</a></b></td><br><br>
+        <h1>My case</h1>
+        You're currently viewing case status for <b><?php echo $first_name ?> <?php echo $last_name ?></b>.<br>
+        <td><i><a href=editPatient.php>Update personal details</a></i></td><br><br>
         <?php
 
 
-        if(mysqli_num_rows(access_referral($patient_id))){
-            echo 'You currently have a pending referral, use the link below to complete.<br>';
-            echo '<b><a href=newReferral.php>Complete Referral</a></b>';
-        }
-        elseif(mysqli_num_rows(access_investigation($patient_id))){
-            echo 'You currently have an investigation in progress, use the link below to update the results.<br>';
-            echo "<b><a href=InvestigationsShow.php?id=" . $patient_id . '>Update investigations</a></td></b>';
-        }else{
-            echo 'You currently have no cases in progress, use the link below to submit results for a review<br>';
-            echo '<b><a href=newInvestigation.php>Start new investigation</a></b>';
+        if(mysqli_num_rows(access_actve_referral($patient_id))){
+            echo 'You currently have a case with us.<br>';
+            echo 'Please use the link below to update your results<br>';
+            echo "<b><a href=InvestigationsShow.php>Update investigations</a></td></b><br>";
+        } else{
+            echo 'You currently have no cases in progress, use the link below to start a new referral<br>';
+            echo '<b><a href=referral_page.php>Start new referral</a></b>';
         }
 
 
