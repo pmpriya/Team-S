@@ -288,8 +288,8 @@ float:left;
 
 table{
   border-collapse: collapse;
-  margin: 0;
 }
+
 table.center { margin-left:auto; margin-right:auto; }
  th, td {
    border-collapse: collapse;
