@@ -242,6 +242,11 @@ if ($_SESSION['userLevel'] > 1) {
             isOkay = false;
         }
       
+        if(isOkay){
+            //alert("all good");
+            document.getElementById("form").submit();
+            return true;
+        }
         append = false;
         return false;
     }
