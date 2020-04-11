@@ -29,6 +29,13 @@
 
         <?php
         if (isset($_SESSION['userLevel'])) {
+            if($_SESSION['userLevel'] > 1)
+                echo '<li><a href=activeCases.php>ACTIVE CASES</a></li>';
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['userLevel'])) {
             if($_SESSION['userLevel'] > 0)
                 echo '<li><a href=patients.php>PATIENTS</a></li>';
         }
