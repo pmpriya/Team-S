@@ -148,9 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 ?>
-    <style>textarea {
-            width: 200px;
-        }</style>
+ 
 
     <center>
         <h1 id="title-page">Edit Patient</h1>
