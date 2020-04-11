@@ -68,9 +68,7 @@
         }
         ?>
 
-<style>textarea {
-        width: 200px;
-    }</style>
+
 
            <center>
                <h1 id="title-page">Add user</h1>
