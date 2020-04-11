@@ -38,12 +38,12 @@ if (isset($_POST['submitbtn'])) {
         <center>
 
 
-        <h1>Appointments</h1>
+        <h1 id="title-page">Appointments</h1>
 
            
             <form method="post" class="example" id="searchbar" action="appointments.php" style="margin:auto;max-width:500px">
                     <input type="text" name="search" id="searchinput" placeholder="Enter Date to Search (yyyy-mm-dd)">
-                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
+                    <button name="submitbtn" id="searchbutton" type="submit" style = " margin-left :10px; height:5%"><i class="fa fa-search"></i></button>
                 </form>  
             <br>
 
@@ -53,13 +53,13 @@ if (isset($_POST['submitbtn'])) {
 
                 <table>
                     <tr>
-                        <th><b>ID</b></th>
-                        <th><b>Patient Name</b></th>
-                        <th><b>Date</b></th>
-                        <th><b>Admission</b></th>
-                        <th><b>Time</b></th>
+                        <th id = "darkblue"><b>ID</b></th>
+                        <th id = "lightblue"><b>Patient Name</b></th>
+                        <th id = "darkblue"><b>Date</b></th>
+                        <th id = "lightblue"><b>Admission</b></th>
+                        <th id = "darkblue"><b>Time</b></th>
 
-                        <th colspan="3"><b>Manage</b></th>
+                        <th id = "lightblue" colspan="3"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($appointment = mysqli_fetch_assoc($appointment_set)) {
@@ -79,4 +79,25 @@ if (isset($_POST['submitbtn'])) {
 
     </div>
 
+    <style>
+        a {
+                background-color: white;
+    box-shadow: -1 1px 0 blue;
+    color: rgb(42,103,204);
+    padding: 0.3em 1em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+} 
+
+a:hover {
+  background-color: rgb(19, 26, 102);
+  cursor: pointer;
+}
+
+a:active {
+  box-shadow: none;
+  top: 5px;
+}
+</style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
