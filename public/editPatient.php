@@ -153,42 +153,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }</style>
 
     <center>
-        <h1>Edit patient</h1>
+        <h1 id="title-page">Edit Patient</h1>
 
 
          <form method="post" id="form">
             <div class="form-group" align="center">
                 <span id="alert_message" style="color:red"></span>
                 <table>
-                    <tr><td>NHS Number:</td><td> <textarea required="" onfocusout="isOnlyNumber(this,'NHS Number')"  name="nhs_number" id="nhs_number" rows="1" cols="10"><?php echo $nhs_number; ?></textarea></td> </tr>
+                    <tr><td id = "darkblue">NHS Number:</td><td> <textarea required="" onfocusout="isOnlyNumber(this,'NHS Number')"  name="nhs_number" id="nhs_number" rows="1" cols="10"><?php echo $nhs_number; ?></textarea></td> </tr>
 
-                      <tr><td>First Name:</td><td> <textarea required="" id="first_name" onfocusout="isOnlyCharacter(this,'First Name')" name="first_name" rows="1" cols="10"><?php echo $first_name; ?></textarea></td></tr>
+                      <tr><td id = "lightblue">First Name:</td><td> <textarea required="" id="first_name" onfocusout="isOnlyCharacter(this,'First Name')" name="first_name" rows="1" cols="10"><?php echo $first_name; ?></textarea></td></tr>
 
-                    <tr><td>Last Name:</td><td> <textarea required="" id="last_name" onfocusout="isOnlyCharacter(this,'Last Name')" name="last_name" rows="1" cols="10"><?php echo $last_name; ?></textarea></td></tr>
+                    <tr><td id = "darkblue">Last Name:</td><td> <textarea required="" id="last_name" onfocusout="isOnlyCharacter(this,'Last Name')" name="last_name" rows="1" cols="10"><?php echo $last_name; ?></textarea></td></tr>
 
-                    <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail()" name="new_email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
+                    <tr><td id = "lightblue">Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail()" name="new_email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
 
-                    <tr><td>DOB:</td><td> <input value="<?php echo $date_of_birth; ?>" type="date" name="date_of_birth" required="" id="date_of_birth" onfocusout="isEmpty(this,'DOB')" name="date_of_birth" rows="1" cols="10"></input></td></tr>
+                    <tr><td id = "darkblue">DOB:</td><td> <input value="<?php echo $date_of_birth; ?>" type="date" name="date_of_birth" required="" id="date_of_birth" onfocusout="isEmpty(this,'DOB')" name="date_of_birth" rows="1" cols="10"></input></td></tr>
 
-                    <tr><td>Sex:</td><td> <textarea required="" name="sex" onfocusout="isOnlyCharacter(this,'Sex')" id="sex" rows="1" cols="10"><?php echo $sex; ?></textarea></td></tr>
+                    <tr><td id = "lightblue">Sex:</td><td> <textarea required="" name="sex" onfocusout="isOnlyCharacter(this,'Sex')" id="sex" rows="1" cols="10"><?php echo $sex; ?></textarea></td></tr>
 
-                    <tr><td>Home address:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home address')" id="home_address" name="home_address" rows="1" cols="10"><?php echo $home_address; ?></textarea></td></tr>
+                    <tr><td id = "darkblue">Home address:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home address')" id="home_address" name="home_address" rows="1" cols="10"><?php echo $home_address; ?></textarea></td></tr>
                     
-                    <tr><td>Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
+                    <tr><td id = "lightblue">Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
 
-                    <tr><td>Home Phone:</td><td> <textarea value="<?php echo $home_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Home Phone')" required="" id="home_phone" name="home_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td id = "darkblue">Home Phone:</td><td> <textarea value="<?php echo $home_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Home Phone')" required="" id="home_phone" name="home_phone" rows="1" cols="10"></textarea></td></tr>
 
-                    <tr><td>Mobile Phone:</td><td> <textarea value="<?php echo $mobile_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Mobile Phone')" required="" id="mobile_phone" name="mobile_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td id = "lightblue">Mobile Phone:</td><td> <textarea value="<?php echo $mobile_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Mobile Phone')" required="" id="mobile_phone" name="mobile_phone" rows="1" cols="10"></textarea></td></tr>
 
-                    <tr><td>HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
+                    <tr><td id = "darkblue">HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
 
-                    <tr><td>GP Phone:</td><td> <input value="<?php echo $gp_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'GP Phone')" required="" id="gp_phone" name="gp_phone" rows="1" cols="10"></input></td></tr>
+                    <tr><td id = "lightblue">GP Phone:</td><td> <input value="<?php echo $gp_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'GP Phone')" required="" id="gp_phone" name="gp_phone" rows="1" cols="10"></input></td></tr>
                     
-                    <tr><td>Access Code</td><td> <input value="<?php echo $accessCode; ?>" type="number" onfocusout="isOnlyNumber(this,'Access Code')" required="" id="accessCode" name="accessCode" rows="1" cols="10"></input></td></tr>
+                    <tr><td id = "darkblue">Access Code</td><td> <input value="<?php echo $accessCode; ?>" type="number" onfocusout="isOnlyNumber(this,'Access Code')" required="" id="accessCode" name="accessCode" rows="1" cols="10"></input></td></tr>
 
                 </table>
 
-                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
+                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary" style = " margin-top : 10px ; margin-bottom:10px; margin-left :30%;width: 40% ; margin-right:30%"><i class="far fa-save"></i> Submit Changes</button>
             </form>
         <br><br>
 
