@@ -167,7 +167,7 @@ table {
 		 font-size: 13px; 
 		 font-weight: bold; 
 		 /* color : rgb(240,138,14);  */
-		color :  rgb(240,134,3); 
+		color :  rgb(116,174,219); 
 		font-family: 'Open Sans', sans-serif;
 	} 
 	
