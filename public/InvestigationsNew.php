@@ -2,12 +2,22 @@
 <?php include('../private/shared/header.php'); ?>
 <?php $page_title = 'Add Investigation'; ?>
 <div class="public">
-<?php $patient_ID = $_GET['patient_ID']?? '3'; ?>
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
+    <?php
+    if (isset($_SESSION['userLevel'])) {
+if ($_SESSION['userLevel'] > 1) {
+     if(isset($_GET['id'])){
+ $patient_ID = $_GET['id'];
+     }}}
+     elseif(isset($_SESSION['nhsno'])){
+         $patient_ID = $_SESSION['current_patient_id'];
+     }else{
+    header('Location: index.php');
+}
+    ?>
+
 <?php
-    //$patient_ID = GET['patient_ID']?? '1';
-    //mysqli_insert_id($db);
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $date = $_POST['date'] ?? '';

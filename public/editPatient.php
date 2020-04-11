@@ -6,24 +6,20 @@
 
 
 <?php
-if ($_SESSION['userLevel'] < 2) {
-    redirect_to('index.php');
-
-}
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $user_set = find_patient_by_id($_GET['id']);
-}
-elseif(isset($_SESSION['nhsno'])){
-    $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
-
-}else{
+    if (isset($_SESSION['userLevel'])) {
+if ($_SESSION['userLevel'] > 1) {
+     if(isset($_GET['id'])){
+          $user_set = find_patient_by_id($_GET['id']);
+     }}}
+     elseif(isset($_SESSION['nhsno'])){
+         $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
+     }else{
     header('Location: index.php');
 }
 
-
 if(mysqli_num_rows($user_set)>=1){
     while($row = mysqli_fetch_array($user_set)) {
+        $id = $row['ID'];
         $nhs_number = $row['nhs_number'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];

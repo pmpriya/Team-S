@@ -6,7 +6,21 @@
 
 <?php
 
-  $patient_ID = $_GET["id"];
+
+if (isset($_SESSION['userLevel'])) {
+    if ($_SESSION['userLevel'] > 1) {
+        if (isset($_GET['id'])) {
+            $patient_ID = $_GET['id'];
+        }
+        else{    header('Location: index.php');}
+    }
+} elseif (isset($_SESSION['nhsno'])) {
+    $patient_ID = $_SESSION['current_patient_id'];
+} else {
+    header('Location: index.php');
+}
+
+
   $patient = find_patient_by_id($patient_ID);
   $patient_values = mysqli_fetch_assoc($patient);
 
