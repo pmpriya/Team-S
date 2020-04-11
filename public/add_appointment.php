@@ -18,15 +18,6 @@ if(is_post_request()) {
         <title>Appointment</title>
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
-	<style>
-
-tr:nth-child(odd) {background-color: #f2f2f2;}
-
-table {
-	border-collapse: collapse;
-	width: 50%;
-}
-</style>
 <body>
     <h1 id="title-page"><b>PATIENT APPOINTMENT</b></h1>
 
@@ -153,25 +144,5 @@ table {
 </form>
 
 	<?php } ?>
-	
-	<style>
-    #label {
-    font-size: 13px;
-    font-weight: bold;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-	}
-	
-	 #awareOption {
-		 font-size: 13px; 
-		 font-weight: bold; 
-		 /* color : rgb(240,138,14);  */
-		color :  rgb(116,174,219); 
-		font-family: 'Open Sans', sans-serif;
-	} 
-	
-    </style>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
-
