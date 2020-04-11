@@ -282,16 +282,6 @@ $isValid = true;
   </div>
 </form>
 
-<style>
-    #label {
-    font-size: 13px;
-    font-weight: bold;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-  }
-  
-	</style>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
