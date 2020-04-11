@@ -17,7 +17,11 @@
 
     <center>
     <br>
-    <br>
+
+        <?php  if(!mysqli_num_rows(access_actve_referral($patient_ID))){ ?>
+        <a href=referral_page.php?id=<?php echo $patient_ID ?>>Create Referral</a></td>
+        <?php }?>
+        <br>
     <table class= "ReferralsTable">
         <th> Date </th>
         <th> Consultant name</th> 
@@ -44,7 +48,7 @@
     <?php if (!$_SESSION['userLevel'] == 1) { ?>
              <br><br><a class="action" href= "<?php echo url_for('referral_page.php?id=' . $patient_ID); ?>"> Add Referral </a>
 
-        <a class="back-link" href="<?php echo url_for('/referral_list.php'); ?>">Back to List</a>
+        <a class="back-link" href="<?php echo url_for('/patients.php'); ?>">Back to Patients</a>
     </center>
 <?php } ?>
     <?php if ($_SESSION['userLevel'] == 1) { ?>
