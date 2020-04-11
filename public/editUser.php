@@ -81,9 +81,7 @@ if(mysqli_num_rows($query)>=1){
         }
         }
         ?>
-<style>textarea {
-        width: 200px;
-    }</style>
+
 
            <center>
                <h1 id="title-page">Edit user</h1>
@@ -112,30 +110,6 @@ if(mysqli_num_rows($query)>=1){
                       </center>
 
 
-
-
-
-  <style>
-        a {
-                background-color: white;
-    box-shadow: -1 1px 0 blue;
-    color: rgb(42,103,204);
-    padding: 0.3em 1em;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-} 
-
-a:hover {
-  background-color: rgb(19, 26, 102);
-  cursor: pointer;
-}
-
-a:active {
-  box-shadow: none;
-  top: 5px;
-}
-</style>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
 <script type="text/javascript">
