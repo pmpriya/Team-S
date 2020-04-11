@@ -270,37 +270,6 @@
 </div>
 </center>
 
-<style>
-      #newsubmit {
-        height : 5% ;
-        width : 40% ; 
-        margin-left : 31% ; 
-        margin-right :30% ; 
-        background-color : rgb(42,103,204);
-        color:white;
-        font-weight : bolder ; 
-        font-size : 14px;
-    }
-    a {
-                background-color: white;
-    box-shadow: -1 1px 0 blue;
-    color: rgb(42,103,204);
-    padding: 0.3em 1em;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-} 
-
-a:hover {
-  background-color: rgb(19, 26, 102);
-  cursor: pointer;
-}
-
-a:active {  
-  box-shadow: none;
-  top: 5px;
-}
-    </style>
 
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
