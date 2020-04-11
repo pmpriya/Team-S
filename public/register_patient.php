@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $message .= "Date Of birth can not be empty";
             }
 
-    $dob = date('Y-m-d', $date_of_birth);
+    $dob = date('Y-m-d', $dob);
         
     $home_phone = $_POST["homenumber"];
     
@@ -142,13 +142,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     
     $reg_email = $_POST["mail2"];
-   //  $val = validateUserEmail($reg_email);
-        //if($val!=1)
-       // {
-        //    echo "not valid email 123";
-         //   $message .= getMessage($val,"Email");
-          //  $isValid = false;
-      //  }
+     $val = validateUserEmail($reg_email);
+        if($val!=1)
+        {
+            echo "not valid email 123";
+            $message .= getMessage($val,"Email");
+            $isValid = false;
+        }
     
     $ref_dr_name = $_POST["refname"];
      $val = isOnlyCharacter($ref_dr_name);
@@ -157,13 +157,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message .= getMessage($val,"Doctor name");
             $isValid = false;
         }
-    $ref_email = $_POST["ref_mail"];
+    
     $ref_hospital_name = $_POST["refhospital"];
+     $val = isOnlyCharacter($ref_hospital_name);
+        if($val!=1)
+        {
+            $message .= getMessage($val,"Hospital name");
+            $isValid = false;
+        }
     
 
        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
             || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
-            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $reg_email=="")
+            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="")
 
             echo '<label class="text-danger">Please fill in all required fields</label>';
    
@@ -187,16 +193,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     else { 
                       
                         if($isValid){
-
-                          send_mail_registration($email,$first_name);
-                          send_mail_ref_doctor($ref_email,$first_name,$last_name,$nhs_number,$accessCode);
+                          
                           $result1 = insert_member($nhs_number, $first_name, $last_name, $dob, $sex,$email, $home_address, $postcode, $home_phone, $mobile_phone, $gp_address, $gp_number, $accessCode,
-                          $ref_dr_name,$ref_hospital_name,$ref_email,$reg_surname,$reg_forename,$reg_email);
+                          $ref_dr_name,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email);
 
                           $new_id = mysqli_insert_id($db);
-                            session_unset();
-                            grant_external_access($nhs_number, $accessCode);
-                          redirect_to(url_for('referral_page.php?id=' . $new_id));
+
+                          redirect_to(url_for('InvestigationsNew.php?patient_ID=' . $new_id));
                            
                         }
                         else {
@@ -217,9 +220,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!--<link rel="stylesheet" href="style.css">-->
     </head>
 <body>
-    <h1 id = "patient-registration"><b>PATIENT REGISTRATION</b></h1>
+    <h1><b>PATIENT REGISTRATION</b></h1>
 
-<h2> <div id = "registration-heading">Details of the person registering the patient(Please complete all fields) </div></h2>
+<h2> <div>Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 
    <form method="post" id="form">    <!-- Patient's Surname -->
@@ -230,32 +233,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- porforma -->
 
     <div class="field-column">
-      <label id="label">Surname </label>
+      <label>Surname </label>
          <input type="text" onfocusout="isOnlyCharacter(this,'Surname')" id="lastname2" name="lastname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
         </div>
 
     <div class="field-column">
-      <label id="label">Forename</label>
+      <label>Forename</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Forename')" id="firstname2" name="firstname2" pattern="[A-Za-z]{1,32}" placeholder="Required" required>
     </div>
 
    <div class="field-column">
-      <label id="label">Email (@nhs.net or @*.nhs.uk)</label> </div>
-      <input type="text" id="email2" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
+      <label>Email (@nhs.net)</label> </div>
+      <input type="text" id="email" onfocusout="ValidateNHSEmail()" name="mail2" pattern="[a-z0-9._%+-]+@nhs\.net" placeholder="Required" required>
 
    </div>
    
-    <h2 id = "registration-heading"> <div>Patient Details(Please complete all fields) </div></h2>
+    <h2> <div>Patient Details(Please complete all fields) </div></h2>
 
     <div class="field-column">
-      <label id="label">Surname</label>
+      <label>Surname</label>
          <input type="text"  onfocusout="isOnlyCharacter(this,'Surname')" id="lastname" name="lastname" placeholder="Required" required>
         </div>
 
     <!-- Patient's forename -->
 
     <div class="field-column">
-      <label id="label">Forename</label>
+      <label>Forename</label>
        <input type="text"  onfocusout="isOnlyCharacter(this,'Forename')" id="firstname" name="firstname" placeholder="Required"  required>
 
     </div>
@@ -263,36 +266,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- NHS number -->
 
      <div class="field-column">
-      <label id="label">NHS number</label>
+      <label>NHS number</label>
        <input type="number" onfocusout="isOnlyNumber(this,'NHS number')"   id="nhsnumber" name="nhsnumber" pattern="^\d{10}$" placeholder="Required" required>
     </div>
      <!-- date of birth -->
 
      <div class="field-column">
-      <label id="label">Date of birth</label>
+      <label>Date of birth</label>
        <input type = "date" onfocusout="isEmpty(this,'Date of birth')"  id="dob" name = "dob" required>
 
     </div>
      
 
     <div class="field-column">
-      <label id="label">Full Name of Referring Doctor</label>
+      <label>Full Name of Referring Doctor</label>
        <input type="text" onfocusout="isOnlyCharacter(this,'Doctor Name')" id="refname" name="refname" pattern="^[a-z ,.'-]+$" placeholder="Required" required>
-    </div>
-
-    <div class="field-column">
-      <label id="label">Email of Referee</label>
-       <input type="text" name="ref_mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
     </div>
      
     <div class="field-column">
-      <label id="label">Referring Hospital</label>
-       <input type="text" id="refhospital" name="refhospital" placeholder="Optional">
+      <label>Referring Hospital</label>
+       <input type="text" onfocusout="isOnlyCharacter(this,'Hospital Name')" id="refhospital" name="refhospital" placeholder="Required" required>
     </div>
 
      <!-- sex -->
+
      <div class="field-column">
-            <label id="label">Gender</label>
+            <label>Gender</label>
                 <input id="gender" type="radio" name="gender" value="m" checked><label id="genderOption">Male</label>
                 <input id="gender" type="radio" name="gender" value="f"> <label id="genderOption">Female</label>
                
@@ -302,7 +301,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    
   <div class="field-column">
-      <label id="label">Email of Patient</label>
+      <label>Email</label>
        <input type="text" name="email" onfocusout="ValidateEmail()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Required" id="email" required>
     </div>
 
@@ -310,7 +309,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- home address -->
 
      <div class="field-column">
-      <label id="label">Home address</label>
+      <label>Home address</label>
      <input name = "address" onfocusout="isEmpty(this,'Home address')" placeholder="Required" id="address" required> </input>
 
     </div>
@@ -318,7 +317,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- post code -->
 
      <div class="field-column">
-      <label id="label">Postcode</label>
+      <label>Postcode</label>
       <input name = "postcode"  id="postcode" onfocusout="isOnlyNumber(this,'Postcode')" placeholder="Required"    required> </input>
 
     </div>
@@ -327,7 +326,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Home telephone number -->
 
      <div class="field-column">
-      <label id="label">Home Phone Number</label>
+      <label>Home Phone Number</label>
       <input type="number" name="homenumber" id="homenumber" placeholder="Required" onfocusout="isOnlyNumber(this,'Home Phone Number')" required>
 
     </div>
@@ -335,7 +334,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Mobile telephone number -->
    
      <div class="field-column">
-      <label id="label">Mobile Phone Number</label>
+      <label>Mobile Phone Number</label>
 
       <input type="number" name="mobilenumber" id="mobilenumber" onfocusout="isOnlyNumber(this,'Mobile Phone Number')" placeholder="Required" required>
 
@@ -344,7 +343,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      <!-- Patient's GP address -->
 
      <div class="field-column">
-      <label id="label">GP address</label>
+      <label>GP address</label>
        <input name = "gpaddress" onfocusout="isEmpty(this,'GP address')" id="gpaddress"  placeholder="Required" required> </input>
 
     </div>
@@ -354,7 +353,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
      <div class="field-column">
 
-      <label id="label">GP phone number</label> <input type="number" name="gpnumber" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Required" required>
+      <label>GP phone number</label> <input type="number" name="gpnumber" id="gpnumber" onfocusout="isOnlyNumber(this,'GP phone number')" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Required" required>
     </div>
      <!-- submit -->
      <!--<input type ="submit" name="submit"> -->
@@ -370,108 +369,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 
-
-
-
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
-    
+<script type="text/javascript" src="../private/validation_functions.js"></script>
+
 <script type="text/javascript">
     var append = false;
-</script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-       if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-       }
-       if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-       return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyCharacter(r,e){
-        if(!isEmpty(r,e)){
-            if(r.value.length<2){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
-                return false;
-            }
-            if(r.value.length>30){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have less than equal to 30 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have less than equal to 30 characters";
-                return false;
-            }
-            if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain characters";
-            return (false)    
-        }
-        return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyNumber(r,e){
-        if(!isEmpty(r,e)){
-            if (/^\d+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-            return (false)    
-        }
-        return false;
-    }
-</script>        
-<script type="text/javascript">
-    function ValidateEmail() 
-    {
-        var mail = document.getElementById("email");
-        if(!isEmpty(mail,"Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
 </script>
         
 <script type="text/javascript">
@@ -494,6 +397,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         var gpaddress = document.getElementById("gpaddress");
         var gpnumber = document.getElementById("gpnumber");
         var refDoctor = document.getElementById("refname");
+        var refHospital = document.getElementById("refhospital");
         
         var isOkay = true;
         if(!isOnlyCharacter(regSurname,"Registering Person Surname")){
@@ -502,9 +406,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!isOnlyCharacter(regForename,"Registering Person Forename")){
             isOkay = false;
         }
-      //  if(!ValidateNHSEmail()){
-        //    isOkay = false;
-       // }
+        if(!ValidateNHSEmail()){
+            isOkay = false;
+        }
 
         if(!isOnlyCharacter(lastname,"Surname")){
             isOkay = false;
@@ -519,6 +423,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             isOkay = false;
         }
         if(!isOnlyCharacter(refDoctor,"Referring Doctor Name")){
+            isOkay = false;
+        }
+        if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
             isOkay = false;
         }
         if(isEmpty(address,"Home Address")){
@@ -555,45 +462,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         return false;
     }
 </script>
-<script type="text/javascript">
-    function ValidateNHSEmail() 
-    {
-        var mail = document.getElementById("email2");
-        if(!isEmpty(mail,"Registering Person Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@nhs.net$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }else if (/^\w+([\.-]?\w+)*@[0-9a-zA-Z]+.nhs.uk$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
-</script>
-  <script type="text/javascript">
-function isNHS(r,e) {
-    if(r.value.length !== 10 && r.value.length !== 0){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
-            return true;
-       }
-}
-</script> 
+

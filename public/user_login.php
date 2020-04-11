@@ -49,19 +49,19 @@ if(!isset($password) || empty($password)){
 }
 ?>
 
-<h1 id="title-page">LOG IN</h1>
+<h1>LOG IN</h1>
    <form name="frmRegistration" id="form" method="post" action="<?php url_for("/login.php?")?>" >
               <div class="form-group" align="center">
               <span id="alert_message" style="color:red"></span>
 
                 
         <div class="field-column">
-            <label id = 'label'>Username</label>
+            <label>Username</label>
             <input type="text" class="demo-input-box"  required="" onfocusout="isEmpty(this,'Username')" id="username" name="username" value="">
         </div>
         
         <div class="field-column">
-            <label id = 'label'>Password</label>
+            <label>Password</label>
             <input type="password" class="demo-input-box" onfocusout="isEmpty(this,'Password')" required="" id="password" name="password" value="">
         </div><br>
         <div class="field-column">
@@ -73,39 +73,14 @@ if(!isset($password) || empty($password)){
     </form>
 </div>
 
-<style>
-    #label {
-    font-size: 13px;
-    font-weight: bold;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    }
-    </style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
+<script type="text/javascript" src="../private/validation_functions.js"></script>
 
 <script type="text/javascript">
   var append = false;
 </script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-        if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-        }
-        if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-        return false;
-    }
-</script>
    
-
 <script type="text/javascript">
     function validateForm(){
         document.getElementById("alert_message").innerHTML = ""
