@@ -34,17 +34,17 @@
     }</style>
 
            <center>
-               <h1>Edit user</h1>
+               <h1 id="title-page">Edit user</h1>
 
 <form method="post" id="form">
                                 <div class="form-group" align="center">
                                     <span id="alert_message" style="color:red"></span>
 
                                     <table>
-                                        <tr><td>New Password:</td><td> <textarea   required=""  id="password"  onfocusout="isEmpty(this,'New Password')" name="password" rows="1" cols="10"></textarea></td></tr>
+                                        <tr><td id = "darkblue"> New Password:</td><td> <textarea   required=""  id="password"  onfocusout="isEmpty(this,'New Password')" name="password" rows="1" cols="10"></textarea></td></tr>
                                     </table>
 
-                                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i>Update password</button>
+                                <button type="button" style = "width : 10% ; margin-top : 1% ; margin-bottom : 1% ;margin-left : 45% ;height:40px ; margin-right : 30% ;" onclick="validateForm()" class="btn btn-sm btn-primary" ><i class="far fa-save" style = " text-align : center " ></i>Update password</button>
                             </form>
                       </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
