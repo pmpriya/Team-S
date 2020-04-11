@@ -10,11 +10,11 @@
     <div class= "Investigations listing">
     <h1 id="title-page"> Investigations  </h1>
 
-    <table class= "list">
+    <table class= "list" align ="center">
         <th id = "darkblue"> Name </th>
-        <th> NHS number </th>
+        <th id = "lightblue"> NHS number </th>
         <th id = "darkblue"> Date of Birth </th>
-        <th> Email </th>
+        <th id = "lightblue"> Email </th>
         <th id = "darkblue"> Referring Doctor Name </th>
     
 
