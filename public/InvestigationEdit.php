@@ -20,7 +20,7 @@ else{
 $delete = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_investigation($delete);
-    header('Location: InvestigationsOfAllPatients.php');
+    header('Location: Patients.php');
 }
 
 if(mysqli_num_rows($investigation_set)>=1){

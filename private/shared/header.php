@@ -42,20 +42,6 @@
         ?>
 
         <?php
-        if (isset($_SESSION['userLevel'])) {
-            if($_SESSION['userLevel'] > 1)
-                echo '<li><a href=referral_list.php>REFERRALS</a></li>';
-        }
-        ?>
-
-        <?php
-        if (isset($_SESSION['userLevel'])) {
-            if($_SESSION['userLevel'] > 1)
-                echo '<li><a href=InvestigationsOfAllPatients.php>INVESTIGATIONS</a></li>';
-        }
-        ?>
-
-        <?php
         if (!isset($_SESSION['userLevel'])) {
                 echo '<li><a href=user_login.php>STAFF LOGIN</a></li>';
         }

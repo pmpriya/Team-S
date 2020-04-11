@@ -21,7 +21,7 @@ $delete = $_GET["delete"] ?? '';
 
 if (isset($_GET["delete"])) {
     delete_referral($delete);
-    redirect_to(url_for('referral_list.php?'));
+    redirect_to(url_for('patients.php'));
 }
 
 $consultant_name = $referral_values['consultant_name'];
