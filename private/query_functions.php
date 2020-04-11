@@ -562,9 +562,20 @@ function search_by_surname($surname)
     return $result;
 }
 
-function find_all_appointments() {
+function find_confirmed_appointments() {
     global $db;
     $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE Confirmed='1'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+function find_unconfirmed_appointments() {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE Confirmed='0'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -593,6 +604,24 @@ function delete_appointment($id)
         return true;
     } else {
         // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+
+function confirm_appointment($id)
+{
+    global $db;
+    $sql = "UPDATE appointments SET Confirmed='1' WHERE id=$id";
+    $result = mysqli_query($db, $sql);
+    if ($result)
+    {
+        return true;
+    }
+    else
+    {
         echo mysqli_error($db);
         db_disconnect($db);
         exit;
