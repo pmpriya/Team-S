@@ -85,110 +85,109 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 ?>
-    <style>textarea {
-            width: 200px;
-        }</style>
+    
 
     <center>
-        <h1>Edit Investigation</h1>
+        <h1 id="title-page" >Edit Investigation</h1>
 
 
         <form method="post">
 
             <dl>
-                <dt> Date </dt>
-                <dd> <input type="text" name= "date" value = "<?php echo h($date);?> " /> </dd>
-            </dl>
+                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Date </dt>
+                <dd> <input type="text" style = "width: 15%" name= "date" value = "<?php echo h($date);?> " /> </dd>
+            </dl> <br>
             <d1>
-                <dt> BiliTD </dt>
-                <dd> <input type="text" name= "BiliTD" value = "<?php echo $BiliTD;?>" /> </dd>
-                </dl>
+                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> BiliTD </dt>
+                <dd> <input type="text" style = "width: 15%" name= "BiliTD" value = "<?php echo $BiliTD;?>" /> </dd>
+                </dl> <br>
                 <d1>
-                    <dt> AST </dt>
-                    <dd> <input type="text" name= "AST" value = "<?php echo $AST;?> " /> </dd>
-                    </dl>
+                    <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > AST </dt>
+                    <dd> <input type="text" style = "width: 15%" name= "AST" value = "<?php echo $AST;?> " /> </dd>
+                    </dl> <br>
                     <d1>
-                        <dt> ALT </dt>
-                        <dd> <input type="text" name= "ALT" value = "<?php echo $ALT;?>" /> </dd>
-                        </dl>
+                        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> ALT </dt>
+                        <dd> <input type="text"  style = "width: 15%" name= "ALT" value = "<?php echo $ALT;?>" /> </dd>
+                        </dl> <br>
                         <d1>
-                            <dt> ALP </dt>
-                            <dd> <input type="text" name= "ALP" value = "<?php echo $ALP;?> " /> </dd>
-                            </dl>
+                            <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > ALP </dt>
+                            <dd> <input type="text" style = "width: 15%" name= "ALP" value = "<?php echo $ALP;?> " /> </dd>
+                            </dl> <br>
                             <d1>
-                                <dt> GGT </dt>
-                                <dd> <input type="text" name= "GGT" value = "<?php echo $GGT;?> " /> </dd>
-                                </dl>
+                                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > GGT </dt>
+                                <dd> <input type="text" style = "width: 15%" name= "GGT" value = "<?php echo $GGT;?> " /> </dd>
+                                </dl> <br>
                                 <d1>
-                                    <dt> Prot </dt>
-                                    <dd> <input type="text" name= "Prot" value = "<?php echo $Prot;?> " /> </dd>
-                                    </dl>
+                                    <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Prot </dt>
+                                    <dd> <input type="text" style = "width: 15%" name= "Prot" value = "<?php echo $Prot;?> " /> </dd>
+                                    </dl> <br>
                                     <d1>
-                                        <dt> Alb </dt>
-                                        <dd> <input type="text" name= "Alb" value = "<?php echo $Alb;?> " /> </dd>
-                                        </dl>
+                                        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Alb </dt>
+                                        <dd> <input type="text" style = "width: 15%" name= "Alb" value = "<?php echo $Alb;?> " /> </dd>
+                                        </dl> <br>
                                         <d1>
-                                            <dt> CK </dt>
-                                            <dd> <input type="text" name= "CK" value = "<?php echo $CK;?> " /> </dd>
-                                            </dl>
+                                            <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > CK </dt>
+                                            <dd> <input type="text" style = "width: 15%" name= "CK" value = "<?php echo $CK;?> " /> </dd>
+                                            </dl> <br>
                                             <d1>
-                                                <dt> Hb/Hct </dt>
-                                                <dd> <input type="text" name= "HbHct" value = "<?php echo $HbHct;?> " /> </dd>
-                                                </dl>
+                                                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Hb/Hct </dt>
+                                                <dd> <input type="text" style = "width: 15%" name= "HbHct" value = "<?php echo $HbHct;?> " /> </dd>
+                                                </dl> <br>
                                                 <d1>
-                                                    <dt> WCC </dt>
-                                                    <dd> <input type="text" name= "WCC" value = "<?php echo $WCC;?> " /> </dd>
-                                                    </dl>
+                                                    <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > WCC </dt>
+                                                    <dd> <input type="text" style = "width: 15%" name= "WCC" value = "<?php echo $WCC;?> " /> </dd>
+                                                    </dl> <br>
                                                     <d1>
-                                                        <dt> Neutro </dt>
-                                                        <dd> <input type="text" name= "Neutro" value = "<?php echo $Neutro;?> " /> </dd>
-                                                        </dl>
+                                                        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Neutro </dt>
+                                                        <dd> <input type="text" style = "width: 15%" name= "Neutro" value = "<?php echo $Neutro;?> " /> </dd>
+                                                        </dl> <br>
                                                         <d1>
-                                                            <dt> Platelets </dt>
-                                                            <dd> <input type="text" name= "Platelets" value = "<?php echo $Platelets;?> " /> </dd>
-                                                            </dl>
+                                                            <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Platelets </dt>
+                                                            <dd> <input type="text" style = "width: 15%" name= "Platelets" value = "<?php echo $Platelets;?> " /> </dd>
+                                                            </dl> <br>
                                                             <d1>
-                                                                <dt> CRP </dt>
-                                                                <dd> <input type="text" name= "CRP" value = "<?php echo $CRP;?> " /> </dd>
-                                                                </dl>
+                                                                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> CRP </dt>
+                                                                <dd> <input type="text" style = "width: 15%" name= "CRP" value = "<?php echo $CRP;?> " /> </dd>
+                                                                </dl> <br>
                                                                 <d1>
-                                                                    <dt> ESR </dt>
-                                                                    <dd> <input type="text" name= "ESR" value = "<?php echo $ESR;?> " /> </dd>
-                                                                    </dl>
+                                                                    <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > ESR </dt>
+                                                                    <dd> <input type="text" style = "width: 15%" name= "ESR" value = "<?php echo $ESR;?> " /> </dd>
+                                                                    </dl> <br>
                                                                     <d1>
-                                                                        <dt> PT/INR </dt>
-                                                                        <dd> <input type="text" name= "PTINR" value = "<?php echo $PTINR;?> " /> </dd>
-                                                                        </dl>
+                                                                        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > PT/INR </dt>
+                                                                        <dd> <input type="text" style = "width: 15%" name= "PTINR" value = "<?php echo $PTINR;?> " /> </dd>
+                                                                        </dl> <br>
                                                                         <d1>
-                                                                            <dt> APTR </dt>
-                                                                            <dd> <input type="text" name= "APTR" value = "<?php echo $APTR;?> " /> </dd>
-                                                                            </dl>
+                                                                            <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> APTR </dt>
+                                                                            <dd> <input type="text" style = "width: 15%" name= "APTR" value = "<?php echo $APTR;?> " /> </dd>
+                                                                            </dl> <br>
                                                                             <d1>
-                                                                                <dt> Fibrinogen </dt>
-                                                                                <dd> <input type="text" name= "Fibrinogen" value = "<?php echo $Fibrinogen;?> " /> </dd>
-                                                                                </dl>
+                                                                                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Fibrinogen </dt>
+                                                                                <dd> <input type="text" style = "width: 15%" name= "Fibrinogen" value = "<?php echo $Fibrinogen;?> " /> </dd>
+                                                                                </dl> <br>
                                                                                 <d1>
-                                                                                    <dt> Cortisol </dt>
-                                                                                    <dd> <input type="text" name= "Cortisol" value = "<?php echo $Cortisol;?>" /> </dd>
-                                                                                    </dl>
+                                                                                    <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Cortisol </dt>
+                                                                                    <dd> <input type="text" style = "width: 15%" name= "Cortisol" value = "<?php echo $Cortisol;?>" /> </dd>
+                                                                                    </dl> <br>
                                                                                     <d1>
-                                                                                        <dt> Urea </dt>
-                                                                                        <dd> <input type="text" name= "Urea" value = "<?php echo $Urea;?> " /> </dd>
-                                                                                        </dl>
+                                                                                        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Urea </dt>
+                                                                                        <dd> <input type="text" style = "width: 15%" name= "Urea" value = "<?php echo $Urea;?> " /> </dd>
+                                                                                        </dl> <br>
                                                                                         <d1>
-                                                                                                <dt> Creatinine </dt>
-                                                                                                <dd> <input type="text" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
-                                                                                                </dl>
+                                                                                                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Creatinine </dt>
+                                                                                                <dd> <input type="text" style = "width: 15%" name= "Creatinine" value = "<?php echo $Creatinine;?> " /> </dd>
+                                                                                                </dl> <br>
                                                                                             <d1>
-                                                                                                <dt> Notes </dt>
-                                                                                                <dd> <input type="text" name= "Notes" value = "<?php echo $Notes;?> " /> </dd>
-                                                                                                </dl>
+                                                                                                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > Notes </dt>
+                                                                                                <dd> <input type="text" style = "width: 15%" name= "Notes" value = "<?php echo $Notes;?> " /> </dd>
+                                                                                                </dl> <br>
                                                                                             <div id="operations">
-                                                                                                <input type="submit" value="Edit Investigation"/>
+                                                                                                <input type="submit" id = "editsubmit"  value= "EDIT INVESTIGATION" /> 
                                                                                             </div>
         </form>
         <?php echo"<a href=?delete=" . $investigation_id . " onclick=\"return confirm('Are you sure that you want to delete this investigation?');\">Delete</a></td>" ?>
         <br><br>
 
     </center>
+
 <?php include(SHARED_PATH . '/footer.php'); ?>

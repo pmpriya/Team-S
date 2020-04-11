@@ -34,7 +34,7 @@ if (isset($_POST['submitbtn'])) {
     <h1 id="title-page"> Referrals  </h1>
     <form method="post" class="example" id="searchbar" action="referral_list.php" style="margin:auto;max-width:700px">
                     <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
-                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
+                    <button name="submitbtn" id="searchbutton" type="submit" style = " margin-left :10px; height:5%"><i class="fa fa-search"></i></button>
    </form>
    <br>
    <br>
@@ -64,5 +64,3 @@ if (isset($_POST['submitbtn'])) {
 
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
-
-

@@ -81,33 +81,36 @@ if(mysqli_num_rows($query)>=1){
         }
         }
         ?>
-<style>textarea {
-        width: 200px;
-    }</style>
+
 
            <center>
-               <h1>Edit user</h1>
+               <h1 id="title-page">Edit user</h1>
 
 <form method="post" id="form">
                                 <div class="form-group" align="center">
                                     <span id="alert_message" style="color:red"></span>
 
                                     <table>
-                                        <tr><td>Username:</td><td> <textarea required="" id="username"   onfocusout="isEmpty(this,'Username')" name="username" rows="1" cols="10"><?php echo $username; ?></textarea></td></tr>
-                                        <tr><td>Name:</td><td> <textarea  required="" id="name" onfocusout="isOnlyCharacter(this,'Name')" name="name" rows="1" cols="10"><?php echo $name; ?></textarea></td></tr>
-                                        <tr><td>Surname:</td><td> <textarea  required="" id="surname" onfocusout="isOnlyCharacter(this,'Surname')"  name="surname" rows="1" cols="10"><?php echo $surname; ?></textarea></td></tr>
+                                        <tr><td id = "darkblue">Username:</td><td> <textarea required="" id="username"   onfocusout="isEmpty(this,'Username')" name="username" rows="1" cols="10"><?php echo $username; ?></textarea></td></tr>
+                                        <tr><td id = "lightblue">Name:</td><td> <textarea  required="" id="name" onfocusout="isOnlyCharacter(this,'Name')" name="name" rows="1" cols="10"><?php echo $name; ?></textarea></td></tr>
+                                        <tr><td id = "darkblue">Surname:</td><td> <textarea  required="" id="surname" onfocusout="isOnlyCharacter(this,'Surname')"  name="surname" rows="1" cols="10"><?php echo $surname; ?></textarea></td></tr>
 
-                                        <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail(this,'Email')" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
+                                        <tr><td id = "lightblue">Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail(this,'Email')" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
 
-                                        <tr><td>userLevel:</td><td> <input value="<?php echo $userLevel; ?>" type="number" required="" id="userLevel" onfocusout="isOnlyNumber(this,'userLevel')"  name="userLevel" rows="1" cols="10"></input></td></tr>
+                                        <tr><td id = "darkblue">userLevel:</td><td> <input value="<?php echo $userLevel; ?>" type="number" required="" id="userLevel" onfocusout="isOnlyNumber(this,'userLevel')"  name="userLevel" rows="1" cols="10"></input></td></tr>
                                     </table>
+                                    <br>
 
-                                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary"><i class="far fa-save"></i> Submit Changes</button>
+                                <button type="button" onclick="validateForm()" class="btn btn-sm btn-primary" style = " margin-left :30%;width: 40% ; margin-right:30%" ><i class="far fa-save"></i> Submit Changes</button>
+                                </br>
                             </form>
-               <br><br>
-               <td><a href=passwordReset.php?id=<?php echo $id; ?>>Update password</a></td>
+               <br> <br> <br>
+               <td ><a href=passwordReset.php?id=<?php echo $id; ?>>Update password</a></td>
 
                       </center>
+
+
+
 <?php include(SHARED_PATH . '/footer.php'); ?>
 <script type="text/javascript">
     var append = false;

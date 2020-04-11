@@ -116,146 +116,168 @@ if ($_SESSION['userLevel'] > 1) {
 </div>
 <div class = "new investigation">
 <center>
-<h1> Create Investigation </h1> 
+<h1 id="title-page"> Create Investigation </h1> 
 
 <?php //echo display_error($errors);?> 
 <form id="form" method="post">
 <span id="alert_message" style="color:red"></span>
 <d1>
      <dl>
-        <dt> Date<input type="date" onfocusout="isEmpty(this,'Date')" id="date" name= "date"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Date </dt>
+        <dd><input type="date" style = "width: 15%" onfocusout="isEmpty(this,'Date')" id="date" name= "date" /> </dd>
+    </dl> <br>
     <d1>
     
    <d1>
     <dl>
-        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="required" required> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Bili T/D  </dt>
+        <dd><input type="text" style = "width: 15%" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="required" required> </dd>
+    </dl> <br>
     <d1> 
 
     <d1>
     <dl>
-        <dt> AST <input type="text" id="AST" name= "AST" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> AST </dt>
+        <dd><input type="text" style = "width: 15%" id="AST" name= "AST" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="required" required> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> ALT </dt>
+        <dd><input type="text" style = "width: 15%" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="required" required> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> ALP <input type="text" id="ALP" name= "ALP" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> ALP </dt>
+        <dd><input type="text" style = "width: 15%" id="ALP" name= "ALP" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> GGT <input type="text" id="GGT" name= "GGT" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> GGT </dt>
+        <dd><input type="text" style = "width: 15%" id="GGT" name= "GGT" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Prot <input type="text" id="Prot" name= "Prot" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Prot </dt>
+        <dd><input type="text" style = "width: 15%" id="Prot" name= "Prot" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Alb <input type="text" id="Alb" name= "Alb" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Alb </dt>
+        <dd><input type="text" style = "width: 15%" id="Alb" name= "Alb" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> CK <input type="text" id="CK" name= "CK" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> CK </dt>
+        <dd><input type="text" style = "width: 15%" id="CK" name= "CK" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="required" required> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Hb/Hct </dt>
+        <dd><input type="tinytext" style = "width: 15%" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="required" required> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="required" required> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> WCC </dt>
+        <dd><input type="tinytext" style = "width: 15%" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="required" required> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Neutro <input type="tinytext" id="Neutro" name="Neutro" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Neutro </dt>
+        <dd><input type="tinytext" style = "width: 15%" id="Neutro" name="Neutro" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="required" required> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Platelets </dt>
+        <dd><input type="text" style = "width: 15%" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="required" required> </dd>
+    </dl> <br>
+    <d1>
+
+    <d1>
+    <dl> 
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> CRP </dt>
+        <dd><input type="text" style = "width: 15%" id="CRP" name= "CRP" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> CRP <input type="text" id="CRP" name= "CRP" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> ESR </dt>
+        <dd><input type="text" style = "width: 15%" id="ESR" name= "ESR" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> ESR <input type="text" id="ESR" name= "ESR" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> PT/INR </dt>
+        <dd><input type="text" style = "width: 15%" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="required" required> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="required" required> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; " > APTR </dt>
+        <dd> <input type="text" style = "width: 15%" id="APTR" name= "APTR" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> APTR <input type="text" id="APTR" name= "APTR" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Fibrinogen </dt>
+        <dd> <input type="text" style = "width: 15%" id="Fibrinogen" name= "Fibrinogen" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Fibrinogen <input type="text" id="Fibrinogen" name= "Fibrinogen" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Cortisol </dt>
+        <dd> <input type="text" style = "width: 15%" id="Cortisol" name= "Cortisol" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Cortisol <input type="text" id="Cortisol" name= "Cortisol" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Urea </dt>
+        <dd> <input type="text" style = "width: 15%" id="Urea" name= "Urea" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
     <d1>
     <dl>
-        <dt> Urea <input type="text" id="Urea" name= "Urea" placeholder="optional"> </dt>
-    </dl>
-    <d1>
-
-    <d1>
-    <dl>
-        <dt> Creatinine <input type="text" id="Creatinine" name= "Creatinine" placeholder="optional"> </dt>
-    </dl>
+        <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Creatinine </dt>
+        <dd> <input type="text" style = "width: 15%" id="Creatinine" name= "Creatinine" placeholder="optional"> </dd>
+    </dl> <br>
     <d1>
 
         <d1>
             <dl>
-                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"> </dt>
-            </dl>
+                <dt style =  "text-align:center ; font-weight:bolder; padding-left: 30px; "> Additional notes </dt>
+                <dd> <input type="text" style = "width: 15%" id="Notes" name= "Notes" placeholder="optional"> </dd>
+            </dl> 
             <d1>
 
 
             <div id="operations">
-    <input type="button" onclick="submitInvestigation()" name="btnsubmit" value="Add Investigation"/>
+    <input type="button" id = "newsubmit" onclick="submitInvestigation()" name="btnsubmit" value="Add Investigation"/>
     </div>
     
    
@@ -265,6 +287,9 @@ if ($_SESSION['userLevel'] > 1) {
 </div>
 </div>
 </center>
+
+
+
 <?php include(SHARED_PATH . '/footer.php'); ?>
 <script type="text/javascript">
     var append = false;

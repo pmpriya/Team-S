@@ -40,7 +40,7 @@ if (isset($_GET["confirm"])) {
         <center>
 
 
-        <h1>Appointments</h1>
+        <h1 id="title-page">Appointments</h1>
 
             <br>
 
@@ -51,11 +51,12 @@ if (isset($_GET["confirm"])) {
             <b><h2>Appointments confirmed by the patients</h2></b>
                 <table>
                     <tr>
-                        <th><b>Patient Name</b></th>
-                        <th><b>Date</b></th>
-                        <th><b>Admission</b></th>
-                        <th><b>Time</b></th>
-                        <th><b>Manage</b></th>
+
+                        <th id = "darkblue"><b>Patient Name</b></th>
+                        <th id = "lightblue"><b>Date</b></th>
+                        <th id = "darkblue"><b>Admission</b></th>
+                        <th id = "lightblue"><b>Time</b></th>
+                        <th id = "darkblue"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($appointment = mysqli_fetch_assoc($confirmed_set)) {
@@ -72,11 +73,13 @@ if (isset($_GET["confirm"])) {
             <br><br><b><h2><i><span style="color: orange; "> Appointments awaiting confirmation by the patients</span></i></h2></b>
             <table>
                 <tr>
-                    <th><b>Patient Name</b></th>
-                    <th><b>Date</b></th>
-                    <th><b>Admission</b></th>
-                    <th><b>Time</b></th>
-                    <th colspan="2"><b>Manage</b></th>
+
+                    <th id = "darkblue"><b>Patient Name</b></th>
+                    <th id = "lightblue"><b>Date</b></th>
+                    <th id = "darkblue"><b>Admission</b></th>
+                    <th  id = "lightblue"><b>Time</b></th>
+                    <th id = "darkblue" colspan="2"><b>Manage</b></th>
+
                 </tr>
                 <?php
                 while ($appointment = mysqli_fetch_assoc($unconfirmed_set)) {
