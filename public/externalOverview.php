@@ -53,7 +53,7 @@ if(mysqli_num_rows($user_set)>=1){
 
 
         if(mysqli_num_rows(access_actve_referral($patient_id))){
-            echo 'You currently have a case with us.<br>';
+            echo 'You currently have an active case with us.<br>';
             echo 'Please use the link below to update your results or edit your referral<br><br>';
             echo "<i><a href=InvestigationsShow.php>Update investigations</a></td></i><br><br><br>";
             echo "<i><a href=referral_show.php>Update my referral</a></td></i><br><br><br>";
