@@ -147,7 +147,7 @@ $isValid = true;
                     $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
                     $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
-                    header('Location: referral_show.php?id=' . $patient_ID);
+                    redirect_to(url_for('InvestigationsNew.php?id=' . $patient_ID));
                 }
                 else 
                 {
@@ -240,20 +240,25 @@ $isValid = true;
    <!-- Current Issue -->
 
    <div class="field-column">
+
     <label>Current Issue</label>
     <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required></textarea>
+
   </div>
 
    <!-- History Of Present Complaint -->
 
    <div class="field-column">
+
     <label>History Of Present Complaint</label>
     <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required></textarea>
+
   </div>
 
    <!-- Family History -->
 
    <div class="field-column">
+
     <label>Family History</label>
     <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required></textarea>
   </div>
@@ -261,22 +266,28 @@ $isValid = true;
    <!-- Current Feeds -->
  
    <div class="field-column">
+
     <label>Current Feeds</label>
     <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required></textarea>
+
   </div>
 
    <!-- Medications -->
 
    <div class="field-column">
+
     <label>Medications</label>
     <textarea rows="10" cols="50" onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required></textarea>
+
   </div>
 
    <!-- Other Investigations -->
 
    <div class="field-column">
+
     <label>Other Investigations</label> 
     <textarea rows="10" cols="50" onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required></textarea>
+
   </div>
    <!-- submit -->
    <!--<input type ="submit" name="submit"> -->

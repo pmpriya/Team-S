@@ -5,7 +5,7 @@
 
 <div class="public">
 
-<?php $patient_ID = $_GET['patient_ID']?? '3'; ?>
+<?php $patient_ID = $_GET['id']?? '3'; ?>
 
 <?php $row = mysqli_fetch_array(find_active_referral($patient_ID)); 
 $referral_id = $row["ID"]; ?>
