@@ -43,8 +43,8 @@ class ReferralFormCest
                 
                 $I->click('Submit');
 
-                $I->canSeeInCurrentUrl('/InvestigationsNew.php?id=165');
-                $I->see('Create Investigation');
+                $I->canSeeInCurrentUrl('/referral_show.php?id=165');
+                $I->see('Referrals for TEST TEST');
                 
 
              
