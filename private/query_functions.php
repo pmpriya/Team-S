@@ -724,22 +724,22 @@ function insert_appointment_member($data) {
 function search_by_date($date) 
 {
     global $db;
-    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id` WHERE `appointments`.`date` LIKE '%".$date."%'";
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id` WHERE Active='0' AND `appointments`.`date` LIKE '%".$date."%'";
     $sql .= "ORDER BY id ASC";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
 }
 
+function find_all_appointments() {
+    global $db;
+    $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
+    $sql .= "WHERE Active='0'";
+    $sql .= "ORDER BY id ASC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
 
-
-// function delete_expired_appointments($id)
-// {
-//     global $db;
-//     $sql = "DELETE FROM appointments 
-//     $sql .= WHERE id= ' . db_escape($db, $id)'
-//     $sql .= AND Validity < '".date('Y-m-d H:i:s', time())."'";
-//     $result = mysqli_query($db, $sql);
-// }
 
 ?>
