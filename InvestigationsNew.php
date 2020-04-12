@@ -249,7 +249,7 @@ if ($_SESSION['userLevel'] > 1) {
 
         <d1>
             <dl>
-                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"></dt>
+                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"> </dt>
             </dl>
             <d1>
 

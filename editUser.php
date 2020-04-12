@@ -97,7 +97,7 @@ if(mysqli_num_rows($query)>=1){
                                         <tr><td>Name:</td><td> <textarea  required="" id="name" onfocusout="isOnlyCharacter(this,'Name')" name="name" rows="1" cols="10"><?php echo $name; ?></textarea></td></tr>
                                         <tr><td>Surname:</td><td> <textarea  required="" id="surname" onfocusout="isOnlyCharacter(this,'Surname')"  name="surname" rows="1" cols="10"><?php echo $surname; ?></textarea></td></tr>
 
-                                        <tr><td>Email:</td><td> <textarea required="" id="email" onfocusout="ValidateEmail(this,'Email')" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
+                                        <tr><td>Email:</td><td> <textarea required="" id="email2" onfocusout="ValidateNHSEmail()" name="email" rows="1" cols="10"><?php echo $email; ?></textarea></td></tr>
 
                                         <tr><td>userLevel:</td><td> <input value="<?php echo $userLevel; ?>" type="number" required="" id="userLevel" onfocusout="isOnlyNumber(this,'userLevel')"  name="userLevel" rows="1" cols="10"></input></td></tr>
                                     </table>
@@ -114,7 +114,6 @@ if(mysqli_num_rows($query)>=1){
 </script>
 
 <script type="text/javascript" src="../private/validation_functions.js"></script>
-
 
 <script type="text/javascript">
     function validateForm(){
@@ -133,10 +132,10 @@ if(mysqli_num_rows($query)>=1){
         if(!isOnlyCharacter(name,"Name")){
             isOkay = false;
         }
-        if(!isOnlyCharacter(surname,"Sur Name")){
+        if(!isOnlyCharacter(surname,"Surname")){
             isOkay = false;
         }
-        if(!ValidateEmail(email,"Email")){
+        if(!ValidateNHSEmail(email,"Email")){
             isOkay = false;
         }
         if(!isOnlyNumber(userLevel,"User Level")){
