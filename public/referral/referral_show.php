@@ -1,5 +1,5 @@
 <?php ?>
-<?php require_once ('../private/initialise.php'); ?>
+<?php require_once('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
 <?php 
     $patient_ID = $_GET['id'] ?? '1';

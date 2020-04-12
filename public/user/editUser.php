@@ -109,7 +109,7 @@ if(mysqli_num_rows($query)>=1){
 
                       </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
-<script type="text/javascript" src="../private/validation_functions.js"></script>
+<script type="text/javascript" src="../../private/validation_functions.js"></script>
 
 <script type="text/javascript">
     var append = false;

@@ -1,5 +1,5 @@
 <?php // show the investigations that are already if not empty (if empty have only the links) and have links for edit and add ?>
-<?php require_once ('../private/initialise.php'); ?>
+<?php require_once('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
 
 

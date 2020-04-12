@@ -290,7 +290,7 @@ $isValid = true;
   var append = false;
 </script>
 
-<script type="text/javascript" src="../private/validation_functions.js"></script>
+<script type="text/javascript" src="../../private/validation_functions.js"></script>
 
 <script type="text/javascript">
   function validateForm(){

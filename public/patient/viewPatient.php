@@ -74,7 +74,7 @@ if(mysqli_num_rows($query)>=1){
 
         <br><a href="editPatient.php?id=<?php echo $id?>">Edit Patient</a><br>
         <?php } ?>
-        <br><a href="patients.php">Go Back</a>
+        <br><a href="../patients.php">Go Back</a>
 
 
 

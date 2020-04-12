@@ -1,4 +1,4 @@
-<?php require_once ('../private/initialise.php');?>
+<?php require_once('../private/initialise.php');?>
 <?php include('../private/shared/header.php'); ?>
 
 <?php $page_title = 'Add Investigation'; ?>
