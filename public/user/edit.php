@@ -72,7 +72,7 @@ if(mysqli_num_rows($query)>=1){
             }
             if($isValid){
             edit_user($id, $new_username,$new_name,$new_surname,$new_email,$new_userLevel);
-            header('Location: users.php');
+            header('Location: index.php');
             exit;
 
         }

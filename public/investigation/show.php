@@ -61,7 +61,7 @@ $patient = mysqli_fetch_assoc($patient_set);
  
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
             <tr>
-                <td><a href=InvestigationEdit.php?id=<?php echo h($allInvetigations['id']); ?>><?php echo h($allInvetigations['date']); ?></a></td>
+                <td><a href=edit.php?id=<?php echo h($allInvetigations['id']); ?>><?php echo h($allInvetigations['date']); ?></a></td>
                 <td> <?php echo h($allInvetigations['BiliTD']); ?> </td> 
                 <td> <?php echo h($allInvetigations['AST']); ?> </td> 
                 <td> <?php echo h($allInvetigations['ALT']); ?> </td> 
@@ -86,7 +86,7 @@ $patient = mysqli_fetch_assoc($patient_set);
         <?php } ?>
     </table>
           <center>       
-             <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
+             <br><br><a class="action" href= "<?php echo url_for('new.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
               <h1>Additional notes</h1>
 
 
@@ -94,7 +94,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
         <?php while ($allInvetigations2= mysqli_fetch_assoc($find_notes)){ ?>
             <tr>
-                <td><a href=InvestigationEdit.php?id=<?php echo h($allInvetigations2['id']); ?>><?php echo h($allInvetigations2['date']); ?></a></td>
+                <td><a href=edit.php?id=<?php echo h($allInvetigations2['id']); ?>><?php echo h($allInvetigations2['date']); ?></a></td>
                 <td> <?php echo h($allInvetigations2['Notes']); ?> </td>
 
             </tr>

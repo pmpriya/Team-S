@@ -9,13 +9,13 @@ settype($var, 'integer');
 $var = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_appointment($var);
-    header('Location: appointments.php');
+    header('Location: index.php');
 }
 
 $var = $_GET["confirm"] ?? '';
 if (isset($_GET["confirm"])) {
     confirm_appointment($var);
-    header('Location: appointments.php');
+    header('Location: index.php');
 }
 
         
@@ -44,7 +44,7 @@ if (isset($_GET["confirm"])) {
 
             <br>
 
-            <center> <br><td><a href=add_appointment.php>Add an appointment</a></td> </center>
+            <center> <br><td><a href=new.php>Add an appointment</a></td> </center>
 
             <br>
 

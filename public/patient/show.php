@@ -72,7 +72,7 @@ if(mysqli_num_rows($query)>=1){
             <?php if (!$_SESSION['userLevel'] == 1) { ?>
         <h4>Access Code: <b><?php echo $accessCode?></b></h4>
 
-        <br><a href="editPatient.php?id=<?php echo $id?>">Edit Patient</a><br>
+        <br><a href="edit.php?id=<?php echo $id?>">Edit Patient</a><br>
         <?php } ?>
         <br><a href="../patients.php">Go Back</a>
 

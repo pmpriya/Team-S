@@ -14,7 +14,7 @@ $unconfirmed_set = find_patient_unconfirmed_appointments($id);
 $var = $_GET["confirm"] ?? '';
 if (isset($_GET["confirm"])) {
     confirm_appointment($var);
-    header('Location: appointments.php');
+    header('Location: index.php');
 }
 
 ?>
@@ -42,7 +42,7 @@ if (isset($_GET["confirm"])) {
 
                 <br>
 
-                <center> <br><td><a href=add_appointment.php>Add an appointment</a></td> </center>
+                <center> <br><td><a href=new.php>Add an appointment</a></td> </center>
 
                 <br>
 

@@ -31,7 +31,7 @@ if(!isset($password) || empty($password)){
       if(md5($password) == $user['password']) {
       
         log_in_user($user);
-        redirect_to(url_for('patients.php'));
+        redirect_to(url_for('index.php'));
       }
       else {
         echo "Incorrect password.";

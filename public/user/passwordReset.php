@@ -24,7 +24,7 @@
 
             if(isValid){
             edit_password($id, $new_password);
-            header('Location: users.php');
+            header('Location: index.php');
             exit;
         }
         }

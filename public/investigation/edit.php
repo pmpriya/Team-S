@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_Notes = $_POST['Notes'] ?? '';
 
     edit_investigation($investigation_id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Notes);
-    redirect_to(url_for('InvestigationsShow.php?id=' . $patient_ID));
+    redirect_to(url_for('show.php?id=' . $patient_ID));
     exit;
 }
 ?>

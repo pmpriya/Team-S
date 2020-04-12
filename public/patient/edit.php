@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $new_date_of_birth, $new_sex, $new_email, $new_home_address, $new_postcode, $new_home_phone, $new_mobile_phone, $new_gp_address,$new_gp_phone, $new_accessCode);
-    header('Location: patients.php');
+    header('Location: index.php');
     exit;
 
 }

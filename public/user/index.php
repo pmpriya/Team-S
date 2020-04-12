@@ -9,7 +9,7 @@ settype($var, 'integer');
 $var = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_user($var);
-    header('Location: users.php');
+    header('Location: index.php');
 }
 
 if ($_SESSION['userLevel'] < 2) {
@@ -95,7 +95,7 @@ a:active {
         <center>
 
                 <h1 id="title-page">Staff</h1>
-                <form method="post" class="example" action="users.php" style="margin:auto;max-width:700px">
+                <form method="post" class="example" action="index.php" style="margin:auto;max-width:700px">
                     <input id="searchinput" type="text" name="search" placeholder="Enter Surname to Search">
                     <button id = "searchbutton" style = "width : 30%;height : 06%;"name="submitbtn" type="submit"><i class="fa fa-search"></i></button>
                 </form>
@@ -120,7 +120,7 @@ a:active {
                     } ?>
 
                 </table>
-            <br><td><a href=addUser.php>Add user</a></td>
+            <br><td><a href=new.php>Add user</a></td>
 
         </center>
 
