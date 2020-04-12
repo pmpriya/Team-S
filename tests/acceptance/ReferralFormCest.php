@@ -12,19 +12,19 @@ class ReferralFormCest
     
     public function referralIncompleteSubmitTest(AcceptanceTester $I)
     {
-        $I->amOnPage('/referral_page.php?id=141');
+        $I->amOnPage('/referral_page.php?id=165');
                 
 
                 
                 $I->click('Submit');
                 $I->see("REFERRAL FORM for Test Test");
-                $I->canSeeInCurrentUrl('/referral_page.php?id=141');
+                $I->canSeeInCurrentUrl('/referral_page.php?id=165');
                 
              
     }
     public function referralSuccessfulSubmitTest(AcceptanceTester $I)
     {
-                $I->amOnPage('/referral_page.php?id=141');
+                $I->amOnPage('/referral_page.php?id=165');
                 $I->fillField('consultant_name','testname');
                 $I->fillField('consultant_specialty','testspecialty');
                 $I->fillField('organisation_hospital_name','testhosname');
@@ -43,8 +43,8 @@ class ReferralFormCest
                 
                 $I->click('Submit');
 
-                $I->see('Referrals for Test Test');
-                $I->see('testname');
+                $I->canSeeInCurrentUrl('/InvestigationsNew.php?id=165');
+                $I->see('Create Investigation');
                 
 
              
