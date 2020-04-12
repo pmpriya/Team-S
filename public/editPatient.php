@@ -6,24 +6,20 @@
 
 
 <?php
-if ($_SESSION['userLevel'] < 2) {
-    redirect_to('index.php');
-
-}
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $user_set = find_patient_by_id($_GET['id']);
-}
-elseif(isset($_SESSION['nhsno'])){
-    $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
-
-}else{
+    if (isset($_SESSION['userLevel'])) {
+if ($_SESSION['userLevel'] > 1) {
+     if(isset($_GET['id'])){
+          $user_set = find_patient_by_id($_GET['id']);
+     }}}
+     elseif(isset($_SESSION['nhsno'])){
+         $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
+     }else{
     header('Location: index.php');
 }
 
-
 if(mysqli_num_rows($user_set)>=1){
     while($row = mysqli_fetch_array($user_set)) {
+        $id = $row['ID'];
         $nhs_number = $row['nhs_number'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
@@ -176,9 +172,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <tr><td>Postcode:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="postcode" name="postcode" rows="1" cols="10"><?php echo $postcode; ?></textarea></td></tr>
 
-                    <tr><td>Home Phone:</td><td> <textarea value="<?php echo $home_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Home Phone')" required="" id="home_phone" name="home_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td>Home phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Home phone')" id="home_phone" name="home_phone" rows="1" cols="10"><?php echo $home_phone; ?></textarea></td></tr>
 
-                    <tr><td>Mobile Phone:</td><td> <textarea value="<?php echo $mobile_phone; ?>" type="number" onfocusout="isOnlyNumber(this,'Mobile Phone')" required="" id="mobile_phone" name="mobile_phone" rows="1" cols="10"></textarea></td></tr>
+                    <tr><td>Mobile Phone:</td><td> <textarea required="" onfocusout="isEmpty(this,'Postcode')" id="mobile_phone" name="mobile_phone" rows="1" cols="10"><?php echo $mobile_phone; ?></textarea></td></tr>
 
                     <tr><td>HP Address:</td><td> <textarea required="" onfocusout="isEmpty(this,'HP Address')" id="gp_address" name="gp_address" rows="1" cols="10"><?php echo $gp_address; ?></textarea></td></tr>
 
@@ -195,103 +191,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
         
+<script type="text/javascript" src="../private/validation_functions.js"></script>
+
+        
 <script type="text/javascript">
     var append = false;
 </script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-       if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-       }
-       if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-       return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyCharacter(r,e){
-        if(!isEmpty(r,e)){
-            if(r.value.length<1){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 1 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 1 characters";
-                return false;
-            }
-            if(r.value.length>10){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have less than equal to 10 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have less than equal to 10 characters";
-                return false;
-            }
-            if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain characters";
-            return (false)    
-        }
-        return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyNumber(r,e){
-        if(!isEmpty(r,e)){
-            if (/^\d+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-            return (false)    
-        }
-        return false;
-    }
-</script>        
-<script type="text/javascript">
-    function ValidateEmail() 
-    {
-        var mail = document.getElementById("email");
-        if(!isEmpty(mail,"Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
-</script>
+
 <script type="text/javascript">
     function validateForm(){
         document.getElementById("alert_message").innerHTML = "";
@@ -360,15 +266,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         append = false;
         return false;
     }
-</script>
-  <script type="text/javascript">
-function isNHS(r,e) {
-    if(r.value.length !== 10 && r.value.length !== 0){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
-            return true;
-       }
-}
 </script>

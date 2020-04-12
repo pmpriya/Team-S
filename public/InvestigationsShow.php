@@ -1,13 +1,28 @@
 <?php // show the investigations that are already if not empty (if empty have only the links) and have links for edit and add ?>
 <?php require_once ('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
-<?php 
-    $patient_ID = $_GET['id']?? '1';
+
+
+
+<?php
+    if (isset($_SESSION['userLevel'])) {
+if ($_SESSION['userLevel'] > 1) {
+     if(isset($_GET['id'])){
+ $patient_ID = $_GET['id'];
+     }}}
+     elseif(isset($_SESSION['nhsno'])){
+         $patient_ID = $_SESSION['current_patient_id'];
+     }else{
+    header('Location: index.php');
+}
     $investigations_of_id = find_investigations_by_patientid($patient_ID);
 $find_notes = find_notes($patient_ID);
     $patient_set = find_patient_by_id($patient_ID);
 $patient = mysqli_fetch_assoc($patient_set);
-?> 
+?>
+
+
+
 
 <?php $page_title= 'Show Investigations'; ?>
 
@@ -17,7 +32,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1 id="title-page"> Results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
+    <h1 id="title-page"> Past results for  <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 
@@ -43,11 +58,11 @@ $patient = mysqli_fetch_assoc($patient_set);
         <th id = "darkblue"> Cortisol </th>
         <th> Urea </th>
         <th id = "darkblue"> Creatinine </th>
- 
+
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
-            <tr>
+            <tr >
                 <td><a href=InvestigationEdit.php?id=<?php echo h($allInvetigations['id']); ?>><?php echo h($allInvetigations['date']); ?></a></td>
-                <td> <?php echo h($allInvetigations['BiliTD']); ?> </td> 
+                <td> <?php echo h($allInvetigations['BiliTD']); ?> </td>
                 <td> <?php echo h($allInvetigations['AST']); ?> </td> 
                 <td> <?php echo h($allInvetigations['ALT']); ?> </td> 
                 <td> <?php echo h($allInvetigations['ALP']); ?> </td> 
@@ -84,7 +99,9 @@ $patient = mysqli_fetch_assoc($patient_set);
 
             </tr>
         <?php } ?>
-    </table>          </center>
+    </table>
+              <br><td><a href=<?php echo url_for('InvestigationsShowPast.php?id=' . $patient_ID); ?>>View past investigations</a></td></center>
+    </center>
 
 
     </div>

@@ -159,17 +159,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     $ref_email = $_POST["ref_mail"];
     $ref_hospital_name = $_POST["refhospital"];
-     $val = isOnlyCharacter($ref_hospital_name);
-        if($val!=1)
-        {
-            $message .= getMessage($val,"Hospital name");
-            $isValid = false;
-        }
     
 
        if ($first_name=="" || $last_name=="" || $nhs_number=="" || $dob=="" || $mobile_phone==""|| $home_phone=="" || $postcode=="" 
             || $home_address=="" || $sex=="" || $email=="" || $gp_address==""|| $gp_number==""
-            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $ref_hospital_name=="" || $reg_email=="")
+            || $reg_surname=="" || $reg_forename=="" || $reg_email=="" || $ref_dr_name=="" || $reg_email=="")
 
             echo '<label class="text-danger">Please fill in all required fields</label>';
    
@@ -177,7 +171,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $result = find_member_by_nhsno($nhs_number);
            
                 if(mysqli_num_rows($result) > 0) {
-                  $mes = '<label class="text-danger">Patient is already registered with us</label>';
+                  $mes = '<label class="text-danger">This patient is already registered with us, please contact the clinic in order to obtain access to his records.</label>';
                        echo $mes;
                  } 
                 else {
@@ -200,7 +194,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                           $ref_dr_name,$ref_hospital_name,$ref_email,$reg_surname,$reg_forename,$reg_email);
 
                           $new_id = mysqli_insert_id($db);
-
+                            session_unset();
+                            grant_external_access($nhs_number, $accessCode);
                           redirect_to(url_for('referral_page.php?id=' . $new_id));
                            
                         }
@@ -292,7 +287,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
      
     <div class="field-column">
       <label id="label">Referring Hospital</label>
-       <input type="text" onfocusout="isOnlyCharacter(this,'Hospital Name')" id="refhospital" name="refhospital" placeholder="Required" required>
+       <input type="text" id="refhospital" name="refhospital" placeholder="Optional">
     </div>
 
      <!-- sex -->
@@ -374,148 +369,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </form>
 
-<style>
-#patient-registration {
-    font-size: 30px;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    }
 
-    #registration-heading {
-    font-size: 15px;
-    color : rgb(148, 148, 148);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    padding-left: 20px;
-    }
 
-    #label {
-    font-size: 13px;
-    font-weight: bold;
-    color : rgb(42,103,204);
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    /* font-weight: 300; */
-    }
 
-    #button {
-    font-size: 13px;
-    font-weight: bold;
-    padding: 10px;
-    background-color : rgb(42,103,204);
-    color:white;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    width: 50%;
-    height: 5%;
-    border-radius: 4px;
-    border: 0.5px solid grey;
-border-left: none;
-cursor: pointer;
-float:left;
-    }
 
-    </style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
-    
+<script type="text/javascript" src="../private/validation_functions.js"></script>
+
 <script type="text/javascript">
     var append = false;
-</script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-       if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-       }
-       if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-       return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyCharacter(r,e){
-        if(!isEmpty(r,e)){
-            if(r.value.length<2){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
-                return false;
-            }
-            if(r.value.length>30){
-                if(append)
-                    document.getElementById("alert_message").innerHTML += e+" must have less than equal to 30 characters<br/>";
-                else
-                    document.getElementById("alert_message").innerHTML = e+" must have less than equal to 30 characters";
-                return false;
-            }
-            if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain characters";
-            return (false)    
-        }
-        return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyNumber(r,e){
-        if(!isEmpty(r,e)){
-            if (/^\d+$/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-            return (false)    
-        }
-        return false;
-    }
-</script>        
-<script type="text/javascript">
-    function ValidateEmail() 
-    {
-        var mail = document.getElementById("email");
-        if(!isEmpty(mail,"Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
 </script>
         
 <script type="text/javascript">
@@ -547,10 +410,9 @@ float:left;
         if(!isOnlyCharacter(regForename,"Registering Person Forename")){
             isOkay = false;
         }
-      //  if(!ValidateNHSEmail()){
-        //    isOkay = false;
-       // }
-
+       if(!ValidateNHSEmail()){
+           isOkay = false;
+       }
         if(!isOnlyCharacter(lastname,"Surname")){
             isOkay = false;
         }
@@ -569,13 +431,13 @@ float:left;
         if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
             isOkay = false;
         }
+        if(!ValidateEmail()){
+            isOkay = false;
+        }
         if(isEmpty(address,"Home Address")){
             isOkay = false;
         }
         if(isEmpty(postcode,"Post Code")){
-            isOkay = false;
-        }
-        if(!ValidateEmail()){
             isOkay = false;
         }
         if(!isOnlyNumber(homenumber,"Home Phone")){
@@ -603,45 +465,4 @@ float:left;
         return false;
     }
 </script>
-<script type="text/javascript">
-    function ValidateNHSEmail() 
-    {
-        var mail = document.getElementById("email2");
-        if(!isEmpty(mail,"Registering Person Mail")){
-            mail = mail.value;
-            if (/^\w+([\.-]?\w+)*@nhs.net$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }else if (/^\w+([\.-]?\w+)*@[0-9a-zA-Z]+.nhs.uk$/.test(mail))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += "Invalid Email<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = "Invalid Email";
-            return (false)    
-        }
-        return false;
-        
-    }
-</script>
-  <script type="text/javascript">
-function isNHS(r,e) {
-    if(r.value.length !== 10 && r.value.length !== 0){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" must have 10 digits</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" must have 10 digits";
-            return true;
-       }
-}
-</script> 
+

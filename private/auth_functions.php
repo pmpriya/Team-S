@@ -24,8 +24,15 @@
 function grant_external_access($nhsno, $accessCode) {
   session_start();
   session_regenerate_id();
-  $_SESSION['nhsno'] = $nhsno;
-  $_SESSION['accessCode'] = $accessCode;
+$_SESSION['nhsno'] = $nhsno;
+$_SESSION['accessCode'] = $accessCode;
+$current_patient = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
+if(mysqli_num_rows($current_patient)>=1){
+while($row = mysqli_fetch_array($current_patient)) {
+  $_SESSION['current_patient_id']=$row['ID'];}}
+
+
+
   return true;
 }
 

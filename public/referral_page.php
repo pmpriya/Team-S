@@ -6,7 +6,21 @@
 
 <?php
 
-  $patient_ID = $_GET["id"];
+
+if (isset($_SESSION['userLevel'])) {
+    if ($_SESSION['userLevel'] > 1) {
+        if (isset($_GET['id'])) {
+            $patient_ID = $_GET['id'];
+        }
+        else{    header('Location: index.php');}
+    }
+} elseif (isset($_SESSION['nhsno'])) {
+    $patient_ID = $_SESSION['current_patient_id'];
+} else {
+    header('Location: index.php');
+}
+
+
   $patient = find_patient_by_id($patient_ID);
   $patient_values = mysqli_fetch_assoc($patient);
 
@@ -226,49 +240,66 @@ $isValid = true;
    <!-- Current Issue -->
 
    <div class="field-column">
+
+
     <label>Current Issue</label>
-    <textarea onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required>
-    </textarea>
+    <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Current Issue')" name = "current_issue" id="current_issue" placeholder="Required" required></textarea>
+
+
   </div>
 
    <!-- History Of Present Complaint -->
 
    <div class="field-column">
+
+
     <label>History Of Present Complaint</label>
-    <textarea onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required>
-    </textarea>
+    <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Complaint History')" name="history_of_present_complaint" id="history_of_present_complaint" placeholder="Required" required></textarea>
+
+
   </div>
 
    <!-- Family History -->
 
    <div class="field-column">
+
+
     <label>Family History</label>
-    <textarea onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required>
-    </textarea>
+    <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Family History')" name="family_history" id="family_history" placeholder="Required"  required></textarea>
+
   </div>
   
    <!-- Current Feeds -->
  
    <div class="field-column">
+
+
     <label>Current Feeds</label>
-    <textarea onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required>
-    </textarea>
+    <textarea rows="20" cols="50" onfocusout="isEmpty(this,'Current Feeds')" name="current_feeds" id="current_feeds" placeholder="Required" required></textarea>
+
+
   </div>
 
    <!-- Medications -->
 
    <div class="field-column">
+
+
     <label>Medications</label>
-    <textarea onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required>
-    </textarea>
+    <textarea rows="10" cols="50" onfocusout="isEmpty(this,'Medications')" name="medications" id="medications" placeholder="Required" required></textarea>
+
+
   </div>
 
    <!-- Other Investigations -->
 
    <div class="field-column">
+
+
     <label>Other Investigations</label> 
-    <textarea onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required>
-    </textarea>
+    <textarea rows="10" cols="50" onfocusout="isEmpty(this,'Other Investigations')" name="other_investigations" id="other_investigations" placeholder="Required" required></textarea>
+
+
   </div>
    <!-- submit -->
    <!--<input type ="submit" name="submit"> -->
@@ -285,80 +316,12 @@ $isValid = true;
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
+<script type="text/javascript" src="../private/validation_functions.js"></script>
 
 <script type="text/javascript">
   var append = false;
 </script>
-<script type="text/javascript">
-  function isEmpty(r,e){
-   if(r.value.trim()==""){
-    if(append)
-      document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-    else
-      document.getElementById("alert_message").innerHTML =e+" can't be empty";
-    return true;
-  }
-  if(append) 
-    document.getElementById("alert_message").innerHTML += "";
-  else
-    document.getElementById("alert_message").innerHTML = "";
-  return false;
-}
-</script>
-<script type="text/javascript">
-  function isOnlyCharacter(r,e){
-    if(!isEmpty(r,e)){
-      if(r.value.length<2){
-        if(append)
-          document.getElementById("alert_message").innerHTML += e+" must have more than equal to 2 characters<br/>";
-        else
-          document.getElementById("alert_message").innerHTML = e+" must have more than equal to 2 characters";
-        return false;
-      }
-      if(r.value.length>30){
-        if(append)
-          document.getElementById("alert_message").innerHTML += e+" must have less than equal to 30 characters<br/>";
-        else
-          document.getElementById("alert_message").innerHTML = e+" must have less than equal to 30 characters";
-        return false;
-      }
-      if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(r.value.trim()))
-      {
-        if(append)
-          document.getElementById("alert_message").innerHTML += "";
-        else
-          document.getElementById("alert_message").innerHTML = "";
-        return (true)
-      }
-      if(append)
-        document.getElementById("alert_message").innerHTML += e+" can only contain characters<br/>";
-      else
-        document.getElementById("alert_message").innerHTML = e+" can only contain characters<br/>";
-      return (false)    
-    }
-    return false;
-  }
-</script>
-<script type="text/javascript">
-  function isOnlyNumber(r,e){
-    if(!isEmpty(r,e)){
-      if (/^\d+$/.test(r.value.trim()))
-      {
-        if(append)
-          document.getElementById("alert_message").innerHTML += "";
-        else
-          document.getElementById("alert_message").innerHTML = "";
-        return (true)
-      }
-      if(append)
-        document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-      else
-        document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-      return (false)    
-    }
-    return false;
-  }
-</script>
+
 <script type="text/javascript">
   function validateForm(){
     document.getElementById("alert_message").innerHTML ="";

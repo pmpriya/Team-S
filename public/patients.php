@@ -51,7 +51,9 @@ if (isset($_POST['submitbtn'])) {
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
+
                         echo "<tr><td >" . $users["first_name"] . "</td>
+
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
@@ -59,8 +61,8 @@ if (isset($_POST['submitbtn'])) {
                     <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
                     <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
                     <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
-                    <td><a href=referral_page.php?id=" . $users["ID"] . ">Create Referral</a></td>
-                    <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">View Investigations</a></td></tr>";
+                    <td><a href=referral_show.php?id=" . $users["ID"] . ">Referrals</a></td>
+                    <td><a href=InvestigationsShow.php?id=" . $users["ID"] . ">Investigations</a></td></tr>";
                     }
                 ?>
 
@@ -98,25 +100,6 @@ else{ ?>
         </center>
     </div>
 
-    <style>
-        a {
-                background-color: white;
-    box-shadow: -1 1px 0 blue;
-    color: rgb(42,103,204);
-    padding: 0.3em 1em;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-} 
 
-a:hover {
-  background-color: rgb(19, 26, 102);
-  cursor: pointer;
-}
 
-a:active {
-  box-shadow: none;
-  top: 5px;
-}
-</style>
 <?php include(SHARED_PATH . '/footer.php'); ?>

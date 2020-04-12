@@ -3,19 +3,21 @@
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php
 $page_title = 'KCL Paedriatic Liver Service';
-$appointment_set = find_all_appointments();
-
+$confirmed_set = find_confirmed_appointments();
+$unconfirmed_set = find_unconfirmed_appointments();
 settype($var, 'integer');
 $var = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_appointment($var);
     header('Location: appointments.php');
 }
-if (isset($_POST['submitbtn'])) {
-    $q = $_POST['search'];
-    $appointment_set = search_by_date($q);
-    
-}       
+
+$var = $_GET["confirm"] ?? '';
+if (isset($_GET["confirm"])) {
+    confirm_appointment($var);
+    header('Location: appointments.php');
+}
+
         
 ?>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">      
@@ -40,31 +42,24 @@ if (isset($_POST['submitbtn'])) {
 
         <h1>Appointments</h1>
 
-           
-            <form method="post" class="example" id="searchbar" action="appointments.php" style="margin:auto;max-width:700px">
-                    <input type="text" name="search" id="searchinput" placeholder="Enter Date to Search (yyyy-mm-dd)">
-                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
-                </form>  
             <br>
 
-            <br><td><a href=add_appointment.php>Add an appointment</a></td>
+            <center> <br><td><a href=add_appointment.php>Add an appointment</a></td> </center>
 
             <br>
 
+            <b><h2>Appointments confirmed by the patients</h2></b>
                 <table>
                     <tr>
-                        <th><b>ID</b></th>
                         <th><b>Patient Name</b></th>
                         <th><b>Date</b></th>
                         <th><b>Admission</b></th>
                         <th><b>Time</b></th>
-
-                        <th colspan="3"><b>Manage</b></th>
+                        <th><b>Manage</b></th>
                     </tr>
                     <?php
-                    while ($appointment = mysqli_fetch_assoc($appointment_set)) {
-         echo "<tr><td >" . $appointment["id"] . "</td>
-                    <td>" . $appointment["first_name"].' '.$appointment["last_name"]. "</td>
+                    while ($appointment = mysqli_fetch_assoc($confirmed_set)) {
+         echo "<tr><td>" . $appointment["first_name"].' '.$appointment["last_name"]. "</td>
                     <td>" . $appointment["date"] . "</td>
                     <td>" . $appointment["option_admission"] . "</td>
                     <td>" . $appointment["time"] . "</td>
@@ -73,8 +68,31 @@ if (isset($_POST['submitbtn'])) {
                     } ?>
 
                 </table>
-           
 
+            <br><br><b><h2><i><span style="color: orange; "> Appointments awaiting confirmation by the patients</span></i></h2></b>
+            <table>
+                <tr>
+                    <th><b>Patient Name</b></th>
+                    <th><b>Date</b></th>
+                    <th><b>Admission</b></th>
+                    <th><b>Time</b></th>
+                    <th colspan="2"><b>Manage</b></th>
+                </tr>
+                <?php
+                while ($appointment = mysqli_fetch_assoc($unconfirmed_set)) {
+                    echo "<td>" . $appointment["first_name"].' '.$appointment["last_name"]. "</td>
+                    <td>" . $appointment["date"] . "</td>
+                    <td>" . $appointment["option_admission"] . "</td>
+                    <td>" . $appointment["time"] . "</td>
+
+                <td><a href=?delete=" . $appointment["id"] . " onclick=\"return confirm('Are you sure that you want to delete this Appointment?');\">Delete</a></td>
+                <td><a href=?confirm=" . $appointment["id"] . " onclick=\"return confirm('Are you sure that you want to confirm this Appointment?');\">Confirm</a></td></tr>";
+                } ?>
+
+            </table>
+
+
+            <br><td><a href=appointments_past.php>View past appointments</a></td>
         </center>
 
     </div>

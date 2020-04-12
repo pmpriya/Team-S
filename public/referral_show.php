@@ -2,10 +2,27 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
 <?php 
-    $patient_ID = $_GET['id'] ?? '1';
-    $referrals_of_id = find_referrals_by_id($patient_ID);
-    $patient_set = find_patient_by_id($patient_ID);
-    $patient = mysqli_fetch_assoc($patient_set);
+
+
+
+if (isset($_SESSION['userLevel'])) {
+    if ($_SESSION['userLevel'] > 1) {
+        if (isset($_GET['id'])) {
+            $patient_ID = $_GET['id'];
+        }
+    }
+} elseif (isset($_SESSION['nhsno'])) {
+    $patient_ID = $_SESSION['current_patient_id'];
+} else {
+    header('Location: index.php');
+}
+
+
+$referrals_of_id = find_referrals_by_id($patient_ID);
+$patient_set = find_patient_by_id($patient_ID);
+$patient = mysqli_fetch_assoc($patient_set);
+
+
 ?> 
 
 <?php $page_title= 'Show Referrals'; ?>
@@ -17,13 +34,19 @@
 
     <center>
     <br>
-    <br>
+
+        <?php  if(!mysqli_num_rows(access_actve_referral($patient_ID))){ ?>
+            This patient has no ongoing referrals at the moment, please use the link below to start a new case.<br><br>
+        <a href=referral_page.php?id=<?php echo $patient_ID ?>>Create Referral</a><br>
+        <?php }?>
+        <br>
     <table class= "ReferralsTable">
+
         <th> Date </th>
         <th> Consultant name</th> 
         <th> Consultant Specialty</th>
         <th> Organisation Hospital Name</th>
-
+        <th> Status</th>
         <th> View </th>
  
      
@@ -36,21 +59,16 @@
                 <td><?php echo h($allReferrals['consultant_name']); ?></td>
                 <td><?php echo h($allReferrals['consultant_specialty']); ?></td>
                 <td><?php echo h($allReferrals['organisation_hospital_name']); ?></td>
+                <td><?php if($allReferrals['Active']==1){echo "<b><font color=green>IN PROGRESS</b></font>";} else{echo "<b><font color=Red>RESOLVED</b></font>";} ?></td>
                 <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>>Details</a></td>
             
             </tr> 
         <?php } ?>
     </table>
-    <?php if (!$_SESSION['userLevel'] == 1) { ?>
-             <br><br><a class="action" href= "<?php echo url_for('referral_page.php?id=' . $patient_ID); ?>"> Add Referral </a>
+        <td><?php echo h($allReferrals['Active']); ?></td>
 
-        <a class="back-link" href="<?php echo url_for('/referral_list.php'); ?>">Back to List</a>
     </center>
-<?php } ?>
-    <?php if ($_SESSION['userLevel'] == 1) { ?>
-        <br><br>
-        <a class="back-link" href=patients.php>Go back</a>
-    <?php } ?>
+
 
     </div>
 </div>

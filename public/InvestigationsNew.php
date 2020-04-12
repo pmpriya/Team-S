@@ -1,13 +1,31 @@
 <?php require_once ('../private/initialise.php');?>
 <?php include('../private/shared/header.php'); ?>
+
 <?php $page_title = 'Add Investigation'; ?>
+
 <div class="public">
+
 <?php $patient_ID = $_GET['patient_ID']?? '3'; ?>
+
+<?php $row = mysqli_fetch_array(find_active_referral($patient_ID)); 
+$referral_id = $row["ID"]; ?>
+
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
+    <?php
+    if (isset($_SESSION['userLevel'])) {
+if ($_SESSION['userLevel'] > 1) {
+     if(isset($_GET['id'])){
+ $patient_ID = $_GET['id'];
+     }}}
+     elseif(isset($_SESSION['nhsno'])){
+         $patient_ID = $_SESSION['current_patient_id'];
+     }else{
+    header('Location: index.php');
+}
+    ?>
+
 <?php
-    //$patient_ID = GET['patient_ID']?? '1';
-    //mysqli_insert_id($db);
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $date = $_POST['date'] ?? '';
@@ -84,7 +102,7 @@
         $Creatinine = $_POST['Creatinine'] ?? '';
         $Notes = $_POST['Notes'] ?? '';
 
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes);
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes,$referral_id);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     
@@ -94,7 +112,7 @@
 
 
 <div id= "content";>
-<a class = "back-Link" href="<?php echo url_for('InvestigationsShow.php?patient_ID=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+<a class = "back-Link" href="<?php echo url_for('InvestigationsShow.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
 </div>
 <div class = "new investigation">
 <center>
@@ -111,7 +129,7 @@
     
    <d1>
     <dl>
-        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="required" required> </dt>
+        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="optional"> </dt>
     </dl>
     <d1> 
 
@@ -123,7 +141,7 @@
 
     <d1>
     <dl>
-        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="required" required> </dt>
+        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="optional"> </dt>
     </dl>
     <d1>
 
@@ -159,13 +177,13 @@
 
     <d1>
     <dl>
-        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="required" required> </dt>
+        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="optional"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="required" required> </dt>
+        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="optional"> </dt>
     </dl>
     <d1>
 
@@ -177,7 +195,7 @@
 
     <d1>
     <dl>
-        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="required" required> </dt>
+        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="optional"> </dt>
     </dl>
     <d1>
 
@@ -195,7 +213,7 @@
 
     <d1>
     <dl>
-        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="required" required> </dt>
+        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="optional"> </dt>
     </dl>
     <d1>
 
@@ -231,7 +249,7 @@
 
         <d1>
             <dl>
-                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"> </dt>
+                <dt> Additional notes <input type="text" id="Notes" name= "Notes" placeholder="optional"></dt>
             </dl>
             <d1>
 
@@ -251,42 +269,8 @@
 <script type="text/javascript">
     var append = false;
 </script>
-<script type="text/javascript">
-    function isEmpty(r,e){
-       if(r.value.trim()==""){
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
-            else
-                document.getElementById("alert_message").innerHTML =e+" can't be empty";
-            return true;
-       }
-       if(append) 
-            document.getElementById("alert_message").innerHTML += "";
-        else
-            document.getElementById("alert_message").innerHTML = "";
-       return false;
-    }
-</script>
-<script type="text/javascript">
-    function isOnlyNumber(r,e){
-        if(!isEmpty(r,e)){
-            if (/[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/.test(r.value.trim()))
-            {
-                if(append)
-                    document.getElementById("alert_message").innerHTML += "";
-                else
-                    document.getElementById("alert_message").innerHTML = "";
-                return (true)
-            }
-            if(append)
-                document.getElementById("alert_message").innerHTML += e+" can only contain Numbers<br/>";
-            else
-                document.getElementById("alert_message").innerHTML = e+" can only contain Numbers";
-            return (false)    
-        }
-        return false;
-    }
-</script> 
+
+<script type="text/javascript" src="../private/validation_functions.js"></script>
 
 <script type="text/javascript">
     function submitInvestigation(){
@@ -294,54 +278,10 @@
         document.getElementById("alert_message").innerHTML = "";
 
         var date = document.getElementById("date");
-        var BiliTD = document.getElementById("BiliTD");
-        var AST = document.getElementById("AST");
-        var ALT = document.getElementById("ALT");
-        var ALP = document.getElementById("ALP");
-        var GGT = document.getElementById("GGT");
-        var Prot = document.getElementById("Prot");
-        var Alb = document.getElementById("Alb");
-        var CK = document.getElementById("CK");
-        var HbHct = document.getElementById("HbHct");
-        var WCC = document.getElementById("WCC");
-        var Neutro = document.getElementById("Neutro");
-        var Platelets = document.getElementById("Platelets");
-        var CRP = document.getElementById("CRP");
-        var ESR = document.getElementById("ESR");
-        var PTINR = document.getElementById("PTINR");
-        var APTR = document.getElementById("APTR");
-        var Fibrinogen = document.getElementById("Fibrinogen");
-        var Cortisol = document.getElementById("Cortisol");
-        var Urea = document.getElementById("Urea");
-        var Creatinine = document.getElementById("Creatinine");
 
         var isOkay = true;
         if(isEmpty(date,"Date")){
             console.log(1);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(BiliTD,"Bili T/D")){
-            console.log(2);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(ALT,"ALT")){
-            console.log(4);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(HbHct,"Hb/Hct")){
-            console.log(10);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(WCC,"WCC")){
-            console.log(11);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(Platelets,"Platelets")){
-            console.log(13);
-            isOkay = false;
-        }
-        if(!isOnlyNumber(PTINR,"PT/INR")){
-            console.log(16);
             isOkay = false;
         }
 
