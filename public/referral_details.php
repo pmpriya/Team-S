@@ -36,7 +36,7 @@ $patient_values = mysqli_fetch_assoc($patient);
         $current_feeds = $referral_values['current_feeds'];
         $medications = $referral_values['medications'];
         $other_inv=$referral_values['other_investigations'];
-        $urgent = $referral_values['urgent'];
+        $Symptoms = get_referral_symptoms($id);
   
 
 ?>
@@ -63,7 +63,7 @@ $patient_values = mysqli_fetch_assoc($patient);
             <p><b> Current feeds :</b> <?php echo $current_feeds; ?> </p>
             <p><b> Medications :</b> <?php echo $medications; ?> </p>
             <p><b> Other investigations :</b> <?php echo $other_inv; ?> </p>
-            <p><b> Urgent :</b> <?php echo $urgent; ?> </p>
+            <p><b> Urgent Symptoms :</b> <?php echo $Symptoms; ?> </p>
 
     </div>
 

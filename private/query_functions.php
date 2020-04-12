@@ -699,6 +699,25 @@ function check_investigation_urgent($investigation_ID){
     if ($row[0] =="Y"){return true;}
     else{return false;}
 }
+
+function check_patient_investigation_urgent($patient_ID){
+    global $db;
+    $sql = "SELECT Urgent FROM Investigations WHERE patient_ID = $patient_ID";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $row = mysqli_fetch_array($result);
+    if ($row[0] =="Y"){return true;}
+    else{return false;}
+}
+
+function get_referral_symptoms($referral_id){
+    global $db;
+    $sql = "SELECT SymptomCount FROM Investigations WHERE referral_id = $referral_id";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $row = mysqli_fetch_array($result);
+    return $row[0];
+}
 // function delete_expired_appointments($id)
 // {
 //     global $db;
