@@ -401,6 +401,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         var gpaddress = document.getElementById("gpaddress");
         var gpnumber = document.getElementById("gpnumber");
         var refDoctor = document.getElementById("refname");
+        var refHospital = document.getElementById("refhospital");
         
         var isOkay = true;
         if(!isOnlyCharacter(regSurname,"Registering Person Surname")){
@@ -427,13 +428,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!isOnlyCharacter(refDoctor,"Referring Doctor Name")){
             isOkay = false;
         }
+        if(!isOnlyCharacter(refHospital,"Referring Hospital Name")){
+            isOkay = false;
+        }
+        if(!ValidateEmail()){
+            isOkay = false;
+        }
         if(isEmpty(address,"Home Address")){
             isOkay = false;
         }
         if(isEmpty(postcode,"Post Code")){
-            isOkay = false;
-        }
-        if(!ValidateEmail()){
             isOkay = false;
         }
         if(!isOnlyNumber(homenumber,"Home Phone")){
