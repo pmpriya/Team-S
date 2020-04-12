@@ -171,7 +171,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $result = find_member_by_nhsno($nhs_number);
            
                 if(mysqli_num_rows($result) > 0) {
-                  $mes = '<label class="text-danger">Patient is already registered with us</label>';
+                  $mes = '<label class="text-danger">This patient is already registered with us, please contact the clinic in order to obtain access to his records.</label>';
                        echo $mes;
                  } 
                 else {
