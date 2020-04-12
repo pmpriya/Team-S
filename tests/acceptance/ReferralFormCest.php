@@ -2,7 +2,7 @@
 
 class ReferralFormCest
 {
-    public function _before(AcceptanceTester $I)
+   /* public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/user_login.php');
         $I->fillField('username','admin');
@@ -53,5 +53,6 @@ class ReferralFormCest
     // tests
     public function tryToTest(AcceptanceTester $I)
     {
-    }
+    } */
+    
 }

@@ -1,9 +1,17 @@
+
 <?php 
 
+use Codeception\Util\Locator;
 class StaffLoginCest
 
 
 {
+
+    public function _before(AcceptanceTester $I)
+    {
+        $I->amOnPage('/user_login.php');
+       
+    }
 
     public function adminLoginWorks(AcceptanceTester $I)
     {   
@@ -94,7 +102,9 @@ class StaffLoginCest
         $I->fillField('password','Jacques123');
         $I->click('Sign in');
         $I->canSeeInCurrentUrl('/user_login.php');
-        $I->seeElement('span',['id' => 'alert_message'],['style' => 'color:red']);
+       // $I->see('Username can\'t be empty','#text');
+       $I->seeElement('span',['id' => 'alert_message'],['style' => 'color:red']);
+       Locator::contains("span[id=alert_message]",'Username can\'t be empty.');
         $I->cantSee('PATIENTS');
     }
 
@@ -110,17 +120,7 @@ class StaffLoginCest
         $I->cantSee('PATIENTS');
     }
 
-    public function emptyUsernamePassword(AcceptanceTester $I){
-
-        $I->wantTo('Log In');
-        $I->amOnPage('/user_login.php');
-        $I->fillField('username','');
-        $I->fillField('password','');
-        $I->click('Sign in');
-        $I->canSeeInCurrentUrl('/user_login.php');
-        $I->seeElement('span',['id' => 'alert_message'],['style' => 'color:red']);
-        $I->cantSee('PATIENTS');
-    }
+    
 
     
 }      
