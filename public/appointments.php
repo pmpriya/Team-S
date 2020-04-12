@@ -92,7 +92,7 @@ if (isset($_GET["confirm"])) {
             </table>
 
 
-
+            <br><td><a href=appointments_past.php>View past appointments</a></td>
         </center>
 
     </div>
