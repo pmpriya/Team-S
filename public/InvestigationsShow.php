@@ -58,11 +58,11 @@ $patient = mysqli_fetch_assoc($patient_set);
         <th id = "darkblue"> Cortisol </th>
         <th> Urea </th>
         <th id = "darkblue"> Creatinine </th>
- 
+
         <?php while ($allInvetigations= mysqli_fetch_assoc($investigations_of_id)){ ?>
-            <tr>
+            <tr >
                 <td><a href=InvestigationEdit.php?id=<?php echo h($allInvetigations['id']); ?>><?php echo h($allInvetigations['date']); ?></a></td>
-                <td> <?php echo h($allInvetigations['BiliTD']); ?> </td> 
+                <td> <?php echo h($allInvetigations['BiliTD']); ?> </td>
                 <td> <?php echo h($allInvetigations['AST']); ?> </td> 
                 <td> <?php echo h($allInvetigations['ALT']); ?> </td> 
                 <td> <?php echo h($allInvetigations['ALP']); ?> </td> 
