@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Referral Form'; ?>
 <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>

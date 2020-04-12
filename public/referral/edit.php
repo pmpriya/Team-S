@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Edit Referral'; ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
 }
 
 else{
-    header('Location: index.php');
+    hheader('Location: ../index.php');
 }
 
 
@@ -21,7 +21,7 @@ $delete = $_GET["delete"] ?? '';
 
 if (isset($_GET["delete"])) {
     delete_referral($delete);
-    redirect_to(url_for('index.php'));
+    redirect_to(url_for('patient/index.php'));
 }
 
 $consultant_name = $referral_values['consultant_name'];
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     edit_referral($referral_id,$new_consultant_name,$new_consultant_specialty,$new_organisation_hospital_name,$new_organisation_h_no,$new_referring_doctor_name,
      $new_bleep_no,$new_parents_aware,$new_interpreter_needed,$new_interpreter_language,$new_doctor_kch_name,$new_current_issue,
      $new_history_of_present_complaint,$new_family_history,$new_current_feeds,$new_medications,$new_other_inv,$new_date_of_referral);
-    redirect_to(url_for('show.php?id=' . $patient_ID));
+    redirect_to(url_for('referral/show.php?id=' . $patient_ID));
     exit;
 }
 ?>

@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); 
+<?php require_once('../../private/initialise.php');
 $patients = find_all_patients();
 ?>
 <?php $page_title = 'Patient Appointment'; ?>
@@ -8,7 +8,7 @@ $patients = find_all_patients();
 <?php
 if(is_post_request()) {
 	insert_appointment_member($_POST);
-	redirect_to(url_for('new.php?success'));
+    redirect_to(url_for('appointment/new.php?success'));
 
 }
 ?>
@@ -39,8 +39,8 @@ table {
 
 <?php if(isset($_GET['patient_id'])){ ?>
     <!-- patient details form -->
-    <form action="<?php echo url_for("/new.php"); ?>" method="post">
-      <div class="field-column">
+    <form action="<?php echo url_for("/appointment/new.php"); ?>" method="post">
+    <div class="field-column">
       <label>Selected Patient ID</label>
 		<input type="text" name="patient_id" value="<?=$_GET['patient_id']?>"  readonly/>
 		</div>

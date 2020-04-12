@@ -50,9 +50,9 @@ if (isset($_GET["close"])) {
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
                     <td>" . $users["accessCode"] . "</td>
-                    <td><a href=show.php?id=" . $users["ID"] . ">Referral</a></td>
-                    <td><a href=show.php?id=" . $users["ID"] . ">Investigations</a></td>
-                            <td><a href=patient.php?id=" . $users["ID"] . ">Appointments</a></td>
+                    <td><a href=referral/show.php?id=" . $users["ID"] . ">Referral</a></td>
+                    <td><a href=investigation/show.php?id=" . $users["ID"] . ">Investigations</a></td>
+                            <td><a href=appointment/patient.php?id=" . $users["ID"] . ">Appointments</a></td>
                              <td> <a href=?close=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to close this case?');\">Close</a></td></tr>";
                     }else {}}
 

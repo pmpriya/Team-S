@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
     <div class="public">
         <?php include(SHARED_PATH . '/header.php'); ?>
           <?php include(SHARED_PATH . '/validation.php'); ?>
@@ -6,7 +6,7 @@
         <?php
         $page_title = 'KCL Paedriatic Liver Service';
         if ($_SESSION['userLevel'] < 2) {
-            redirect_to('index.php');
+            redirect_to('../index.php');
 
         }
         ?>

@@ -1,11 +1,11 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php
 $page_title = 'KCL Paedriatic Liver Service';
 
 if ($_SESSION['userLevel'] < 1) {
-    redirect_to('index.php');
+    redirect_to('../index.php');
 
 }
 
@@ -72,9 +72,9 @@ if(mysqli_num_rows($query)>=1){
             <?php if (!$_SESSION['userLevel'] == 1) { ?>
         <h4>Access Code: <b><?php echo $accessCode?></b></h4>
 
-        <br><a href="edit.php?id=<?php echo $id?>">Edit Patient</a><br>
+                <br><a href="patient/edit.php?id=<?php echo $id?>">Edit Patient</a><br>
         <?php } ?>
-        <br><a href="../patients.php">Go Back</a>
+        <br><a href="index.php">Go Back</a>
 
 
 

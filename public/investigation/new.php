@@ -1,5 +1,5 @@
-<?php require_once('../private/initialise.php');?>
-<?php include('../private/shared/header.php'); ?>
+<?php require_once ('../../private/initialise.php');?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
 <?php $page_title = 'Add Investigation'; ?>
 
@@ -61,13 +61,14 @@ if ($_SESSION['userLevel'] > 1) {
     }
     
 
-?> 
+?>
 
 
 
-<div id= "content";>
-<a class = "back-Link" href="<?php echo url_for('show.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
-</div>
+    <div id= "content";>
+        <a class = "back-Link" href="<?php echo url_for('investigation/show.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+    </div>
+
 <div class = "new investigation">
 <center>
 <h1> Create Investigation </h1> 
@@ -220,15 +221,26 @@ if ($_SESSION['userLevel'] > 1) {
 </div>
 </center>
 <?php include(SHARED_PATH . '/footer.php'); ?>
-        
 <script type="text/javascript">
     var append = false;
 </script>
-        
-<script>
-    <script type="text/javascript" src="../private/validation_functions.js"></script>
+<script type="text/javascript">
+    function isEmpty(r,e){
+        if(r.value.trim()==""){
+            if(append)
+                document.getElementById("alert_message").innerHTML += e+" can't be empty.</br>";
+            else
+                document.getElementById("alert_message").innerHTML =e+" can't be empty";
+            return true;
+        }
+        if(append)
+            document.getElementById("alert_message").innerHTML += "";
+        else
+            document.getElementById("alert_message").innerHTML = "";
+        return false;
+    }
 </script>
-        
+
 <script type="text/javascript">
     function submitInvestigation(){
         append = true;
@@ -241,13 +253,18 @@ if ($_SESSION['userLevel'] > 1) {
             console.log(1);
             isOkay = false;
         }
-      
+
+
         if(isOkay){
             //alert("all good");
             document.getElementById("form").submit();
             return true;
         }
+
+
         append = false;
         return false;
     }
 </script>
+
+

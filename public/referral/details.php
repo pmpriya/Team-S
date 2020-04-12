@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
 
@@ -68,9 +68,9 @@ $patient_values = mysqli_fetch_assoc($patient);
 
 
 
-           
-    <br><a href="edit.php?id=<?php echo $id?>">Edit Referral</a><br>
-    <br><a href="show.php?id=<?php echo $patient_ID?>">Go Back</a>
+
+        <br><a href="edit.php?id=<?php echo $id?>">Edit Referral</a><br>
+        <br><a href="show.php?id=<?php echo $patient_ID?>">Go Back</a>
    
 
            

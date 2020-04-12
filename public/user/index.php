@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php
@@ -13,7 +13,7 @@ if (isset($_GET["delete"])) {
 }
 
 if ($_SESSION['userLevel'] < 2) {
-    redirect_to('index.php');
+    redirect_to('../index.php');
 
 }
 
@@ -115,7 +115,7 @@ a:active {
                     <td>" . $users["name"] . "</td>
                     <td>" . $users["surname"] . "</td>
                     <td>" . $users["userLevel"] . "</td>
-                <td><a href=editUser.php?id=" . $users["id"] . ">Edit</a></td>
+                <td><a href=edit.php?id=" . $users["id"] . ">Edit</a></td>
                 <td><a href=?delete=" . $users["id"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td></tr>";
                     } ?>
 

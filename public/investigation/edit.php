@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Edit Investigation'; ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
@@ -8,19 +8,19 @@
 if(isset($_GET['id'])){
     $investigation_id= $_GET['id'];
     $investigation_set = find_investigations_by_id($investigation_id);
-   
+
 }
 elseif(isset($_SESSION['nhsno'])){
     $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
 
 }
 else{
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 $delete = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_investigation($delete);
-    header('Location: Patients.php');
+    header('Location: index.php');
 }
 
 if(mysqli_num_rows($investigation_set)>=1){
@@ -85,9 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 ?>
+
     <style>textarea {
             width: 200px;
         }</style>
+
+    <div id= "content";>
+        <a class = "back-Link" href="<?php echo url_for('investigation/show.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+    </div>
+
 
     <center>
         <h1>Edit Investigation</h1>

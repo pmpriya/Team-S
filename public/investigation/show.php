@@ -1,6 +1,6 @@
 <?php // show the investigations that are already if not empty (if empty have only the links) and have links for edit and add ?>
-<?php require_once('../private/initialise.php'); ?>
-<?php include('../private/shared/header.php'); ?>
+<?php require_once ('../../private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
 
 
@@ -85,8 +85,8 @@ $patient = mysqli_fetch_assoc($patient_set);
             </tr> 
         <?php } ?>
     </table>
-          <center>       
-             <br><br><a class="action" href= "<?php echo url_for('new.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
+          <center>
+              <br><br><a class="action" href= "<?php echo url_for('investigation/new.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
               <h1>Additional notes</h1>
 
 
