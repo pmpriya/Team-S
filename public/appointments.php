@@ -41,13 +41,13 @@ if (isset($_POST['submitbtn'])) {
         <h1>Appointments</h1>
 
            
-            <form method="post" class="example" id="searchbar" action="appointments.php" style="margin:auto;max-width:700px">
+            <form method="post" class="example" id="searchbar" action="appointments.php" style="margin:auto;max-width:500px">
                     <input type="text" name="search" id="searchinput" placeholder="Enter Date to Search (yyyy-mm-dd)">
                     <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
                 </form>  
             <br>
 
-            <br><td><a href=add_appointment.php>Add an appointment</a></td>
+            <center> <br><td><a href=add_appointment.php>Add an appointment</a></td> </center>
 
             <br>
 

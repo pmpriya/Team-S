@@ -92,52 +92,6 @@ $ref_dr_name,$ref_email,$ref_hospital_name,$reg_surname,$reg_forename,$reg_email
     }
 }
 
-function send_mail_ref_doctor($ref_email,$first_name,$last_name,$nhs_number,$accessCode){
-
-    
-  $to  = $ref_email; 
-  $subject = 'Signup verification'; 
-  $message = '
-   
-  As a patient of yours: '.$first_name . $last_name. '  has been registered with Kings College Health Centre - Paediatric Liver Section, you have been created a KCH account automatically.
-  You can now login with your username and password with the credentials below:
-   
-  ------------------------
-  NHS number: '.$nhs_number.'
-  Password: '.$accessCode.'
-  ------------------------
-   
-  Please log in to your account if you want to view or edit data of your newly registered patient:
-  http://project.juliusz.uk/public/external_access.php
-   
-  '; 
-                       
-  $headers = 'From:noreply@nhs.net' . "\r\n"; 
-  mail($to, $subject, $message, $headers); 
-}
-
-function send_mail_registration($email,$first_name){
-    $subject = 'Patient registration'; 
-    $message = '
-
-       Hello '.$first_name.',
-        
-       We are happy to let you know that you have been fully registered with Kings College Health Centre - Paediatric Liver Section.
-       Now we have access to your investigations and personal data and you will be notified by email before every appointment with us.
-
-
-       Kind Regards,
-
-       Kings College London NHS Health Centre
-       
-      
-
-       ';
-    $to = $email; 
-    $headers = 'From:noreply@nhs.net' . "\r\n"; 
-    mail($to, $subject, $message, $headers); 
-  
-  }
 function find_all_users() 
 {
     global $db;
@@ -445,14 +399,14 @@ $new_history_of_present_complaint,$new_family_history,$new_current_feeds,$new_me
 
         
 
-function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent, $Notes, $SymptomCount)
+function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent, $Notes, $Symptoms)
 {
     global $db;
     // $errors = validate_investigation($investigation);
     // if(!empty($errors)){
     //   return $errors;
     // }
-    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Urgent, Notes, SymptomCount) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Urgent', '$Notes', '$SymptomCount')";
+    $sql = "INSERT INTO Investigations (patient_ID, `date`, BiliTD, AST, ALT, ALP, GGT, Prot, Alb, CK, HbHct, WCC, Neutro, Platelets, CRP, ESR, PTINR, APTR, Fibrinogen, Cortisol, Urea, Creatinine, Urgent, Notes, SymptomCount) VALUES ('$patient_ID', '$date', '$BiliTD', '$AST', '$ALT', '$ALP', '$GGT', '$Prot', '$Alb', '$CK','$HbHct','$WCC','$Neutro','$Platelets', '$CRP', '$ESR', '$PTINR', '$APTR', '$Fibrinogen', '$Cortisol', '$Urea', '$Creatinine', '$Urgent', '$Notes', '$Symptoms')";
     //remove spaces
     $result = mysqli_query($db, $sql);
     if($result) 
@@ -468,10 +422,10 @@ function insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GG
     }
 }
     
-function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent, $new_Notes) 
+function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $new_ALP, $new_GGT, $new_Prot, $new_Alb, $new_CK, $new_HbHct, $new_WCC, $new_Neutro, $new_Platelets, $new_CRP, $new_ESR, $new_PTINR, $new_APTR, $new_Fibrinogen, $new_Cortisol, $new_Urea, $new_Creatinine, $new_Urgent, $new_Notes, $new_Symptoms) 
 {
     global $db;
-    $sql = "UPDATE Investigations SET `date`='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine',Urgent='$new_Urgent', Notes='$new_Notes' WHERE id=$id";
+    $sql = "UPDATE Investigations SET `date`='$new_date', BiliTD='$new_BiliTD',AST='$new_AST',ALT='$new_ALT',ALP='$new_ALP',GGT='$new_GGT', Prot='$new_Prot',Alb='$new_Alb',CK='$new_CK',HbHct='$new_HbHct',WCC='$new_WCC', Neutro='$new_Neutro',Platelets='$new_Platelets',CRP='$new_CRP',ESR='$new_ESR',PTINR='$new_PTINR', APTR='$new_APTR',Fibrinogen='$new_Fibrinogen',Cortisol='$new_Cortisol',Urea='$new_Urea',Creatinine='$new_Creatinine',Urgent='$new_Urgent', Notes='$new_Notes', SymptomCount = '$new_Symptoms' WHERE id=$id";
     $result = mysqli_query($db, $sql);
     if($result) 
     {

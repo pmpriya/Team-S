@@ -94,14 +94,13 @@
         $hasPStools = $_POST['hasPStools'] ?? 'N';
         $hasAcuteHepPlus = $_POST['hasAcuteHepPlus'] ?? 'N';
         $hasParacetamolOD = $_POST['hasParacetamolOD'] ?? 'N';
-        $SymptomCount = count($_POST['checkbox']) ?? null;
         $Notes = $_POST['Notes'] ?? '';
         if(count($_POST['checkbox']) > 0){
             $Urgent = "Y";
-            echo $_POST['checkbox'];
+            $Symptoms =  implode(", ", $_POST['checkbox']);
         }
         else{ $Urgent = "N";}
-        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent, $Notes, $SymptomCount );
+        $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Urgent, $Notes, $Symptoms );
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
     

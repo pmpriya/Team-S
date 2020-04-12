@@ -49,19 +49,19 @@ if(!isset($password) || empty($password)){
 }
 ?>
 
-<h1>LOG IN</h1>
+<h1 id="title-page">LOG IN</h1>
    <form name="frmRegistration" id="form" method="post" action="<?php url_for("/login.php?")?>" >
               <div class="form-group" align="center">
               <span id="alert_message" style="color:red"></span>
 
                 
         <div class="field-column">
-            <label>Username</label>
+            <label id = 'label'>Username</label>
             <input type="text" class="demo-input-box"  required="" onfocusout="isEmpty(this,'Username')" id="username" name="username" value="">
         </div>
         
         <div class="field-column">
-            <label>Password</label>
+            <label id = 'label'>Password</label>
             <input type="password" class="demo-input-box" onfocusout="isEmpty(this,'Password')" required="" id="password" name="password" value="">
         </div><br>
         <div class="field-column">
@@ -73,6 +73,15 @@ if(!isset($password) || empty($password)){
     </form>
 </div>
 
+<style>
+    #label {
+    font-size: 13px;
+    font-weight: bold;
+    color : rgb(42,103,204);
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    }
+    </style>
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
 
