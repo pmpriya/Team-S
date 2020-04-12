@@ -1,29 +1,29 @@
 <?php require_once('../../private/initialise.php'); ?>
-    <div class="public">
-<?php include(SHARED_PATH . '/header.php'); ?>
-<?php
-$page_title = 'KCL Paedriatic Liver Service';
-$user_set = find_all_patients();
+<div class="public">
+    <?php include(SHARED_PATH . '/header.php'); ?>
+    <?php
+    $page_title = 'KCL Paedriatic Liver Service';
+    $user_set = find_all_patients();
 
-settype($var, 'integer');
-$var = $_GET["delete"] ?? '';
-if (isset($_GET["delete"])) {
-    delete_patient($var);
-    header('Location: patient/index.php');
-}
-if ($_SESSION['userLevel'] < 1) {
-    redirect_to('../index.php');
-}
+    settype($var, 'integer');
+    $var = $_GET["delete"] ?? '';
+    if (isset($_GET["delete"])) {
+        delete_patient($var);
+        header('Location: patient/index.php');
+    }
+    if ($_SESSION['userLevel'] < 1) {
+        redirect_to('../index.php');
+    }
 
-if (isset($_POST['submitbtn'])) {
-    $q = $_POST['search'];
-    $user_set = search_by_surname($q);
-    //echo $user_set;
-}
+    if (isset($_POST['submitbtn'])) {
+        $q = $_POST['search'];
+        $user_set = search_by_surname($q);
+        //echo $user_set;
+    }
 
-?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- 
+    ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <div class="public">
 
@@ -32,13 +32,12 @@ if (isset($_POST['submitbtn'])) {
 
         <center>
 
-                <h1 id="title-page">Patients</h1>
-            <form method="post" class="example" id="searchbar" action="patient/index.php" style="margin:auto;max-width:700px">   <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
-                <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
-                    <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-                <br>
-                <br>
+            <h1 id="title-page">Patients</h1>
+            <form method="post" class="example" id="searchbar" action="patient/index.php" style="margin:auto;max-width:700px">                    <input type="text" name="search" id="searchinput" placeholder="Enter Surname to Search">
+                <button name="submitbtn" id="searchbutton" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <br>
+            <br>
             <?php if ($_SESSION['userLevel'] > 1) { ?>
                 <table>
                     <tr>
@@ -58,22 +57,24 @@ if (isset($_POST['submitbtn'])) {
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
                     <td>" . $users["accessCode"] . "</td>
-                    <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
-                    <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
+                    <td><a href=show.php?id=" . $users["ID"] . ">View</a></td>
+                    <td><a href=edit.php?id=" . $users["ID"] . ">Edit</a></td>
                     <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
-                    <td><a href=../referral/show.php?id=" . $users["ID"] . ">Referrals</a></td>
+                    <td><a href=../referral/new.php?id=" . $users["ID"] . ">Referrals</a></td>
                     <td><a href=../investigation/show.php?id=" . $users["ID"] . ">Investigations</a></td></tr>";
+
                     }
-                ?>
+                    ?>
 
                 </table>
-            <br><td><a href=new.php>Add patient</a></td>
+
+                <br><td><a href=new.php>Add patient</a></td>
 
 
-<?php }
-else{ ?>
+            <?php }
+            else{ ?>
 
-                    <table>
+                <table>
                     <tr>
                         <th id = "darkblue"><b>Name</b></th>
                         <th  id = "lightblue"><b>Surname</b></th>
@@ -90,16 +91,16 @@ else{ ?>
                     <td><a href=show.php?id=" . $users["ID"] . ">Details</a></td>
                     <td><a href=../referral/show.php?id=" . $users["ID"] . ">Referral</a></td></tr>";
                     }
-                ?>
+                    ?>
 
-            </table>
+                </table>
 
 
-           <?php }
-    ?>
+            <?php }
+            ?>
         </center>
     </div>
 
 
 
-<?php include(SHARED_PATH . '/footer.php'); ?>
+    <?php include(SHARED_PATH . '/footer.php'); ?>

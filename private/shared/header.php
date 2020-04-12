@@ -80,7 +80,7 @@ if(!isset($page_title)) { $page_title = 'Paediatric liver service KCL';}
 
         <?php
         if (isset($_SESSION['userLevel']) || isset($_SESSION['nhsno'])) {
-            echo '<li><a href='.WWW_ROOT.'user_logout.php>LOGOUT</a></li>';
+            echo '<li><a href='.WWW_ROOT.'/user_logout.php>LOGOUT</a></li>';
         }
         ?>
 
