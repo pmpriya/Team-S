@@ -2,10 +2,27 @@
 <?php require_once ('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
 <?php 
-    $patient_ID = $_GET['id'] ?? '1';
-    $referrals_of_id = find_referrals_by_id($patient_ID);
-    $patient_set = find_patient_by_id($patient_ID);
-    $patient = mysqli_fetch_assoc($patient_set);
+
+
+
+if (isset($_SESSION['userLevel'])) {
+    if ($_SESSION['userLevel'] > 1) {
+        if (isset($_GET['id'])) {
+            $patient_ID = $_GET['id'];
+        }
+    }
+} elseif (isset($_SESSION['nhsno'])) {
+    $patient_ID = $_SESSION['current_patient_id'];
+} else {
+    header('Location: index.php');
+}
+
+
+$referrals_of_id = find_referrals_by_id($patient_ID);
+$patient_set = find_patient_by_id($patient_ID);
+$patient = mysqli_fetch_assoc($patient_set);
+
+
 ?> 
 
 <?php $page_title= 'Show Referrals'; ?>
