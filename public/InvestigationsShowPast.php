@@ -15,8 +15,8 @@ if ($_SESSION['userLevel'] > 1) {
      }else{
     header('Location: index.php');
 }
-    $investigations_of_id = find_investigations_by_patientid($patient_ID);
-$find_notes = find_notes($patient_ID);
+    $investigations_of_id = find_past_investigations_by_patientid($patient_ID);
+$find_notes = find_past_notes($patient_ID);
     $patient_set = find_patient_by_id($patient_ID);
 $patient = mysqli_fetch_assoc($patient_set);
 ?>
@@ -32,7 +32,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1 id="title-page"> Past results for  <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
+    <h1 id="title-page"> Results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 
@@ -85,8 +85,7 @@ $patient = mysqli_fetch_assoc($patient_set);
             </tr> 
         <?php } ?>
     </table>
-          <center>       
-             <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
+          <center>
               <h1>Additional notes</h1>
 
 
@@ -99,9 +98,8 @@ $patient = mysqli_fetch_assoc($patient_set);
 
             </tr>
         <?php } ?>
-    </table>
-              <br><td><a href=<?php echo url_for('InvestigationsShowPast.php?id=' . $patient_ID); ?>>View past investigations</a></td></center>
-    </center>
+    </table>         <br>
+
 
 
     </div>

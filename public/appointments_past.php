@@ -3,7 +3,7 @@
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php
 $page_title = 'KCL Paedriatic Liver Service';
-$appointment_set = find_all_appointments();
+$appointment_set = find_past_appointments();
 
 settype($var, 'integer');
 $var = $_GET["delete"] ?? '';

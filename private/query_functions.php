@@ -512,12 +512,31 @@ function find_investigations_by_patientid($patient_ID)
 {
     global $db;
     $sql = "SELECT * FROM Investigations ";
-    $sql .= "WHERE patient_id='" . $patient_ID . "'";
+    $sql .= "WHERE Active='1' AND patient_id='" . $patient_ID . "'";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+function find_past_investigations_by_patientid($patient_ID)
+{
+    global $db;
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "WHERE Active='0' AND patient_id='" . $patient_ID . "'";
     $result = mysqli_query($db, $sql);
     return $result;
 }
 
 function find_notes($patient_ID)
+{
+    global $db;
+    $sql = "SELECT * FROM Investigations ";
+    $sql .= "WHERE Active='1' AND patient_id='" . $patient_ID . "' AND Notes IS NOT NULL ";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+
+function find_past_notes($patient_ID)
 {
     global $db;
     $sql = "SELECT * FROM Investigations ";
@@ -731,7 +750,7 @@ function search_by_date($date)
     return $result;
 }
 
-function find_all_appointments() {
+function find_past_appointments() {
     global $db;
     $sql = "SELECT `appointments`.*, `Patient`.`first_name`, `Patient`.`last_name` FROM appointments JOIN `Patient` ON `appointments`.`patient_id` = `Patient`.`id`";
     $sql .= "WHERE Active='0'";
