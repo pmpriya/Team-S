@@ -144,10 +144,14 @@ $isValid = true;
       else  {
                 if($isValid)
                 {
-                    $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
-                    $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
-                    $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
-                    redirect_to(url_for('InvestigationsNew.php?id=' . $patient_ID));
+                    if(!mysqli_num_rows(access_actve_referral($patient_ID))) {
+                        $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name,
+                            $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue,
+                            $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations, $date);
+                        redirect_to(url_for('InvestigationsNew.php?id=' . $patient_ID));
+                    }else{
+                        echo "This patient already has an ongoing referral.";
+                    }
                 }
                 else 
                 {
