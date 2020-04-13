@@ -218,7 +218,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </head>
 <body>
     <h1 id = "patient-registration"><b>PATIENT REGISTRATION</b></h1>
-
+<center><h2>For help with registration of your first patient visit our<br><br> <a href="help.php">Help Section</a> </h2></center>
 <h2> <div id = "registration-heading">Details of the person registering the patient(Please complete all fields) </div></h2>
     <br>
 

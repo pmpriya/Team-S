@@ -80,7 +80,7 @@
         }
         ?>
 
-
+        <li><a href=help.php>HELP</a></li>
 <?php
         if (isset($_SESSION['userLevel']) || isset($_SESSION['nhsno'])) {
                 echo '<li><a href=user_logout.php>LOGOUT</a></li>';
