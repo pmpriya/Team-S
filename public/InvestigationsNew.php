@@ -33,66 +33,21 @@ if ($_SESSION['userLevel'] > 1) {
                 }
 
         $BiliTD = $_POST['BiliTD'] ?? '';
-        $val = isOnlyNumber($BiliTD);
-                if($val!=1)
-                {
-                    $message += getMessage($val,"Bili T/D");
-                    $isValid = false;
-                }
 
         $AST = $_POST['AST'] ?? '';
-
         $ALT = $_POST['ALT'] ?? '';
-        $val = isOnlyNumber($ALT);
-            if($val!=1)
-            {
-                $message += getMessage($val,"ALT");
-                $isValid = false;
-            }
-
         $ALP = $_POST['ALP'] ?? '';
         $GGT = $_POST['GGT'] ?? '';
         $Prot = $_POST['Prot'] ?? '';
         $Alb = $_POST['Alb'] ?? '';
         $CK = $_POST['CK'] ?? '';
-
         $HbHct = $_POST['HbHct'] ?? '';
-        $val = isOnlyNumber($HbHct);
-            if($val!=1)
-            {
-                $message += getMessage($val,"HbHct");
-                $isValid = false;
-            }
-
         $WCC = $_POST['WCC'] ?? '';
-        $val = isOnlyNumber($WCC);
-            if($val!=1)
-            {
-                $message += getMessage($val,"WCC");
-                $isValid = false;
-            }
-        
         $Neutro = $_POST['Neutro'] ?? '';
-
         $Platelets = $_POST['Platelets'] ?? '';
-        $val = isOnlyNumber($Platelets);
-            if($val!=1)
-            {
-                $message += getMessage($val,"Platelets");
-                $isValid = false;
-            }
-
         $CRP = $_POST['CRP'] ?? '';
         $ESR = $_POST['ESR'] ?? '';
-        
         $PTINR = $_POST['PTINR'] ?? '';
-        $val = isOnlyNumber($PTINR);
-            if($val!=1)
-            {
-                $message += getMessage($val,"PTINR");
-                $isValid = false;
-            }
-
         $APTR = $_POST['APTR'] ?? '';
         $Fibrinogen = $_POST['Fibrinogen'] ?? '';
         $Cortisol = $_POST['Cortisol'] ?? '';
@@ -103,9 +58,9 @@ if ($_SESSION['userLevel'] > 1) {
         $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes,$referral_id);
         header('Location: InvestigationsShow.php?id=' . $patient_ID);
     }
-    
 
-?> 
+
+?>
 
 
 
@@ -114,9 +69,9 @@ if ($_SESSION['userLevel'] > 1) {
 </div>
 <div class = "new investigation">
 <center>
-<h1> Create Investigation </h1> 
+<h1> Create Investigation </h1>
 
-<?php //echo display_error($errors);?> 
+<?php //echo display_error($errors);?>
 <form id="form" method="post">
 <span id="alert_message" style="color:red"></span>
 <d1>
@@ -124,12 +79,12 @@ if ($_SESSION['userLevel'] > 1) {
         <dt> Date<input type="date" onfocusout="isEmpty(this,'Date')" id="date" name= "date"> </dt>
     </dl>
     <d1>
-    
+
    <d1>
     <dl>
         <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="required"> </dt>
     </dl>
-    <d1> 
+    <d1>
 
     <d1>
     <dl>
@@ -255,8 +210,8 @@ if ($_SESSION['userLevel'] > 1) {
             <div id="operations">
     <input type="button" onclick="submitInvestigation()" name="btnsubmit" value="Add Investigation"/>
     </div>
-    
-   
+
+
 </form>
 
 
@@ -289,9 +244,9 @@ if ($_SESSION['userLevel'] > 1) {
             return true;
         }
 
-      
+
         append = false;
         return false;
     }
 </script>
-        
+
