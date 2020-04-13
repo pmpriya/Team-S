@@ -15,7 +15,10 @@
     <li> acute liver failure </li>
 </ul>
 <p>We also offer surgery for liver tumours and pancreas conditions, and carry out liver and small bowel transplantations. </p>
-<p>Contact Main Reception: +44 (0)20 3299 3214 </p>
+<p>Contact Details: </p>
+<p>Direct Number for Referrals - 020 3299 7812 </p>
+<p>Hospital Switchboard - 020 3299 9000 </p>
+<p>Paediatric Liver Service - 020 3299 3214 </p>
 
 <img class = "image-aboutus" src ="images/image-1.jpg" alt="image-1" id="image1"> 
 <img class = "image-aboutus" src ="images/image-2.jpg" alt="image-2" id="image2"> 
