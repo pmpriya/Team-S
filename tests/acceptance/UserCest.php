@@ -20,7 +20,7 @@ class UserCest
         $I->fillField('email','');
         $I->fillField('userLevel','');
         $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/addUser.php');
+        $I->canSeeInCurrentUrl('/addUser.php');
     }
 
     public function addUserTestWorks(AcceptanceTester $I)
@@ -33,7 +33,7 @@ class UserCest
         $I->fillField('email','hashim@nhs.net');
         $I->fillField('userLevel','1');
         $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/users.php');
+        $I->canSeeInCurrentUrl('/users.php');
     }
 
     public function addEmptyUser(AcceptanceTester $I)
@@ -46,7 +46,7 @@ class UserCest
         $I->fillField('email','');
         $I->fillField('userLevel','');
         $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/addUser.php');
+        $I->canSeeInCurrentUrl('/addUser.php');
     }
     
 
@@ -57,23 +57,23 @@ class UserCest
         $I->fillField('username','73829');
         $I->fillField('name','hashim');
         $I->fillField('surname','alam');
-        $I->fillField('email','hashim@yahoo.com');
+        $I->fillField('email','test@yahoo.com');
         $I->fillField('userLevel','60');
         $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/users.php');
+        $I->canSeeInCurrentURL('/users.php');
     }
 
     public function editUserEmpty(AcceptanceTester $I)
     {
         $I->wantTo("verify that editing a staff member with empty fields doesn't work");
-        $I->amOnPage('/editUser.php');
+        $I->amOnPage('/editUser.php?id=83');
         $I->fillField('username','');
         $I->fillField('name','');
         $I->fillField('surname','');
         $I->fillField('email','');
         $I->fillField('userLevel','');
         $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/editUser.php');
+        $I->canSeeInCurrentURL('/editUser.php');
     }
 
     public function editUserTestWorks(AcceptanceTester $I)
@@ -86,10 +86,9 @@ class UserCest
         $I->fillField('email','nbaakza@kings.nhs.uk');
         $I->fillField('userLevel','3');
         $I->click('Submit');
-        $I->seeCurrentUrlEquals('/Team-S/public/users.php');
+        $I->canSeeInCurrentUrl('/users.php');
         $I->see('testingyo');
-        $I->amOnPage('/editUser.php?id=83');
-        $I->fillField('username','73829');
+       
     }
 
      public function editUserTestTwo(AcceptanceTester $I)
