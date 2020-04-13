@@ -7,6 +7,15 @@ smtp_port=587 (your local port, 587 in my case)
 sendmail_from = ticketmachineproject@gmail.com
 sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
 
+
+Go in the xampp sendmail.ini file, comment everything out and add 
+smtp_server=smtp.gmail.com
+smtp_port=587
+error_logfile=error.log
+debug_logfile=debug.log
+auth_username=ticketmachineproject@gmail.com
+auth_password=KCLproject
+force_sender=ticketmachineproject@gmail.com
  
 Restart XAMPP
 
