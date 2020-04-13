@@ -6,7 +6,7 @@
 
 
 if (isset($_SESSION['userLevel'])) {
-    if ($_SESSION['userLevel'] > 1) {
+    if ($_SESSION['userLevel'] > 0) {
         if (isset($_GET['id'])) {
             $patient_ID = $_GET['id'];
         }
