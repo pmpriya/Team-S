@@ -32,7 +32,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1 id="title-page"> Past results for  <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
+    <h1 id="title-page"> Current results overview for  <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 
@@ -86,7 +86,7 @@ $patient = mysqli_fetch_assoc($patient_set);
         <?php } ?>
     </table>
           <center>       
-             <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?patient_ID=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
+             <br><br><a class="action" href= "<?php echo url_for('InvestigationsNew.php?id=' . $patient_ID); ?>"> Add Investigation </a><br><br><br>
               <h1>Additional notes</h1>
 
 

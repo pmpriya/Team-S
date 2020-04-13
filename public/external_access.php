@@ -11,17 +11,17 @@
 
             if (isset($nhsno) && isset($accessCode)) {
 
-                $patient = access_investigation($nhsno, $accessCode);
+
 
                 // User exists
-                if ($patient) {
+                if (find_acceess($nhsno, $accessCode)) {
 
 
                     grant_external_access($nhsno, $accessCode);
                     redirect_to(url_for('externalOverview.php'));
 
                 } else {
-                    echo "please check your details";
+                    echo "<h2><b><font color='red'>Incorrect login details</font> </b></h2>";
                 }
 
             }
