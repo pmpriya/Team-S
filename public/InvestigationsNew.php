@@ -127,7 +127,7 @@ if ($_SESSION['userLevel'] > 1) {
     
    <d1>
     <dl>
-        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="optional"> </dt>
+        <dt> Bili T/D  <input type="text" onfocusout="isOnlyNumber(this,'Bili T/D')" id="BiliTD" name= "BiliTD" placeholder="required"> </dt>
     </dl>
     <d1> 
 
@@ -139,7 +139,7 @@ if ($_SESSION['userLevel'] > 1) {
 
     <d1>
     <dl>
-        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="optional"> </dt>
+        <dt> ALT <input type="text" onfocusout="isOnlyNumber(this,'ALT')" id="ALT" name= "ALT" placeholder="required"> </dt>
     </dl>
     <d1>
 
@@ -175,13 +175,13 @@ if ($_SESSION['userLevel'] > 1) {
 
     <d1>
     <dl>
-        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="optional"> </dt>
+        <dt> Hb/Hct <input type="tinytext" onfocusout="isOnlyNumber(this,'HbHct')" id="HbHct" name="HbHct" placeholder="required"> </dt>
     </dl>
     <d1>
 
     <d1>
     <dl>
-        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="optional"> </dt>
+        <dt> WCC <input type="tinytext" onfocusout="isOnlyNumber(this,'WCC')" id="WCC" name="WCC" placeholder="required"> </dt>
     </dl>
     <d1>
 
@@ -193,7 +193,7 @@ if ($_SESSION['userLevel'] > 1) {
 
     <d1>
     <dl>
-        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="optional"> </dt>
+        <dt> Platelets <input type="text" onfocusout="isOnlyNumber(this,'Platelets')" id="Platelets" name= "Platelets" placeholder="required"> </dt>
     </dl>
     <d1>
 
@@ -211,7 +211,7 @@ if ($_SESSION['userLevel'] > 1) {
 
     <d1>
     <dl>
-        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="optional"> </dt>
+        <dt> PT/INR <input type="text" onfocusout="isOnlyNumber(this,'PTINR')" id="PTINR" name= "PTINR" placeholder="required"> </dt>
     </dl>
     <d1>
 
@@ -294,3 +294,4 @@ if ($_SESSION['userLevel'] > 1) {
         return false;
     }
 </script>
+        
