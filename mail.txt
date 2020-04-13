@@ -1,36 +1,12 @@
 
-For mail to work, following packages to be installed
-•	Mail
-•	Net_SMTP
-•	Net_Socket
-•	Auth
-Try direct installation using the command 
-pear install <PackageName>.
-In case if you get the following error, go for manual download. They are available in pear.php.net
- C:\MAMP\bin\php\php7.3.7>pear install pear/Net_STMP pear/Mail-1.4.1
- No releases available for package "pear.php.net/Net_STMP"
- No releases available for package "pear.php.net/Mail"
- install failed 
- 
- C:\MAMP\bin\php\php7.3.7> pear install Net_STMP
- No releases available for package "pear.php.net/Net_STMP"
- install failed 
- 
----------
-Manual download : 
-1. Auth_SASL-1.1.0.tgz
-2. Net_Socket-1.2.2.tgz
-3. Net_STMP-1.9.0.tgz
-4. Mail-1.4.1.tgz
- 
-Extract and place it in Pear directory of MAMP
-include_path=".;C:\MAMP\bin\php\php7.3.7\pear\;C:\MAMP\bin\php\php7.3.7\Mail-1.4.1;C:\MAMP\bin\php\php7.3.7\Net_SMTP-1.9.0;C:\MAMP\bin\php\php7.3.7\Net_Socket-1.2.2;C:\MAMP\bin\php\php7.3.7\Auth_SASL-1.1.0\Auth;C:\MAMP\bin\php\php7.3.7\Auth_SASL-1.1.0\Auth\SASL"
+For mail to work,
 
-In php.ini , 
-; Windows : "\path1;\path2"
-;include_path = ".;D:\php\includes"
-include_path = ".;C:\MAMP\bin\php\php7.3.7\pear\;C:\MAMP\bin\php\php7.3.7\Mail-1.4.1;C:\MAMP\bin\php\php7.3.7\Net_SMTP-1.9.0;C:\MAMP\bin\php\php7.3.7\Net_Socket-1.2.2;C:\MAMP\bin\php\php7.3.7\Auth_SASL-1.1.0\Auth;C:\MAMP\bin\php\php7.3.7\Auth_SASL-1.1.0\Auth\SASL"
+ Assuming you are using xampp on windows, locate the “php.ini” file in the directory “C:\xampp\php”. Look for the "[mail function]", comment out the set port and settings and change them to:
+SMTP=smtp.gmail.com
+smtp_port=587 (your local port, 587 in my case)
+sendmail_from = ticketmachineproject@gmail.com
+sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
 
  
-Restart MAMP
+Restart XAMPP
 
