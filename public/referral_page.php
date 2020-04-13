@@ -147,7 +147,7 @@ $isValid = true;
                     $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
                     $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
-                    header('Location: referral_show.php?id=' . $patient_ID);
+                    redirect_to(url_for('InvestigationsNew.php?id=' . $patient_ID));
                 }
                 else 
                 {

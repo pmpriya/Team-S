@@ -202,56 +202,7 @@ class PatientCest
 
     }
 
-  /*  public function registerPatientTestTwo(AcceptanceTester $I)
-    {
-        $I->wantTo("verify");
-        $I->amOnPage('/register_patient.php');
-        $I->fillField('lastname2','899383');
-        $I->fillField('firstname2','0009300');
-        $I->fillField('mail2','noorbaakza@nhs.net');
-        $I->fillField('lastname','sheikh');
-        $I->fillField('firstname','lala');
-        $I->fillField('nhsnumber','9990');
-        $I->fillField('dob','2000-09-12');
-        $I->fillField('refname','928839');
-        $I->fillField('ref_mail','902838');
-        $I->fillField('refhospital','kcl');
-        $I->fillField('email','baakza@yahoo.com');
-        $I->fillField('address','nvkdnak');
-        $I->fillField('postcode','82229');
-        $I->fillField('homenumber','jdjsj');
-        $I->fillField('mobilenumber','cbsnjs');
-        $I->fillField('gpaddress','ifihwih');
-        $I->fillField('gpnumber','whfjw');
-        $I->click('Submit');
-        $I->seeCurrentUrlEquals('/register_patient.php');
-    }
-
-    public function registerPatientTestThree(AcceptanceTester $I)
-    {
-        $I->wantTo("verify");
-        $I->amOnPage('/register_patient.php');
-        $I->fillField('lastname2','');
-        $I->fillField('firstname2','');
-        $I->fillField('mail2','noorbaakza@nhs.net');
-        $I->fillField('lastname','sheikh');
-        $I->fillField('firstname','lala');
-        $I->fillField('nhsnumber','9990888888');
-        $I->fillField('dob','');
-        $I->fillField('refname','928839');
-        $I->fillField('ref_mail','902838');
-        $I->fillField('refhospital','');
-    
-        $I->fillField('email','baakza@yahoo.com');
-        $I->fillField('address','nvkdnak');
-        $I->fillField('postcode','82229');
-        $I->fillField('homenumber','jdjsj');
-        $I->fillField('mobilenumber','cbsnjs');
-        $I->fillField('gpaddress','ifihwih');
-        $I->fillField('gpnumber','888889');
-        $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/register_patient.php');
-    }
+  /* 
 
     public function editPatientEmpty(AcceptanceTester $I)
     {
