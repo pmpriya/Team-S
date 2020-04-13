@@ -5,10 +5,6 @@
 
 <div class="public">
 
-<?php $patient_ID = $_GET['id']?? '3'; ?>
-
-<?php $row = mysqli_fetch_array(find_active_referral($patient_ID)); 
-$referral_id = $row["ID"]; ?>
 
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
@@ -25,6 +21,8 @@ if ($_SESSION['userLevel'] > 1) {
 }
     ?>
 
+    <?php $row = mysqli_fetch_array(find_active_referral($patient_ID));
+    $referral_id = $row["ID"]; ?>
 <?php
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
