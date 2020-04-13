@@ -107,7 +107,7 @@ table {
 
 
     <!-- patient details form -->
-    <form action="<?php echo url_for("/new.php"); ?>" method="get">    <!-- Patient's Surname -->
+    <form action="<?php echo url_for("appointment/new.php"); ?>" method="get">    <!-- Patient's Surname -->
       <div class="field-column">
       <label>Select Patient</label>
 		<select name="patient_id" required>

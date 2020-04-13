@@ -21,7 +21,7 @@ if ($_SESSION['userLevel'] > 1) {
      elseif(isset($_SESSION['nhsno'])){
          $patient_ID = $_SESSION['current_patient_id'];
      }else{
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
     ?>
 
@@ -61,13 +61,14 @@ if ($_SESSION['userLevel'] > 1) {
     }
     
 
-?> 
+?>
 
 
 
-<div id= "content";>
-<a class = "back-Link" href="<?php echo url_for('show.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
-</div>
+    <div id= "content";>
+        <a class = "back-Link" href="<?php echo url_for('investigation/show.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+    </div>
+
 <div class = "new investigation">
 <center>
 <h1> Create Investigation </h1> 
@@ -226,7 +227,7 @@ if ($_SESSION['userLevel'] > 1) {
 </script>
         
 <script>
-    <script type="text/javascript" src="../private/validation_functions.js"></script>
+    <script type="text/javascript" src="../../private/validation_functions.js"></script>
 </script>
         
 <script type="text/javascript">
