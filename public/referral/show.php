@@ -1,5 +1,5 @@
 <?php ?>
-<?php require_once ('../private/initialise.php'); ?>
+<?php require_once('../private/initialise.php'); ?>
 <?php include('../private/shared/header.php'); ?>
 <?php 
     $patient_ID = $_GET['id'] ?? '1';
@@ -19,7 +19,7 @@
     <br>
 
         <?php  if(!mysqli_num_rows(access_actve_referral($patient_ID))){ ?>
-        <a href=referral_page.php?id=<?php echo $patient_ID ?>>Create Referral</a><br>
+        <a href=new.php?id=<?php echo $patient_ID ?>>Create Referral</a><br>
         <?php }?>
         <br>
     <table class= "ReferralsTable">
@@ -41,7 +41,7 @@
                 <td><?php echo h($allReferrals['consultant_name']); ?></td>
                 <td><?php echo h($allReferrals['consultant_specialty']); ?></td>
                 <td><?php echo h($allReferrals['organisation_hospital_name']); ?></td>
-                <td><a href=referral_details.php?id=<?php echo h($allReferrals['ID']); ?>>Details</a></td>
+                <td><a href=details.php?id=<?php echo h($allReferrals['ID']); ?>>Details</a></td>
             
             </tr> 
         <?php } ?>

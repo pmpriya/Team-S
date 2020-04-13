@@ -69,8 +69,8 @@ $patient_values = mysqli_fetch_assoc($patient);
 
 
            
-    <br><a href="referral_edit.php?id=<?php echo $id?>">Edit Referral</a><br>
-    <br><a href="referral_show.php?id=<?php echo $patient_ID?>">Go Back</a>
+    <br><a href="edit.php?id=<?php echo $id?>">Edit Referral</a><br>
+    <br><a href="show.php?id=<?php echo $patient_ID?>">Go Back</a>
    
 
            

@@ -15,7 +15,7 @@ class PatientsTableCest
     public function checkPage(AcceptanceTester $I)
     {
 
-            $I->amOnPage('/patients.php');
+            $I->amOnPage('/index.php');
             $I->see('LOGOUT');
 
 
@@ -33,8 +33,8 @@ class PatientsTableCest
 
     public function addPatient(AcceptanceTester $I){
 
-            $I->click("//a[@href='register_patient.php']");
-            $I->amOnPage('/register_patient.php');
+            $I->click("//a[@href='new.php']");
+            $I->amOnPage('/new.php');
 
     }
 

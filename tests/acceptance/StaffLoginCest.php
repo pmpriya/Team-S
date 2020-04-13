@@ -23,7 +23,7 @@ class StaffLoginCest
         $I->click('Sign in');
         $I->canSee('PATIENTS');
         $I->cantSeeInCurrentUrl('/user_login.php');
-        $I->canSeeInCurrentUrl('/patients.php');
+        $I->canSeeInCurrentUrl('/index.php');
         $I->canSee('LOGOUT');
         $I->canSee('STAFF');
         $I->canSee('APPOINTMENTS');
@@ -41,7 +41,7 @@ class StaffLoginCest
         $I->click('Sign in');
         $I->canSee('PATIENTS');
         $I->cantSeeInCurrentUrl('/user_login.php');
-        $I->canSeeInCurrentUrl('/patients.php');
+        $I->canSeeInCurrentUrl('/index.php');
         $I->canSee('LOGOUT');
         $I->cantSee('STAFF');
         $I->canSee('APPOINTMENTS');
@@ -59,7 +59,7 @@ class StaffLoginCest
         $I->click('Sign in');
         $I->canSee('PATIENTS');
         $I->cantSeeInCurrentUrl('/user_login.php');
-        $I->canSeeInCurrentUrl('/patients.php');
+        $I->canSeeInCurrentUrl('/index.php');
         $I->canSee('LOGOUT');
         $I->cantSee('STAFF');
         $I->cantSee('INVESTIGATIONS');

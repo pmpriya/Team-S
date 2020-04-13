@@ -134,8 +134,8 @@ function edit_user($id, $new_username,$new_name,$new_surname,$new_email, $new_us
     if($result) 
     {
         return true;
-        echo '<script>window.location.replace("users.php"); </script>';
-        header('users.php');
+        echo '<script>window.location.replace("index.php"); </script>';
+        header('index.php');
     } 
     else 
     {
@@ -205,8 +205,8 @@ function edit_password($id, $new_password)
     if ($result) 
     {
         return true;
-        echo '<script>window.location.replace("users.php"); </script>';
-        header('users.php');
+        echo '<script>window.location.replace("index.php"); </script>';
+        header('index.php');
     }
     else 
     {
@@ -350,8 +350,8 @@ function add_user($username,$name,$surname,$email,$password, $userLevel)
     $result = mysqli_query($db, $sql);
     if($result) {
         return true;
-        echo '<script>window.location.replace("users.php"); </script>';
-        header('users.php');
+        echo '<script>window.location.replace("index.php"); </script>';
+        header('index.php');
     } else {
         echo mysqli_error($db);
         db_disconnect($db);
@@ -379,8 +379,8 @@ function edit_patient($id, $new_nhs_number, $new_first_name, $new_last_name, $ne
     if ($result) 
     {
         return true;
-        echo '<script>window.location.replace("patients.php"); </script>';
-        header('users.php');
+        echo '<script>window.location.replace("index.php"); </script>';
+        header('index.php');
     } 
     else 
     {
@@ -446,7 +446,7 @@ function edit_investigation($id, $new_date, $new_BiliTD, $new_AST, $new_ALT, $ne
     {
         return true;
         echo '<script>window.location.replace("index.php"); </script>';
-        header('users.php');
+        header('index.php');
     } 
     else 
     {

@@ -8,7 +8,7 @@ $patients = find_all_patients();
 <?php
 if(is_post_request()) {
 	insert_appointment_member($_POST);
-	redirect_to(url_for('add_appointment.php?success'));
+	redirect_to(url_for('new.php?success'));
 
 }
 ?>
@@ -39,7 +39,7 @@ table {
 
 <?php if(isset($_GET['patient_id'])){ ?>
     <!-- patient details form -->
-    <form action="<?php echo url_for("/add_appointment.php"); ?>" method="post"> 
+    <form action="<?php echo url_for("/new.php"); ?>" method="post">
       <div class="field-column">
       <label>Selected Patient ID</label>
 		<input type="text" name="patient_id" value="<?=$_GET['patient_id']?>"  readonly/>
@@ -107,7 +107,7 @@ table {
 
 
     <!-- patient details form -->
-    <form action="<?php echo url_for("/add_appointment.php"); ?>" method="get">    <!-- Patient's Surname -->
+    <form action="<?php echo url_for("/new.php"); ?>" method="get">    <!-- Patient's Surname -->
       <div class="field-column">
       <label>Select Patient</label>
 		<select name="patient_id" required>

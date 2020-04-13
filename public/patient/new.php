@@ -199,7 +199,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                           $new_id = mysqli_insert_id($db);
 
-                          redirect_to(url_for('InvestigationsNew.php?patient_ID=' . $new_id));
+                          redirect_to(url_for('new.php?patient_ID=' . $new_id));
                            
                         }
                         else {
@@ -371,7 +371,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
 
-<script type="text/javascript" src="../private/validation_functions.js"></script>
+<script type="text/javascript" src="../../private/validation_functions.js"></script>
 
 <script type="text/javascript">
     var append = false;

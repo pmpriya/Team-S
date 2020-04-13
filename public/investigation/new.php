@@ -1,4 +1,4 @@
-<?php require_once ('../private/initialise.php');?>
+<?php require_once('../private/initialise.php');?>
 <?php include('../private/shared/header.php'); ?>
 
 <?php $page_title = 'Add Investigation'; ?>
@@ -57,7 +57,7 @@ if ($_SESSION['userLevel'] > 1) {
         $Notes = $_POST['Notes'] ?? '';
 
         $result = insert_investigation($patient_ID, $date, $BiliTD, $AST, $ALT, $ALP, $GGT, $Prot, $Alb, $CK, $HbHct, $WCC, $Neutro, $Platelets, $CRP, $ESR, $PTINR, $APTR, $Fibrinogen, $Cortisol, $Urea, $Creatinine, $Notes,$referral_id);
-        header('Location: InvestigationsShow.php?id=' . $patient_ID);
+        header('Location: show.php?id=' . $patient_ID);
     }
     
 
@@ -66,7 +66,7 @@ if ($_SESSION['userLevel'] > 1) {
 
 
 <div id= "content";>
-<a class = "back-Link" href="<?php echo url_for('InvestigationsShow.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
+<a class = "back-Link" href="<?php echo url_for('show.php?id=' . $patient_ID); ?>"> &laquo; Back to Display of Investigations </a>
 </div>
 <div class = "new investigation">
 <center>

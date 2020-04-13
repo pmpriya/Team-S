@@ -133,7 +133,7 @@ $isValid = true;
                     $result1 = insert_referral($patient_ID, $consultant_name, $consultant_specialty, $organisation_hospital_name, $organisation_hospital_no, $referring_name, 
                     $bleep_number, $is_patient_aware, $is_interpreter_needed, $interpreter_language, $kch_doc_name, $current_issue, 
                     $history_of_present_complaint, $family_history, $current_feeds, $medications, $other_investigations,$date);
-                    header('Location: referral_show.php?id=' . $patient_ID);
+                    header('Location: show.php?id=' . $patient_ID);
                 }
                 else 
                 {
@@ -154,7 +154,7 @@ $isValid = true;
 <center>
 <span id="alert_message" style="color:red"></span>
 </center>
-<form action="<?php echo url_for("/referral_page.php?id=" . $patient_ID); ?>" method="post" id="form">
+<form action="<?php echo url_for("/new.php?id=" . $patient_ID); ?>" method="post" id="form">
  <!-- Consultant Name -->
     <div class="field-column">
     <label>Consultant Name </label>
@@ -290,7 +290,7 @@ $isValid = true;
   var append = false;
 </script>
 
-<script type="text/javascript" src="../private/validation_functions.js"></script>
+<script type="text/javascript" src="../../private/validation_functions.js"></script>
 
 <script type="text/javascript">
   function validateForm(){
