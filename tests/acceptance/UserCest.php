@@ -55,8 +55,8 @@ class UserCest
         $I->wantTo("add a user that works");
         $I->amOnPage('/addUser.php');
         $I->fillField('username','73829');
-        $I->fillField('name','hashim');
-        $I->fillField('surname','alam');
+        $I->fillField('name','testit');
+        $I->fillField('surname','testing');
         $I->fillField('email','test@yahoo.com');
         $I->fillField('userLevel','60');
         $I->click('Submit Changes');

@@ -17,7 +17,7 @@ if (isset($_GET["close"])) {
 }
 
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
  
 
     <div class="public">
@@ -32,13 +32,13 @@ if (isset($_GET["close"])) {
                 <br>
                 <table>
                     <tr>
-                        <th id = "darkblue"><b>Name</b></th>
-                        <th id = "lightblue"><b>Surname</b></th>
-                        <th id = "darkblue"><b>DOB</b></th>
-                        <th id = "lightblue"><b>NHS Number</b></th>
-                        <th id = "darkblue"><b>Access Code</b></th>
-                        <th id = "lightblue" colspan="3"><b>View</b></th>
-                        <th id = "darkblue"><b>Close case</b></th>
+                        <th><b>Name</b></th>
+                        <th ><b>Surname</b></th>
+                        <th ><b>DOB</b></th>
+                        <th ><b>NHS Number</b></th>
+                        <th ><b>Access Code</b></th>
+                        <th  colspan="3"><b>View</b></th>
+                        <th ><b>Close case</b></th>
 
                     </tr>
                     <?php

@@ -42,12 +42,12 @@ if (isset($_POST['submitbtn'])) {
             <?php if ($_SESSION['userLevel'] > 1) { ?>
                 <table>
                     <tr>
-                        <th id = "darkblue"><b>Name</b></th>
-                        <th id = "lightblue"><b>Surname</b></th>
-                        <th id = "darkblue"><b>DOB</b></th>
-                        <th id = "lightblue"><b>NHS Number</b></th>
-                        <th id = "darkblue"><b>Access Code</b></th>
-                        <th id = "lightblue" colspan="5"><b>Manage</b></th>
+                        <th ><b>Name</b></th>
+                        <th ><b>Surname</b></th>
+                        <th ><b>DOB</b></th>
+                        <th ><b>NHS Number</b></th>
+                        <th ><b>Access Code</b></th>
+                        <th  colspan="5"><b>Manage</b></th>
                     </tr>
                     <?php
                     while ($users = mysqli_fetch_assoc($user_set)) {
