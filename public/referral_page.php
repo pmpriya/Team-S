@@ -20,7 +20,6 @@ if (isset($_SESSION['userLevel'])) {
     header('Location: index.php');
 }
 
-
   $patient = find_patient_by_id($patient_ID);
   $patient_values = mysqli_fetch_assoc($patient);
 
