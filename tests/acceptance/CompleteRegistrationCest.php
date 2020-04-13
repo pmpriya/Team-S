@@ -62,7 +62,7 @@ public function allFormsTest(AcceptanceTester $I ){
     $I->fillField('CK',1);
     $I->fillField('ESR',0.6);
     $I->click("Add Investigation");
-    $I->see("Past results");
+    $I->see("Current results");
     $I->canSeeInCurrentUrl("InvestigationsShow");
 
 

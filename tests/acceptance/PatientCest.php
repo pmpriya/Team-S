@@ -34,7 +34,7 @@ class PatientCest
         $I->fillField('gpaddress','');
         $I->fillField('gpnumber','');
         $I->click('Submit');
-        $I->seeCurrentUrlEquals('/Team-S/public/register_patient.php');
+        $I->canSeeInCurrentUrl('/register_patient.php');
         
         $I->seeElement('span',['id' => 'alert_message'],['style' => 'color:red']);
     }
@@ -202,75 +202,10 @@ class PatientCest
 
     }
 
-  /* 
 
-    public function editPatientEmpty(AcceptanceTester $I)
-    {
-        $I->wantTo("verify");
-        $I->amOnPage('/editPatient.php');
-        $I->fillField('first_name','');
-        $I->fillField('last_name','');
-        $I->fillField('date_of_birth','');
-        $I->fillField('sex','');
-        $I->fillField('email','');
-        $I->fillField('home_address','');
-        $I->fillField('postcode','');
-        $I->fillField('home_phone','');
-        $I->fillField('mobile_phone','');
-        $I->fillField('gp_address','');
-        $I->fillField('gp_phone','');
-        $I->fillField('accessCode','');
-        $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/editPatient.php');
-
-    }
-
-    public function editPatientTestWorks(AcceptanceTester $I)
-    {
-        $I->wantTo("verify");
-        $I->amOnPage('/editPatient.php?id=158');
-        $I->fillField('first_name','noor');
-        $I->fillField('last_name','baakza');
-        $I->fillField('date_of_birth','02-03-2000');
-        $I->fillField('sex','f');
-        $I->fillField('email','nooriebaakza@yahoo.com');
-        $I->fillField('home_address','zamzama street');
-        $I->fillField('postcode','tw7 5uv');
-        $I->fillField('home_phone','9372979');
-        $I->fillField('mobile_phone','18908018081');
-        $I->fillField('gp_address','nsknvndnv');
-        $I->fillField('gp_phone','288082');
-        $I->fillField('accessCode','1222');
-        $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/patients.php');
-
-    }
-
-    public function editPatientTestTwo(AcceptanceTester $I)
-    {
-        $I->wantTo("verify");
-        $I->amOnPage('/editPatient.php');
-        $I->fillField('first_name','94950');
-        $I->fillField('last_name','144453');
-        $I->fillField('date_of_birth','02-12-2000');
-        $I->fillField('sex','');
-        $I->fillField('email','');
-        $I->fillField('home_address','iriwihgh');
-        $I->fillField('postcode','849822');
-        $I->fillField('home_phone','sfvnkln');
-        $I->fillField('mobile_phone','knkwkn');
-        $I->fillField('gp_address','');
-        $I->fillField('gp_phone','wkdmkcwkmc');
-        $I->fillField('accessCode','yoyo');
-        $I->click('Submit Changes');
-        $I->seeCurrentUrlEquals('/Team-S/public/editPatient.php');
-
-    }*/
 
 
    
-
-    
 }
 
 ?>
