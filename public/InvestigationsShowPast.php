@@ -32,7 +32,7 @@ $patient = mysqli_fetch_assoc($patient_set);
 
 <div id="content">
 <div class= "Show Investigations">
-    <h1 id="title-page"> Results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
+    <h1 id="title-page"> Past results overview for <?php echo $patient["first_name"] . " " . $patient["last_name"]; ?> </h1>
 
 
 

@@ -193,6 +193,19 @@ function find_user_by_username($username)
     return $user;
 }
 
+
+function find_acceess($nhsno, $accessCode)
+{
+    global $db;
+    $sql = "SELECT * FROM Patient ";
+    $sql .= "WHERE nhs_number='" . $nhsno . "' AND accessCode='" . $accessCode . "'";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $user = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $user;
+}
+
 function edit_password($id, $new_password)
 {
     global $db;
@@ -538,7 +551,7 @@ function find_past_notes($patient_ID)
 {
     global $db;
     $sql = "SELECT * FROM Investigations ";
-    $sql .= "WHERE patient_id='" . $patient_ID . "' AND Notes IS NOT NULL ";
+    $sql .= "WHERE patient_id='" . $patient_ID . "' AND Notes IS NOT NULL AND Active='0' ";
     $result = mysqli_query($db, $sql);
     return $result;
 }
