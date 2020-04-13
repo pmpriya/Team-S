@@ -110,17 +110,6 @@ class StaffLoginCest
         $I->cantSee('PATIENTS');
     }
 
-    public function emptyUsernamePassword(AcceptanceTester $I){
-
-        $I->wantTo('Log In');
-        $I->amOnPage('/user_login.php');
-        $I->fillField('username','');
-        $I->fillField('password','');
-        $I->click('Sign in');
-        $I->canSeeInCurrentUrl('/user_login.php');
-        $I->seeElement('span',['id' => 'alert_message'],['style' => 'color:red']);
-        $I->cantSee('PATIENTS');
-    }
-
+   
     
 }      
