@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php
@@ -9,10 +9,10 @@ settype($var, 'integer');
 $var = $_GET["delete"] ?? '';
 if (isset($_GET["delete"])) {
     delete_patient($var);
-    header('Location: index.php');
+    header('Location: patient/index.php');
 }
 if ($_SESSION['userLevel'] < 1) {
-    redirect_to('index.php');
+    redirect_to('../index.php');
 }
 
 if (isset($_POST['submitbtn'])) {
@@ -58,16 +58,16 @@ if (isset($_POST['submitbtn'])) {
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
                     <td>" . $users["accessCode"] . "</td>
-                    <td><a href=viewPatient.php?id=" . $users["ID"] . ">View</a></td>
-                    <td><a href=editPatient.php?id=" . $users["ID"] . ">Edit</a></td>
+                    <td><a href=show.php?id=" . $users["ID"] . ">View</a></td>
+                    <td><a href=edit.php?id=" . $users["ID"] . ">Edit</a></td>
                     <td><a href=?delete=" . $users["ID"] . " onclick=\"return confirm('Are you sure that you want to delete this user?');\">Delete</a></td>
-                    <td><a href=show.php?id=" . $users["ID"] . ">Referrals</a></td>
-                    <td><a href=show.php?id=" . $users["ID"] . ">Investigations</a></td></tr>";
+                    <td><a href=../referral/show.php?id=" . $users["ID"] . ">Referrals</a></td>
+                    <td><a href=../investigation/show.php?id=" . $users["ID"] . ">Investigations</a></td></tr>";
                     }
                 ?>
 
                 </table>
-            <br><td><a href=patient/register_patient.php>Add patient</a></td>
+            <br><td><a href=new.php>Add patient</a></td>
 
 
 <?php }
@@ -87,8 +87,8 @@ else{ ?>
                     <td>" . $users["last_name"] . "</td>
                     <td>" . $users["date_of_birth"] . "</td>
                     <td>" . $users["nhs_number"] . "</td>
-                    <td><a href=viewPatient.php?id=" . $users["ID"] . ">Details</a></td>
-                    <td><a href=show.php?id=" . $users["ID"] . ">Referral</a></td></tr>";
+                    <td><a href=show.php?id=" . $users["ID"] . ">Details</a></td>
+                    <td><a href=../referral/show.php?id=" . $users["ID"] . ">Referral</a></td></tr>";
                     }
                 ?>
 

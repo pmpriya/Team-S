@@ -1,6 +1,6 @@
 <?php ?>
-<?php require_once('../private/initialise.php'); ?>
-<?php include('../private/shared/header.php'); ?>
+<?php require_once ('../../private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 <?php 
     $patient_ID = $_GET['id'] ?? '1';
     $referrals_of_id = find_referrals_by_id($patient_ID);
@@ -19,7 +19,7 @@
     <br>
 
         <?php  if(!mysqli_num_rows(access_actve_referral($patient_ID))){ ?>
-        <a href=new.php?id=<?php echo $patient_ID ?>>Create Referral</a><br>
+            <a href=referral/new.php?id=<?php echo $patient_ID ?>>Create Referral</a><br>
         <?php }?>
         <br>
     <table class= "ReferralsTable">

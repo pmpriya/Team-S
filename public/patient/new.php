@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Register patient'; ?>
   <?php include(SHARED_PATH . '/validation.php'); ?>
 
@@ -199,7 +199,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                           $new_id = mysqli_insert_id($db);
 
-                          redirect_to(url_for('new.php?patient_ID=' . $new_id));
+                          redirect_to(url_for('../investigation/new.php?patient_ID=' . $new_id));
                            
                         }
                         else {

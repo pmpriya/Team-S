@@ -1,4 +1,4 @@
-<?php require_once('../private/initialise.php'); ?>
+<?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Edit patient'; ?>
     <div class="public">
 <?php include(SHARED_PATH . '/header.php'); ?>
@@ -7,7 +7,7 @@
 
 <?php
 if ($_SESSION['userLevel'] < 1) {
-    redirect_to('index.php');
+    redirect_to('../index.php');
 
 }
 if(isset($_GET['id'])){
@@ -18,7 +18,7 @@ elseif(isset($_SESSION['nhsno'])){
     $user_set = find_patient_by_nhsno_and_accesscode($_SESSION['nhsno'], $_SESSION['accessCode']);
 
 }else{
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 
 
