@@ -33,8 +33,8 @@ class PatientsTableCest
 
     public function addPatient(AcceptanceTester $I){
 
-            $I->click("//a[@href='new.php']");
-            $I->amOnPage('/new.php');
+            $I->click("//a[@href='patient/new.php']");
+            $I->amOnPage('patient/new.php');
 
     }
 

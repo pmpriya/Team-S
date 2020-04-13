@@ -1,6 +1,7 @@
 <?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Edit Referral'; ?>
     <div class="public">
+        <img src="../images/nhs.png" alt="Logo" id="logo">
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 

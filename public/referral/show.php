@@ -1,5 +1,6 @@
 <?php ?>
 <?php require_once ('../../private/initialise.php'); ?>
+<img src="../images/nhs.png" alt="Logo" id="logo">
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php 
     $patient_ID = $_GET['id'] ?? '1';

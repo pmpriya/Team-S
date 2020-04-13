@@ -1,6 +1,7 @@
 <?php require_once('../private/initialise.php'); ?>
     <div class="public">
         <?php $page_title = 'Log in'; ?>
+        <img src="images/nhs.png" alt="Logo" id="logo">
         <?php include(SHARED_PATH . '/header.php'); ?>
 
         <?php

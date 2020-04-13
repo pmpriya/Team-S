@@ -1,6 +1,7 @@
 <?php require_once('../../private/initialise.php'); ?>
 <?php $page_title = 'Referral Form'; ?>
 <div class="public">
+    <img src="../images/nhs.png" alt="Logo" id="logo">
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php include(SHARED_PATH . '/validation.php'); ?>
 

@@ -3,7 +3,7 @@
 <?php $page_title = 'Log in'; ?>
   <?php include(SHARED_PATH . '/validation.php'); ?>
 
-
+    <img src="images/nhs.png" alt="Logo" id="logo">
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <?php

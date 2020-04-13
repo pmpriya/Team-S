@@ -3,6 +3,7 @@
 <?php include(SHARED_PATH . '/validation.php'); ?>
 
 <div class="public">
+    <img src="../images/nhs.png" alt="Logo" id="logo">
     <?php include(SHARED_PATH . '/header.php'); ?>
 
     <?php
