@@ -13,16 +13,16 @@ class InvestigationFormCest
     
     public function addInvestigationFromShowInvestigations(AcceptanceTester $I)
     {
-        $I->amOnPage('/investigation/show.php?id=150');
+        $I->amOnPage('/InvestigationsShow.php?id=150');
         $I->see("Results overview for James Bond");       
         $I->click('ADD INVESTIGATION');
-        $I->canSeeInCurrentUrl('/new.php?patient_ID=150');
+        $I->canSeeInCurrentUrl('/InvestigationsNew.php?patient_ID=150');
                 
              
     }
     public function investigationSuccessfulSubmitTest(AcceptanceTester $I)
     {
-        $I->amOnPage('/new.php?patient_ID=150');
+        $I->amOnPage('/InvestigationsNew..php?patient_ID=150');
         $I->fillField('date',10/01/2020);
         $I->fillField('BiliTD','3');
         $I->fillField('AST','4');
@@ -49,14 +49,14 @@ class InvestigationFormCest
         $I->click('Add Investigation');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
 
              
     }
 
     public function investigationSubmitTestWithEmptyFields(AcceptanceTester $I)
     {
-        $I->amOnPage('/new.php?patient_ID=150');
+        $I->amOnPage('/InvestigationsNew.php?patient_ID=150');
         $I->fillField('date',10/01/2020);
         $I->fillField('ALT', '4');
         $I->fillField('ALP','5');
@@ -76,13 +76,13 @@ class InvestigationFormCest
         $I->click('Add Investigation');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationWithWrongDateFormatTest(AcceptanceTester $I)
     {
-        $I->amOnPage('/new.php?patient_ID=150');
+        $I->amOnPage('/InvestigationsNew.php?patient_ID=150');
         $I->fillField('date',1);
         $I->fillField('ALP','5');
         $I->fillField('HbHct','1');
@@ -94,14 +94,14 @@ class InvestigationFormCest
         $I->click('Add Investigation');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationWithEmptyDateTest(AcceptanceTester $I)
     {
         //should fail
-        $I->amOnPage('/new.php?patient_ID=150');
+        $I->amOnPage('/InvestigationsNew.php?patient_ID=150');
         $I->fillField('ALP','5');
         $I->fillField('HbHct','1');
         $I->fillField('Neutro','2');
@@ -112,24 +112,24 @@ class InvestigationFormCest
         $I->click('Add Investigation');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationFromNewToDisplayTest(AcceptanceTester $I)
     {
-        $I->amOnPage('/new.php?patient_ID=150');
+        $I->amOnPage('/InvestigationsNew.php?patient_ID=150');
         $I->see("Create Investigation");       
         $I->click('BACK TO DISPLAY OF INVESTIGATIONS');
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationEditTest(AcceptanceTester $I)
     {
         $I->click('2020-01-02', \Codeception\Util\Locator::elementAt('//table/tr',-1));
-        $I->canSeeInCurrentUrl('investigation/edit.php?id=116');
+        $I->canSeeInCurrentUrl('InvestigationEdit.php?id=116');
         $I->see("Edit Investigation");    
         $I->fillField('BiliTD','3');
         $I->fillField('AST','4');
@@ -138,13 +138,13 @@ class InvestigationFormCest
         $I->fillField('Notes','It is an emergency');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationEditTest2(AcceptanceTester $I)
     {
-        $I->amOnPage('investigation/edit.php?id=115');
+        $I->amOnPage('InvestigationEdit.php?id=115');
         $I->see("Edit Investigation");    
         $I->fillField('ALT', '4');
         $I->fillField('ALP','5');
@@ -161,28 +161,28 @@ class InvestigationFormCest
         $I->fillField('Urea','3');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationDeleteTest(AcceptanceTester $I)
     {
         $I->click('2020-01-02', \Codeception\Util\Locator::elementAt('//InvestigationsTable/tr',-1));
-        $I->canSeeInCurrentUrl('investigation/edit.php?id=116');
+        $I->canSeeInCurrentUrl('InvestigationEdit.php?id=116');
         $I->see("Edit Investigation");    
         $I->click('DELETE');
         $I->see("Are you sure you want to delete this investigation?");
         $I->click('Yes');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
     public function investigationAdditionalNotesTest(AcceptanceTester $I)
     {
         $I->click('2020-01-02', \Codeception\Util\Locator::elementAt('//InvestigationsTable2/tr',-1));
-        $I->canSeeInCurrentUrl('investigation/edit.php?id=116');
+        $I->canSeeInCurrentUrl('InvestigationEdit.php?id=116');
         $I->see("Edit Investigation");    
         $I->fillField('date',10/01/2020);
         $I->fillField('ALT', '4');
@@ -202,7 +202,7 @@ class InvestigationFormCest
         $I->fillField('Notes','The patient needs to be immediately admitted to the hospital and this sentence should test how long the notes can be');
 
         $I->see('Results overview for James Bond');
-        $I->canSeeInCurrentUrl('/investigation/show.php?id=150');
+        $I->canSeeInCurrentUrl('/InvestigationsShow.php?id=150');
              
     }
 
