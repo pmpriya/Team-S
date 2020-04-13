@@ -63,46 +63,8 @@ class UserCest
         $I->canSeeInCurrentURL('/users.php');
     }
 
-    public function editUserEmpty(AcceptanceTester $I)
-    {
-        $I->wantTo("verify that editing a staff member with empty fields doesn't work");
-        $I->amOnPage('/editUser.php?id=83');
-        $I->fillField('username','');
-        $I->fillField('name','');
-        $I->fillField('surname','');
-        $I->fillField('email','');
-        $I->fillField('userLevel','');
-        $I->click('Submit Changes');
-        $I->canSeeInCurrentURL('/editUser.php');
-    }
+   
 
-    public function editUserTestWorks(AcceptanceTester $I)
-    {
-        $I->wantTo("verify that editing a staff member works");
-        $I->amOnPage('/editUser.php?id=83');
-        $I->fillField('username','testingyo');
-        $I->fillField('name','again');
-        $I->fillField('surname','testing');
-        $I->fillField('email','nbaakza@kings.nhs.uk');
-        $I->fillField('userLevel','3');
-        $I->click('Submit');
-        $I->canSeeInCurrentUrl('/users.php');
-        $I->see('testingyo');
-       
-    }
-
-     public function editUserTestTwo(AcceptanceTester $I)
-    {
-        $I->wantTo("editing a user");
-        $I->amOnPage('/editUser.php?id=83');
-        $I->fillField('username','xchkvk');
-        $I->fillField('name','9909w9');
-        $I->fillField('surname','238398');
-        $I->fillField('email','nooriebaakza@yahoo.com');
-        $I->fillField('userLevel','2');
-        $I->click('Submit');
-        $I->seeCurrentUrlEquals('/Team-S/public/editUser.php?id=83');
-    }
 
 }
 

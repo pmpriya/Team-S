@@ -725,10 +725,12 @@ function insert_appointment_member($data) {
     if($result) {
      $patient = find_patient_by_id($data['patient_id']);
         $patient_values = mysqli_fetch_assoc($patient);
-        $email=$patient_values['email'];
+        $to=$patient_values['email'];
         $subject="King's Hospital Appointment";
-        $message="You have an appointment at King's Hospital fixed on the " . $data['date'] . " at " . $data['time'];
-       // send_mail($email,$subject,$message);
+    
+        $message="You have an appointment at King's Hospital fixed on the " . $data['date'] . " at " . $data['time']." Please confirm it with your GP.";
+        $headers = 'From:noreply@nhs.net' . "\r\n"; 
+        mail($to, $subject, $message, $headers); 
         return true;
     } else {
         echo mysqli_error($db);
@@ -737,6 +739,9 @@ function insert_appointment_member($data) {
     }
  
 }
+
+
+
 
 function search_by_date($date) 
 {

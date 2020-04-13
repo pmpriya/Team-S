@@ -362,19 +362,19 @@ table{
   margin: 0;
 }
 table.center { margin-left:auto; margin-right:auto; }
- th, td {
-   border-collapse: collapse;
-   border: 1px solid black;
-   text-align: center;
-   padding: 9px;
-   background-color: rgb(255, 255, 255);
- }
- 
- th {
-   background-color: rgb(170, 170, 170) ;
-   color: white;
-   width: 20%;
- }
+th, td {
+  border-collapse: collapse;
+  border: 1px solid black;
+  text-align: center;
+  padding: 15px;
+  background-color: white;
+}
+
+th {
+  background-color: #333;
+  color: white;
+  width: 33.3%;
+}
 
  
  #gender {
