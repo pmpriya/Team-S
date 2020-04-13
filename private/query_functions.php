@@ -15,7 +15,6 @@ function find_active_referral($patient_ID){
     $sql="SELECT ID FROM Referral ";
     $sql .="WHERE patient_ID='$patient_ID'" . "AND Active='1'";
     $result = mysqli_query($db,$sql);
-
     return $result;
     }
 
@@ -55,8 +54,6 @@ function find_active_referrals($patient_ID)
     $sql .= "WHERE patient_ID ='" . $patient_ID . "'";
     $result = mysqli_query($db,$sql);
     $rowcount=mysqli_num_rows($result);
-
-
     return $rowcount;
 
 
@@ -395,6 +392,7 @@ $new_bleep_no,$new_parents_aware,$new_interpreter_needed,$new_interpreter_langua
 $new_history_of_present_complaint,$new_family_history,$new_current_feeds,$new_medications,$new_other_inv,$new_date_of_referral) 
 {
     global $db;
+    $new_current_issue = g($db, $new_current_issue);
     $sql = "UPDATE Referral SET consultant_name='$new_consultant_name',consultant_specialty='$new_consultant_specialty',organisation_hospital_name='$new_organisation_hospital_name',organisation_hospital_no='$new_organisation_h_no'
     ,referring_name='$new_referring_doctor_name', bleep_number='$new_bleep_no',is_patient_aware='$new_parents_aware',is_interpreter_needed='$new_interpreter_needed',interpreter_language='$new_interpreter_language',
     kch_doc_name='$new_doctor_kch_name',current_issue='$new_current_issue',history_of_present_complaint='$new_history_of_present_complaint',family_history='$new_family_history',current_feeds='$new_current_feeds',medications='$new_medications',other_investigations='$new_other_inv',date='$new_date_of_referral' WHERE id=$referral_id";

@@ -153,42 +153,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    <div class="field-column">
     <label>Current Issue</label>
-    <textarea name = "current_issue"  id="current_issue"><?php echo h($current_issue);?> </textarea>
+    <textarea  rows="20" cols="50" name = "current_issue"  id="current_issue"><?php echo h($current_issue);?> </textarea>
   </div>
 
    <!-- History Of Present Complaint -->
 
    <div class="field-column">
     <label>History Of Present Complaint</label>
-    <textarea  name="history_of_present_complaint" id="history_of_present_complaint" ><?php echo h($history_of_present_complaint);?></textarea>
+    <textarea   rows="20" cols="50" name="history_of_present_complaint" id="history_of_present_complaint" ><?php echo h($history_of_present_complaint);?></textarea>
   </div>
 
    <!-- Family History -->
 
    <div class="field-column">
     <label>Family History</label>
-    <textarea  name="family_history"  id="family_history"><?php echo h($family_history);?> </textarea>
+    <textarea  rows="10" cols="50"  name="family_history"  id="family_history"><?php echo h($family_history);?> </textarea>
   </div>
   
    <!-- Current Feeds -->
  
    <div class="field-column">
     <label>Current Feeds</label>
-    <textarea  name="current_feeds" id="current_feeds" ><?php echo h($current_feeds);?></textarea>
+    <textarea  rows="10" cols="50"  name="current_feeds" id="current_feeds" ><?php echo h($current_feeds);?></textarea>
   </div>
 
    <!-- Medications -->
 
    <div class="field-column">
     <label>Medications</label>
-    <textarea  name="medications"  id="medications" ><?php echo h($medications);?></textarea>
+    <textarea  rows="10" cols="50"  name="medications"  id="medications" ><?php echo h($medications);?></textarea>
   </div>
 
    <!-- Other Investigations -->
 
    <div class="field-column">
     <label>Other Investigations</label> 
-    <textarea name="other_investigations" style="white-space:normal;" id="other_investigations" ><?php echo h($other_inv);?></textarea>
+    <textarea  rows="10" cols="50" name="other_investigations" style="white-space:normal;" id="other_investigations" ><?php echo h($other_inv);?></textarea>
     <div>
       <input type="submit" value="Edit Referral"/>
    </div>
